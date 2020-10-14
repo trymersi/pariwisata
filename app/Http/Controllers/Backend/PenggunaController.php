@@ -129,7 +129,9 @@ class PenggunaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $this->data['kabupaten'] = $this->kabupatenClass->orderBy('nama_kabupaten','asc')->get();
+        $this->data['edit'] = $this->userClass->find($id);
+        return view('dashboard.pages.pengguna.edit',$this->data);
     }
 
     /**
@@ -141,7 +143,50 @@ class PenggunaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required',
+            'email' => 'required',
+            'username' => 'required',
+            'level'=> 'required',
+            'tos' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Toastr::error('Terjadi Kesalahan Saat Menyimpan Data', 'Gagal', ["positionClass" => "toast-bottom-right"]);
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+        
+        if($request->file('foto'))
+        {
+            $foto = $request->file('foto');
+            $ext = $foto->getClientOriginalExtension();
+            $destination = public_path('uploads/images/pengguna');
+            $filename = $request->username.".".$ext;
+            $foto->move($destination, $filename);
+        }
+
+        $kab = ($request->level == 7) ? $request->kabupaten : NULL; 
+
+        $edit = $this->userClass->find($id);
+        $edit->nama = $request->nama;
+        $edit->email = $request->email;
+        $edit->username = $request->username;
+        if($request->password):
+            $edit->password = Hash::make($request->password);
+        endif;
+        $edit->level = $request->level;
+        $edit->kabupaten_id = $kab;
+        if(isset($filename)):
+            $edit->foto = $filename;
+        endif;
+        $edit->status = isset($request->status) ? 1 : 0;
+        $edit->save();
+        
+        if($edit)
+        {
+            Toastr::success('Data Berhasil Diubah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
+        }
+        return redirect::to('dashboard/pengguna');
     }
 
     /**
@@ -152,7 +197,11 @@ class PenggunaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = $this->userClass->find($id);
+        $path = public_path('uploads/images/pengguna');
+        File::delete($path.'/'.$data->foto);
+        $data->delete();
+        return ['status'=>'1'];
     }
 
     public function table(Request $request)
