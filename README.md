@@ -29,9 +29,9 @@ Masukan multiple setelah role,  masukan sesuai kebutuhan
 #Configurasi
 storage dan .env tambahkan manual
 ```sh
-    //update composer
-    composer update
-    //untuk mendapatkan key baru
-    php artisan key:generate
-    php artisan migrate:fresh --seed
+#update composer
+$ composer update
+#untuk mendapatkan key baru
+$ php artisan key:generate
+$ php artisan migrate:fresh --seed
 ```
