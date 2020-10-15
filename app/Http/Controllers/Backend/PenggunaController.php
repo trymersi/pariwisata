@@ -198,8 +198,11 @@ class PenggunaController extends Controller
     public function destroy($id)
     {
         $data = $this->userClass->find($id);
-        $path = public_path('uploads/images/pengguna');
-        File::delete($path.'/'.$data->foto);
+        if($data->foto != 'default.jpg')
+        {
+            $path = public_path('uploads/images/pengguna');
+            File::delete($path.'/'.$data->foto);
+        }
         $data->delete();
         return ['status'=>'1'];
     }

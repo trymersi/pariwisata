@@ -30,6 +30,8 @@
                             </div>
                         </a>
                         <ul class="collapse submenu list-unstyled {{ ($category_name === 'Master') ? 'show' : '' }}" id="dashboard" data-parent="#accordionExample">
+                           
+                            @if(Auth::user()->level == 1)
                             <li class="{{ ($page_name === 'Kabupaten') ? 'active' : '' }}">
                                 <a href="{{ url('dashboard/kabupaten') }}"> Kabupaten </a>
                             </li>
@@ -39,6 +41,12 @@
                             <li class="{{ ($page_name === 'Kategori Ekraf') ? 'active' : '' }}">
                                 <a href="{{ url('dashboard/kategori-ekraf') }}"> Kategori Ekraf </a>
                             </li>
+                            @endif
+                            @if(Auth::user()->level == 1 || Auth::user()->level == 3 || Auth::user()->level == 7)
+                            <li class="{{ ($page_name === 'Ekraf') ? 'active' : '' }}">
+                                <a href="{{ url('dashboard/ekraf') }}"> Ekraf </a>
+                            </li>
+                            @endif
                         </ul>
                     </li>
 

@@ -2,6 +2,12 @@
 <script src="{{asset('assets/js/libs/jquery-3.1.1.min.js')}}"></script>
 @toastr_js
 @toastr_render
+<script>
+$("#button-simpan").on('click',function()
+{
+    $("#loading-simpan").removeClass('d-none');
+})
+</script>
 <script src="{{asset('bootstrap/js/popper.min.js')}}"></script>
 <script src="{{asset('bootstrap/js/bootstrap.min.js')}}"></script>
 
