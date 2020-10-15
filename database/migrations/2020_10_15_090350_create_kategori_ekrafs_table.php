@@ -18,6 +18,7 @@ class CreateKategoriEkrafsTable extends Migration
             $table->string('nama_kategori');
             $table->string('deskripsi');
             $table->string('gambar');
+            $table->string('slug');
             $table->timestamps();
         });
     }

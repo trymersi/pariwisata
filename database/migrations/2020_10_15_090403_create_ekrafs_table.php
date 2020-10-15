@@ -21,6 +21,7 @@ class CreateEkrafsTable extends Migration
             $table->string('alamat');
             $table->string('nomor_kontak');
             $table->string('jenis_usaha');
+            $table->string('status');
             $table->timestamps();
         });
     }

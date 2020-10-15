@@ -36,5 +36,21 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
         Route::patch('/update/{id}','Backend\PenggunaController@update');
         Route::delete('/delete/{id}','Backend\PenggunaController@destroy');
     });
+
+    Route::prefix('/kategori-ekraf')->group(function(){
+        Route::resource('/','Backend\KategoriEkrafController');
+        Route::get('/table','Backend\KategoriEkrafController@table');
+        Route::get('/edit/{id}','Backend\KategoriEkrafController@edit');
+        Route::patch('/update/{id}','Backend\KategoriEkrafController@update');
+        Route::delete('/delete/{id}','Backend\KategoriEkrafController@destroy');
+    });
+
+    Route::prefix('/ekraf')->group(function(){
+        Route::resource('/','Backend\EkrafController');
+        Route::get('/table','Backend\EkrafController@table');
+        Route::get('/edit/{id}','Backend\EkrafController@edit');
+        Route::patch('/update/{id}','Backend\EkrafController@update');
+        Route::delete('/delete/{id}','Backend\EkrafController@destroy');
+    });
 });
 
