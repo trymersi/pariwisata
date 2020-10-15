@@ -26,12 +26,13 @@ Masukan multiple setelah role,  masukan sesuai kebutuhan
     }
 ```
 
-#Configurasi
+# Configurasi
 storage dan .env tambahkan manual
 ```sh
-#update composer
+# update composer
 $ composer update
-#untuk mendapatkan key baru
+
+# untuk mendapatkan key baru
 $ php artisan key:generate
 $ php artisan migrate:fresh --seed
 ```
