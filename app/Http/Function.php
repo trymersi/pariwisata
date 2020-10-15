@@ -151,3 +151,35 @@ function levelCode($kode)
     }
     return $status;
 }
+
+function roleMiddle($kode)
+{
+    switch($kode)
+    {
+        case 'super_admin':
+            $id = 1;
+            break;
+        case 'auth_destinasi':
+            $id = 2;
+            break;
+        case 'auth_ekraf':
+            $id = 3;
+            break;
+        case 'auth_sdp':
+            $id = 4;
+            break;
+        case 'auth_pemasaran':
+            $id = 5;
+            break;
+        case 'auth_upt':
+            $id = 6;
+            break;
+        case 'auth_kabupaten':
+            $id = 7;
+            break;
+        default:
+            $id =0;
+            break;
+    }
+    return $id;
+}

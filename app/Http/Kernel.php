@@ -62,12 +62,6 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'super_admin' => \App\Http\Middleware\SuperAdmin::class,
-        'auth_destinasi' => \App\Http\Middleware\Destinasi::class,
-        'auth_ekraf' => \App\Http\Middleware\Ekraf::class,
-        'auth_sdp' => \App\Http\Middleware\Sdp::class,
-        'auth_pemasaran' => \App\Http\Middleware\Pemasaran::class,
-        'auth_upt' => \App\Http\Middleware\Upt::class,
-        'auth_kabupaten' => \App\Http\Middleware\Kabupaten::class,
+        'role' => \App\Http\Middleware\Role::class,
     ];
 }

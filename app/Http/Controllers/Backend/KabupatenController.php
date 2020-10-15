@@ -25,7 +25,7 @@ class KabupatenController extends Controller
 
     public function __construct()
     {
-        $this->middleware('super_admin');
+        $this->middleware(['role:super_admin']);
 
         $this->kabupatenClass = new Kabupaten;
 

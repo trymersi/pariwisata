@@ -36,6 +36,9 @@
                             <li class="{{ ($page_name === 'Pengguna') ? 'active' : '' }}">
                                 <a href="{{ url('dashboard/pengguna') }}"> Pengguna </a>
                             </li>
+                            <li class="{{ ($page_name === 'Kategori Ekraf') ? 'active' : '' }}">
+                                <a href="{{ url('dashboard/kategori-ekraf') }}"> Kategori Ekraf </a>
+                            </li>
                         </ul>
                     </li>
 
