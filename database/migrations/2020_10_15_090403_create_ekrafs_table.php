@@ -14,8 +14,8 @@ class CreateEkrafsTable extends Migration
     public function up()
     {
         Schema::create('ekrafs', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('kabupaten_id')->constrained();
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('kabupaten_id')->nullable()->comment('foreign key dari tabel kabupatens');
             $table->foreignId('kategori_ekraf_id');
             $table->string('nama');
             $table->string('alamat');
@@ -23,6 +23,8 @@ class CreateEkrafsTable extends Migration
             $table->string('jenis_usaha');
             $table->string('status');
             $table->timestamps();
+            $table->softDeletes();
+            $table->foreign('kabupaten_id')->references('id')->on('kabupatens')->onDelete('set null');
         });
     }
 

@@ -14,13 +14,15 @@ class CreateKabupatensTable extends Migration
     public function up()
     {
         Schema::create('kabupatens', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama_kabupaten');
-            $table->text('keterangan_lengkap');
-            $table->string('foto');
-            $table->string('telepon');
-            $table->string('email');
+            $table->bigIncrements('id');
+            $table->string('nama')->nullable()->comment('nama kabupaten');
+            $table->string('keterangan')->nullable()->comment('keterangan kabupaten');
+            $table->string('gambar')->nullable()->comment('gambar kabupaten');
+            $table->string('alamat')->nullable()->comment('alamat kabupaten');
+            $table->string('latitude')->nullable()->comment('titik latitude kabupaten');
+            $table->string('longitude')->nullable()->comment('titik longitude kabupaten');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

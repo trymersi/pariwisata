@@ -14,12 +14,13 @@ class CreateKategoriEkrafsTable extends Migration
     public function up()
     {
         Schema::create('kategori_ekrafs', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama_kategori');
+            $table->bigIncrements('id');
+            $table->string('nama');
             $table->string('deskripsi');
             $table->string('gambar');
             $table->string('slug');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
