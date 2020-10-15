@@ -248,7 +248,7 @@ if (!function_exists('set_breadcrumb')) {
             // echo 'CORK Admin - Multipurpose Bootstrap Dashboard Template';
             echo '<li class="breadcrumb-item"><a href="javascript:void(0);">'. $category .'</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><span>' . $page .'</span></li>';
-        elseif ($page_name === 'sales') :
+        elseif ($page_name === 'Kategori Ekraf') :
             // echo 'Sales Admin ' . $admin_name;
             echo '<li class="breadcrumb-item"><a href="javascript:void(0);">'. $category .'</a></li>
                 <li class="breadcrumb-item active" aria-current="page"><span>' . $page .'</span></li>';
@@ -645,8 +645,11 @@ if (!function_exists('set_breadcrumb')) {
         elseif ($page_name === 'widgets') :
             // echo 'Widgets ' . $admin_name;
             echo '<li class="breadcrumb-item"><a href="javascript:void(0);">'. $page .'</a></li>';
+        else:
+            echo '<li class="breadcrumb-item"><a href="javascript:void(0);">'. $category .'</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><span>' . $page .'</span></li>';
         endif;
-
+        
 
     }
 }

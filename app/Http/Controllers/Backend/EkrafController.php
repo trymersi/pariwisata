@@ -2,11 +2,42 @@
 
 namespace App\Http\Controllers\Backend;
 
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect; 
+use Intervention\Image\Facades\Image;
 use App\Http\Controllers\Controller;
+use App\Models\KategoriEkraf;
 use Illuminate\Http\Request;
+use App\Models\Kabupaten;
+use App\Models\Ekraf;
+use DataTables;
+use Toastr;
+use File;
 
 class EkrafController extends Controller
 {
+    private $data;
+    private $ekrafClass;
+    private $kabupatenClass;
+    private $kategoriEkrafClass;
+
+    public function __construct()
+    {
+        $this->middleware(['role:super_admin']);
+
+        $this->ekrafClass = new Ekraf;
+        $this->kabupatenClass = new Kabupaten;
+        $this->kategoriEkrafClass = new KategoriEkraf;
+        
+        $this->data = [
+            'category_name' => 'Master',
+            'page_name' => 'Ekraf',
+            'has_scrollspy' => 0,
+            'scrollspy_offset' => '',
+            'alt_menu' => 1,
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +45,7 @@ class EkrafController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.pages.ekraf.index',$this->data);
     }
 
     /**
