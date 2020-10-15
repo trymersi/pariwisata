@@ -8,13 +8,13 @@ $ php artisan make:controller Backend/PenggunaController --resource
 
 # List Middleware
 ```sh
-- super_admin
-- auth_destinasi
-- auth_ekraf
-- auth_sdp
-- auth_pemasaran
-- auth_upt
-- auth_kabupaten
+- 1 super_admin
+- 2 auth_destinasi
+- 3 auth_ekraf
+- 4 auth_sdp
+- 5 auth_pemasaran
+- 6 auth_upt
+- 7 auth_kabupaten
 ```
 
 # Cara Menggunakan Middleware

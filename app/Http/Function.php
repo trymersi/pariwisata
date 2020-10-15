@@ -183,3 +183,26 @@ function roleMiddle($kode)
     }
     return $id;
 }
+
+function status($kode)
+{
+    switch ($kode) 
+    {
+        case '1':
+            $status = '<span class="badge badge-info">Diusulkan</span>';
+            break;
+        case '2':
+            $status = '<span class="badge badge-warning">Pending</span>';
+            break;
+        case '3':
+            $status = '<span class="badge badge-success">Aktif</span>';
+            break;
+        case '4':
+            $status = '<span class="badge badge-danger">Ditolak</span>';
+            break;
+        default:
+            $status ="-";
+            break;
+    }
+    return $status;
+}

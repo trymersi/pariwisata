@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                             <h4>Tabel Data {{ $page_name }}</h4>
-                            <a href="{{ action('Backend\KategoriEkrafController@create') }}" class="btn btn-primary mb-2 mr-2 float-right"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Tambah Data</a>
+                            <a href="{{ action('Backend\EkrafController@create') }}" class="btn btn-primary mb-2 mr-2 float-right"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Tambah Data</a>
                         </div>
                     </div>
                 </div>
@@ -21,10 +21,15 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Gambar</th>
-                                <th>Nama Kategori Ekraf</th>
-                                <th>Deskripsi</th>
-                                <th>Jumlah Pelaku Ekraf </th>
+                                <th>Kategori Ekraf</th>
+                                @if(Auth::user()->level == 1 || Auth::user()->level == 3)
+                                <th>Kabupaten</th>
+                                @endif
+                                <th>Nama</th>
+                                <th>Alamat</th>
+                                <th>Nomor Kontak</th>
+                                <th>Jenis Usaha</th>
+                                <th>Status</th>
                                 <th class="no-content"></th>
                             </tr>
                         </thead>
@@ -80,26 +85,40 @@
            processing: true,
            serverSide: true,
            ajax: {
-           url: "{{ url('dashboard/kategori-ekraf/table') }}",
+           url: "{{ url('dashboard/ekraf/table') }}",
            },
            columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false,searchable: false},
             
            {
-               data: 'image',
-               name: 'image'
-           },
-           {
                data: 'nama_kategori',
                name: 'nama_kategori'
            },
+           @if(Auth::user()->level == 1 || Auth::user()->level == 3)
            {
-               data: 'deskripsi',
-               name: 'deskripsi'
+               data: 'nama_kabupaten',
+               name: 'nama_kabupaten'
+           },
+           @endif
+           {
+               data: 'nama',
+               name: 'nama'
            },
            {
-               data: 'jumlah_pelaku',
-               name: 'jumlah_pelaku'
+               data: 'alamat',
+               name: 'alamat'
+           },
+           {
+               data: 'nomor_kontak',
+               name: 'nomor_kontak'
+           },
+           {
+               data: 'jenis_usaha',
+               name: 'jenis_usaha'
+           },
+           {
+               data: 'status',
+               name: 'status'
            },
            {
                data: 'option',
@@ -127,7 +146,7 @@
                         var idDelete = $(this).attr('data-id');
                         var token = $(this).attr('data-token');
                         $.ajax({
-                            url:"{{url('dashboard/kategori-ekraf/delete')}}/" + idDelete,
+                            url:"{{url('dashboard/ekraf/delete')}}/" + idDelete,
                             type: 'POST',
                             data: {_method: 'delete', _token :token},
                             success:function(get){
