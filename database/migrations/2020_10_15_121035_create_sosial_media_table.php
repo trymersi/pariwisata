@@ -19,7 +19,6 @@ class CreateSosialMediaTable extends Migration
             $table->string('kode_tempat')->nullable()->comment('kode tempat yang di deskripsikan didalan function');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('objek_wisata_id')->references('id')->on('objek_wisatas')->onDelete('set null');
         });
     }
 

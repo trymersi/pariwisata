@@ -29,7 +29,7 @@ class CreateRestaurantsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('kabupaten_id')->references('id')->on('kabupatens')->onDelete('set null');
-            $table->foreign('objek_wisata_id')->references('id')->on('objekwisatas')->onDelete('set null');
+            $table->foreign('objek_wisata_id')->references('id')->on('objek_wisatas')->onDelete('set null');
         });
     }
 
