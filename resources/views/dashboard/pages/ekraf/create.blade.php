@@ -28,7 +28,7 @@
                                         <select name="kabupaten" class="form-control select">
                                             <option selected="selected" value="">Pilih Kabupaten</option>
                                             @foreach($kabupaten as $kab)
-                                                <option @if(old('kabupaten') == $kab->id) selected="" @endif value="{{ $kab->id }}">{{ $kab->nama_kabupaten }}</option>
+                                                <option @if(old('kabupaten') == $kab->id) selected="" @endif value="{{ $kab->id }}">{{ $kab->nama }}</option>
                                             @endforeach
                                         </select>
                                         @error('kabupaten')
@@ -44,7 +44,7 @@
                                     <select name="kategori_ekraf" class="form-control select">
                                         <option selected="selected" value="">Pilih Kategori</option>
                                         @foreach($kategori as $kat)
-                                            <option @if(old('kategori_ekraf') == $kat->id) selected="" @endif value="{{ $kat->id }}">{{ $kat->nama_kategori }}</option>
+                                            <option @if(old('kategori_ekraf') == $kat->id) selected="" @endif value="{{ $kat->id }}">{{ $kat->nama }}</option>
                                         @endforeach
                                     </select>
                                     @error('kategori_ekraf')
@@ -95,7 +95,7 @@
 
                             <div class="form-group row">
                                 <div class="col-sm-10">
-                                    <a class="btn btn-warning mt-3" href="{{ url('/dashboard/kategori-ekraf') }}">
+                                    <a class="btn btn-warning mt-3" href="{{ url('/dashboard/ekraf') }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
                                         Batalkan
                                     </a>

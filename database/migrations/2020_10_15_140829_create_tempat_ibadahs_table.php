@@ -18,6 +18,7 @@ class CreateTempatIbadahsTable extends Migration
             $table->unsignedBigInteger('kabupaten_id')->nullable()->comment('foreign key dari tabel kabupatens');
             $table->unsignedBigInteger('objek_wisata_id')->nullable()->comment('foreign key dari tabel objekwisatas');
             $table->string('nama')->nullable()->comment('nama tempat ibadah');
+            $table->string('slug');
             $table->string('agama')->nullable()->comment('agama tempat ibadah');
             $table->string('gambar')->nullable()->comment('gambar tempat ibadah');
             $table->string('alamat')->nullable()->comment('alamat hotel');

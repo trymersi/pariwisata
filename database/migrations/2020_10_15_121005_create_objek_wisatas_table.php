@@ -18,6 +18,7 @@ class CreateObjekWisatasTable extends Migration
             $table->unsignedBigInteger('kabupaten_id')->nullable()->comment('foreign key dari tabel kabupatens');
             $table->unsignedBigInteger('kecamatan_id')->nullable()->comment('foreign key dari tabel kecamatans');
             $table->string('nama')->nullable()->comment('nama dari objek wisata');
+            $table->string('slug');
             $table->string('deskripsi')->nullable()->comment('deskripsi dari objek wisata');
             $table->string('jenis')->nullable()->comment('jenis jenis,alam atau buatan');
             $table->string('video_promosi')->nullable()->comment('link video promosi yang dari youtube ex: <iframe width="1237" height="696" src="https://www.youtube.com/embed/3oL4e24Dzyk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');

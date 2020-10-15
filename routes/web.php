@@ -29,6 +29,14 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
         Route::delete('/delete/{id}','Backend\KabupatenController@destroy');
     });
 
+    Route::prefix('/kecamatan')->group(function(){
+        Route::resource('/','Backend\KecamatanController');
+        Route::get('/table','Backend\KecamatanController@table');
+        Route::get('/edit/{id}','Backend\KecamatanController@edit');
+        Route::patch('/update/{id}','Backend\KecamatanController@update');
+        Route::delete('/delete/{id}','Backend\KecamatanController@destroy');
+    });
+
     Route::prefix('/pengguna')->group(function(){
         Route::resource('/','Backend\PenggunaController');
         Route::get('/table','Backend\PenggunaController@table');
@@ -51,6 +59,15 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
         Route::get('/edit/{id}','Backend\EkrafController@edit');
         Route::patch('/update/{id}','Backend\EkrafController@update');
         Route::delete('/delete/{id}','Backend\EkrafController@destroy');
+    });
+
+    Route::prefix('/objek-wisata')->group(function(){
+        Route::resource('/','Backend\ObjekWisataController');
+        Route::get('/table','Backend\ObjekWisataController@table');
+        Route::get('/edit/{id}','Backend\ObjekWisataController@edit');
+        Route::patch('/update/{id}','Backend\ObjekWisataController@update');
+        Route::delete('/delete/{id}','Backend\ObjekWisataController@destroy');
+        Route::get('list-kecamatan/{id_kabupaten}','Backend\ObjekWisataController@getListKecamatan');
     });
 });
 

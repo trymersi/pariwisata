@@ -56,7 +56,7 @@ class PenggunaController extends Controller
      */
     public function create()
     {   
-        $this->data['kabupaten'] = $this->kabupatenClass->orderBy('nama_kabupaten','asc')->get();
+        $this->data['kabupaten'] = $this->kabupatenClass->orderBy('nama','asc')->get();
         return view('dashboard.pages.pengguna.create',$this->data);
     }
 
@@ -129,7 +129,7 @@ class PenggunaController extends Controller
      */
     public function edit($id)
     {
-        $this->data['kabupaten'] = $this->kabupatenClass->orderBy('nama_kabupaten','asc')->get();
+        $this->data['kabupaten'] = $this->kabupatenClass->orderBy('nama','asc')->get();
         $this->data['edit'] = $this->userClass->find($id);
         return view('dashboard.pages.pengguna.edit',$this->data);
     }
@@ -230,7 +230,7 @@ class PenggunaController extends Controller
                 if($data->level == 7)
                 {
                     $kab = $this->kabupatenClass->find($data->kabupaten_id);
-                    $level = $level.' <span class="badge badge-success">'.$kab->nama_kabupaten.'</span>';
+                    $level = $level.'<br><span class="badge badge-success">'.$kab->nama.'</span>';
                 }
                 return $level;
             })

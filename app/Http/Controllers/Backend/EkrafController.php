@@ -14,6 +14,7 @@ use DataTables;
 use Toastr;
 use File;
 use Auth;
+
 class EkrafController extends Controller
 {
     private $data;
@@ -55,8 +56,8 @@ class EkrafController extends Controller
      */
     public function create()
     {
-        $this->data['kabupaten'] = $this->kabupatenClass->orderBy("nama_kabupaten",'desc')->get();
-        $this->data['kategori'] = $this->kategoriEkrafClass->orderBy("nama_kategori",'desc')->get();
+        $this->data['kabupaten'] = $this->kabupatenClass->orderBy("nama",'desc')->get();
+        $this->data['kategori'] = $this->kategoriEkrafClass->orderBy("nama",'desc')->get();
         return view('dashboard.pages.ekraf.create',$this->data);
     }
 
@@ -123,8 +124,8 @@ class EkrafController extends Controller
      */
     public function edit($id)
     {
-        $this->data['kabupaten'] = $this->kabupatenClass->orderBy("nama_kabupaten",'desc')->get();
-        $this->data['kategori'] = $this->kategoriEkrafClass->orderBy("nama_kategori",'desc')->get();
+        $this->data['kabupaten'] = $this->kabupatenClass->orderBy("nama",'desc')->get();
+        $this->data['kategori'] = $this->kategoriEkrafClass->orderBy("nama",'desc')->get();
         $this->data['edit'] = $this->ekrafClass->find($id);
         return view('dashboard.pages.ekraf.edit',$this->data);
     }

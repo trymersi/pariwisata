@@ -23,7 +23,7 @@
                             <div class="form-group row mb-4">
                                 <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nama Kabupaten</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <input type="text" class="form-control" name="nama_kabupaten" value="{{ old('nama_kabupaten',$edit->nama_kabupaten) }}" placeholder="Masukan Data">
+                                    <input type="text" class="form-control" name="nama_kabupaten" value="{{ old('nama_kabupaten',$edit->nama) }}" placeholder="Masukan Data">
                                     @error('nama_kabupaten')
                                         <span><code>{{$message}}</code></span>
                                     @enderror
@@ -32,16 +32,22 @@
                             </div>
 
                             <div class="form-group row mb-4">
-                                <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Email Kabupaten</label>
+                                <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Longitude</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <input type="email" class="form-control" name="email_kabupaten" value="{{ old('email_kabupaten',$edit->email) }}" placeholder="Masukan Data">
+                                    <input type="text" class="form-control" name="longitude" value="{{ old('longitude',$edit->longitude) }}" placeholder="Masukan Longitude">
+                                    @error('longitude')
+                                        <span><code>{{$message}}</code></span>
+                                    @enderror
                                 </div>
                             </div>
 
                             <div class="form-group row mb-4">
-                                <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nomor Kontak</label>
+                                <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Latitude</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <input type="text" class="form-control" name="nomor_kontak" value="{{ old('nomor_kontak',$edit->telepon) }}" placeholder="Masukan Data">
+                                    <input type="text" class="form-control" name="latitude" value="{{ old('latitude',$edit->latitude) }}" placeholder="Masukan Latitude">
+                                    @error('latitude')
+                                        <span><code>{{$message}}</code></span>
+                                    @enderror
                                 </div>
                             </div>
 
@@ -64,7 +70,7 @@
                             <div class="form-group row mb-4">
                                 <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Keterangan Lengkap</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <textarea id="summernote" name="keterangan_lengkap">{!! $edit->keterangan_lengkap !!}</textarea>    
+                                    <textarea id="summernote" name="keterangan_lengkap">{!! $edit->keterangan !!}</textarea>    
                                 </div>
                             </div>
 
@@ -119,7 +125,7 @@
     <script>
         var firstUpload = new FileUploadWithPreview('myFirstImage',{
             presetFiles: [
-                    "{{ $path }}/{{ $edit->foto }}",
+                    "{{ $path }}/{{ $edit->gambar }}",
                 ],
         })
         $(document).ready(function() {

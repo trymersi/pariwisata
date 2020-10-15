@@ -94,7 +94,7 @@
                                     <select id="kabupaten-select" name="kabupaten" class="form-control select">
                                         <option selected="selected"  value="">Pilih Nama Kabupaten</option>
                                         @foreach($kabupaten as $kab)
-                                            <option @if(old('kabupaten',$edit->kabupaten_id) == $kab->id) selected="" @endif value="{{ $kab->id }}">{{ $kab->nama_kabupaten }}</option>
+                                            <option @if(old('kabupaten',$edit->kabupaten_id) == $kab->id) selected="" @endif value="{{ $kab->id }}">{{ $kab->nama }}</option>
                                         @endforeach
                                     </select>
                                     @error('kabupaten')

@@ -18,6 +18,7 @@ class CreateHotelsTable extends Migration
             $table->unsignedBigInteger('kabupaten_id')->nullable()->comment('foreign key dari tabel kabupatens');
             $table->unsignedBigInteger('objek_wisata_id')->nullable()->comment('foreign key dari tabel objekwisatas');
             $table->string('nama')->nullable()->comment('nama hotel');
+            $table->string('slug');
             $table->string('deskripsi')->nullable()->comment('deskripsi hotel');
             $table->string('gambar')->nullable()->comment('gambar hotel');
             $table->string('layanan')->nullable()->comment('layanan hotel');

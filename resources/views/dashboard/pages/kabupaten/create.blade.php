@@ -32,16 +32,22 @@
                             </div>
 
                             <div class="form-group row mb-4">
-                                <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Email Kabupaten</label>
+                                <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Longitude</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <input type="email" class="form-control" name="email_kabupaten" value="{{ old('email_kabupaten') }}" placeholder="Masukan Data">
+                                    <input type="text" class="form-control" name="longitude" value="{{ old('longitude') }}" placeholder="Masukan Longitude">
+                                    @error('longitude')
+                                        <span><code>{{$message}}</code></span>
+                                    @enderror
                                 </div>
                             </div>
 
                             <div class="form-group row mb-4">
-                                <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nomor Kontak</label>
+                                <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Latitude</label>
                                 <div class="col-xl-10 col-lg-9 col-sm-10">
-                                    <input type="text" class="form-control" name="nomor_kontak" value="{{ old('nomor_kontak') }}" placeholder="Masukan Data">
+                                    <input type="text" class="form-control" name="latitude" value="{{ old('latitude') }}" placeholder="Masukan Latitude">
+                                    @error('latitude')
+                                        <span><code>{{$message}}</code></span>
+                                    @enderror
                                 </div>
                             </div>
 

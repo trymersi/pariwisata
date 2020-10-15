@@ -67,6 +67,8 @@ class KabupatenController extends Controller
             'foto_kabupaten' => 'required',
             'tos' => 'required',
             'keterangan_lengkap'=> 'required',
+            'longitude'=> 'required',
+            'latitude'=> 'required',
         ]);
 
         if ($validator->fails()) {
@@ -113,11 +115,11 @@ class KabupatenController extends Controller
             $foto_kabupaten->move($destination, $filename_kabupaten);
         }
         
-        $this->kabupatenClass->nama_kabupaten = $request->nama_kabupaten;
-        $this->kabupatenClass->keterangan_lengkap = $dom->saveHTML();
-        $this->kabupatenClass->foto = $filename_kabupaten;
-        $this->kabupatenClass->telepon = $request->nomor_kontak;
-        $this->kabupatenClass->email = $request->email_kabupaten;
+        $this->kabupatenClass->nama = $request->nama_kabupaten;
+        $this->kabupatenClass->keterangan = $dom->saveHTML();
+        $this->kabupatenClass->gambar = $filename_kabupaten;
+        $this->kabupatenClass->longitude = $request->longitude;
+        $this->kabupatenClass->latitude = $request->latitude;
         $this->kabupatenClass->save();
 
         if($this->kabupatenClass)
@@ -161,9 +163,11 @@ class KabupatenController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'nama_kabupaten' => 'required|unique:kabupatens,nama_kabupaten',
+            'nama_kabupaten' => 'required',
             'tos' => 'required',
             'keterangan_lengkap'=> 'required',
+            'longitude'=> 'required',
+            'latitude'=> 'required',
         ]);
 
         if ($validator->fails()) {
@@ -212,11 +216,13 @@ class KabupatenController extends Controller
         }
         
         $edit = $this->kabupatenClass->find($id);
-        $edit->nama_kabupaten = $request->nama_kabupaten;
-        $edit->keterangan_lengkap = $dom->saveHTML();
-        $edit->foto = $filename_kabupaten;
-        $edit->telepon = $request->nomor_kontak;
-        $edit->email = $request->email_kabupaten;
+        $edit->nama = $request->nama_kabupaten;
+        $edit->keterangan = $dom->saveHTML();
+        if(isset($filename_kabupaten)):
+            $edit->gambar = $filename_kabupaten;
+        endif;
+        $edit->longitude = $request->longitude;
+        $edit->latitude = $request->latitude;
         $edit->save();
 
         if($edit)
@@ -238,7 +244,7 @@ class KabupatenController extends Controller
         
         /* DELETE DATA GAMBAR */
         $path = public_path('uploads/images/foto-kabupaten');
-        File::delete($path.'/'.$data->foto);
+        File::delete($path.'/'.$data->gambar);
 
         /* DELETE DATA GAMBAR KETERANGAN*/
         $path_keterangan = public_path('uploads/images/keterangan-kabupaten');
@@ -263,19 +269,19 @@ class KabupatenController extends Controller
             return DataTables::of($data)
             ->addColumn('image', function($data)
             {
-               return  "<img width='150px' src='".asset('uploads/images/foto-kabupaten/'.$data->foto)."'>";
+               return  "<img width='150px' src='".asset('uploads/images/foto-kabupaten/'.$data->gambar)."'>";
             })
 
             ->addColumn('option', function($data)
             {
                 $button = '<a href="'.url('dashboard/kabupaten/edit/'.$data->id).'" class="btn btn-warning mb-2 mr-2 btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a>';
-                $button .= '<button data-id="'.$data->id.'" data-nama="'.$data->nama_kabupaten.'" class="btn btn-danger mb-2 mr-2 btn-sm" data-toggle="modal" data-target="#ModalHapus" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>';
+                $button .= '<button data-id="'.$data->id.'" data-nama="'.$data->nama.'" class="btn btn-danger mb-2 mr-2 btn-sm" data-toggle="modal" data-target="#ModalHapus" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>';
                 return  $button;
             })
 
             ->addColumn('keterangan_lengkap', function($data)
             {
-                return meta_description($data->keterangan_lengkap);
+                return meta_description($data->keterangan);
             })
     
             ->addIndexColumn()

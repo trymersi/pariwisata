@@ -18,6 +18,7 @@ class CreateEventsTable extends Migration
             $table->unsignedBigInteger('kabupaten_id')->nullable()->comment('foreign key dari tabel kabupatens');
             $table->unsignedBigInteger('objek_wisata_id')->nullable()->comment('foreign key dari tabel objek_wisatas');
             $table->string('nama')->nullable()->comment('nama event');
+            $table->string('slug');
             $table->date('tanggal_mulai')->nullable()->comment('tanggal mulai event');
             $table->date('tanggal_selesai')->nullable()->comment('tanggal selesai event');
             $table->string('gambar_header')->nullable()->comment('gambar untuk header page event');

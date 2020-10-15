@@ -24,8 +24,8 @@
                                 <th>Gambar</th>
                                 <th>Nama Kabupaten</th>
                                 <th>Keterangan</th>
-                                <th>Telpon</th>
-                                <th>Email</th>
+                                <th>Longitude</th>
+                                <th>Latitude</th>
                                 <th class="no-content"></th>
                             </tr>
                         </thead>
@@ -91,21 +91,21 @@
                name: 'image'
            },
            {
-               data: 'nama_kabupaten',
-               name: 'nama_kabupaten'
+               data: 'nama',
+               name: 'nama'
            },
            {
                data: 'keterangan_lengkap',
                name: 'keterangan_lengkap'
            },
            {
-               data: 'telepon',
-               name: 'telepon'
+               data: 'longitude',
+               name: 'longitude'
            },
            
            {
-               data: 'email',
-               name: 'email',
+               data: 'latitude',
+               name: 'latitude',
            },
            {
                data: 'option',

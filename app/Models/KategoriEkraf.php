@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 
 class KategoriEkraf extends Model
 {
+    use SoftDeletes;
     use HasFactory;
 
     public function getData()
@@ -16,7 +18,7 @@ class KategoriEkraf extends Model
             ->select(
                 DB::RAW('count(ekrafs.id) as jumlah_pelaku'),
                 'kategori_ekrafs.id',
-                'kategori_ekrafs.nama_kategori',
+                'kategori_ekrafs.nama',
                 'kategori_ekrafs.deskripsi',
                 'kategori_ekrafs.gambar',
                 'kategori_ekrafs.slug'
