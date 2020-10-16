@@ -16,7 +16,6 @@ class CreateKategoriEkrafsTable extends Migration
         Schema::create('kategori_ekrafs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
-            $table->string('slug');
             $table->string('deskripsi');
             $table->string('gambar');
             $table->string('slug');
