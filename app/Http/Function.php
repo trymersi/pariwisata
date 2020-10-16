@@ -286,13 +286,13 @@ function jenisWisata($ar)
         switch ($key) 
         {
             case '1':
-                $status = '<span class="badge badge-dark">Alam</span>';
+                $status = '<span class="badge badge-success">Alam</span>';
                 break;
             case '2':
-                $status = '<span class="badge badge-dark">Buatan</span>';
+                $status = '<span class="badge badge-success">Buatan</span>';
                 break;
             case '3':
-                $status = '<span class="badge badge-dark">Budaya</span>';
+                $status = '<span class="badge badge-success">Budaya</span>';
                 break;
             default:
                 $status ="-";

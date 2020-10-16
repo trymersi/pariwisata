@@ -16,7 +16,7 @@ class CreateObjekWisataGambarsTable extends Migration
         Schema::create('objek_wisata_gambars', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('objek_wisata_id')->nullable()->comment('foreign key dari tabel objekwisatas');
-            $table->integer('gambar')->default(1)->nullable()->comment('gambar');
+            $table->string('gambar')->default(1)->nullable()->comment('gambar');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('objek_wisata_id')->references('id')->on('objek_wisatas')->onDelete('set null');

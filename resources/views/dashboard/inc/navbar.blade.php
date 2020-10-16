@@ -186,7 +186,12 @@
 
                         <nav class="breadcrumb-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
+                                @if(isset($sub_page))
+                                {{ set_breadcrumb($page_name, $category_name,$sub_page) }}
+                                @else
                                 {{ set_breadcrumb($page_name, $category_name) }}
+                                @endif
+                                
                             </ol>
                         </nav>
 

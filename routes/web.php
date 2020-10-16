@@ -68,6 +68,15 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
         Route::patch('/update/{id}','Backend\ObjekWisataController@update');
         Route::delete('/delete/{id}','Backend\ObjekWisataController@destroy');
         Route::get('list-kecamatan/{id_kabupaten}','Backend\ObjekWisataController@getListKecamatan');
+        Route::prefix('/gambar')->group(function(){
+            Route::get('/{id}','Backend\ObjekWisataController@gambarIndex');
+            Route::get('/create/{id_objek_wisata}','Backend\ObjekWisataController@gambarCreate');
+            Route::post('/store','Backend\ObjekWisataController@gambarStore');
+            Route::get('/table/{id_objek_wisata}','Backend\ObjekWisataController@gambarTable');
+            Route::get('/edit/{id}/{id_objek_wisata}','Backend\ObjekWisataController@gambarEdit');
+            Route::patch('/update/{id}','Backend\ObjekWisataController@gambarUpdate');
+            Route::delete('/delete/{id}','Backend\ObjekWisataController@gambarDestroy');
+        });
     });
 });
 

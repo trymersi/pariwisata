@@ -28,8 +28,8 @@
                                 <th>Nama</th>
                                 <th>Gambar</th>
                                 <th>Jenis</th>
-                                <th>Detail</th>
                                 <th>Status</th>
+                                <th>Detail</th>
                                 <th class="no-content"></th>
                             </tr>
                         </thead>
@@ -112,12 +112,12 @@
                name: 'jenis'
            },
            {
-               data: 'detail',
-               name: 'detail'
-           },
-           {
                data: 'status',
                name: 'status'
+           },
+           {
+               data: 'detail',
+               name: 'detail'
            },
            {
                data: 'option',
