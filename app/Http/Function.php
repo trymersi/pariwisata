@@ -224,12 +224,16 @@ function getDistance($from,$to)
     $data = json_decode(file_get_contents($url),true);
     if(isset($data['status']) && $data['status'] == "OK")
     {
-        $jarak = $data['rows'][0]['elements'][0]['distance']['text'];
-        $jarak = str_replace(' mi', '', $jarak)*1.609344;
-        $jarak = formatAngkat($jarak).' Km';
-        $durasi = $data['rows'][0]['elements'][0]['duration']['value'];
-        $durasi = waktu($durasi);
-        return $jarak." (".$durasi.")";
+        if(isset($data['rows'][0]['elements'][0]['distance']))
+        {
+            $jarak = $data['rows'][0]['elements'][0]['distance']['text'];
+            $jarak = str_replace(' mi', '', $jarak)*1.609344;
+            $jarak = formatAngkat($jarak).' Km';
+            $durasi = $data['rows'][0]['elements'][0]['duration']['value'];
+            $durasi = waktu($durasi);
+            return $jarak." (".$durasi.")";
+        }
+        return '-';
     }
     return False;
 }

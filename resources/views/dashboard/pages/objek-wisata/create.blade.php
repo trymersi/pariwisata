@@ -227,9 +227,37 @@
                 zoom: 8,
             });
         }
+
+        function changeMap(lat,long)
+        {
+            var data = {lat: +lat , lng: +long};
+            console.log(data)
+            var map = new google.maps.Map(
+                document.getElementById('map'), {zoom: 15, center: data}
+            );
+            var marker = new google.maps.Marker({position: data, map: map});
+        }
         $(document).ready(function() {
             initMap()
             
+            $("#longitude").keyup(function()
+            {
+                console.log($("#longitude").val())
+                if($("#latitude").val() != '')
+                {
+                    changeMap($("#latitude").val(),$("#longitude").val())
+                }
+            })
+
+            $("#latitude").keyup(function()
+            {
+                console.log($("#latitude").val())
+                if($("#longitude").val() != '')
+                {
+                    changeMap($("#latitude").val(),$("#longitude").val())
+                }
+            })
+
             $('#summernote').summernote({
                 placeholder: 'Masukan keterangan lengkap disini, anda juga dapat memasukan gambar pada bagian text',
                 height: 350
@@ -252,13 +280,8 @@
                 {
                     setTimeout(function(){ 
                         $('#map').removeClass('d-none');
+                        changeMap(position.coords.latitude,position.coords.longitude)
                         
-                        var data = {lat: +position.coords.latitude , lng: +position.coords.longitude};
-                        var map = new google.maps.Map(
-                            document.getElementById('map'), {zoom: 15, center: data}
-                        );
-                        var marker = new google.maps.Marker({position: data, map: map});
-
                         $("#latitude").val(position.coords.latitude);
                         $("#longitude").val(position.coords.longitude);
                         $("#icon-selesai").removeClass('d-none');
