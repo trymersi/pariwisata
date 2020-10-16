@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Backend;
 
-namespace App\Http\Controllers\Backend;
-
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect; 
 use Intervention\Image\Facades\Image;

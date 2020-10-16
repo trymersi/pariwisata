@@ -78,5 +78,23 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
             Route::delete('/delete/{id}','Backend\ObjekWisataController@gambarDestroy');
         });
     });
+
+    Route::prefix('/hotel')->group(function(){
+        Route::resource('/','Backend\HotelController');
+        Route::get('/table','Backend\HotelController@table');
+        Route::get('/edit/{id}','Backend\HotelController@edit');
+        Route::patch('/update/{id}','Backend\HotelController@update');
+        Route::delete('/delete/{id}','Backend\HotelController@destroy');
+        Route::get('list-kecamatan/{id_kabupaten}','Backend\HotelController@getListKecamatan');
+        Route::prefix('/gambar')->group(function(){
+            Route::get('/{id}','Backend\HotelController@gambarIndex');
+            Route::get('/create/{id_objek_wisata}','Backend\HotelController@gambarCreate');
+            Route::post('/store','Backend\HotelController@gambarStore');
+            Route::get('/table/{id_objek_wisata}','Backend\HotelController@gambarTable');
+            Route::get('/edit/{id}/{id_objek_wisata}','Backend\HotelController@gambarEdit');
+            Route::patch('/update/{id}','Backend\HotelController@gambarUpdate');
+            Route::delete('/delete/{id}','Backend\HotelController@gambarDestroy');
+        });
+    });
 });
 

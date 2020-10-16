@@ -10,4 +10,26 @@ class hotel extends Model
 {
     use SoftDeletes;
     use HasFactory;
+
+    public function getData($kab=false)
+    {
+        $get = $this->leftJoin('kabupatens','kabupatens.id','hotels.kabupaten_id')
+            ->leftJoin('objek_wisatas','objek_wisatas.id','hotels.objek_wisata_id')
+            ->select(
+                'kabupatens.nama as nama_kabupaten',
+                'objek_wisatas.nama as nama_wisata',
+                'hotels.nama as nama_hotel',
+                'hotels.deskripsi as deskripsi_hotel',
+                'hotels.gambar as gambar_hotel',
+                'hotels.jenis as jenis_hotel',
+                'hotels.alamat as alamat_hotel',
+                'hotels.status as status_hotel',
+            );
+            if($kab):
+                $get->where('hotels.kabupaten_id',$kab);
+            endif;
+            $get->orderBy('hotels.updated_at','desc')
+            ->get();
+        return $get;
+    }
 }
