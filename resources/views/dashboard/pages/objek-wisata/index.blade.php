@@ -17,18 +17,18 @@
                     </div>
                 </div>
                 <div class="table-responsive mb-4 mt-4">
-                    <table id="tabel" class="tabel table table-hover" style="width:100%">
+                    <table id="tabel" class="tabel table" style="width:100%">
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Kategori Ekraf</th>
                                 @if(Auth::user()->level == 1 || Auth::user()->level == 3)
                                 <th>Kabupaten</th>
                                 @endif
+                                <th>Kecamatan</th>
                                 <th>Nama</th>
-                                <th>Alamat</th>
-                                <th>Nomor Kontak</th>
-                                <th>Jenis Usaha</th>
+                                <th>Gambar</th>
+                                <th>Jenis</th>
+                                <th>Detail</th>
                                 <th>Status</th>
                                 <th class="no-content"></th>
                             </tr>
@@ -85,36 +85,35 @@
            processing: true,
            serverSide: true,
            ajax: {
-           url: "{{ url('dashboard/ekraf/table') }}",
+           url: "{{ url('dashboard/objek-wisata/table') }}",
            },
            columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false,searchable: false},
-            
-           {
-               data: 'nama_kategori',
-               name: 'nama_kategori'
-           },
-           @if(Auth::user()->level == 1 || Auth::user()->level == 3)
+           @if(Auth::user()->level == 1 || Auth::user()->level == 2)
            {
                data: 'nama_kabupaten',
                name: 'nama_kabupaten'
            },
            @endif
            {
+               data: 'nama_kecamatan',
+               name: 'nama_kecamatan'
+           },
+           {
                data: 'nama',
                name: 'nama'
            },
            {
-               data: 'alamat',
-               name: 'alamat'
+               data: 'gambar',
+               name: 'gambar'
            },
            {
-               data: 'nomor_kontak',
-               name: 'nomor_kontak'
+               data: 'jenis',
+               name: 'jenis'
            },
            {
-               data: 'jenis_usaha',
-               name: 'jenis_usaha'
+               data: 'detail',
+               name: 'detail'
            },
            {
                data: 'status',
@@ -146,7 +145,7 @@
                         var idDelete = $(this).attr('data-id');
                         var token = $(this).attr('data-token');
                         $.ajax({
-                            url:"{{url('dashboard/ekraf/delete')}}/" + idDelete,
+                            url:"{{url('dashboard/objek-wisata/delete')}}/" + idDelete,
                             type: 'POST',
                             data: {_method: 'delete', _token :token},
                             success:function(get){

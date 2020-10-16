@@ -11,19 +11,23 @@ class objekWisata extends Model
     use SoftDeletes;
     use HasFactory;
 
-    public function getData()
+    public function getData($kab=false)
     {
         $get = $this->leftJoin('kabupatens','kabupatens.id','objek_wisatas.kabupaten_id')
             ->leftJoin('kecamatans','kecamatans.id','objek_wisatas.kecamatan_id')
-            -select(
+            ->select(
                 'kabupatens.nama as nama_kabupaten',
                 'kecamatans.nama as nama_kecamatan',
                 'objek_wisatas.id',
-                'objek_wisatas.gambar',
+                'objek_wisatas.gambar_header',
                 'objek_wisatas.nama',
                 'objek_wisatas.jenis',
-                )
-            ->orderBy('updated_at','desc')
+                'objek_wisatas.status',
+            );
+            if($kab):
+                $get->where('objek_wisatas.kabupaten_id',$kab);
+            endif;
+            $get->orderBy('objek_wisatas.updated_at','desc')
             ->get();
         return $get;
     }

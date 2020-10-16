@@ -167,7 +167,7 @@ class EkrafController extends Controller
         $edit->alamat = $request->alamat;
         $edit->nomor_kontak = $request->nomor_kontak;
         $edit->jenis_usaha = $request->jenis_usaha;
-        $edit->status = (Auth::user()->level == 1 || Auth::user()->level == $request->status ) ? 3 : 1;
+        $edit->status = (Auth::user()->level == 1 || Auth::user()->level == 3 ) ? $request->status : 1;
         $edit->save();
 
         if($edit)

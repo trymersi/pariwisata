@@ -10,11 +10,13 @@
 */
 .sidenav {
   position: fixed;
-  right: -30px;
+  /* right: -30px; */
+  right: -2px;
   top: 125px;
-  width: 236px;
+  /* width: 236px; */
   height: auto;
-  border-left: 1px solid #e0e6ed; }
+  border-left: 1px solid #e0e6ed; 
+}
   .sidenav .sidenav-header:after {
     display: none; }
   .sidenav .sidenav-header p {

@@ -206,3 +206,99 @@ function status($kode)
     }
     return $status;
 }
+
+function apiMap()
+{
+    return "AIzaSyD4qfrYReAFlZNx5YPg1mIMKQ_k5ilrlAw";
+}
+
+function latLongProv()
+{
+    return "0.507068,101.447777";
+}
+
+function getDistance($from,$to)
+{
+    $api = apiMap();
+    $url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=".$from."&destinations=".$to."&key=".$api;
+    $data = json_decode(file_get_contents($url),true);
+    if(isset($data['status']) && $data['status'] == "OK")
+    {
+        $jarak = $data['rows'][0]['elements'][0]['distance']['text'];
+        $jarak = str_replace(' mi', '', $jarak)*1.609344;
+        $jarak = formatAngkat($jarak).' Km';
+        $durasi = $data['rows'][0]['elements'][0]['duration']['value'];
+        $durasi = waktu($durasi);
+        return $jarak." (".$durasi.")";
+    }
+    return False;
+}
+
+function getLocationLatLong($lat,$long)
+{
+    $api = apiMap();
+    $url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=".$lat.",".$long."&key=".$api;
+    $data = file_get_contents($url);
+    print_r($data);
+}
+
+function getCurrentLoc()
+{
+    $api = apiMap();
+    $url = "https://maps.googleapis.com/maps/api/geocode/json?key=".$api;
+    $data = file_get_contents($url);
+    print_r($data);
+}
+
+function formatAngkat($number)
+{
+    return number_format((float)$number, 2, '.', '');
+}
+
+function waktu($waktu){
+    if(($waktu>0) and ($waktu<60)){
+        $lama=number_format($waktu,2)." detik";
+        return $lama;
+    }
+    if(($waktu>60) and ($waktu<3600)){
+        $detik=fmod($waktu,60);
+        $menit=$waktu-$detik;
+        $menit=$menit/60;
+        $lama=$menit." Menit";
+        return $lama;
+    }
+    elseif($waktu >3600){
+        $detik=fmod($waktu,60);
+        $tempmenit=($waktu-$detik)/60;
+        $menit=fmod($tempmenit,60);
+        $jam=($tempmenit-$menit)/60;    
+        $lama=$jam." Jam ".$menit." Menit";
+        return $lama;
+    }
+}
+
+function jenisWisata($ar)
+{
+    $ar = explode(',',$ar);
+    $data = '';
+    foreach($ar as $key)
+    {
+        switch ($key) 
+        {
+            case '1':
+                $status = '<span class="badge badge-dark">Alam</span>';
+                break;
+            case '2':
+                $status = '<span class="badge badge-dark">Buatan</span>';
+                break;
+            case '3':
+                $status = '<span class="badge badge-dark">Budaya</span>';
+                break;
+            default:
+                $status ="-";
+                break;
+        }
+        $data .=$status;
+    }
+    return $data;
+}
