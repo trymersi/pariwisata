@@ -206,8 +206,9 @@ class ObjekWisataController extends Controller
      */
     public function edit($id)
     {
-        $this->data['kabupaten'] = $this->kabupatenClass->orderBy("nama",'desc')->get();
         $this->data['edit'] = $this->objekWisataClass->find($id);
+        $this->data['kabupaten'] = $this->kabupatenClass->orderBy("nama",'desc')->get();
+        $this->data['kecamatan'] = $this->kecamatanClass->getListByKab($this->data['edit']->kabupaten_id);
         $check = strpos($this->data['edit']->jenis,",");
         if($check !== FALSE)
         {

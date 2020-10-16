@@ -40,6 +40,9 @@
                         <div class="col-xl-10 col-lg-9 col-sm-10">
                             <select name="kecamatan"  id="kecamatan" class="form-control select">
                                 <option selected="selected" value="">Pilih Kecamatan</option>
+                                @foreach($kecamatan as $kec)
+                                    <option @if(old('kabupaten',$edit->kecamatan_id) == $kec->id) selected="" @endif value="{{ $kec->id }}">{{ $kec->text }}</option>
+                                @endforeach
                             </select>
                             @error('kecamatan')
                                 <span><code>{{$message}}</code></span>
@@ -248,9 +251,38 @@
             });
             var marker = new google.maps.Marker({position: { lat: {{ $edit->latitude }}, lng: {{ $edit->longitude }} }, map: map});
         }
+
+        function changeMap(lat,long)
+        {
+            var data = {lat: +lat , lng: +long};
+            console.log(data)
+            var map = new google.maps.Map(
+                document.getElementById('map'), {zoom: 15, center: data}
+            );
+            var marker = new google.maps.Marker({position: data, map: map});
+        }
+
         $(document).ready(function() {
             initMap()
             
+            $("#longitude").keyup(function()
+            {
+                console.log($("#longitude").val())
+                if($("#latitude").val() != '')
+                {
+                    changeMap($("#latitude").val(),$("#longitude").val())
+                }
+            })
+
+            $("#latitude").keyup(function()
+            {
+                console.log($("#latitude").val())
+                if($("#longitude").val() != '')
+                {
+                    changeMap($("#latitude").val(),$("#longitude").val())
+                }
+            })
+
             $('#summernote').summernote({
                 placeholder: 'Masukan keterangan lengkap disini, anda juga dapat memasukan gambar pada bagian text',
                 height: 350
@@ -273,13 +305,8 @@
                 {
                     setTimeout(function(){ 
                         $('#map').removeClass('d-none');
+                        changeMap(position.coords.latitude,position.coords.longitude)
                         
-                        var data = {lat: +position.coords.latitude , lng: +position.coords.longitude};
-                        var map = new google.maps.Map(
-                            document.getElementById('map'), {zoom: 15, center: data}
-                        );
-                        var marker = new google.maps.Marker({position: data, map: map});
-
                         $("#latitude").val(position.coords.latitude);
                         $("#longitude").val(position.coords.longitude);
                         $("#icon-selesai").removeClass('d-none');
