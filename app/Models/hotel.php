@@ -22,6 +22,7 @@ class hotel extends Model
                 'hotels.deskripsi as deskripsi_hotel',
                 'hotels.gambar as gambar_hotel',
                 'hotels.jenis as jenis_hotel',
+                'hotels.id',
                 'hotels.alamat as alamat_hotel',
                 'hotels.status as status_hotel',
             );

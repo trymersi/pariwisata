@@ -15,7 +15,7 @@
             </div>
             
             <div class="widget-content widget-content-area">
-                <form method="post" action="{{ action('Backend\ObjekWisataController@store') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ action('Backend\HotelController@store') }}" enctype="multipart/form-data">
                     @csrf
 
                     @if(Auth::user()->level == 1 || Auth::user()->level == 3)
@@ -36,31 +36,24 @@
                     @endif
 
                     <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Kecamatan</label>
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Objek Wisata Terdekat</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <select name="kecamatan"  id="kecamatan" class="form-control select">
-                                <option selected="selected" value="">Pilih Kecamatan</option>
+                            <select name="objek_wisata"  id="objek_wisata" class="form-control select">
+                                <option selected="selected" value="">Pilih Objek Wisata</option>
+                                @foreach($objek_wisata as $objek_wisata)
+                                    <option @if(old('objek_wisata') == $objek_wisata->id) selected="" @endif value="{{ $objek_wisata->id }}">{{ $objek_wisata->nama }}</option>
+                                @endforeach
                             </select>
-                            @error('kecamatan')
+                            @error('objek_wisata')
                                 <span><code>{{$message}}</code></span>
                             @enderror
                         </div>
                     </div>
 
                     <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Desa</label>
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nama Hotel</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <input type="text" class="form-control" name="desa" value="{{ old('desa') }}" placeholder="Masukan nama desa lokasi objek wisata">
-                            @error('desa')
-                                <span><code>{{$message}}</code></span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nama Objek Wisata</label>
-                        <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <input type="text" class="form-control" name="nama" value="{{ old('nama') }}" placeholder="Masukan nama objek wisata">
+                            <input type="text" class="form-control" name="nama" value="{{ old('nama') }}" placeholder="Masukan nama hotel">
                             @error('nama')
                                 <span><code>{{$message}}</code></span>
                             @enderror
@@ -68,7 +61,7 @@
                     </div>
 
                     <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Alamat Objek Wisata</label>
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Alamat Hotel</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
                             <input type="text" class="form-control" name="alamat" value="{{ old('alamat') }}" placeholder="Masukan alamat objek wisata">
                             @error('alamat')
@@ -78,20 +71,16 @@
                     </div>
 
                     <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Jenis Wisata</label>
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Deskripsi</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <select name="jenis[]" class="form-control select" multiple="multiple">
-                                <option value="">Pilih Jenis Wisata</option>
-                                <option @if(old('jenis.0')) selected="" @endif value="1">Alam</option>
-                                <option @if(old('jenis.1')) selected="" @endif value="2">Buatan</option>
-                                <option @if(old('jenis.2')) selected="" @endif value="3">Budaya</option>
-                            </select>
-                            @error('jenis')
+                            <textarea id="summernote" name="deskripsi">{!! old('deskripsi') !!}</textarea>
+                            @error('deskripsi')
                                 <span><code>{{$message}}</code></span>
-                            @enderror
+                            @enderror   
                         </div>
                     </div>
 
+                    
                     <div class="form-group row mb-4">
                         <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Gambar Header</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
@@ -103,10 +92,34 @@
                     </div>
 
                     <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Video Promosi</label>
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Layanan Hotel</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <input type="text" class="form-control" name="video_promosi" value="{{ old('video_promosi') }}" placeholder="Masukan url video dari youtube">
-                            @error('video_promosi')
+                            <select name="layanan[]" class="form-control select" multiple="multiple">
+                                <option value="">Pilih Layanan Hotel</option>
+                                <option @if(old('layanan.0')) selected="" @endif value="1">Elevator in building</option>
+                                <option @if(old('layanan.1')) selected="" @endif value="2">Free Wi Fi</option>
+                                <option @if(old('layanan.2')) selected="" @endif value="3">Free Parking</option>
+                                <option @if(old('layanan.3')) selected="" @endif value="4">Air Conditioned</option>
+                                <option @if(old('layanan.4')) selected="" @endif value="5">Online Ordering</option>
+                            </select>
+                            @error('layanan')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Jenis Hotel</label>
+                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                            <select name="jenis[]" class="form-control select" multiple="multiple">
+                                <option value="">Pilih Jenis Hotel</option>
+                                <option @if(old('jenis.0')) selected="" @endif value="1">Hotel Bintang Satu</option>
+                                <option @if(old('jenis.1')) selected="" @endif value="2">Hotel Bintang Dua</option>
+                                <option @if(old('jenis.2')) selected="" @endif value="3">Hotel Bintang Tiga</option>
+                                <option @if(old('jenis.3')) selected="" @endif value="4">Hotel Bintang Empat</option>
+                                <option @if(old('jenis.4')) selected="" @endif value="5">Hotel Bintang Lima</option>
+                            </select>
+                            @error('jenis')
                                 <span><code>{{$message}}</code></span>
                             @enderror
                         </div>
@@ -137,17 +150,6 @@
                             @enderror
                         </div>
                     </div>
-                    
-
-                    <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Deskripsi</label>
-                        <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <textarea id="summernote" name="deskripsi">{!! old('deskripsi') !!}</textarea>
-                            @error('deskripsi')
-                                <span><code>{{$message}}</code></span>
-                            @enderror   
-                        </div>
-                    </div>
 
                     <div class="form-group row">
                         <div class="col-sm-2">Setuju</div>
@@ -166,7 +168,7 @@
 
                     <div class="form-group row">
                         <div class="col-sm-10">
-                            <a class="btn btn-warning mt-3" href="{{ url('/dashboard/objek-wisata') }}">
+                            <a class="btn btn-warning mt-3" href="{{ url('/dashboard/hotel') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
                                 Batalkan
                             </a>

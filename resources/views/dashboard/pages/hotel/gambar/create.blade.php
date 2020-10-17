@@ -8,17 +8,17 @@
                 <div class="row">
                     <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                         <h4>
-                            Form Tambah Gambar {{ $page_name }} {{ $nama_objek_wisata }}
+                            Form Tambah Gambar {{ $page_name }} {{ $nama_hotel }}
                         </h4>
                     </div>                                                                        
                 </div>
             </div>
             
             <div class="widget-content widget-content-area">
-                <form method="post" action="{{ url('dashboard/objek-wisata/gambar/store') }}" enctype="multipart/form-data">
+                <form method="post" action="{{ url('dashboard/hotel/gambar/store') }}" enctype="multipart/form-data">
                     @csrf
 
-                    <input type="text" hidden name="objek_wisata_id" value="{{ $objek_wisata_id }}">
+                    <input type="text" hidden name="hotel_id" value="{{ $hotel_id }}">
 
                     <div class="form-group row mb-4">
                         <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Gambar</label>
@@ -47,7 +47,7 @@
 
                     <div class="form-group row">
                         <div class="col-sm-10">
-                            <a class="btn btn-warning mt-3" href="{{ url('/dashboard/objek-wisata/gambar') }}/{{ $objek_wisata_id }}">
+                            <a class="btn btn-warning mt-3" href="{{ url('/dashboard/hotel/gambar') }}/{{ $hotel_id }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
                                 Batalkan
                             </a>
