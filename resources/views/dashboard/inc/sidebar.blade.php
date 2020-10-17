@@ -35,6 +35,9 @@
                             <li class="{{ ($page_name === 'Kabupaten') ? 'active' : '' }}">
                                 <a href="{{ url('dashboard/kabupaten') }}"> Kabupaten </a>
                             </li>
+                            <li class="{{ ($page_name === 'Kecamatan') ? 'active' : '' }}">
+                                <a href="{{ url('dashboard/kecamatan') }}"> Kecamatan </a>
+                            </li>
                             <li class="{{ ($page_name === 'Pengguna') ? 'active' : '' }}">
                                 <a href="{{ url('dashboard/pengguna') }}"> Pengguna </a>
                             </li>
