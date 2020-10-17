@@ -77,6 +77,23 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
             Route::patch('/update/{id}','Backend\ObjekWisataController@gambarUpdate');
             Route::delete('/delete/{id}','Backend\ObjekWisataController@gambarDestroy');
         });
+        Route::prefix('/aksesibilitas')->group(function(){
+            Route::get('/{id}','Backend\ObjekWisataController@aksesibilitasCreate');
+            Route::post('/store','Backend\ObjekWisataController@aksesibilitasStore');
+            Route::patch('/update/{id}','Backend\ObjekWisataController@aksesibilitasUpdate');
+        });
+
+        Route::prefix('/amenitas')->group(function(){
+            Route::get('/{id}','Backend\ObjekWisataController@amenitasCreate');
+            Route::post('/store','Backend\ObjekWisataController@amenitasStore');
+            Route::patch('/update/{id}','Backend\ObjekWisataController@amenitasUpdate');
+        });
+
+        Route::prefix('/detail')->group(function(){
+            Route::get('/{id}','Backend\ObjekWisataController@detailCreate');
+            Route::post('/store','Backend\ObjekWisataController@detailStore');
+            Route::patch('/update/{id}','Backend\ObjekWisataController@detailUpdate');
+        });
     });
 
     Route::prefix('/hotel')->group(function(){

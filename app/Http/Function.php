@@ -306,3 +306,4 @@ function jenisWisata($ar)
     }
     return $data;
 }
+
