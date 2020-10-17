@@ -70,6 +70,7 @@
                            
                         </ul>
                     </li>
+                    
                     <li class="menu {{ ($category_name === 'Hotel') ? 'active' : '' }}">
                         <a href="#dashboard" data-active="{{ ($category_name === 'Hotel') ? 'true' : 'false' }}" data-toggle="collapse" aria-expanded="{{ ($category_name === 'Hotel') ? 'true' : 'false' }}" class="dropdown-toggle">
                             <div class="">

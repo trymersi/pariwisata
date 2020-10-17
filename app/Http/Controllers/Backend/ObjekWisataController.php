@@ -42,7 +42,7 @@ class ObjekWisataController extends Controller
         $this->kabupatenClass = new Kabupaten;
         $this->kecamatanClass = new Kecamatan;
         $this->objekWisataClass = new ObjekWisata;
-        $this->objekAksebilitasClass = new objekWisataAksebilitas;
+        $this->objekAksesibilitasClass = new objekWisataAksebilitas;
         $this->objekAmenitasClass = new ObjekWisataAmenitas;
         $this->objekDetailClass = new ObjekWisataDetail;
         $this->objekGambarClass = new ObjekWisataGambar;
@@ -341,7 +341,7 @@ class ObjekWisataController extends Controller
     {
         $data = $this->objekWisataClass->find($id);
 
-        $aksebilitas = $this->objekAksebilitasClass->where('objek_wisata_id',$id)->first();
+        $aksebilitas = $this->objekAksesibilitasClass->where('objek_wisata_id',$id)->first();
         if(isset($aksebilitas->id)):
             $aksebilitas = $aksebilitas->find($aksebilitas->id);
             $aksebilitas->delete();
@@ -419,9 +419,9 @@ class ObjekWisataController extends Controller
                         <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu" style="will-change: transform;">
-                        <a class="dropdown-item" href="'.url("/dashboard/objek-wisata/gambar").'">Aksesibilitas</a>
-                        <a class="dropdown-item" href="'.url("/dashboard/objek-wisata/gambar").'">Amenitas</a>
-                        <a class="dropdown-item" href="'.url("/dashboard/objek-wisata/gambar").'">Detail Objek Wisata</a>
+                        <a class="dropdown-item" href="'.url("/dashboard/objek-wisata/aksesibilitas").'/'.$data->id.'">Aksesibilitas</a>
+                        <a class="dropdown-item" href="'.url("/dashboard/objek-wisata/amenitas").'/'.$data->id.'">Amenitas</a>
+                        <a class="dropdown-item" href="'.url("/dashboard/objek-wisata/detail").'/'.$data->id.'">Detail Objek Wisata</a>
                         <a class="dropdown-item" href="'.url("/dashboard/objek-wisata/gambar").'/'.$data->id.'">Gambar Gallery</a>
                     </div>
                 </div>';
@@ -587,5 +587,272 @@ class ObjekWisataController extends Controller
         File::delete($path.'/'.$delete->gambar);
         $delete->delete();
         return ['status'=>'1'];
+    }
+
+    public function aksesibilitasCreate($id)
+    {
+        $data = $this->objekWisataClass->find($id);
+        $this->data['sub_page'] = $data->nama;
+        $this->data['objek_wisata_id'] = $id;
+        $this->data['nama_objek_wisata'] = $data->nama;
+        $this->data['edit'] = $this->objekAksesibilitasClass->where('objek_wisata_id',$id)->first();
+        return view('dashboard.pages.objek-wisata.aksesibilitas',$this->data);
+    }
+
+    public function aksesibilitasStore(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'kondisi_jalan_menuju' => 'required',
+            'kondisi_jalan_dalam' => 'required',
+            'jenis_transportasi' => 'required',
+            'biaya' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Toastr::error('Terjadi Kesalahan Saat Menyimpan Data', 'Gagal', ["positionClass" => "toast-bottom-right"]);
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
+        $this->objekAksesibilitasClass->objek_wisata_id = $request->objek_wisata_id;
+        $this->objekAksesibilitasClass->kondisi_jalan_menuju = $request->kondisi_jalan_menuju;
+        $this->objekAksesibilitasClass->kondisi_jalan_dalam = $request->kondisi_jalan_dalam;
+        $this->objekAksesibilitasClass->jenis_transportasi = $request->jenis_transportasi;
+        $this->objekAksesibilitasClass->biaya = $request->biaya;
+        $this->objekAksesibilitasClass->save();
+
+        if($this->objekAksesibilitasClass)
+        {
+            Toastr::success('Data Berhasil Diubah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
+            return redirect::to('dashboard/objek-wisata');
+        }
+        
+    }
+
+    public function aksesibilitasUpdate(Request $request,$id)
+    {
+        $validator = Validator::make($request->all(), [
+            'kondisi_jalan_menuju' => 'required',
+            'kondisi_jalan_dalam' => 'required',
+            'jenis_transportasi' => 'required',
+            'biaya' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Toastr::error('Terjadi Kesalahan Saat Menyimpan Data', 'Gagal', ["positionClass" => "toast-bottom-right"]);
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
+        $edit = $this->objekAksesibilitasClass->find($id);
+        $edit->objek_wisata_id = $request->objek_wisata_id;
+        $edit->kondisi_jalan_menuju = $request->kondisi_jalan_menuju;
+        $edit->kondisi_jalan_dalam = $request->kondisi_jalan_dalam;
+        $edit->jenis_transportasi = $request->jenis_transportasi;
+        $edit->biaya = $request->biaya;
+        $edit->save();
+
+        if($this->objekAksesibilitasClass)
+        {
+            Toastr::success('Data Berhasil Diubah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
+            return redirect::to('dashboard/objek-wisata');
+        }
+            
+    }
+
+    public function amenitasCreate($id)
+    {
+        $data = $this->objekWisataClass->find($id);
+        $this->data['sub_page'] = $data->nama;
+        $this->data['objek_wisata_id'] = $id;
+        $this->data['nama_objek_wisata'] = $data->nama;
+        $this->data['edit'] = $this->objekAmenitasClass->where('objek_wisata_id',$id)->first();
+        if(isset($this->data['edit']->sinyal_provider))
+        {
+            $cek = strpos($this->data['edit']->sinyal_provider,',');
+            if($cek !== FALSE)
+            {
+                $provider = explode(',',$this->data['edit']->sinyal_provider);
+            }
+            else
+            {
+                $provider = [$this->data['edit']->sinyal_provider];
+            }
+        }
+        else
+        {
+            $provider = [];
+        }
+        
+        $this->data['provider'] = $provider;
+        return view('dashboard.pages.objek-wisata.amenitas',$this->data);
+    }
+
+    public function amenitasStore(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'tempat_parkir' => 'required',
+            'fasilitas_kesehatan' => 'required',
+            'fasilitas_perbelanjaan' => 'required',
+            'listrik' => 'required',
+            'street_furniture' => 'required',
+            'bengkel' => 'required',
+            'money_changer' => 'required',
+            'tempat_sewa_kendaraan' => 'required',
+            'sinyal_provider' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Toastr::error('Terjadi Kesalahan Saat Menyimpan Data', 'Gagal', ["positionClass" => "toast-bottom-right"]);
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+        
+        $this->objekAmenitasClass->objek_wisata_id = $request->objek_wisata_id;
+        $this->objekAmenitasClass->tempat_parkir = $request->tempat_parkir;
+        $this->objekAmenitasClass->fasilitas_kesehatan = $request->fasilitas_kesehatan;
+        $this->objekAmenitasClass->fasilitas_perbelanjaan = $request->fasilitas_perbelanjaan;
+        $this->objekAmenitasClass->listrik = $request->listrik;
+        $this->objekAmenitasClass->street_furniture = $request->street_furniture;
+        $this->objekAmenitasClass->bengkel = $request->bengkel;
+        $this->objekAmenitasClass->money_changer = $request->money_changer;
+        $this->objekAmenitasClass->tempat_sewa_kendaraan = $request->tempat_sewa_kendaraan;
+        $this->objekAmenitasClass->sinyal_provider = implode(',',$request->sinyal_provider);
+        $this->objekAmenitasClass->save();
+        if($this->objekAmenitasClass)
+        {
+            Toastr::success('Data Berhasil Ditambah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
+            return redirect::to('dashboard/objek-wisata');
+        }
+        
+    }
+
+    public function amenitasUpdate(Request $request,$id)
+    {
+        $validator = Validator::make($request->all(), [
+            'kondisi_jalan_menuju' => 'required',
+            'kondisi_jalan_dalam' => 'required',
+            'jenis_transportasi' => 'required',
+            'biaya' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Toastr::error('Terjadi Kesalahan Saat Menyimpan Data', 'Gagal', ["positionClass" => "toast-bottom-right"]);
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
+        $edit = $this->objekAksesibilitasClass->find($id);
+        $edit->objek_wisata_id = $request->objek_wisata_id;
+        $edit->kondisi_jalan_menuju = $request->kondisi_jalan_menuju;
+        $edit->kondisi_jalan_dalam = $request->kondisi_jalan_dalam;
+        $edit->jenis_transportasi = $request->jenis_transportasi;
+        $edit->biaya = $request->biaya;
+        $edit->save();
+
+        if($this->objekAksesibilitasClass)
+        {
+            Toastr::success('Data Berhasil Diubah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
+            return redirect::to('dashboard/objek-wisata');
+        } 
+    }
+
+    public function detailCreate($id)
+    {
+        $data = $this->objekWisataClass->find($id);
+        $this->data['sub_page'] = $data->nama;
+        $this->data['objek_wisata_id'] = $id;
+        $this->data['nama_objek_wisata'] = $data->nama;
+        $this->data['edit'] = $this->objekDetailClass->where('objek_wisata_id',$id)->first();
+        if(isset($this->data['edit']->jenis_pemasaran))
+        {
+            $cek = strpos($this->data['edit']->jenis_pemasaran,',');
+            if($cek !== FALSE)
+            {
+                $pemasaran = explode(',',$this->data['edit']->jenis_pemasaran);
+            }
+            else
+            {
+                $pemasaran = [$this->data['edit']->jenis_pemasaran];
+            }
+        }
+        else
+        {
+            $pemasaran = [];
+        }
+        
+        $this->data['pemasaran'] = $pemasaran;
+        return view('dashboard.pages.objek-wisata.detail',$this->data);
+    }
+
+    public function detailStore(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'lembaga_pengelolah' => 'required',
+            'jenis_pemasaran' => 'required',
+            'peraturan_uu' => 'required',
+            'stakeholders' => 'required',
+            'kontak_nama' => 'required',
+            'kontak_telepon' => 'required',
+            'harga_tiket' => 'required',
+            'halal' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Toastr::error('Terjadi Kesalahan Saat Menyimpan Data', 'Gagal', ["positionClass" => "toast-bottom-right"]);
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
+        $this->objekDetailClass->objek_wisata_id = $request->objek_wisata_id;
+        $this->objekDetailClass->lembaga_pengelola = $request->lembaga_pengelolah;
+        $this->objekDetailClass->jenis_pemasaran = implode(',',$request->jenis_pemasaran);
+        $this->objekDetailClass->peraturan_uu = $request->peraturan_uu;
+        $this->objekDetailClass->stakeholders = $request->stakeholders;
+        $this->objekDetailClass->kontak_nama = $request->kontak_nama;
+        $this->objekDetailClass->kontak_telepon = $request->kontak_telepon;
+        $this->objekDetailClass->harga_tiket = $request->harga_tiket;
+        $this->objekDetailClass->halal = $request->halal;
+        $this->objekDetailClass->save();
+
+        if($this->objekDetailClass)
+        {
+            Toastr::success('Data Berhasil Ditambah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
+            return redirect::to('dashboard/objek-wisata');
+        }
+        
+    }
+
+    public function detailUpdate(Request $request,$id)
+    {
+        $validator = Validator::make($request->all(), [
+            'lembaga_pengelolah' => 'required',
+            'jenis_pemasaran' => 'required',
+            'peraturan_uu' => 'required',
+            'stakeholders' => 'required',
+            'kontak_nama' => 'required',
+            'kontak_telepon' => 'required',
+            'harga_tiket' => 'required',
+            'halal' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Toastr::error('Terjadi Kesalahan Saat Menyimpan Data', 'Gagal', ["positionClass" => "toast-bottom-right"]);
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
+        $edit = $this->objekDetailClass->find($id);
+        $edit->objek_wisata_id = $request->objek_wisata_id;
+        $edit->lembaga_pengelola = $request->lembaga_pengelolah;
+        $edit->jenis_pemasaran = implode(',',$request->jenis_pemasaran);
+        $edit->peraturan_uu = $request->peraturan_uu;
+        $edit->stakeholders = $request->stakeholders;
+        $edit->kontak_nama = $request->kontak_nama;
+        $edit->kontak_telepon = $request->kontak_telepon;
+        $edit->harga_tiket = $request->harga_tiket;
+        $edit->halal = $request->halal;
+        $edit->save();
+
+        if($edit)
+        {
+            Toastr::success('Data Berhasil Diubah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
+            return redirect::to('dashboard/objek-wisata');
+        }
+            
     }
 }
