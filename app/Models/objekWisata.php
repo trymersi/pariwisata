@@ -31,4 +31,12 @@ class objekWisata extends Model
             ->get();
         return $get;
     }
+
+    public function getDataByKab($id)
+    {
+        return $this->where('kabupaten_id',$id)
+            ->select('id','nama as text')
+            ->orderBy('nama','asc')
+            ->get();
+    }
 }

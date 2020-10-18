@@ -143,7 +143,7 @@ class ObjekWisataController extends Controller
                 $image = Image::make($src)
                         ->encode($mimetype, 75)
                         ->save($filepath);
-                $truepath = asset('uploads/images/keterangan-kabupaten').'/'.$filename.'.'.$mimetype;
+                $truepath = asset('uploads/images/deskripsi-objek-wisata').'/'.$filename.'.'.$mimetype;
                 $new_src =$truepath;
                 $img->removeAttribute('src');
                 $img->setAttribute('src', $new_src);
@@ -286,7 +286,7 @@ class ObjekWisataController extends Controller
                 $image = Image::make($src)
                         ->encode($mimetype, 75)
                         ->save($filepath);
-                $truepath = asset('uploads/images/keterangan-kabupaten').'/'.$filename.'.'.$mimetype;
+                $truepath = asset('uploads/images/deskripsi-objek-wisata').'/'.$filename.'.'.$mimetype;
                 $new_src =$truepath;
                 $img->removeAttribute('src');
                 $img->setAttribute('src', $new_src);
