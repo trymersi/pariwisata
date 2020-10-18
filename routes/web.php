@@ -96,6 +96,24 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
         });
     });
 
+    Route::prefix('/restaurant')->group(function(){
+        Route::resource('/','Backend\RestaurantController');
+        Route::get('/table','Backend\RestaurantController@table');
+        Route::get('/edit/{id}','Backend\RestaurantController@edit');
+        Route::patch('/update/{id}','Backend\RestaurantController@update');
+        Route::delete('/delete/{id}','Backend\RestaurantController@destroy');
+        Route::get('list-objek-wisata/{id_kabupaten}','Backend\RestaurantController@getListObjekWisata');
+        Route::prefix('/gambar')->group(function(){
+            Route::get('/{id}','Backend\RestaurantController@gambarIndex');
+            Route::get('/create/{id_objek_wisata}','Backend\RestaurantController@gambarCreate');
+            Route::post('/store','Backend\RestaurantController@gambarStore');
+            Route::get('/table/{id_objek_wisata}','Backend\RestaurantController@gambarTable');
+            Route::get('/edit/{id}/{id_objek_wisata}','Backend\RestaurantController@gambarEdit');
+            Route::patch('/update/{id}','Backend\RestaurantController@gambarUpdate');
+            Route::delete('/delete/{id}','Backend\RestaurantController@gambarDestroy');
+        });
+    });
+
     Route::prefix('/hotel')->group(function(){
         Route::resource('/','Backend\HotelController');
         Route::get('/table','Backend\HotelController@table');
