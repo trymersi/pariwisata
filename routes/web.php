@@ -105,10 +105,10 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
         Route::get('list-objek-wisata/{id_kabupaten}','Backend\RestaurantController@getListObjekWisata');
         Route::prefix('/gambar')->group(function(){
             Route::get('/{id}','Backend\RestaurantController@gambarIndex');
-            Route::get('/create/{id_objek_wisata}','Backend\RestaurantController@gambarCreate');
+            Route::get('/create/{restaurant_id}','Backend\RestaurantController@gambarCreate');
             Route::post('/store','Backend\RestaurantController@gambarStore');
-            Route::get('/table/{id_objek_wisata}','Backend\RestaurantController@gambarTable');
-            Route::get('/edit/{id}/{id_objek_wisata}','Backend\RestaurantController@gambarEdit');
+            Route::get('/table/{restaurant_id}','Backend\RestaurantController@gambarTable');
+            Route::get('/edit/{id}/{restaurant_id}','Backend\RestaurantController@gambarEdit');
             Route::patch('/update/{id}','Backend\RestaurantController@gambarUpdate');
             Route::delete('/delete/{id}','Backend\RestaurantController@gambarDestroy');
         });

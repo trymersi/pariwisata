@@ -378,8 +378,8 @@ class RestaurantController extends Controller
                         <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu" style="will-change: transform;">
-                        <a class="dropdown-item" href="'.url("/dashboard/objek-wisata/menu").'/'.$data->id.'">Detail Objek Wisata</a>
-                        <a class="dropdown-item" href="'.url("/dashboard/objek-wisata/gambar").'/'.$data->id.'">Gambar Gallery</a>
+                        <a class="dropdown-item" href="'.url("/dashboard/restaurant/menu").'/'.$data->id.'">Detail Objek Wisata</a>
+                        <a class="dropdown-item" href="'.url("/dashboard/restaurant/gambar").'/'.$data->id.'">Gambar Gallery</a>
                     </div>
                 </div>';
 
@@ -411,6 +411,141 @@ class RestaurantController extends Controller
     {
         $get = $this->objekWisataClass->getDataByKab($id_kabupaten);
         return response()->json($get);
+    }
+
+    public function gambarIndex($id)
+    {  
+        $data = $this->restaurantClass->find($id);
+        $this->data['sub_page'] = $data->nama;
+        $this->data['id'] = $id;
+        return view('dashboard.pages.restaurant.gambar.index',$this->data); 
+    }
+
+    public function gambarTable($id)
+    {
+        
+        $data = $this->restaurantGambarClass->where('restaurant_id',$id)->orderBy('updated_at','desc')->get();
+        
+        return DataTables::of($data)
+        ->addColumn('option', function($data)
+        {
+            $restaurant = $this->restaurantClass->find($data->restaurant_id);
+            $nama_objek = $restaurant->nama;
+            $button = '<a href="'.url('dashboard/restaurant/gambar/edit/'.$data->id.'/'.$data->restaurant_id).'" class="btn btn-warning mb-2 mr-2 btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a>';
+            $button .= '<button data-id="'.$data->id.'" data-nama="'.$nama_objek.'" class="btn btn-danger mb-2 mr-2 btn-sm" data-toggle="modal" data-target="#ModalHapus" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>';
+            return  $button;
+        })
+        
+        ->addColumn('tanggal', function($data)
+        {
+           return  Carbon::parse($data->updated_at)->diffForHumans();
+        })
+
+        ->addColumn('gambar', function($data)
+        {
+           return  "<img width='250px' src='".asset('uploads/images/gallery-restaurant/'.$data->gambar)."'>";
+        })
+        ->addIndexColumn()
+        ->rawColumns(['status','option','gambar','jenis','detail'])
+        ->make(true);
+    }
+
+    public function gambarCreate($restaurant_id)
+    {
+        
+        $data = $this->restaurantClass->find($restaurant_id);
+        $this->data['sub_page'] = $data->nama;
+        $this->data['id'] = $restaurant_id;
+        return view('dashboard.pages.restaurant.gambar.create',$this->data); 
+    }
+
+    public function gambarStore(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'gambar' => 'required',
+            'tos' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Toastr::error('Terjadi Kesalahan Saat Menyimpan Data', 'Gagal', ["positionClass" => "toast-bottom-right"]);
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
+        if($request->file('gambar'))
+        {
+            $data = $this->restaurantClass->find($request->restaurant_id);
+            $nama_objek = bersih($data->nama,'-');
+            $i = 1;
+            foreach($request->file('gambar') as $key)
+            {
+                $ext = $key->getClientOriginalExtension();
+                $destination = public_path('uploads/images/gallery-restaurant');
+                $filename = $nama_objek."-".$i.".".$ext;
+                $key->move($destination, $filename);
+
+                $save = new RestaurantGambar;
+                $save->restaurant_id = $request->restaurant_id;
+                $save->gambar = $filename;
+                $save->save();
+                $i++;
+            }
+
+            Toastr::success('Data Berhasil Ditambah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
+            return redirect::to('dashboard/restaurant/gambar/'.$request->restaurant_id);
+        }
+    }
+
+    public function gambarEdit($id,$restaurant_id)
+    {   
+        $data = $this->restaurantClass->find($restaurant_id);
+        $this->data['sub_page'] = $data->nama;
+        $this->data['id'] = $restaurant_id;
+        $this->data['edit'] = $this->restaurantGambarClass->find($id);
+        return view('dashboard.pages.restaurant.gambar.edit',$this->data); 
+    }
+
+    public function gambarUpdate($id,Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'gambar' => 'required',
+            'tos' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Toastr::error('Terjadi Kesalahan Saat Menyimpan Data', 'Gagal', ["positionClass" => "toast-bottom-right"]);
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
+            $data_edit = $this->restaurantGambarClass->find($id);
+            $nama_gambar_old = $data_edit->gambar;
+
+            $nama_gambar_old = explode('.',$nama_gambar_old);
+            $nama_gambar_old = $nama_gambar_old[0];
+
+            $gambar = $request->file('gambar');
+            $ext = $gambar->getClientOriginalExtension();
+            $destination = public_path('uploads/images/gallery-restaurant');
+            $filename = $nama_gambar_old.".".$ext;
+            $gambar->move($destination, $filename);
+
+            $edit = RestaurantGambar::find($id);
+            $edit->gambar = $filename;
+            $edit->save();
+
+            if($edit)
+            {
+                Toastr::success('Data Berhasil Diubah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
+                return redirect::to('dashboard/restaurant/gambar/'.$request->restaurant_id);
+            }
+    }
+
+    public function gambarDestroy($id)
+    {
+        $delete = $this->restaurantGambarClass->find($id);
+        $path = public_path('uploads/images/gallery-restaurant');
+        File::delete($path.'/'.$delete->gambar);
+        $delete->delete();
+        return ['status'=>'1'];
     }
     
 }
