@@ -378,7 +378,7 @@ class RestaurantController extends Controller
                         <span class="sr-only">Toggle Dropdown</span>
                     </button>
                     <div class="dropdown-menu" style="will-change: transform;">
-                        <a class="dropdown-item" href="'.url("/dashboard/restaurant/menu").'/'.$data->id.'">Detail Objek Wisata</a>
+                        <a class="dropdown-item" href="'.url("/dashboard/restaurant/menu").'/'.$data->id.'">Menu Restaurant</a>
                         <a class="dropdown-item" href="'.url("/dashboard/restaurant/gambar").'/'.$data->id.'">Gambar Gallery</a>
                     </div>
                 </div>';
@@ -543,6 +543,144 @@ class RestaurantController extends Controller
     {
         $delete = $this->restaurantGambarClass->find($id);
         $path = public_path('uploads/images/gallery-restaurant');
+        File::delete($path.'/'.$delete->gambar);
+        $delete->delete();
+        return ['status'=>'1'];
+    }
+
+    public function menuIndex($id)
+    {  
+        $data = $this->restaurantClass->find($id);
+        $this->data['sub_page'] = $data->nama;
+        $this->data['id'] = $id;
+        return view('dashboard.pages.restaurant.menu.index',$this->data); 
+    }
+
+    public function menuTable($id)
+    {
+        
+        $data = $this->restaurantMenuClass->where('restaurant_id',$id)->orderBy('updated_at','desc')->get();
+        
+        return DataTables::of($data)
+        ->addColumn('option', function($data)
+        {
+            
+            $button = '<a href="'.url('dashboard/restaurant/menu/edit/'.$data->id.'/'.$data->restaurant_id).'" class="btn btn-warning mb-2 mr-2 btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a>';
+            $button .= '<button data-id="'.$data->id.'" data-nama="'.$data->nama.'" class="btn btn-danger mb-2 mr-2 btn-sm" data-toggle="modal" data-target="#ModalHapus" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>';
+            return  $button;
+        })
+        
+        ->addColumn('tanggal', function($data)
+        {
+           return  Carbon::parse($data->updated_at)->diffForHumans();
+        })
+
+        ->addColumn('gambar', function($data)
+        {
+           return  "<img width='250px' src='".asset('uploads/images/restaurant-menu/'.$data->gambar)."'>";
+        })
+        ->addIndexColumn()
+        ->rawColumns(['status','option','gambar','jenis','detail'])
+        ->make(true);
+    }
+
+    public function menuCreate($restaurant_id)
+    {
+        $data = $this->restaurantClass->find($restaurant_id);
+        $this->data['sub_page'] = $data->nama;
+        $this->data['id'] = $restaurant_id;
+        return view('dashboard.pages.restaurant.menu.create',$this->data); 
+    }
+
+    public function menuStore(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'gambar' => 'required',
+            'nama_menu' => 'required',
+            'deskripsi' => 'required',
+            'tos' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Toastr::error('Terjadi Kesalahan Saat Menyimpan Data', 'Gagal', ["positionClass" => "toast-bottom-right"]);
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+        $data = $this->restaurantClass->find($request->restaurant_id);
+        $nama_objek = bersih($data->nama,'-');
+        $nama_menu = bersih($request->nama_menu,'-');
+        $nama_gambar = $nama_objek.'-'.$nama_menu;
+        if($request->file('gambar'))
+        {
+            $gambar = $request->file('gambar');
+            $ext = $gambar->getClientOriginalExtension();
+            $destination = public_path('uploads/images/restaurant-menu');
+            $filename_header = $nama_gambar.".".$ext;
+            $gambar->move($destination, $filename_header);
+        }
+
+        $save = new RestaurantMenu;
+        $save->restaurant_id = $request->restaurant_id;
+        $save->nama = $request->nama_menu;
+        $save->deskripsi = $request->deskripsi;
+        $save->gambar = $filename_header;
+        $save->save();
+
+        Toastr::success('Data Berhasil Ditambah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
+        return redirect::to('dashboard/restaurant/menu/'.$request->restaurant_id);
+    }
+
+    public function menuEdit($id,$restaurant_id)
+    {   
+        $data = $this->restaurantClass->find($restaurant_id);
+        $this->data['sub_page'] = $data->nama;
+        $this->data['id'] = $restaurant_id;
+        $this->data['edit'] = $this->restaurantMenuClass->find($id);
+        return view('dashboard.pages.restaurant.menu.edit',$this->data); 
+    }
+
+    public function menuUpdate($id,Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nama_menu' => 'required',
+            'deskripsi' => 'required',
+            'tos' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Toastr::error('Terjadi Kesalahan Saat Menyimpan Data', 'Gagal', ["positionClass" => "toast-bottom-right"]);
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+        $data = $this->restaurantClass->find($request->restaurant_id);
+        $nama_objek = bersih($data->nama,'-');
+        $nama_menu = bersih($request->nama_menu,'-');
+        $nama_gambar = $nama_objek.'-'.$nama_menu;
+
+        if($request->file('gambar'))
+        {
+            $gambar = $request->file('gambar');
+            $ext = $gambar->getClientOriginalExtension();
+            $destination = public_path('uploads/images/restaurant-menu');
+            $filename_header = $nama_gambar.".".$ext;
+            $gambar->move($destination, $filename_header);
+        }
+
+        $save = RestaurantMenu::find($id);
+        $save->restaurant_id = $request->restaurant_id;
+        $save->nama = $request->nama_menu;
+        $save->deskripsi = $request->deskripsi;
+        if(isset($filename_header)):
+            $save->gambar = $filename_header;
+        endif;
+        $save->save();
+
+        Toastr::success('Data Berhasil Ditambah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
+        return redirect::to('dashboard/restaurant/menu/'.$request->restaurant_id);
+    }
+
+    public function menuDestroy($id)
+    {
+        $delete = $this->restaurantMenuClass->find($id);
+        $path = public_path('uploads/images/restaurant-menu');
         File::delete($path.'/'.$delete->gambar);
         $delete->delete();
         return ['status'=>'1'];

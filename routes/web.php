@@ -112,6 +112,15 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
             Route::patch('/update/{id}','Backend\RestaurantController@gambarUpdate');
             Route::delete('/delete/{id}','Backend\RestaurantController@gambarDestroy');
         });
+        Route::prefix('/menu')->group(function(){
+            Route::get('/{id}','Backend\RestaurantController@menuIndex');
+            Route::get('/create/{restaurant_id}','Backend\RestaurantController@menuCreate');
+            Route::post('/store','Backend\RestaurantController@menuStore');
+            Route::get('/table/{restaurant_id}','Backend\RestaurantController@menuTable');
+            Route::get('/edit/{id}/{restaurant_id}','Backend\RestaurantController@menuEdit');
+            Route::patch('/update/{id}','Backend\RestaurantController@menuUpdate');
+            Route::delete('/delete/{id}','Backend\RestaurantController@menuDestroy');
+        });
     });
 
     Route::prefix('/hotel')->group(function(){
