@@ -123,6 +123,15 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
         });
     });
 
+    Route::prefix('/tempat-ibadah')->group(function(){
+        Route::resource('/','Backend\TempatIbadahController');
+        Route::get('/table','Backend\TempatIbadahController@table');
+        Route::get('/edit/{id}','Backend\TempatIbadahController@edit');
+        Route::patch('/update/{id}','Backend\TempatIbadahController@update');
+        Route::delete('/delete/{id}','Backend\TempatIbadahController@destroy');
+        Route::get('list-objek-wisata/{id_kabupaten}','Backend\TempatIbadahController@getListObjekWisata');
+    });
+
     Route::prefix('/hotel')->group(function(){
         Route::resource('/','Backend\HotelController');
         Route::get('/table','Backend\HotelController@table');

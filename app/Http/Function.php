@@ -307,3 +307,15 @@ function jenisWisata($ar)
     return $data;
 }
 
+function listAgama()
+{
+    $data =[
+        'Islam',
+        'Protestan',
+        'Katolik',
+        'Hindu',
+        'Buddha',
+        'Khonghucu'
+    ];
+    return $data;
+}

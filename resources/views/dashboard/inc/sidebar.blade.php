@@ -73,6 +73,12 @@
                                 <a href="{{ url('dashboard/restaurant') }}"> Restaurant </a>
                             </li>
                             @endif
+
+                            @if(Auth::user()->level == 1 || Auth::user()->level == 4 || Auth::user()->level == 7)
+                            <li class="{{ ($page_name === 'Tempat Ibadah') ? 'active' : '' }}">
+                                <a href="{{ url('dashboard/tempat-ibadah') }}"> Tempat Ibadah </a>
+                            </li>
+                            @endif
                            
                         </ul>
                     </li>
