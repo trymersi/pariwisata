@@ -22,6 +22,8 @@ class CreateCindramatasTable extends Migration
             $table->string('nomor_kontak')->nullable()->comment('nomor kontak cindramata');
             $table->string('gambar')->nullable()->comment('gambar cindramata');
             $table->string('alamat')->nullable()->comment('alamat hotel');
+            $table->string('latitude')->nullable()->comment('titik latitude tempat');
+            $table->string('longitude')->nullable()->comment('titik longitude tempat');
             $table->integer('status')->default(0)->nullable()->comment('status pengajuan tempat ibadah; 0 untuk diajukan');
             $table->timestamps();
             $table->softDeletes();

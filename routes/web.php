@@ -123,6 +123,24 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
         });
     });
 
+    Route::prefix('/cindramata')->group(function(){
+        Route::resource('/','Backend\CendramataController');
+        Route::get('/table','Backend\CendramataController@table');
+        Route::get('/edit/{id}','Backend\CendramataController@edit');
+        Route::patch('/update/{id}','Backend\CendramataController@update');
+        Route::delete('/delete/{id}','Backend\CendramataController@destroy');
+        Route::get('list-objek-wisata/{id_kabupaten}','Backend\CendramataController@getListObjekWisata');
+        Route::prefix('/detail')->group(function(){
+            Route::get('/{id}','Backend\CendramataController@detailIndex');
+            Route::get('/create/{cindramata_id}','Backend\CendramataController@detailCreate');
+            Route::post('/store','Backend\CendramataController@detailStore');
+            Route::get('/table/{cindramata_id}','Backend\CendramataController@detailTable');
+            Route::get('/edit/{id}/{cindramata_id}','Backend\CendramataController@detailEdit');
+            Route::patch('/update/{id}','Backend\CendramataController@detailUpdate');
+            Route::delete('/delete/{id}','Backend\CendramataController@detailDestroy');
+        });
+    });
+
     Route::prefix('/tempat-ibadah')->group(function(){
         Route::resource('/','Backend\TempatIbadahController');
         Route::get('/table','Backend\TempatIbadahController@table');
