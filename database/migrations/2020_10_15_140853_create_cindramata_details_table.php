@@ -17,7 +17,6 @@ class CreateCindramataDetailsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('cindramata_id')->nullable()->comment('foreign key dari tabel cindramatas');
             $table->string('nama')->nullable()->comment('nama cindramata');
-            $table->string('alamat')->nullable()->comment('alamat cindramata');
             $table->string('gambar')->nullable()->comment('gambar cindramata');
             $table->timestamps();
             $table->softDeletes();
