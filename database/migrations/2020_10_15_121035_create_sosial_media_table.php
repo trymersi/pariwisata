@@ -17,6 +17,8 @@ class CreateSosialMediaTable extends Migration
             $table->bigIncrements('id');
             $table->string('id_tempat')->nullable()->comment('id tempat yang di deskripsikan didalan function');
             $table->string('kode_tempat')->nullable()->comment('kode tempat yang di deskripsikan didalan function');
+            $table->string('kode_sosmed')->nullable()->comment('kode untuk mengetahui itu sosmed apa');
+            $table->string('alamat_sosmed')->nullable()->comment('alamat sosmed bisa berupa username');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -144,6 +144,24 @@
                         </div>
                     </div>
 
+                    @if(Auth::user()->level == 1 || Auth::user()->level == 4)
+                        <div class="form-group row mb-4">
+                            <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Status</label>
+                            <div class="col-xl-10 col-lg-9 col-sm-10">
+                                <select name="status" class="form-control select">
+                                    <option selected="selected" value="">Pilih Status</option>
+                                    <option @if(old('status',$edit->status) == 1) selected="" @endif value="1">Diusulkan</option>
+                                    <option @if(old('status',$edit->status) == 2) selected="" @endif value="2">Pending</option>
+                                    <option @if(old('status',$edit->status) == 3) selected="" @endif value="3">Aktif</option>
+                                    <option @if(old('status',$edit->status) == 4) selected="" @endif value="4">Tolak</option>
+                                </select>
+                                @error('status')
+                                    <span><code>{{$message}}</code></span>
+                                @enderror
+                            </div>
+                        </div>
+                    @endif
+
                     <div class="form-group row">
                         <div class="col-sm-2">Setuju</div>
                         <div class="col-sm-10">

@@ -213,6 +213,7 @@ class RestaurantController extends Controller
                 'latitude'=> 'required',
                 'longitude'=> 'required',
                 'deskripsi'=> 'required',
+                'status' => 'required',
                 'tos' => 'required',
             ]);
         else:
@@ -291,7 +292,7 @@ class RestaurantController extends Controller
         $edit->halal = isset($request->halal) ? 1:0;
         $edit->nomor_kontak = $request->nomor_kontak;
         $edit->deskripsi = $dom->saveHTML();
-        $edit->status = (Auth::user()->level == 1 || Auth::user()->level == 4 ) ? 3 : 1;
+        $edit->status = (Auth::user()->level == 1 || Auth::user()->level == 4 ) ? $request->status : 1;
         $edit->save();
 
         if($edit)
