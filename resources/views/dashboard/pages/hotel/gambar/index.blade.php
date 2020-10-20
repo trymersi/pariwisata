@@ -12,8 +12,8 @@
                     <div class="row">
                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                             <h4>Tabel Gambar {{ $page_name }} {{ $sub_page }}</h4>
-                            <a href="{{ url('dashboard/objek-wisata/gambar/create/'.$objek_wisata_id) }}" class="btn btn-primary mb-2 mr-2 float-right"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Tambah Data</a>
-                            <a href="{{ url('dashboard/objek-wisata/') }}" class="btn btn-warning mb-2 mr-2 float-left"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Kembali</a>
+                            <a href="{{ url('dashboard/hotel/gambar/create/'.$hotel_id) }}" class="btn btn-primary mb-2 mr-2 float-right"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Tambah Data</a>
+                            <a href="{{ url('dashboard/hotel/') }}" class="btn btn-warning mb-2 mr-2 float-left"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> Kembali</a>
                         </div>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
                 <h5 class="modal-title" id="exampleModalLabel">Hapus Data {{ $page_name }}</h5>
             </div>
             <div class="modal-body">
-              <p class="no-margin">Anda Yakin Akan Menghapus Data Gambar Dariz` {{ $page_name }} <mark class="text-danger NamaUserHapus">highlight</mark> ?</p>
+              <p class="no-margin">Anda Yakin Akan Menghapus Data Gambar Dari {{ $page_name }} <mark class="text-danger NamaUserHapus">highlight</mark> ?</p>
             </div>
             <div class="modal-footer AksiHapus">
               
@@ -79,7 +79,7 @@
            processing: true,
            serverSide: true,
            ajax: {
-           url: "{{ url('dashboard/objek-wisata/gambar/table') }}/{{ $objek_wisata_id }}",
+           url: "{{ url('dashboard/hotel/gambar/table') }}/{{ $hotel_id }}",
            },
            columns: [
             {data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false,searchable: false},
@@ -117,7 +117,7 @@
                         var idDelete = $(this).attr('data-id');
                         var token = $(this).attr('data-token');
                         $.ajax({
-                            url:"{{url('dashboard/objek-wisata/gambar/  delete')}}/" + idDelete,
+                            url:"{{url('dashboard/hotel/gambar/delete')}}/" + idDelete,
                             type: 'POST',
                             data: {_method: 'delete', _token :token},
                             success:function(get){

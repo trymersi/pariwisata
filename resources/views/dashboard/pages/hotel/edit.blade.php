@@ -15,10 +15,10 @@
             </div>
             
             <div class="widget-content widget-content-area">
-                <form method="post" action="{{ url ('dashboard/objek-wisata/update/'.$edit->id) }}" enctype="multipart/form-data">
+                <form method="post" action="{{ url ('dashboard/hotel/update/'.$edit->id) }}" enctype="multipart/form-data">
                     @csrf {{ method_field('PATCH') }}
 
-                    @if(Auth::user()->level == 1 || Auth::user()->level == 3)
+                    @if(Auth::user()->level == 1 || Auth::user()->level == 4)
                         <div class="form-group row mb-4">
                             <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Kabupaten</label>
                             <div class="col-xl-10 col-lg-9 col-sm-10">
@@ -36,34 +36,24 @@
                     @endif
 
                     <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Kecamatan</label>
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Objek Wisata Terdekat</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <select name="kecamatan"  id="kecamatan" class="form-control select">
-                                <option selected="selected" value="">Pilih Kecamatan</option>
-                                @foreach($kecamatan as $kec)
-                                    <option @if(old('kabupaten',$edit->kecamatan_id) == $kec->id) selected="" @endif value="{{ $kec->id }}">{{ $kec->text }}</option>
+                            <select name="objek_wisata"  id="objek_wisata" class="form-control select">
+                                <option selected="selected" value="">Pilih Objek Wisata</option>
+                                @foreach($objek_wisata as $objek_wisata)
+                                    <option @if(old('objek_wisata',$edit->objek_wisata_id) == $objek_wisata->id) selected="" @endif value="{{ $objek_wisata->id }}">{{ $objek_wisata->nama }}</option>
                                 @endforeach
                             </select>
-                            @error('kecamatan')
+                            @error('objek_wisata')
                                 <span><code>{{$message}}</code></span>
                             @enderror
                         </div>
                     </div>
 
                     <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Desa</label>
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nama Hotel</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <input type="text" class="form-control" name="desa" value="{{ old('desa',$edit->desa) }}" placeholder="Masukan nama desa lokasi objek wisata">
-                            @error('desa')
-                                <span><code>{{$message}}</code></span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nama Objek Wisata</label>
-                        <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <input type="text" class="form-control" name="nama" value="{{ old('nama',$edit->nama) }}" placeholder="Masukan nama objek wisata">
+                            <input type="text" class="form-control" name="nama" value="{{ old('nama',$edit->nama) }}" placeholder="Masukan nama hotel">
                             @error('nama')
                                 <span><code>{{$message}}</code></span>
                             @enderror
@@ -71,25 +61,10 @@
                     </div>
 
                     <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Alamat Objek Wisata</label>
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Alamat Hotel</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
                             <input type="text" class="form-control" name="alamat" value="{{ old('alamat',$edit->alamat) }}" placeholder="Masukan alamat objek wisata">
                             @error('alamat')
-                                <span><code>{{$message}}</code></span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Jenis Wisata</label>
-                        <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <select name="jenis[]" class="form-control select" multiple="multiple">
-                                <option value="">Pilih Jenis Wisata</option>
-                                <option @if(old('jenis.0') || in_array(1,$jenis)) selected="" @endif value="1">Alam</option>
-                                <option @if(old('jenis.1') || in_array(2,$jenis)) selected="" @endif value="2">Buatan</option>
-                                <option @if(old('jenis.2') || in_array(3,$jenis)) selected="" @endif value="3">Budaya</option>
-                            </select>
-                            @error('jenis')
                                 <span><code>{{$message}}</code></span>
                             @enderror
                         </div>
@@ -103,20 +78,55 @@
                                 <span><code>{{$message}}</code></span>
                             @enderror
                             <p> Upload foto baru untuk mengubah gambar header</p>
-                                <img width="150px" src="{{ url('uploads/images/gambar-header-objek-wisata/') }}/{{ $edit->gambar_header }}">
+                                <img width="150px" src="{{ url('uploads/images/gambar-header-hotel/') }}/{{ $edit->gambar }}">
                         </div>
                     </div>
 
+                    
+                    
+
                     <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Video Promosi</label>
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Deskripsi</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <input type="text" class="form-control" name="video_promosi" value="{{ old('video_promosi',$edit->video_promosi) }}" placeholder="Masukan url video dari youtube">
-                            @error('video_promosi')
+                            <textarea id="summernote" name="deskripsi">{!! old('deskripsi',$edit->deskripsi) !!}</textarea>
+                            @error('deskripsi')
+                                <span><code>{{$message}}</code></span>
+                            @enderror   
+                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Layanan Hotel</label>
+                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                            <select name="layanan[]" class="form-control select" multiple="multiple">
+                                <option value="">Pilih Layanan Hotel</option>
+                                <option @if(old('layanan.0') || in_array(1,$layanan)) selected="" @endif value="1">Elevator in building</option>
+                                <option @if(old('layanan.1') || in_array(2,$layanan)) selected="" @endif value="2">Free Wi Fi</option>
+                                <option @if(old('layanan.2') || in_array(3,$layanan)) selected="" @endif value="3">Free Parking</option>
+                                <option @if(old('layanan.3') || in_array(4,$layanan)) selected="" @endif value="4">Air Conditioned</option>
+                                <option @if(old('layanan.4') || in_array(5,$layanan)) selected="" @endif value="5">Online Ordering</option>
+                            </select>
+                            @error('jenis')
                                 <span><code>{{$message}}</code></span>
                             @enderror
                         </div>
                     </div>
 
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Jenis Hotel</label>
+                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                            <select name="jenis[]" class="form-control select" multiple="multiple">
+                                <option value="">Pilih Jenis Hotel</option>
+                                <option @if(old('jenis.0') || in_array(1,$jenis)) selected="" @endif value="1">Hotel Bintang Satu</option>
+                                <option @if(old('jenis.1') || in_array(2,$jenis)) selected="" @endif value="2">Hotel Bintang Dua</option>
+                                <option @if(old('jenis.2') || in_array(3,$jenis)) selected="" @endif value="3">Hotel Bintang Tiga</option>
+                                <option @if(old('jenis.3') || in_array(4,$jenis)) selected="" @endif value="4">Hotel Bintang Empat</option>
+                                <option @if(old('jenis.4') || in_array(5,$jenis)) selected="" @endif value="5">Hotel Bintang Lima</option>
+                            </select>
+                            @error('jenis')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="form-group row mb-4">
                         <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">
                             Lokasi <br>
@@ -142,19 +152,8 @@
                             @enderror
                         </div>
                     </div>
-                    
 
-                    <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Deskripsi</label>
-                        <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <textarea id="summernote" name="deskripsi">{!! old('deskripsi',$edit->deskripsi) !!}</textarea>
-                            @error('deskripsi')
-                                <span><code>{{$message}}</code></span>
-                            @enderror   
-                        </div>
-                    </div>
-
-                    @if(Auth::user()->level == 1 || Auth::user()->level == 2)
+                    @if(Auth::user()->level == 1 || Auth::user()->level == 4)
                         <div class="form-group row mb-4">
                             <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Status</label>
                             <div class="col-xl-10 col-lg-9 col-sm-10">
@@ -189,7 +188,7 @@
 
                     <div class="form-group row">
                         <div class="col-sm-10">
-                            <a class="btn btn-warning mt-3" href="{{ url('/dashboard/objek-wisata') }}">
+                            <a class="btn btn-warning mt-3" href="{{ url('/dashboard/hotel') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
                                 Batalkan
                             </a>
@@ -314,50 +313,6 @@
                     }, 1000);
                     
                 }
-            })
-            
-            @if(Auth::user()->level == 7)
-                $('#kecamatan').select2({
-                    ajax: {
-                        url:"{{url('dashboard/objek-wisata/list-kecamatan')}}/" + {{ Auth::user()->kabupaten_id }},
-                        processResults: function (data) {
-                            return {
-                                results: data
-                            };
-                        }
-                    }
-                });
-            @endif
-            
-            @if(old('kabupaten',$edit->kabupaten_id))
-                    $('#kecamatan').select2({
-                        ajax: {
-                            url:"{{url('dashboard/objek-wisata/list-kecamatan')}}/" + {{ old('kabupaten',$edit->kabupaten_id) }},
-                            processResults: function (data) {
-                                return {
-                                    results: data
-                                };
-                            }
-                        }
-                    });
-            @endif
-           
-            $('#kabupaten').on('change',function()
-            {
-                var id_kabupaten = $(this).val();
-
-                $('#kecamatan').select2({
-                   
-                    placeholder: "Pilih Kecamatan",
-                    ajax: {
-                        url:"{{url('dashboard/objek-wisata/list-kecamatan')}}/" + id_kabupaten,
-                        processResults: function (data) {
-                            return {
-                                results: data
-                            };
-                        }
-                    }
-                });
             })
         });
     </script>

@@ -12,7 +12,7 @@
                     <div class="row">
                         <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                             <h4>Tabel Data {{ $page_name }}</h4>
-                            <a href="{{ action('Backend\ObjekWisataController@create') }}" class="btn btn-primary mb-2 mr-2 float-right"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Tambah Data</a>
+                            <a href="{{ action('Backend\HotelController@create') }}" class="btn btn-primary mb-2 mr-2 float-right"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg> Tambah Data</a>
                         </div>
                     </div>
                 </div>
@@ -26,7 +26,6 @@
                                 @endif
                                 <th>Objek Wisata</th>
                                 <th>Nama</th>
-                                <th>Deskripsi</th>
                                 <th>Gambar</th>
                                 <th>Jenis</th>
                                 <th>Alamat</th>
@@ -106,10 +105,6 @@
                name: 'nama_hotel'
            },
            {
-               data: 'deskripsi_hotel',
-               name: 'deskripsi_hotel'
-           },
-           {
                data: 'gambar',
                name: 'gambar'
            },
@@ -155,7 +150,7 @@
                         var idDelete = $(this).attr('data-id');
                         var token = $(this).attr('data-token');
                         $.ajax({
-                            url:"{{url('dashboard/objek-wisata/delete')}}/" + idDelete,
+                            url:"{{url('dashboard/hotel/delete')}}/" + idDelete,
                             type: 'POST',
                             data: {_method: 'delete', _token :token},
                             success:function(get){

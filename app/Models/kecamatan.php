@@ -21,4 +21,18 @@ class kecamatan extends Model
             ->orderBy('nama','asc')
             ->get();
     }
+
+    public function getData()
+    {
+        $get = $this->leftJoin('kabupatens','kabupatens.id','kecamatans.kabupaten_id')
+            ->select(
+                'kabupatens.nama as nama_kabupaten',
+                'kecamatans.id as id',
+                'kecamatans.nama as nama_kecamatan',
+                'kecamatans.gambar as gambar',
+            );
+            $get->orderBy('kecamatans.nama','asc')
+            ->get();
+        return $get;
+    }
 }
