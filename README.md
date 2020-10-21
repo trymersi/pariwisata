@@ -44,3 +44,11 @@ $ composer update
 $ php artisan key:generate
 $ php artisan migrate:fresh --seed
 ```
+
+# KODE SOSIAL MEDIA
+```sh
+- 1 objek wisata
+- 2 restaurant
+- 3 hotel
+- 4 cindramata
+```

@@ -319,3 +319,60 @@ function listAgama()
     ];
     return $data;
 }
+
+function listSosmed()
+{
+    return [
+        [
+            'id'=>1,
+            'nama'=>"Instagram"
+        ],
+        [
+            'id'=>2,
+            'nama'=>"Twitter"
+        ],
+        [
+            'id'=>3,
+            'nama'=>"Facebook"
+        ],
+        [
+            'id'=>4,
+            'nama'=>"Tiktok"
+        ],
+        [
+            'id'=>5,
+            'nama'=>"Whatsapp"
+        ],
+        [
+            'id'=>6,
+            'nama'=>"Youtube"
+        ]
+    ];
+}
+
+function getSosmed($kode)
+{
+    switch($kode)
+    {
+        case 1 :
+            $sosmed = "<span class='badge badge-success'>Instagram</span>";
+            break;
+        case 2 :
+            $sosmed = "<span class='badge badge-success'>Twitter</span>";
+            break;
+        case 3 :
+            $sosmed = "<span class='badge badge-success'>Facebook</span>";
+            break;
+        case 4 :
+            $sosmed = "<span class='badge badge-success'>Tiktok</span>";
+            break;
+        case 5 :
+            $sosmed = "<span class='badge badge-success'>Whatsapp</span>";
+            break;
+        case 6 :
+            $sosmed = "<span class='badge badge-success'>Youtube</span>";
+            break;
+    }
+    return $sosmed;
+    
+}

@@ -6,13 +6,12 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Redirect; 
 use Intervention\Image\Facades\Image;
 use App\Http\Controllers\Controller;
-
 use App\Models\objekWisataAksebilitas;
 use App\Models\objekWisataAmenitas;
 use App\Models\objekWisataDetail;
 use App\Models\objekWisataGambar;
-
 use Illuminate\Http\Request;
+use App\Models\SosialMedia;
 use App\Models\ObjekWisata;
 use App\Models\Kabupaten;
 use App\Models\Kecamatan;
@@ -33,6 +32,7 @@ class ObjekWisataController extends Controller
     private $objekAmenitasClass;
     private $objekDetailClass;
     private $objekGambarClass;
+    private $sosialMediaClass;
     
 
     public function __construct()
@@ -46,6 +46,7 @@ class ObjekWisataController extends Controller
         $this->objekAmenitasClass = new ObjekWisataAmenitas;
         $this->objekDetailClass = new ObjekWisataDetail;
         $this->objekGambarClass = new ObjekWisataGambar;
+        $this->sosialMediaClass = new SosialMedia;
 
         $this->data = [
             'category_name' => 'Objek',
@@ -423,6 +424,7 @@ class ObjekWisataController extends Controller
                         <a class="dropdown-item" href="'.url("/dashboard/objek-wisata/amenitas").'/'.$data->id.'">Amenitas</a>
                         <a class="dropdown-item" href="'.url("/dashboard/objek-wisata/detail").'/'.$data->id.'">Detail Objek Wisata</a>
                         <a class="dropdown-item" href="'.url("/dashboard/objek-wisata/gambar").'/'.$data->id.'">Gambar Gallery</a>
+                        <a class="dropdown-item" href="'.url("/dashboard/objek-wisata/sosial-media").'/'.$data->id.'">Sosial Media</a>
                     </div>
                 </div>';
 
@@ -854,5 +856,112 @@ class ObjekWisataController extends Controller
             return redirect::to('dashboard/objek-wisata');
         }
             
+    }
+
+    public function sosmedIndex($id)
+    {  
+        $data = $this->objekWisataClass->find($id);
+        $this->data['sub_page'] = $data->nama;
+        $this->data['id'] = $id;
+        return view('dashboard.pages.objek-wisata.sosial-media.index',$this->data); 
+    }
+
+    public function sosmedTable($id)
+    {
+        
+        $data = $this->sosialMediaClass->where('id_tempat',$id)->where('kode_tempat',1)->orderBy('updated_at','desc')->get();
+        
+        return DataTables::of($data)
+        ->addColumn('option', function($data)
+        {
+            
+            $button = '<a href="'.url('dashboard/objek-wisata/sosial-media/edit/'.$data->id.'/'.$data->id_tempat).'" class="btn btn-warning mb-2 mr-2 btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a>';
+            $button .= '<button data-id="'.$data->id.'" data-nama="'.$data->nama.'" class="btn btn-danger mb-2 mr-2 btn-sm" data-toggle="modal" data-target="#ModalHapus" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>';
+            return  $button;
+        })
+        
+        ->addColumn('tanggal', function($data)
+        {
+           return  Carbon::parse($data->updated_at)->diffForHumans();
+        })
+
+        ->addColumn('sosmed', function($data)
+        {
+           return  getSosmed($data->kode_sosmed);
+        })
+        ->addIndexColumn()
+        ->rawColumns(['status','option','sosmed','tanggal'])
+        ->make(true);
+    }
+
+    public function sosmedCreate($id)
+    {
+        $data = $this->objekWisataClass->find($id);
+        $this->data['sub_page'] = $data->nama;
+        $this->data['id'] = $id;
+        return view('dashboard.pages.objek-wisata.sosial-media.create',$this->data); 
+    }
+
+    public function sosmedStore(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'sosial_media' => 'required',
+            'alamat_sosial_media' => 'required',
+            'tos' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Toastr::error('Terjadi Kesalahan Saat Menyimpan Data', 'Gagal', ["positionClass" => "toast-bottom-right"]);
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+        
+        $this->sosialMediaClass->id_tempat = $request->id;
+        $this->sosialMediaClass->kode_tempat = 1;
+        $this->sosialMediaClass->kode_sosmed = $request->sosial_media;
+        $this->sosialMediaClass->alamat_sosmed = $request->alamat_sosial_media;
+        $this->sosialMediaClass->save();
+
+        Toastr::success('Data Berhasil Ditambah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
+        return redirect::to('dashboard/objek-wisata/sosial-media/'.$request->id);
+    }
+
+    public function sosmedEdit($id,$id_tempat)
+    {   
+        $data = $this->objekWisataClass->find($id_tempat);
+        $this->data['sub_page'] = $data->nama;
+        $this->data['id'] = $id_tempat;
+        $this->data['edit'] = $this->sosialMediaClass->find($id);
+        return view('dashboard.pages.objek-wisata.sosial-media.edit',$this->data); 
+    }
+
+    public function sosmedUpdate($id,Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'sosial_media' => 'required',
+            'alamat_sosial_media' => 'required',
+            'tos' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Toastr::error('Terjadi Kesalahan Saat Menyimpan Data', 'Gagal', ["positionClass" => "toast-bottom-right"]);
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+        
+        $edit =  SosialMedia::find($id);
+        $edit->id_tempat = $request->id;
+        $edit->kode_tempat = 1;
+        $edit->kode_sosmed = $request->sosial_media;
+        $edit->alamat_sosmed = $request->alamat_sosial_media;
+        $edit->save();
+
+        Toastr::success('Data Berhasil Diubah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
+        return redirect::to('dashboard/objek-wisata/sosial-media/'.$request->id);
+    }
+
+    public function sosmedDestroy($id)
+    {
+        $delete = $this->sosialMediaClass->find($id);
+        $delete->delete();
+        return ['status'=>'1'];
     }
 }

@@ -94,6 +94,15 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
             Route::post('/store','Backend\ObjekWisataController@detailStore');
             Route::patch('/update/{id}','Backend\ObjekWisataController@detailUpdate');
         });
+        Route::prefix('/sosial-media')->group(function(){
+            Route::get('/{id}','Backend\ObjekWisataController@sosmedIndex');
+            Route::get('/create/{id_tempat}','Backend\ObjekWisataController@sosmedCreate');
+            Route::post('/store','Backend\ObjekWisataController@sosmedStore');
+            Route::get('/table/{id_tempat}','Backend\ObjekWisataController@sosmedTable');
+            Route::get('/edit/{id}/{id_tempat}','Backend\ObjekWisataController@sosmedEdit');
+            Route::patch('/update/{id}','Backend\ObjekWisataController@sosmedUpdate');
+            Route::delete('/delete/{id}','Backend\ObjekWisataController@sosmedDestroy');
+        });
     });
 
     Route::prefix('/restaurant')->group(function(){
@@ -121,6 +130,15 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
             Route::patch('/update/{id}','Backend\RestaurantController@menuUpdate');
             Route::delete('/delete/{id}','Backend\RestaurantController@menuDestroy');
         });
+        Route::prefix('/sosial-media')->group(function(){
+            Route::get('/{id}','Backend\RestaurantController@sosmedIndex');
+            Route::get('/create/{id_tempat}','Backend\RestaurantController@sosmedCreate');
+            Route::post('/store','Backend\RestaurantController@sosmedStore');
+            Route::get('/table/{id_tempat}','Backend\RestaurantController@sosmedTable');
+            Route::get('/edit/{id}/{id_tempat}','Backend\RestaurantController@sosmedEdit');
+            Route::patch('/update/{id}','Backend\RestaurantController@sosmedUpdate');
+            Route::delete('/delete/{id}','Backend\RestaurantController@sosmedDestroy');
+        });
     });
 
     Route::prefix('/cindramata')->group(function(){
@@ -138,6 +156,15 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
             Route::get('/edit/{id}/{cindramata_id}','Backend\CendramataController@detailEdit');
             Route::patch('/update/{id}','Backend\CendramataController@detailUpdate');
             Route::delete('/delete/{id}','Backend\CendramataController@detailDestroy');
+        });
+        Route::prefix('/sosial-media')->group(function(){
+            Route::get('/{id}','Backend\CendramataController@sosmedIndex');
+            Route::get('/create/{id_tempat}','Backend\CendramataController@sosmedCreate');
+            Route::post('/store','Backend\CendramataController@sosmedStore');
+            Route::get('/table/{id_tempat}','Backend\CendramataController@sosmedTable');
+            Route::get('/edit/{id}/{id_tempat}','Backend\CendramataController@sosmedEdit');
+            Route::patch('/update/{id}','Backend\CendramataController@sosmedUpdate');
+            Route::delete('/delete/{id}','Backend\CendramataController@sosmedDestroy');
         });
     });
 
@@ -165,6 +192,15 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
             Route::get('/edit/{id}/{id_objek_wisata}','Backend\HotelController@gambarEdit');
             Route::patch('/update/{id}','Backend\HotelController@gambarUpdate');
             Route::delete('/delete/{id}','Backend\HotelController@gambarDestroy');
+        });
+        Route::prefix('/sosial-media')->group(function(){
+            Route::get('/{id}','Backend\HotelController@sosmedIndex');
+            Route::get('/create/{id_tempat}','Backend\HotelController@sosmedCreate');
+            Route::post('/store','Backend\HotelController@sosmedStore');
+            Route::get('/table/{id_tempat}','Backend\HotelController@sosmedTable');
+            Route::get('/edit/{id}/{id_tempat}','Backend\HotelController@sosmedEdit');
+            Route::patch('/update/{id}','Backend\HotelController@sosmedUpdate');
+            Route::delete('/delete/{id}','Backend\HotelController@sosmedDestroy');
         });
     });
 });
