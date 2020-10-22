@@ -88,6 +88,12 @@
                                 <a href="{{ url('dashboard/cindramata') }}"> Cindramata </a>
                             </li>
                             @endif
+
+                            @if(Auth::user()->level == 1 || Auth::user()->level == 4 || Auth::user()->level == 7)
+                            <li class="{{ ($page_name === 'Event') ? 'active' : '' }}">
+                                <a href="{{ url('dashboard/event') }}"> Event </a>
+                            </li>
+                            @endif
                            
                         </ul>
                     </li>
@@ -125,23 +131,17 @@
                         </a>
                         <ul class="collapse submenu list-unstyled {{ ($category_name === 'Berita') ? 'show' : '' }}" id="dashboard" data-parent="#accordionExample">
                            
-                            @if(Auth::user()->level == 1 || Auth::user()->level == 2 || Auth::user()->level == 7)
                             <li class="{{ ($page_name === 'Kategori Berita') ? 'active' : '' }}">
                                 <a href="{{ url('dashboard/kategori-berita') }}"> Kategori Berita </a>
                             </li>
-                            @endif
 
-                            @if(Auth::user()->level == 1 || Auth::user()->level == 4 || Auth::user()->level == 7)
                             <li class="{{ ($page_name === 'Label') ? 'active' : '' }}">
                                 <a href="{{ url('dashboard/label') }}"> Label Berita </a>
                             </li>
-                            @endif
 
-                            @if(Auth::user()->level == 1 || Auth::user()->level == 4 || Auth::user()->level == 7)
                             <li class="{{ ($page_name === 'Berita') ? 'active' : '' }}">
                                 <a href="{{ url('dashboard/berita') }}"> Berita </a>
                             </li>
-                            @endif
                            
                         </ul>
                     </li>

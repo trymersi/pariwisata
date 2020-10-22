@@ -227,5 +227,13 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
         Route::patch('/update/{id}','Backend\PostController@update');
         Route::delete('/delete/{id}','Backend\PostController@destroy');
     });
+
+    Route::prefix('/event')->group(function(){
+        Route::resource('/','Backend\EventController');
+        Route::get('/table','Backend\EventController@table');
+        Route::get('/edit/{id}','Backend\EventController@edit');
+        Route::patch('/update/{id}','Backend\EventController@update');
+        Route::delete('/delete/{id}','Backend\EventController@destroy');
+    });
 });
 

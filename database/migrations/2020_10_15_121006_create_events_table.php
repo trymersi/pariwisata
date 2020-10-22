@@ -22,6 +22,7 @@ class CreateEventsTable extends Migration
             $table->date('tanggal_mulai')->nullable()->comment('tanggal mulai event');
             $table->date('tanggal_selesai')->nullable()->comment('tanggal selesai event');
             $table->string('gambar_header')->nullable()->comment('gambar untuk header page event');
+            $table->integer('status')->default(0)->nullable()->comment('status pengajuan event; 0 untuk diajukan');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('kabupaten_id')->references('id')->on('kabupatens')->onDelete('set null');

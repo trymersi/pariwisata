@@ -31,7 +31,7 @@ class PostController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['role:super_admin']);
+        $this->middleware('auth');
 
         $this->postClass = new Post;
         $this->labelClass = new Label;
@@ -395,6 +395,10 @@ class PostController extends Controller
             ->addColumn('gambar', function($data)
             {
                return  "<img width='150px' src='".asset('uploads/images/gambar-berita/'.$data->thumbnail)."'>";
+            })
+            ->addColumn('status', function($data)
+            {
+               return  status($data->status);
             })
 
             ->addColumn('label', function($data)
