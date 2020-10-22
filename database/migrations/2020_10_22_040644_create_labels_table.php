@@ -17,6 +17,7 @@ class CreateLabelsTable extends Migration
             $table->id();
             $table->string('nama')->nullable()->comment('nama label');
             $table->string('slug');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

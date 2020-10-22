@@ -17,6 +17,7 @@ class CreatePostCategoriesTable extends Migration
             $table->id();
             $table->string('nama')->nullable()->comment('nama kategori');
             $table->string('slug');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -120,6 +120,24 @@ function meta_description($string) {
     return $string;
 }
 
+function meta_keywords($string) {
+    $string = preg_replace ('/<[^>]*>/', ' ', $string);
+    $string = str_replace("\r", '', $string);
+    $string = str_replace("\n", ' ', $string);
+    $string = str_replace("\t", ' ', $string);
+    $string = trim(preg_replace('/ {2,}/', ' ', $string));
+    $string = preg_replace("/&#?[a-z0-9]{2,8};/i","",$string);
+    $string = preg_replace("#[[:punct:]]#", "", $string);
+    $string = preg_replace("[^-\w\d\s\.=$'€%]",'',$string);
+    $string = str_replace(' ', ', ', $string);
+    $string = str_replace(' ,', '', $string);
+    $string = trim($string, ", ");
+    $string = trim($string, " ,");
+    $string = trim($string, ",");
+    $string = trim($string);
+    return $string;
+}
+
 function levelCode($kode)
 {
     switch ($kode) 

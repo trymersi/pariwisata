@@ -203,5 +203,29 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
             Route::delete('/delete/{id}','Backend\HotelController@sosmedDestroy');
         });
     });
+
+    Route::prefix('/kategori-berita')->group(function(){
+        Route::resource('/','Backend\PostCategoryController');
+        Route::get('/table','Backend\PostCategoryController@table');
+        Route::get('/edit/{id}','Backend\PostCategoryController@edit');
+        Route::patch('/update/{id}','Backend\PostCategoryController@update');
+        Route::delete('/delete/{id}','Backend\PostCategoryController@destroy');
+    });
+
+    Route::prefix('/label')->group(function(){
+        Route::resource('/','Backend\LabelController');
+        Route::get('/table','Backend\LabelController@table');
+        Route::get('/edit/{id}','Backend\LabelController@edit');
+        Route::patch('/update/{id}','Backend\LabelController@update');
+        Route::delete('/delete/{id}','Backend\LabelController@destroy');
+    });
+
+    Route::prefix('/berita')->group(function(){
+        Route::resource('/','Backend\PostController');
+        Route::get('/table','Backend\PostController@table');
+        Route::get('/edit/{id}','Backend\PostController@edit');
+        Route::patch('/update/{id}','Backend\PostController@update');
+        Route::delete('/delete/{id}','Backend\PostController@destroy');
+    });
 });
 
