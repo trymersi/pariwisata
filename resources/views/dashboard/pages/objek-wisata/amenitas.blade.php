@@ -26,7 +26,7 @@
 
                     <input type="text" hidden name="objek_wisata_id" value="{{ $objek_wisata_id }}">
 
-                    
+                    <h5>Sarana Penunjang</h5>
 
                     <div class="form-group row mb-4">
                         <label  class="col-xl-4 col-sm-6 col-sm-4 col-form-label">Tempat Parkir</label>
@@ -97,6 +97,25 @@
                     </div>
 
                     <div class="form-group row mb-4">
+                        <label  class="col-xl-4 col-sm-6 col-sm-4 col-form-label">Sinyal Provider</label>
+                        <div class="col-xl-8 col-lg-6 col-sm-8">
+                            <select name="sinyal_provider[]" class="form-control select" multiple="multiple">
+                                <option value="">Pilih Internet Provider</option>
+                                <option @if(old('sinyal_provider.0') || in_array('Telkomsel',$provider)) selected="" @endif value="Telkomsel">Telkomsel</option>
+                                <option @if(old('sinyal_provider.1') || in_array('XL Axiata',$provider)) selected="" @endif value="XL Axiata">XL Axiata</option>
+                                <option @if(old('sinyal_provider.2') || in_array('Indosat',$provider)) selected="" @endif value="Indosat">Indosat</option>
+                                <option @if(old('sinyal_provider.3') || in_array('3 Tri',$provider)) selected="" @endif value="3 Tri">3 Tri</option>
+                                <option @if(old('sinyal_provider.4') || in_array('Axis',$provider)) selected="" @endif value="Axis">Axis</option>
+                                <option @if(old('sinyal_provider.5') || in_array('Smartfren',$provider)) selected="" @endif value="Smartfren">Smartfren</option>
+                            </select>
+                            <p>Anda dapat memilih lebih dari satu</p>
+                            @error('sinyal_provider')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
+                        </div>
+                    </div>
+                    <h5>Sarana Pendukung</h5>
+                    <div class="form-group row mb-4">
                         <label  class="col-xl-4 col-sm-6 col-sm-4 col-form-label">Street Furniture</label>
                         <div class="col-xl-8 col-lg-6 col-sm-8">
                             <div class="custom-control custom-radio custom-control-inline">
@@ -164,28 +183,11 @@
                         </div>
                     </div>
 
-                    <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Sinyal Provider</label>
-                        <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <select name="sinyal_provider[]" class="form-control select" multiple="multiple">
-                                <option value="">Pilih Internet Provider</option>
-                                <option @if(old('sinyal_provider.0') || in_array('Telkomsel',$provider)) selected="" @endif value="Telkomsel">Telkomsel</option>
-                                <option @if(old('sinyal_provider.1') || in_array('XL Axiata',$provider)) selected="" @endif value="XL Axiata">XL Axiata</option>
-                                <option @if(old('sinyal_provider.2') || in_array('Indosat',$provider)) selected="" @endif value="Indosat">Indosat</option>
-                                <option @if(old('sinyal_provider.3') || in_array('3 Tri',$provider)) selected="" @endif value="3 Tri">3 Tri</option>
-                                <option @if(old('sinyal_provider.4') || in_array('Axis',$provider)) selected="" @endif value="Axis">Axis</option>
-                                <option @if(old('sinyal_provider.5') || in_array('Smartfren',$provider)) selected="" @endif value="Smartfren">Smartfren</option>
-                            </select>
-                            <p>Anda dapat memilih lebih dari satu</p>
-                            @error('sinyal_provider')
-                                <span><code>{{$message}}</code></span>
-                            @enderror
-                        </div>
-                    </div>
+                    
 
                     <div class="form-group row">
                         <div class="col-sm-10">
-                            <a class="btn btn-warning mt-3" href="{{ url('/dashboard/kategori-ekraf') }}">
+                            <a class="btn btn-warning mt-3" href="{{ url('/dashboard/objek-wisata') }}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
                                 Batalkan
                             </a>

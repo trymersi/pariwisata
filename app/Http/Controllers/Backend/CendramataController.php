@@ -290,7 +290,6 @@ class CendramataController extends Controller
                     </button>
                     <div class="dropdown-menu" style="will-change: transform;">
                         <a class="dropdown-item" href="'.url("/dashboard/cindramata/detail").'/'.$data->id.'">Produk Cindramata</a>
-                        <a class="dropdown-item" href="'.url("/dashboard/cindramata/gambar").'/'.$data->id.'">Gambar Gallery</a>
                         <a class="dropdown-item" href="'.url("/dashboard/cindramata/sosial-media").'/'.$data->id.'">Sosial Media</a>
                     </div>
                 </div>';
