@@ -13,8 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('/')->group(function(){
+    Route::get('/','Frontend\HomeController@index');
 });
 
 Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()

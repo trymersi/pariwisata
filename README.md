@@ -12,6 +12,7 @@
 Cara Buat Controller Dialam Sub Folder
 ```sh
 $ php artisan make:controller Backend/PenggunaController --resource
+$ php artisan make:controller Frontend/HomeController --resource
 ```
 
 # List Middleware
