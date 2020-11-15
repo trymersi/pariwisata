@@ -21,6 +21,14 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
 {
     Route::get('/', "Backend\DashboardController@index");
 
+
+    Route::prefix('/pengaturan')->group(function(){
+        Route::resource('/','Backend\SettingController');
+        Route::get('/edit/{id}','Backend\SettingController@edit');
+        Route::patch('/update/{id}','Backend\SettingController@update');
+        Route::delete('/delete/{id}','Backend\SettingController@destroy');
+    });
+
     Route::prefix('/kabupaten')->group(function(){
         Route::resource('/','Backend\KabupatenController');
         Route::get('/table','Backend\KabupatenController@table');
