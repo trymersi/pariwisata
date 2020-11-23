@@ -1,4 +1,5 @@
 <?php
+
 function bersih( $str, $delimiter = '-', $options = array() )
 {
 
@@ -393,4 +394,162 @@ function getSosmed($kode)
     }
     return $sosmed;
     
+}
+
+function tgl_indo($tanggal){
+    $tanggal = date('Y-m-d',strtotime($tanggal));
+
+	$bulan = array (
+		1 =>   'Januari',
+		'Februari',
+		'Maret',
+		'April',
+		'Mei',
+		'Juni',
+		'Juli',
+		'Agustus',
+		'September',
+		'Oktober',
+		'November',
+		'Desember'
+	);
+	$pecahkan = explode('-', $tanggal);
+	return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
+}
+
+function iconSosmedHome($kode)
+{
+    switch($kode)
+    {
+        case 1 :
+            $sosmed = '<i class="fab fa-instagram"></i>';
+            break;
+        case 2 :
+            $sosmed = '<i class="fab fa-twitter"></i>';
+            break;
+        case 3 :
+            $sosmed = '<i class="fab fa-facebook-f"></i>';
+            break;
+        case 4 :
+            $sosmed = '<i class="fab fa-tiktok"></i>';
+            break;
+        case 5 :
+            $sosmed = '<i class="fab fa-whatsapp"></i>';
+            break;
+        case 6 :
+            $sosmed = '<i class="fab fa-youtube"></i>';
+            break;
+    }
+    return $sosmed;
+}
+
+function getSosmedHotel($id)
+{
+    $get = App\Models\sosialMedia::getHotelSosmed($id);
+    $url = array();
+    foreach($get as $item)
+    {
+        $icon = iconSosmedHome($item->kode_sosmed);
+        $url[] = '<a target="_blank" href="'.$item->alamat_sosmed.'">'.$icon.'</a>';
+    }
+    return $url;
+}
+
+function getSosmedObjekWisata($id)
+{
+    $get = App\Models\sosialMedia::getObjekWisataSosmed($id);
+    $url = array();
+    foreach($get as $item)
+    {
+        $icon = iconSosmedHome($item->kode_sosmed);
+        $url[] = '<a target="_blank" href="'.$item->alamat_sosmed.'">'.$icon.'</a>';
+    }
+    return $url;
+}
+
+function getSosmedObjekRestoran($id)
+{
+    $get = App\Models\sosialMedia::getRestoranSosmed($id);
+    $url = array();
+    foreach($get as $item)
+    {
+        $icon = iconSosmedHome($item->kode_sosmed);
+        $url[] = '<a target="_blank" href="'.$item->alamat_sosmed.'">'.$icon.'</a>';
+    }
+    return $url;
+}
+
+function getSosmedObjekCindramata($id)
+{
+    $get = App\Models\sosialMedia::getCindramataSosmed($id);
+    $url = array();
+    foreach($get as $item)
+    {
+        $icon = iconSosmedHome($item->kode_sosmed);
+        $url[] = '<a target="_blank" href="'.$item->alamat_sosmed.'">'.$icon.'</a>';
+    }
+    return $url;
+}
+
+function getGambarObjekWisata($id)
+{
+    $data =  App\Models\objekWisataGambar::getGallery($id);
+    $hitung = count($data);
+    $i = 1;
+    $ar = array();
+    foreach($data as $key)
+    {
+        if($i != $hitung)
+        {
+            $ar[$i] = "{'src': '".asset('/uploads/images/gallery-objek-wisata')."/".$key->gambar."'},"; 
+        }
+        else
+        {
+            $ar[$i] = "{'src': '".asset('/uploads/images/gallery-objek-wisata')."/".$key->gambar."'}";
+        }
+        $i++;
+    }
+    return $ar;
+}
+
+function getGambarHotel($id)
+{
+    $data =  App\Models\hotelGambar::getGallery($id);
+    $hitung = count($data);
+    $i = 1;
+    $ar = array();
+    foreach($data as $key)
+    {
+        if($i != $hitung)
+        {
+            $ar[$i] = "{'src': '".asset('/uploads/images/gallery-hotel')."/".$key->gambar."'},"; 
+        }
+        else
+        {
+            $ar[$i] = "{'src': '".asset('/uploads/images/gallery-hotel')."/".$key->gambar."'}";
+        }
+        $i++;
+    }
+    return $ar;
+}
+
+function getGambarRestoran($id)
+{
+    $data =  App\Models\restaurantGambar::getGallery($id);
+    $hitung = count($data);
+    $i = 1;
+    $ar = array();
+    foreach($data as $key)
+    {
+        if($i != $hitung)
+        {
+            $ar[$i] = "{'src': '".asset('/uploads/images/gallery-restaurant')."/".$key->gambar."'},"; 
+        }
+        else
+        {
+            $ar[$i] = "{'src': '".asset('/uploads/images/gallery-restaurant')."/".$key->gambar."'}";
+        }
+        $i++;
+    }
+    return $ar;
 }

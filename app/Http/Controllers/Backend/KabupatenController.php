@@ -118,6 +118,9 @@ class KabupatenController extends Controller
         $this->kabupatenClass->nama = $request->nama_kabupaten;
         $this->kabupatenClass->keterangan = $dom->saveHTML();
         $this->kabupatenClass->gambar = $filename_kabupaten;
+        $this->kabupatenClass->slug = $nama_kabupaten_bersih;
+        $this->kabupatenClass->meta_description = meta_description($dom->saveHTML());
+        $this->kabupatenClass->meta_keywords = meta_keywords($request->nama_kabupaten);
         $this->kabupatenClass->longitude = $request->longitude;
         $this->kabupatenClass->latitude = $request->latitude;
         $this->kabupatenClass->save();
@@ -221,6 +224,9 @@ class KabupatenController extends Controller
         if(isset($filename_kabupaten)):
             $edit->gambar = $filename_kabupaten;
         endif;
+        $edit->slug = $nama_kabupaten_bersih;
+        $edit->meta_description = meta_description($dom->saveHTML());
+        $edit->meta_keywords = meta_keywords($request->nama_kabupaten);
         $edit->longitude = $request->longitude;
         $edit->latitude = $request->latitude;
         $edit->save();
@@ -248,7 +254,7 @@ class KabupatenController extends Controller
 
         /* DELETE DATA GAMBAR KETERANGAN*/
         $path_keterangan = public_path('uploads/images/keterangan-kabupaten');
-        $content = $data->keterangan_lengkap;
+        $content = $data->keterangan;
         $dom = new \DomDocument();
         libxml_use_internal_errors(true);
         $dom->loadHtml($content, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD);

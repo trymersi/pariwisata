@@ -195,13 +195,49 @@ class SettingController extends Controller
             $gambar->move($destination, $filename_icon);
         }
 
-        if($request->file('logo_website'))
+        if($request->file('slider_gambar_utama'))
         {
-            $gambar = $request->file('logo_website');
+            $gambar = $request->file('slider_gambar_utama');
             $ext = $gambar->getClientOriginalExtension();
             $destination = public_path('uploads/images/setting');
-            $filename_logo_website = "logo_website.".$ext;
-            $gambar->move($destination, $filename_logo_website);
+            $slider_gambar_utama = "slider_gambar_utama.".$ext;
+            $gambar->move($destination, $slider_gambar_utama);
+        }
+
+        if($request->file('slider_gambar_objek_wisata'))
+        {
+            $gambar = $request->file('slider_gambar_objek_wisata');
+            $ext = $gambar->getClientOriginalExtension();
+            $destination = public_path('uploads/images/setting');
+            $slider_gambar_objek_wisata = "slider_gambar_objek_wisata.".$ext;
+            $gambar->move($destination, $slider_gambar_objek_wisata);
+        }
+
+        if($request->file('slider_gambar_event'))
+        {
+            $gambar = $request->file('slider_gambar_event');
+            $ext = $gambar->getClientOriginalExtension();
+            $destination = public_path('uploads/images/setting');
+            $slider_gambar_event = "slider_gambar_event.".$ext;
+            $gambar->move($destination, $slider_gambar_event);
+        }
+
+        if($request->file('slider_gambar_restoran'))
+        {
+            $gambar = $request->file('slider_gambar_restoran');
+            $ext = $gambar->getClientOriginalExtension();
+            $destination = public_path('uploads/images/setting');
+            $slider_gambar_restoran = "slider_gambar_restoran.".$ext;
+            $gambar->move($destination, $slider_gambar_restoran);
+        }
+
+        if($request->file('slider_gambar_hotel'))
+        {
+            $gambar = $request->file('slider_gambar_hotel');
+            $ext = $gambar->getClientOriginalExtension();
+            $destination = public_path('uploads/images/setting');
+            $slider_gambar_hotel = "slider_gambar_hotel.".$ext;
+            $gambar->move($destination, $slider_gambar_hotel);
         }
 
         if($request->file('gambar_login'))
@@ -212,6 +248,26 @@ class SettingController extends Controller
             $filename_gambar_login = "gambar_login.".$ext;
             $gambar->move($destination, $filename_gambar_login);
         }
+
+        if($request->file('gambar_promosi_satu'))
+        {
+            $gambar = $request->file('gambar_promosi_satu');
+            $ext = $gambar->getClientOriginalExtension();
+            $destination = public_path('uploads/images/setting');
+            $gambar_promosi_satu = "gambar_promosi_satu.".$ext;
+            $gambar->move($destination, $gambar_promosi_satu);
+        }
+
+        if($request->file('gambar_promosi_dua'))
+        {
+            $gambar = $request->file('gambar_promosi_dua');
+            $ext = $gambar->getClientOriginalExtension();
+            $destination = public_path('uploads/images/setting');
+            $gambar_promosi_dua = "gambar_promosi_dua.".$ext;
+            $gambar->move($destination, $gambar_promosi_dua);
+        }
+
+
 
         $edit = Setting::find(1);
         $edit->nama_website =  $request->nama_website;
@@ -227,6 +283,27 @@ class SettingController extends Controller
         endif;
         if(isset($filename_gambar_login)):
         $edit->gambar_login =  $filename_gambar_login;
+        endif;
+        if(isset($slider_gambar_utama)):
+        $edit->slider_gambar_utama =  $slider_gambar_utama;
+        endif;
+        if(isset($slider_gambar_objek_wisata)):
+        $edit->slider_gambar_objek_wisata =  $slider_gambar_objek_wisata;
+        endif;
+        if(isset($slider_gambar_event)):
+        $edit->slider_gambar_event =  $slider_gambar_event;
+        endif;
+        if(isset($slider_gambar_restoran)):
+        $edit->slider_gambar_restoran =  $slider_gambar_restoran;
+        endif;
+        if(isset($slider_gambar_hotel)):
+        $edit->slider_gambar_hotel =  $slider_gambar_hotel;
+        endif;
+        if(isset($gambar_promosi_satu)):
+        $edit->gambar_promosi_satu =  $gambar_promosi_satu;
+        endif;
+        if(isset($gambar_promosi_dua)):
+        $edit->gambar_promosi_dua =  $gambar_promosi_dua;
         endif;
         $edit->meta_description =  meta_description($request->keterangan_website);
         $edit->meta_keywords =  meta_keywords($request->nama_website);

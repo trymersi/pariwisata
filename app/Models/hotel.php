@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
-
+use DB;
 class hotel extends Model
 {
     use SoftDeletes;
@@ -33,4 +33,54 @@ class hotel extends Model
             ->get();
         return $get;
     }
+
+    public function getHome()
+    {
+        $get = $this->leftJoin('kabupatens','kabupatens.id','hotels.kabupaten_id')
+            ->leftJoin('objek_wisatas','objek_wisatas.id','hotels.objek_wisata_id')
+            ->select(
+                'kabupatens.nama as nama_kabupaten',
+                'objek_wisatas.nama as nama_objek_wisata',
+                'objek_wisatas.gambar_header',
+                'hotels.nama',
+                'hotels.deskripsi',
+                'hotels.gambar',
+                'hotels.jenis',
+                'hotels.id',
+                'hotels.alamat',
+                'hotels.status',
+            )
+            ->where('hotels.status',3)
+            ->orderBy('hotels.updated_at','desc')
+            ->get();
+        return $get;
+    }
+
+    public function getByKabupaten($id)
+    {
+        $get = $this->leftJoin('kabupatens','kabupatens.id','hotels.kabupaten_id')
+            ->leftJoin('objek_wisatas','objek_wisatas.id','hotels.objek_wisata_id')
+            ->select(
+                'kabupatens.nama as nama_kabupaten',
+                'objek_wisatas.nama as nama_objek_wisata',
+                'objek_wisatas.gambar_header',
+                'hotels.nama',
+                'hotels.deskripsi',
+                'hotels.gambar',
+                'hotels.jenis',
+                'hotels.id',
+                'hotels.alamat',
+                'hotels.status',
+            )
+            ->where('hotels.status',3)
+            ->where('hotels.status',3)
+            ->where('hotels.kabupaten_id',$id)
+            ->orderBy('hotels.updated_at','desc')
+            ->get();
+        return $get;
+    }
+
+    
+
+
 }

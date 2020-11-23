@@ -33,5 +33,48 @@ class event extends Model
             ->get();
         return $get;
     }
+
+    public function getHome()
+    {
+        $get = $this->leftJoin('kabupatens','kabupatens.id','events.kabupaten_id')
+            ->leftJoin('objek_wisatas','objek_wisatas.id','events.objek_wisata_id')
+            ->select(
+                'kabupatens.nama as nama_kabupaten',
+                'objek_wisatas.nama as nama_objek_wisata',
+                'objek_wisatas.gambar_header',
+                'events.nama',
+                'events.tanggal_mulai',
+                'events.gambar_header',
+                'events.tanggal_selesai',
+                'events.status',
+                'events.id'
+            )
+            ->where('events.status',3)
+            ->orderBy('events.updated_at','desc')
+            ->get();
+        return $get;
+    }
+
+    public function getByKabupaten($id)
+    {
+        $get = $this->leftJoin('kabupatens','kabupatens.id','events.kabupaten_id')
+            ->leftJoin('objek_wisatas','objek_wisatas.id','events.objek_wisata_id')
+            ->select(
+                'kabupatens.nama as nama_kabupaten',
+                'objek_wisatas.nama as nama_objek_wisata',
+                'objek_wisatas.gambar_header',
+                'events.nama',
+                'events.tanggal_mulai',
+                'events.gambar_header',
+                'events.tanggal_selesai',
+                'events.status',
+                'events.id'
+            )
+            ->where('events.status',3)
+            ->where('events.kabupaten_id',$id)
+            ->orderBy('events.updated_at','desc')
+            ->get();
+        return $get;
+    }
     
 }

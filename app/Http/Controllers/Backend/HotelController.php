@@ -80,7 +80,6 @@ class HotelController extends Controller
         if(Auth::user()->level == 1 || Auth::user()->level == 4):
             $validator = Validator::make($request->all(), [
                 'kabupaten' => 'required',
-                'objek_wisata' => 'required',
                 'nama'=> 'required',
                 'jenis'=> 'required',
                 'layanan'=> 'required',
@@ -93,7 +92,6 @@ class HotelController extends Controller
             ]);
         else:
             $validator = Validator::make($request->all(), [
-                'objek_wisata' => 'required',
                 'nama'=> 'required',
                 'jenis'=> 'required',
                 'layanan'=> 'required',
@@ -232,7 +230,6 @@ class HotelController extends Controller
         if(Auth::user()->level == 1 || Auth::user()->level == 4):
             $validator = Validator::make($request->all(), [
                 'kabupaten' => 'required',
-                'objek_wisata' => 'required',
                 'nama'=> 'required',
                 'jenis'=> 'required',
                 'layanan'=> 'required',
@@ -244,7 +241,6 @@ class HotelController extends Controller
             ]);
         else:
             $validator = Validator::make($request->all(), [
-                'objek_wisata' => 'required',
                 'nama'=> 'required',
                 'jenis'=> 'required',
                 'layanan'=> 'required',

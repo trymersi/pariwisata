@@ -19,7 +19,7 @@ class CreateRestaurantsTable extends Migration
             $table->unsignedBigInteger('objek_wisata_id')->nullable()->comment('foreign key dari tabel objekwisatas');
             $table->string('nama')->nullable()->comment('nama restaurant');
             $table->string('slug');
-            $table->string('deskripsi')->nullable()->comment('deskripsi restaurant');
+            $table->text('deskripsi')->nullable()->comment('deskripsi restaurant');
             $table->string('alamat')->nullable()->comment('alamat restaurant');
             $table->string('gambar')->nullable()->comment('gambar restaurant');
             $table->string('nomor_kontak')->nullable()->comment('nomor kontak restaurant');

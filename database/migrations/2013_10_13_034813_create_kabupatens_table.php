@@ -17,9 +17,12 @@ class CreateKabupatensTable extends Migration
             $table->bigIncrements('id');
             $table->string('nama')->nullable()->comment('nama kabupaten');
             $table->string('slug');
-            $table->string('keterangan')->nullable()->comment('keterangan kabupaten');
+            $table->text('keterangan')->nullable()->comment('keterangan kabupaten');
             $table->string('gambar')->nullable()->comment('gambar kabupaten');
             $table->string('alamat')->nullable()->comment('alamat kabupaten');
+            $table->string('slug')->nullable()->comment('slug untuk url');
+            $table->string('meta_description')->nullable()->comment('meta deskripsi');
+            $table->string('meta_keywords')->nullable()->comment('meta keyword');
             $table->string('latitude')->nullable()->comment('titik latitude kabupaten');
             $table->string('longitude')->nullable()->comment('titik longitude kabupaten');
             $table->timestamps();

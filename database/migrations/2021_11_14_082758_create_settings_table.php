@@ -27,6 +27,13 @@ class CreateSettingsTable extends Migration
             $table->string('meta_keywords');
             $table->string('longitude');
             $table->string('latitude');
+            $table->string('slider_gambar_utama');
+            $table->string('slider_gambar_objek_wisata');
+            $table->string('slider_gambar_objek_event');
+            $table->string('slider_gambar_objek_restoran');
+            $table->string('slider_gambar_objek_hotel');
+            $table->string('gambar_promosi_satu');
+            $table->string('gambar_promosi_dua');
             $table->timestamps();
         });
     }

@@ -3,18 +3,18 @@
     <head>
         <!--=============== basic  ===============-->
         <meta charset="UTF-8">
-        <title>Townhub - Directory Listing Template</title>
+        <title>{{ $page_name }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="robots" content="index, follow"/>
-        <meta name="keywords" content=""/>
-        <meta name="description" content=""/>
+        <meta name="keywords" content="{{ $meta_keywords }}"/>
+        <meta name="description" content="{{ $meta_description }}"/>
         <!--=============== css  ===============-->	
         <link type="text/css" rel="stylesheet" href="{{ asset('assets/frontend/css/reset.css') }}">
         <link type="text/css" rel="stylesheet" href="{{ asset('assets/frontend/css/plugins.css') }}">
         <link type="text/css" rel="stylesheet" href="{{ asset('assets/frontend/css/style.css') }}">
         <link type="text/css" rel="stylesheet" href="{{ asset('assets/frontend/css/color.css') }}">
         <!--=============== favicons ===============-->
-        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="shortcut icon" href="{{ asset('uploads/images/setting/'.$setting_website->icon) }}">
     </head>
     <body>
         <!--loader-->
@@ -29,7 +29,7 @@
             <!-- header -->
             <header class="main-header">
                 <!-- logo-->
-                <a href="index.html" class="logo-holder"><img src="{{ asset('assets/frontend/images/logo.png') }}" alt=""></a>
+                <a href="index.html" class="logo-holder"><img src="{{ asset('uploads/images/setting/'.$setting_website->logo_website) }}" alt=""></a>
                 <!-- logo end-->
                 <!-- header-search_btn-->         
                 <div class="header-search_btn show-search-button"><i class="fal fa-search"></i><span>Search</span></div>
@@ -185,13 +185,13 @@
                             <!-- footer-widget-->
                             <div class="col-md-4">
                                 <div class="footer-widget fl-wrap">
-                                    <div class="footer-logo"><a href="index.html"><img src="{{ asset('assets/frontend/images/logo.png') }}" alt=""></a></div>
+                                    <div class="footer-logo"><a href="index.html"><img src="{{ asset('uploads/images/setting/'.$setting_website->logo_website) }}" alt=""></a></div>
                                     <div class="footer-contacts-widget fl-wrap">
-                                        <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida.   </p>
+                                        <p>{{ $setting_website->keterangan_website }}</p>
                                         <ul  class="footer-contacts fl-wrap no-list-style">
-                                            <li><span><i class="fal fa-envelope"></i> Mail :</span><a href="#" target="_blank">yourmail@domain.com</a></li>
-                                            <li> <span><i class="fal fa-map-marker"></i> Adress :</span><a href="#" target="_blank">USA 27TH Brooklyn NY</a></li>
-                                            <li><span><i class="fal fa-phone"></i> Phone :</span><a href="#">+7(111)123456789</a></li>
+                                            <li><span><i class="fal fa-envelope"></i> E-Mail :</span><a href="#" target="_blank">{{ $setting_website->email }}</a></li>
+                                            <li> <span><i class="fal fa-map-marker"></i> Alamat :</span><a href="#" target="_blank">{{ $setting_website->alamat_kantor }}</a></li>
+                                            <li><span><i class="fal fa-phone"></i> Telepon :</span><a href="#">{{ $setting_website->notel }}</a></li>
                                         </ul>
                                         <div class="footer-social">
                                             <span>Find  us on: </span>
@@ -213,27 +213,15 @@
                                     <h3>Our Last News</h3>
                                     <div class="footer-widget-posts fl-wrap">
                                         <ul class="no-list-style">
+                                            @foreach($footer_post as $item)
                                             <li class="clearfix">
-                                                <a href="#"  class="widget-posts-img"><img src="{{ asset('assets/frontend/images/all/1.jpg') }}" class="respimg" alt=""></a>
+                                                <a href="#"  class="widget-posts-img"><img src="{{ asset('uploads/images/gambar-berita/'.$item->thumbnail) }}" class="respimg" alt=""></a>
                                                 <div class="widget-posts-descr">
-                                                    <a href="#" title="">Vivamus dapibus rutrum</a>
-                                                    <span class="widget-posts-date"><i class="fal fa-calendar"></i> 21 Mar 09.05 </span> 
+                                                    <a href="#" title="">{{ $item->title }}</a>
+                                                    <span class="widget-posts-date"><i class="fal fa-calendar"></i> {{ tgl_indo($item->updated_at) }} </span> 
                                                 </div>
                                             </li>
-                                            <li class="clearfix">
-                                                <a href="#"  class="widget-posts-img"><img src="{{ asset('assets/frontend/images/all/1.jpg') }}" class="respimg" alt=""></a>
-                                                <div class="widget-posts-descr">
-                                                    <a href="#" title=""> In hac habitasse platea</a>
-                                                    <span class="widget-posts-date"><i class="fal fa-calendar"></i> 7 Mar 18.21 </span> 
-                                                </div>
-                                            </li>
-                                            <li class="clearfix">
-                                                <a href="#"  class="widget-posts-img"><img src="{{ asset('assets/frontend/images/all/1.jpg') }}" class="respimg" alt=""></a>
-                                                <div class="widget-posts-descr">
-                                                    <a href="#" title="">Tortor tempor in porta</a>
-                                                    <span class="widget-posts-date"><i class="fal fa-calendar"></i> 7 Mar 16.42 </span>
-                                                </div>
-                                            </li>
+                                            @endforeach
                                         </ul>
                                         <a href="blog.html" class="footer-link">Read all <i class="fal fa-long-arrow-right"></i></a>
                                     </div>
@@ -241,15 +229,7 @@
                             </div>
                             <!-- footer-widget end-->
                             <!-- footer-widget  -->
-                            <div class="col-md-4">
-                                <div class="footer-widget fl-wrap ">
-                                    <h3>Our  Twitter</h3>
-                                    <div class="twitter-holder fl-wrap scrollbar-inner2" data-simplebar data-simplebar-auto-hide="false">
-                                        <div id="footer-twiit"></div>
-                                    </div>
-                                    <a href="#" class="footer-link twitter-link" target="_blank">Follow us <i class="fal fa-long-arrow-right"></i></a>
-                                </div>
-                            </div>
+                           
                             <!-- footer-widget end-->
                         </div>
                     </div>
@@ -295,82 +275,7 @@
             </div>
             <!--map-modal end -->                
             <!--register form -->
-            <div class="main-register-wrap modal">
-                <div class="reg-overlay"></div>
-                <div class="main-register-holder tabs-act">
-                    <div class="main-register fl-wrap  modal_main">
-                        <div class="main-register_title">Welcome to <span><strong>Town</strong>Hub<strong>.</strong></span></div>
-                        <div class="close-reg"><i class="fal fa-times"></i></div>
-                        <ul class="tabs-menu fl-wrap no-list-style">
-                            <li class="current"><a href="#tab-1"><i class="fal fa-sign-in-alt"></i> Login</a></li>
-                            <li><a href="#tab-2"><i class="fal fa-user-plus"></i> Register</a></li>
-                        </ul>
-                        <!--tabs -->                       
-                        <div class="tabs-container">
-                            <div class="tab">
-                                <!--tab -->
-                                <div id="tab-1" class="tab-content first-tab">
-                                    <div class="custom-form">
-                                        <form method="post"  name="registerform">
-                                            <label>Username or Email Address <span>*</span> </label>
-                                            <input name="email" type="text"   onClick="this.select()" value="">
-                                            <label >Password <span>*</span> </label>
-                                            <input name="password" type="password"   onClick="this.select()" value="" >
-                                            <button type="submit"  class="btn float-btn color2-bg"> Log In <i class="fas fa-caret-right"></i></button>
-                                            <div class="clearfix"></div>
-                                            <div class="filter-tags">
-                                                <input id="check-a3" type="checkbox" name="check">
-                                                <label for="check-a3">Remember me</label>
-                                            </div>
-                                        </form>
-                                        <div class="lost_password">
-                                            <a href="#">Lost Your Password?</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--tab end -->
-                                <!--tab -->
-                                <div class="tab">
-                                    <div id="tab-2" class="tab-content">
-                                        <div class="custom-form">
-                                            <form method="post"   name="registerform" class="main-register-form" id="main-register-form2">
-                                                <label >Full Name <span>*</span> </label>
-                                                <input name="name" type="text"   onClick="this.select()" value="">
-                                                <label>Email Address <span>*</span></label>
-                                                <input name="email" type="text"  onClick="this.select()" value="">
-                                                <label >Password <span>*</span></label>
-                                                <input name="password" type="password"   onClick="this.select()" value="" >
-                                                <div class="filter-tags ft-list">
-                                                    <input id="check-a2" type="checkbox" name="check">
-                                                    <label for="check-a2">I agree to the <a href="#">Privacy Policy</a></label>
-                                                </div>
-                                                <div class="clearfix"></div>
-                                                <div class="filter-tags ft-list">
-                                                    <input id="check-a" type="checkbox" name="check">
-                                                    <label for="check-a">I agree to the <a href="#">Terms and Conditions</a></label>
-                                                </div>
-                                                <div class="clearfix"></div>
-                                                <button type="submit"     class="btn float-btn color2-bg"> Register  <i class="fas fa-caret-right"></i></button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--tab end -->
-                            </div>
-                            <!--tabs end -->
-                            <div class="log-separator fl-wrap"><span>or</span></div>
-                            <div class="soc-log fl-wrap">
-                                <p>For faster login or register use your social account.</p>
-                                <a href="#" class="facebook-log"> Facebook</a>
-                            </div>
-                            <div class="wave-bg">
-                                <div class='wave -one'></div>
-                                <div class='wave -two'></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
             <!--register form end -->
             <a class="to-top"><i class="fas fa-caret-up"></i></a>     
         </div>
@@ -379,7 +284,7 @@
         <script src="{{ asset('assets/frontend/js/jquery.min.js') }}"></script>
         <script src="{{ asset('assets/frontend/js/plugins.js') }}"></script>
         <script src="{{ asset('assets/frontend/js/scripts.js') }}"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY_HERE&libraries=places&callback=initAutocomplete"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key={{ apiMap() }}&libraries=places&callback=initAutocomplete"></script>
         <script src="{{ asset('assets/frontend/js/map-single.js') }}"></script>                          
     </body>
 </html>

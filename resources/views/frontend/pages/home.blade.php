@@ -6,7 +6,7 @@
 <section class="hero-section"   data-scrollax-parent="true">
     <div class="bg-tabs-wrap">
         <div class="bg-parallax-wrap" data-scrollax="properties: { translateY: '200px' }">
-            <div class="bg bg_tabs"  data-bg="{{ asset('assets/frontend/images/bg/hero/1.jpg') }}"></div>
+            <div class="bg bg_tabs"  data-bg="{{ asset('uploads/images/setting/'.$setting->slider_gambar_utama) }}"></div>
             <div class="overlay op7"></div>
         </div>
     </div>
@@ -14,17 +14,17 @@
         <div class="intro-item fl-wrap">
             <span class="section-separator"></span>
             <div class="bubbles">
-                <h1>Explore Best Places In City</h1>
+                <h1>Temukan Tempat Terbaik Di Provinsi Riau</h1>
             </div>
             <h3>Find some of the best tips from around the city from our partners and friends.</h3>
         </div>
         <!-- main-search-input-tabs-->
         <div class="main-search-input-tabs  tabs-act fl-wrap">
             <ul class="tabs-menu change_bg no-list-style">
-                <li class="current"><a href="#tab-inpt1" data-bgtab="{{ asset('assets/frontend/images/bg/hero/1.jpg') }}"> Places</a></li>
-                <li><a href="#tab-inpt2" data-bgtab="{{ asset('assets/frontend/images/bg/hero/1.jpg') }}"> Events</a></li>
-                <li><a href="#tab-inpt3" data-bgtab="{{ asset('assets/frontend/images/bg/hero/1.jpg') }}"> Restaurants</a></li>
-                <li><a href="#tab-inpt4" data-bgtab="{{ asset('assets/frontend/images/bg/hero/1.jpg') }}"> Hotels</a></li>
+                <li class="current"><a href="#tab-inpt1" data-bgtab="{{ asset('uploads/images/setting/'.$setting->slider_gambar_objek_wisata) }}"> Objek Wisata</a></li>
+                <li><a href="#tab-inpt2" data-bgtab="{{ asset('uploads/images/setting/'.$setting->slider_gambar_event) }}"> Event</a></li>
+                <li><a href="#tab-inpt3" data-bgtab="{{ asset('uploads/images/setting/'.$setting->slider_gambar_restoran) }}"> Restoran</a></li>
+                <li><a href="#tab-inpt4" data-bgtab="{{ asset('uploads/images/setting/'.$setting->slider_gambar_hotel) }}"> Hotel</a></li>
             </ul>
             <!--tabs -->                       
             <div class="tabs-container fl-wrap  ">
@@ -146,11 +146,11 @@
         <div class="hero-categories fl-wrap">
             <h4 class="hero-categories_title">Just looking around ? Use quick search by category :</h4>
             <ul class="no-list-style">
-                <li><a href="listing.html"><i class="far fa-cheeseburger"></i><span>Restaurants</span></a></li>
-                <li><a href="listing.html"><i class="far fa-bed"></i><span>Hotels</span></a></li>
-                <li><a href="listing.html"><i class="far fa-shopping-bag"></i><span>Shops</span></a></li>
-                <li><a href="listing.html"><i class="far fa-dumbbell"></i><span>Fitness</span></a></li>
-                <li><a href="listing.html"><i class="far fa-cocktail"></i><span>Events</span></a></li>
+                <li><a href="listing.html"><i class="fas fa-map-marked-alt"></i><span>Objek Wisata</span></a></li>
+                <li><a href="listing.html"><i class="far fa-bed"></i><span>Hotel</span></a></li>
+                <li><a href="listing.html"><i class="fas fa-utensils"></i><span>Restoran</span></a></li>
+                <li><a href="listing.html"><i class="fas fa-mosque"></i><span>Tempat Ibadah</span></a></li>
+                <li><a href="listing.html"><i class="far fa-cocktail"></i><span>Event</span></a></li>
             </ul>
         </div>
     </div>
@@ -162,10 +162,10 @@
 <!--section  -->
 <section class="slw-sec" id="sec1">
     <div class="section-title">
-        <h2>The Latest Listings</h2>
-        <div class="section-subtitle">Newest  Listings</div>
+        <h2>Objek Wisata Provinsi Riau</h2>
+        <div class="section-subtitle">Objek Wisata Terbaik Di Provinsi Riau</div>
         <span class="section-separator"></span>
-        <p>Mauris ac maximus neque. Nam in mauris quis libero sodales eleifend. Morbi varius, nulla sit amet rutrum elementum.</p>
+        <p>Lihat dan datangi objek - objek wisata yang ada di Provinsi Riau.</p>
     </div>
     <div class="listing-slider-wrap fl-wrap">
         <div class="listing-slider fl-wrap">
@@ -176,38 +176,38 @@
                         <div class="listing-slider-item fl-wrap">
                             <!-- listing-item  -->
                             <div class="listing-item listing_carditem">
-                                <article class="geodir-category-listing fl-wrap">
-                                    <div class="geodir-category-img">
-                                        <div class="geodir-js-favorite_btn"><i class="fal fa-heart"></i><span>Save</span></div>
-                                        <a href="listing-single.html" class="geodir-category-img-wrap fl-wrap">
-                                        <img src="{{ asset('assets/frontend/images/all/1.jpg') }}" alt=""> 
-                                        </a>
-                                        <div class="geodir_status_date gsd_open"><i class="fal fa-lock-open"></i>Open Now</div>
-                                        <div class="geodir-category-opt">
-                                            <div class="geodir-category-opt_title">
-                                                <h4><a href="listing-single.html">The Goggi Restaurant</a></h4>
-                                                <div class="geodir-category-location"><a href="#"><i class="fas fa-map-marker-alt"></i>  34-42 Montgomery St , NY, USA</a></div>
-                                            </div>
-                                            <div class="listing-rating-count-wrap">
-                                                <div class="review-score">4.1</div>
-                                                <div class="listing-rating card-popup-rainingvis" data-starrating2="4"></div>
-                                                <br>
-                                                <div class="reviews-count">26 reviews</div>
-                                            </div>
-                                            <div class="listing_carditem_footer fl-wrap">
-                                                <a class="listing-item-category-wrap" href="#">
-                                                    <div class="listing-item-category red-bg"><i class="fal fa-cheeseburger"></i></div>
-                                                    <span>Restaurants</span>
-                                                </a>
-                                                <div class="price-level geodir-category_price">
-                                                    <span class="price-level-item" data-pricerating="2"></span>
-                                                    <span class="price-name-tooltip">Pricey</span>
+                                @foreach($objek_wisata as $wisata)
+                                    <article class="geodir-category-listing fl-wrap">
+                                        <div class="geodir-category-img">
+                                            
+                                            <a href="listing-single.html" class="geodir-category-img-wrap fl-wrap">
+                                            <img src="{{ asset('uploads/images/gambar-header-objek-wisata/'.$wisata->gambar_header) }}" alt=""> 
+                                            </a>
+                                            <div class="geodir_status_date gsd_open"><i class="fal fa-lock-open"></i>Buka</div>
+                                            <div class="geodir-category-opt">
+                                                <div class="geodir-category-opt_title">
+                                                    <h4><a href="listing-single.html">The Goggi Restaurant</a></h4>
+                                                    <div class="geodir-category-location"><a href="#"><i class="fas fa-map-marker-alt"></i>  34-42 Montgomery St , NY, USA</a></div>
                                                 </div>
-                                                <div class="post-author"><a href="#"><img src="{{ asset('assets/frontend/images/avatar/1.jpg') }}" alt=""><span>By , Alisa Noory</span></a></div>
+                                                <div class="listing-rating-count-wrap">
+                                                    <div class="review-score">4.1</div>
+                                                    <div class="listing-rating card-popup-rainingvis" data-starrating2="4"></div>
+                                                    <br>
+                                                    <div class="reviews-count">26 reviews</div>
+                                                </div>
+                                                <div class="listing_carditem_footer fl-wrap">
+                                                    <a class="listing-item-category-wrap" href="#">
+                                                        <div class="listing-item-category red-bg"><i class="far fa-bookmark"></i></div>
+                                                        <span>Objek Wisata</span>
+                                                    </a>
+                                                  
+                                                    
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </article>
+                                    </article> 
+                                @endforeach
+                                
                             </div>
                             <!-- listing-item end -->                                                   
                         </div>
@@ -236,72 +236,83 @@
             <span class="section-separator"></span>
             <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus.</p>
         </div>
+        
         <div class="listing-item-grid_container fl-wrap">
             <div class="row">
                 <!--  listing-item-grid  -->
+                @if(isset($kabupaten[0]))
                 <div class="col-sm-4">
                     <div class="listing-item-grid">
-                        <div class="bg"  data-bg="{{ asset('assets/frontend/images/all/1.jpg') }}"></div>
+                        <div class="bg"  data-bg="{{ asset('uploads/images/foto-kabupaten/'.$kabupaten[0]->gambar) }}"></div>
                         <div class="d-gr-sec"></div>
-                        <div class="listing-counter color2-bg"><span>16 </span> Locations</div>
+                        <div class="listing-counter color2-bg"><span>{{ $kabupaten[0]->total_objek_wisata }} </span> Objek Wisata</div>
                         <div class="listing-item-grid_title">
-                            <h3><a href="listing.html">New York</a></h3>
-                            <p>Constant care and attention to the patients makes good record</p>
+                            <h3><a href="{{ url('/kabupaten/'.$kabupaten[0]->slug) }}">{{ $kabupaten[0]->nama }}</a></h3>
+                            <p>{{ meta_description($kabupaten[0]->keterangan) }}</p>
                         </div>
                     </div>
                 </div>
+                @endif
                 <!--  listing-item-grid end  -->
                 <!--  listing-item-grid  -->
+                @if(isset($kabupaten[1]))
                 <div class="col-sm-4">
                     <div class="listing-item-grid">
-                        <div class="bg"  data-bg="{{ asset('assets/frontend/images/all/1.jpg') }}"></div>
+                        <div class="bg"  data-bg="{{ asset('uploads/images/foto-kabupaten/'.$kabupaten[1]->gambar) }}"></div>
                         <div class="d-gr-sec"></div>
-                        <div class="listing-counter color2-bg"><span>22 </span> Locations</div>
+                        <div class="listing-counter color2-bg"><span>{{ $kabupaten[1]->total_objek_wisata }} </span> Objek Wisata</div>
                         <div class="listing-item-grid_title">
-                            <h3><a href="listing.html">Paris</a></h3>
-                            <p>Constant care and attention to the patients makes good record</p>
+                            <h3><a href="{{ url('/kabupaten/'.$kabupaten[1]->slug) }}">{{ $kabupaten[1]->nama }}</a></h3>
+                            <p>{{ meta_description($kabupaten[1]->keterangan) }}</p>
                         </div>
                     </div>
                 </div>
+                @endif
                 <!--  listing-item-grid end  -->                                
                 <!--  listing-item-grid  -->
+                @if(isset($kabupaten[2]))
                 <div class="col-sm-4">
                     <div class="listing-item-grid">
-                        <div class="bg"  data-bg="{{ asset('assets/frontend/images/all/1.jpg') }}"></div>
+                        <div class="bg"  data-bg="{{ asset('uploads/images/foto-kabupaten/'.$kabupaten[2]->gambar) }}"></div>
                         <div class="d-gr-sec"></div>
-                        <div class="listing-counter color2-bg"><span>9 </span> Locations</div>
+                        <div class="listing-counter color2-bg"><span>{{ $kabupaten[2]->total_objek_wisata }} </span> Objek Wisata</div>
                         <div class="listing-item-grid_title">
-                            <h3><a href="listing.html">Moscow</a></h3>
-                            <p>Constant care and attention to the patients makes good record</p>
+                            <h3><a href="{{ url('/kabupaten/'.$kabupaten[2]->slug) }}">{{ $kabupaten[2]->nama }}</a></h3>
+                            <p>{{ meta_description($kabupaten[2]->keterangan) }}</p>
                         </div>
                     </div>
                 </div>
+                @endif
                 <!--  listing-item-grid end  -->
                 <!--  listing-item-grid  -->
+                @if(isset($kabupaten[3]))
                 <div class="col-sm-4">
                     <div class="listing-item-grid">
-                        <div class="bg"  data-bg="{{ asset('assets/frontend/images/all/1.jpg') }}"></div>
+                        <div class="bg"  data-bg="{{ asset('uploads/images/foto-kabupaten/'.$kabupaten[3]->gambar) }}"></div>
                         <div class="d-gr-sec"></div>
-                        <div class="listing-counter color2-bg"><span>12 </span> Locations</div>
+                        <div class="listing-counter color2-bg"><span>{{ $kabupaten[3]->total_objek_wisata }} </span> Objek Wisata</div>
                         <div class="listing-item-grid_title">
-                            <h3><a href="listing.html">Rome</a></h3>
-                            <p>Constant care and attention to the patients makes good record</p>
+                            <h3><a href="{{ url('/kabupaten/'.$kabupaten[3]->slug) }}">{{ $kabupaten[3]->nama }}</a></h3>
+                            <p>{{ meta_description($kabupaten[3]->keterangan) }}</p>
                         </div>
                     </div>
                 </div>
+                @endif
                 <!--  listing-item-grid end  -->
                 <!--  listing-item-grid  -->
+                @if(isset($kabupaten[4]))
                 <div class="col-sm-8">
                     <div class="listing-item-grid">
-                        <div class="bg"  data-bg="{{ asset('assets/frontend/images/all/1.jpg') }}"></div>
+                        <div class="bg"  data-bg="{{ asset('uploads/images/foto-kabupaten/'.$kabupaten[4]->gambar) }}"></div>
                         <div class="d-gr-sec"></div>
-                        <div class="listing-counter color2-bg"><span>33 </span> Locations</div>
+                        <div class="listing-counter color2-bg"><span>{{ $kabupaten[4]->total_objek_wisata }} </span> Objek Wisata</div>
                         <div class="listing-item-grid_title">
-                            <h3><a href="listing.html">London</a></h3>
-                            <p>Constant care and attention to the patients makes good record</p>
+                            <h3><a href="{{ url('/kabupaten/'.$kabupaten[4]->slug) }}">{{ $kabupaten[4]->nama }}</a></h3>
+                            <p>{{ meta_description($kabupaten[4]->keterangan) }}</p>
                         </div>
                     </div>
                 </div>
+                @endif
                 <!--  listing-item-grid end  -->                                                                                               
             </div>
         </div>
@@ -311,7 +322,7 @@
 <!--  section  -->
 <!--section end-->
 <section class="parallax-section small-par" data-scrollax-parent="true">
-    <div class="bg par-elem "  data-bg="{{ asset('assets/frontend/images/bg/1.jpg') }}" data-scrollax="properties: { translateY: '30%' }"></div>
+    <div class="bg par-elem "  data-bg="{{ asset('uploads/images/setting/'.$setting->gambar_promosi_satu) }}" data-scrollax="properties: { translateY: '30%' }"></div>
     <div class="overlay  op7"></div>
     <div class="container">
         <div class=" single-facts single-facts_2 fl-wrap">
@@ -320,10 +331,10 @@
                 <div class="inline-facts">
                     <div class="milestone-counter">
                         <div class="stats animaper">
-                            <div class="num" data-content="0" data-num="1254">1254</div>
+                            <div class="num" data-content="0" data-num="{{ $total['objek_wisata'] }}">{{ $total['objek_wisata'] }}</div>
                         </div>
                     </div>
-                    <h6>New Visiters Every Week</h6>
+                    <h6>Total Objek Wisata</h6>
                 </div>
             </div>
             <!-- inline-facts end -->
@@ -332,10 +343,10 @@
                 <div class="inline-facts">
                     <div class="milestone-counter">
                         <div class="stats animaper">
-                            <div class="num" data-content="0" data-num="12168">12168</div>
+                            <div class="num" data-content="0" data-num="{{ $total['restoran'] }}">{{ $total['restoran'] }}</div>
                         </div>
                     </div>
-                    <h6>Happy customers every year</h6>
+                    <h6>Total Restoran</h6>
                 </div>
             </div>
             <!-- inline-facts end -->
@@ -344,10 +355,10 @@
                 <div class="inline-facts">
                     <div class="milestone-counter">
                         <div class="stats animaper">
-                            <div class="num" data-content="0" data-num="2172">2172</div>
+                            <div class="num" data-content="0" data-num="{{ $total['hotel'] }}">{{ $total['hotel'] }}</div>
                         </div>
                     </div>
-                    <h6>Won Amazing Awards</h6>
+                    <h6>Total Hotel</h6>
                 </div>
             </div>
             <!-- inline-facts end -->
@@ -356,10 +367,10 @@
                 <div class="inline-facts">
                     <div class="milestone-counter">
                         <div class="stats animaper">
-                            <div class="num" data-content="0" data-num="732">732</div>
+                            <div class="num" data-content="0" data-num="{{ $total['tempat_ibadah'] }}">{{ $total['tempat_ibadah'] }}</div>
                         </div>
                     </div>
-                    <h6>New Listing Every Week</h6>
+                    <h6>Total Tempat Ibadah</h6>
                 </div>
             </div>
             <!-- inline-facts end -->
@@ -377,86 +388,271 @@
             <p>Proin dapibus nisl ornare diam varius tempus. Aenean a quam luctus, finibus tellus ut, convallis eros sollicitudin turpis.</p>
         </div>
         <div class="listing-filters gallery-filters fl-wrap">
-            <a href="#" class="gallery-filter  gallery-filter-active" data-filter="*">All Categories</a>
-            <a href="#" class="gallery-filter" data-filter=".restaurant">Restaurants </a>
-            <a href="#" class="gallery-filter" data-filter=".hotels">Hotels</a>
-            <a href="#" class="gallery-filter" data-filter=".events">Events</a>
-            <a href="#" class="gallery-filter" data-filter=".fitness">Fitness</a>
+            <a href="#" class="gallery-filter  gallery-filter-active" data-filter="*">Semua Kategori</a>
+            <a href="#" class="gallery-filter" data-filter=".restaurant">Restoran </a>
+            <a href="#" class="gallery-filter" data-filter=".hotels">Hotel</a>
+            <a href="#" class="gallery-filter" data-filter=".events">Event</a>
+            <a href="#" class="gallery-filter" data-filter=".fitness">Tempat Ibadah</a>
         </div>
         <div class="grid-item-holder gallery-items fl-wrap">
             <!--  gallery-item-->
-            <div class="gallery-item restaurant events">
-                <!-- listing-item  -->
+            @foreach ($restoran as $item)
+            <div class="gallery-item restaurant">
                 <div class="listing-item">
                     <article class="geodir-category-listing fl-wrap">
                         <div class="geodir-category-img">
-                            <div class="geodir-js-favorite_btn"><i class="fal fa-heart"></i><span>Save</span></div>
                             <a href="listing-single.html" class="geodir-category-img-wrap fl-wrap">
-                            <img src="{{ asset('assets/frontend/images/all/1.jpg') }}" alt=""> 
-                            </a>
-                            <div class="listing-avatar"><a href="author-single.html"><img src="{{ asset('assets/frontend/images/avatar/1.jpg') }}" alt=""></a>
-                                <span class="avatar-tooltip">Added By  <strong>Alisa Noory</strong></span>
-                            </div>
-                            <div class="geodir_status_date gsd_open"><i class="fal fa-lock-open"></i>Open Now</div>
+                            <div class="geodir_status_date gsd_open"><i class="fas fa-city"></i>{{ $item->nama_kabupaten }}</div>
                             <div class="geodir-category-opt">
                                 <div class="listing-rating-count-wrap">
-                                    <div class="review-score">4.8</div>
+                                    <div class="review-score">4.7</div>
                                     <div class="listing-rating card-popup-rainingvis" data-starrating2="5"></div>
                                     <br>
-                                    <div class="reviews-count">12 reviews</div>
+                                    <div class="reviews-count">9 reviews</div>
                                 </div>
                             </div>
+                            <img src="{{ asset('uploads/images/gambar-header-restaurant/'.$item->gambar) }}" alt="{{ ucwords($item->nama) }}"> 
+                            </a>
+                            @if(isset($item->gambar_header))
+                            <div class="listing-avatar"><a href="author-single.html"><img src="{{ asset('uploads/images/gambar-header-objek-wisata/'.$item->gambar_header) }}" alt=""></a>
+                                <span class="avatar-tooltip"><strong>{{ $item->nama_objek_wisata }}</strong></span>
+                            </div>
+                            @endif
                         </div>
                         <div class="geodir-category-content fl-wrap title-sin_item">
                             <div class="geodir-category-content-title fl-wrap">
                                 <div class="geodir-category-content-title-item">
-                                    <h3 class="title-sin_map"><a href="listing-single.html">Luxary Resaturant</a><span class="verified-badge"><i class="fal fa-check"></i></span></h3>
-                                    <div class="geodir-category-location fl-wrap"><a href="#" ><i class="fas fa-map-marker-alt"></i> 27th Brooklyn New York, USA</a></div>
+                                    <h3 class="title-sin_map"><a href="listing-single.html">{{ ucwords($item->nama) }}</a><span class="verified-badge"><i class="fal fa-check"></i></span></h3>
+                                    <div class="geodir-category-location fl-wrap"><a href="#" ><i class="fas fa-map-marker-alt"></i> {{ $item->alamat }}</a></div>
                                 </div>
                             </div>
                             <div class="geodir-category-text fl-wrap">
-                                <p class="small-text">Sed interdum metus at nisi tempor laoreet. Integer gravida orci a justo sodales.</p>
+                                <p class="small-text">{!! strip_tags(meta_description($item->deskripsi)) !!}</p>
                                 <div class="facilities-list fl-wrap">
-                                    <div class="facilities-list-title">Facilities : </div>
-                                    <ul class="no-list-style">
-                                        <li class="tolt"  data-microtip-position="top" data-tooltip="Free WiFi"><i class="fal fa-wifi"></i></li>
-                                        <li class="tolt"  data-microtip-position="top" data-tooltip="Parking"><i class="fal fa-parking"></i></li>
-                                        <li class="tolt"  data-microtip-position="top" data-tooltip="Non-smoking Rooms"><i class="fal fa-smoking-ban"></i></li>
-                                        <li class="tolt"  data-microtip-position="top" data-tooltip="Pets Friendly"><i class="fal fa-dog-leashed"></i></li>
-                                    </ul>
+                                   
                                 </div>
                             </div>
                             <div class="geodir-category-footer fl-wrap">
                                 <a class="listing-item-category-wrap">
                                     <div class="listing-item-category red-bg"><i class="fal fa-cheeseburger"></i></div>
-                                    <span>Restaurants</span>
+                                    <span>Restoran</span>
                                 </a>
                                 <div class="geodir-opt-list">
                                     <ul class="no-list-style">
                                         <li><a href="#" class="show_gcc"><i class="fal fa-envelope"></i><span class="geodir-opt-tooltip">Contact Info</span></a></li>
-                                        <li><a href="#1" class="single-map-item" data-newlatitude="40.72956781" data-newlongitude="-73.99726866"><i class="fal fa-map-marker-alt"></i><span class="geodir-opt-tooltip">On the map <strong>1</strong></span> </a></li>
+                                        <li><a href="#1" class="single-map-item" data-newlatitude="{{ $item->latitude }}" data-newlongitude="{{ $item->longitude }}"><i class="fal fa-map-marker-alt"></i><span class="geodir-opt-tooltip">On the map <strong>1</strong></span> </a></li>
                                         <li>
                                             <div class="dynamic-gal gdop-list-link" data-dynamicPath="[{'src': 'images/all/1.jpg'},{'src': 'images/all/1.jpg'}, {'src': 'images/all/1.jpg'}]"><i class="fal fa-search-plus"></i><span class="geodir-opt-tooltip">Gallery</span></div>
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="price-level geodir-category_price">
-                                    <span class="price-level-item" data-pricerating="3"></span>
-                                    <span class="price-name-tooltip">Pricey</span>
-                                </div>
+                               
                                 <div class="geodir-category_contacts">
                                     <div class="close_gcc"><i class="fal fa-times-circle"></i></div>
                                     <ul class="no-list-style">
-                                        <li><span><i class="fal fa-phone"></i> Call : </span><a href="#">+38099231212</a></li>
-                                        <li><span><i class="fal fa-envelope"></i> Write : </span><a href="#">yourmail@domain.com</a></li>
+                                        <li><span><i class="fal fa-phone"></i> Kontak : </span><a href="#">{{ $item->nomor_kontak }}</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </article>
-                </div>
-                <!-- listing-item end -->                              
+                </div>                           
             </div>
+            @endforeach
+
+            @foreach ($hotel as $item)
+            <div class="gallery-item hotels">
+                <div class="listing-item">
+                    <article class="geodir-category-listing fl-wrap">
+                        <div class="geodir-category-img">
+                            <a href="listing-single.html" class="geodir-category-img-wrap fl-wrap">
+                            <div class="geodir_status_date gsd_open"><i class="fas fa-city"></i>{{ $item->nama_kabupaten }}</div>
+                            <div class="geodir-category-opt">
+                                <div class="listing-rating-count-wrap">
+                                    <div class="review-score">4.7</div>
+                                    <div class="listing-rating card-popup-rainingvis" data-starrating2="5"></div>
+                                    <br>
+                                    <div class="reviews-count">9 reviews</div>
+                                </div>
+                            </div>
+                            <img src="{{ asset('uploads/images/gambar-header-hotel/'.$item->gambar) }}" alt="{{ ucwords($item->nama) }}"> 
+                            </a>
+                            @if(isset($item->gambar_header))
+                            <div class="listing-avatar"><a href="author-single.html"><img src="{{ asset('uploads/images/gambar-header-objek-wisata/'.$item->gambar_header) }}" alt=""></a>
+                                <span class="avatar-tooltip"><strong>{{ $item->nama_objek_wisata }}</strong></span>
+                            </div>
+                            @endif
+                        </div>
+                        <div class="geodir-category-content fl-wrap title-sin_item">
+                            <div class="geodir-category-content-title fl-wrap">
+                                <div class="geodir-category-content-title-item">
+                                    <h3 class="title-sin_map"><a href="listing-single.html">{{ ucwords($item->nama) }}</a><span class="verified-badge"><i class="fal fa-check"></i></span></h3>
+                                    <div class="geodir-category-location fl-wrap"><a href="#" ><i class="fas fa-map-marker-alt"></i> {{ $item->alamat }}</a></div>
+                                </div>
+                            </div>
+                            <div class="geodir-category-text fl-wrap">
+                                <p class="small-text">{!! strip_tags(meta_description($item->deskripsi)) !!}</p>
+                                <div class="facilities-list fl-wrap">
+                                   
+                                </div>
+                            </div>
+                            <div class="geodir-category-footer fl-wrap">
+                                <a class="listing-item-category-wrap">
+                                    <div class="listing-item-category yellow-bg"><i class="fal fa-bed"></i></div>
+                                    <span>Hotel</span>
+                                </a>
+                                <div class="geodir-opt-list">
+                                    <ul class="no-list-style">
+                                        <li><a href="#" class="show_gcc"><i class="fal fa-envelope"></i><span class="geodir-opt-tooltip">Contact Info</span></a></li>
+                                        <li><a href="#1" class="single-map-item" data-newlatitude="{{ $item->latitude }}" data-newlongitude="{{ $item->longitude }}"><i class="fal fa-map-marker-alt"></i><span class="geodir-opt-tooltip">On the map <strong>1</strong></span> </a></li>
+                                        <li>
+                                            <div class="dynamic-gal gdop-list-link" data-dynamicPath="[{'src': 'images/all/1.jpg'},{'src': 'images/all/1.jpg'}, {'src': 'images/all/1.jpg'}]"><i class="fal fa-search-plus"></i><span class="geodir-opt-tooltip">Gallery</span></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                               
+                                <div class="geodir-category_contacts">
+                                    <div class="close_gcc"><i class="fal fa-times-circle"></i></div>
+                                    <ul class="no-list-style">
+                                        <li><span><i class="fal fa-phone"></i> Kontak : </span><a href="#">{{ $item->nomor_kontak }}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>                           
+            </div>
+            @endforeach
+
+            @foreach ($event as $item)
+            <div class="gallery-item events">
+                <div class="listing-item">
+                    <article class="geodir-category-listing fl-wrap">
+                        <div class="geodir-category-img">
+                            <a href="listing-single.html" class="geodir-category-img-wrap fl-wrap">
+                            <div class="geodir_status_date gsd_open"><i class="fas fa-city"></i>{{ $item->nama_kabupaten }}</div>
+                            <div class="geodir-category-opt">
+                                <div class="listing-rating-count-wrap">
+                                    <div class="review-score">4.7</div>
+                                    <div class="listing-rating card-popup-rainingvis" data-starrating2="5"></div>
+                                    <br>
+                                    <div class="reviews-count">9 reviews</div>
+                                </div>
+                            </div>
+                            <img src="{{ asset('uploads/images/gambar-header-event/'.$item->gambar) }}" alt="{{ ucwords($item->nama) }}"> 
+                            </a>
+                            @if(isset($item->gambar_header))
+                            <div class="listing-avatar"><a href="author-single.html"><img src="{{ asset('uploads/images/gambar-header-objek-wisata/'.$item->gambar_header) }}" alt=""></a>
+                                <span class="avatar-tooltip"><strong>{{ $item->nama_objek_wisata }}</strong></span>
+                            </div>
+                            @endif
+                        </div>
+                        <div class="geodir-category-content fl-wrap title-sin_item">
+                            <div class="geodir-category-content-title fl-wrap">
+                                <div class="geodir-category-content-title-item">
+                                    <h3 class="title-sin_map"><a href="listing-single.html">{{ ucwords($item->nama) }}</a><span class="verified-badge"><i class="fal fa-check"></i></span></h3>
+                                    <div class="geodir-category-location fl-wrap"><a href="#" ><i class="fas fa-map-marker-alt"></i> {{ $item->alamat }}</a></div>
+                                </div>
+                            </div>
+                            <div class="geodir-category-text fl-wrap">
+                                <p class="small-text">{!! strip_tags(meta_description($item->deskripsi)) !!}</p>
+                                <div class="facilities-list fl-wrap">
+                                   
+                                </div>
+                            </div>
+                            <div class="geodir-category-footer fl-wrap">
+                                <a class="listing-item-category-wrap">
+                                    <div class="listing-item-category purp-bg"><i class="fal fa-cocktail"></i></div>
+                                    <span>Event</span>
+                                </a>
+                                <div class="geodir-opt-list">
+                                    <ul class="no-list-style">
+                                        <li><a href="#" class="show_gcc"><i class="fal fa-envelope"></i><span class="geodir-opt-tooltip">Contact Info</span></a></li>
+                                        <li><a href="#1" class="single-map-item" data-newlatitude="{{ $item->latitude }}" data-newlongitude="{{ $item->longitude }}"><i class="fal fa-map-marker-alt"></i><span class="geodir-opt-tooltip">On the map <strong>1</strong></span> </a></li>
+                                        <li>
+                                            <div class="dynamic-gal gdop-list-link" data-dynamicPath="[{'src': 'images/all/1.jpg'},{'src': 'images/all/1.jpg'}, {'src': 'images/all/1.jpg'}]"><i class="fal fa-search-plus"></i><span class="geodir-opt-tooltip">Gallery</span></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                               
+                                <div class="geodir-category_contacts">
+                                    <div class="close_gcc"><i class="fal fa-times-circle"></i></div>
+                                    <ul class="no-list-style">
+                                        <li><span><i class="fal fa-phone"></i> Kontak : </span><a href="#">{{ $item->nomor_kontak }}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>                           
+            </div>
+            @endforeach
+
+            @foreach ($tempat_ibadah as $item)
+            <div class="gallery-item fitness">
+                <div class="listing-item">
+                    <article class="geodir-category-listing fl-wrap">
+                        <div class="geodir-category-img">
+                            <a href="listing-single.html" class="geodir-category-img-wrap fl-wrap">
+                            <div class="geodir_status_date gsd_open"><i class="fas fa-city"></i>{{ $item->nama_kabupaten }}</div>
+                            <div class="geodir-category-opt">
+                                <div class="listing-rating-count-wrap">
+                                    <div class="review-score">4.7</div>
+                                    <div class="listing-rating card-popup-rainingvis" data-starrating2="5"></div>
+                                    <br>
+                                    <div class="reviews-count">9 reviews</div>
+                                </div>
+                            </div>
+                            <img src="{{ asset('uploads/images/gambar-header-tempat-ibadah/'.$item->gambar) }}" alt="{{ ucwords($item->nama) }}"> 
+                            </a>
+                            @if(isset($item->gambar_header))
+                            <div class="listing-avatar"><a href="author-single.html"><img src="{{ asset('uploads/images/gambar-header-objek-wisata/'.$item->gambar_header) }}" alt=""></a>
+                                <span class="avatar-tooltip"><strong>{{ $item->nama_objek_wisata }}</strong></span>
+                            </div>
+                            @endif
+                        </div>
+                        <div class="geodir-category-content fl-wrap title-sin_item">
+                            <div class="geodir-category-content-title fl-wrap">
+                                <div class="geodir-category-content-title-item">
+                                    <h3 class="title-sin_map"><a href="listing-single.html">{{ ucwords($item->nama) }}</a><span class="verified-badge"><i class="fal fa-check"></i></span></h3>
+                                    <div class="geodir-category-location fl-wrap"><a href="#" ><i class="fas fa-map-marker-alt"></i> {{ $item->alamat }}</a></div>
+                                </div>
+                            </div>
+                            <div class="geodir-category-text fl-wrap">
+                                <p class="small-text">{!! strip_tags(meta_description($item->deskripsi)) !!}</p>
+                                <div class="facilities-list fl-wrap">
+                                   
+                                </div>
+                            </div>
+                            <div class="geodir-category-footer fl-wrap">
+                                <a class="listing-item-category-wrap">
+                                    <div class="listing-item-category blue-bg"><i class="fas fa-mosque"></i></div>
+                                    <span>Tempat Ibadah</span>
+                                </a>
+                                <div class="geodir-opt-list">
+                                    <ul class="no-list-style">
+                                        <li><a href="#" class="show_gcc"><i class="fal fa-envelope"></i><span class="geodir-opt-tooltip">Contact Info</span></a></li>
+                                        <li><a href="#1" class="single-map-item" data-newlatitude="{{ $item->latitude }}" data-newlongitude="{{ $item->longitude }}"><i class="fal fa-map-marker-alt"></i><span class="geodir-opt-tooltip">On the map <strong>1</strong></span> </a></li>
+                                        @if(isset(getGambarObjekWisata($item->id)))
+                                        <li>
+                                            <div class="dynamic-gal gdop-list-link" data-dynamicPath="[@foreach(getGambarObjekWisata($item->id) as $key) {{ $key }}@endforeach]"><i class="fal fa-search-plus"></i><span class="geodir-opt-tooltip">Gallery</span></div>
+                                        </li>
+                                        @endif
+                                    </ul>
+                                </div>
+                               
+                                <div class="geodir-category_contacts">
+                                    <div class="close_gcc"><i class="fal fa-times-circle"></i></div>
+                                    <ul class="no-list-style">
+                                        <li><span><i class="fal fa-phone"></i> Kontak : </span><a href="#">{{ $item->nomor_kontak }}</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>                           
+            </div>
+            @endforeach
                                         
         </div>
         <a href="listing.html" class="btn  dec_btn  color2-bg">Check Out All Listings<i class="fal fa-arrow-alt-right"></i></a>
@@ -465,7 +661,7 @@
 <!--section end-->
 <!--section  -->
 <section class="parallax-section" data-scrollax-parent="true">
-    <div class="bg par-elem "  data-bg="{{ asset('assets/frontend/images/bg/1.jpg') }}" data-scrollax="properties: { translateY: '30%' }"></div>
+    <div class="bg par-elem "  data-bg="{{ asset('uploads/images/setting/'.$setting->gambar_promosi_dua) }}" data-scrollax="properties: { translateY: '30%' }"></div>
     <div class="overlay op7"></div>
     <!--container-->
     <div class="container">
@@ -473,7 +669,7 @@
             <h4>Aliquam erat volutpat interdum</h4>
             <h2>Get ready to start your exciting journey. <br> Our agency will lead you through the amazing digital world</h2>
         </div>
-        <a href="https://vimeo.com/70851162" class="promo-link big_prom   image-popup"><i class="fal fa-play"></i><span>Promo Video</span></a>
+        <a href="https://youtu.be/NaObm9CezxA" class="promo-link big_prom   image-popup"><i class="fal fa-play"></i><span>Promo Video</span></a>
     </div>
 </section>
 <!--section end-->
@@ -537,10 +733,10 @@
             <div class="col-md-6">
                 <div class="collage-image">
                     <img src="{{ asset('assets/frontend/images/api.png') }}" class="main-collage-image" alt="">                               
-                    <div class="images-collage-title color2-bg icdec"> <img src="{{ asset('assets/frontend/images/logo.png') }}"   alt=""></div>
+                    <div class="images-collage-title color2-bg icdec"> <img src="{{ asset('uploads/images/setting/'.$setting->logo_website) }}"   alt=""></div>
                     <div class="images-collage_icon green-bg" style="right:-20px; top:120px;"><i class="fal fa-thumbs-up"></i></div>
-                    <div class="collage-image-min cim_1"><img src="{{ asset('assets/frontend/images/api/1.jpg') }}" alt=""></div>
-                    <div class="collage-image-min cim_2"><img src="{{ asset('assets/frontend/images/api/1.jpg') }}" alt=""></div>
+                    <div class="collage-image-min cim_1"><img src="{{ asset('uploads/images/setting/'.$setting->slider_gambar_event) }}" alt=""></div>
+                    <div class="collage-image-min cim_2"><img src="{{ asset('uploads/images/setting/'.$setting->slider_gambar_objek_wisata) }}" alt=""></div>
                     <div class="collage-image-input">Search <i class="fa fa-search"></i></div>
                 </div>
             </div>
@@ -578,9 +774,12 @@
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
                         <!--client-item-->
+                        @foreach($link_terkait as $item)
                         <div class="swiper-slide">
-                            <a href="#" class="client-item"><img src="{{ asset('assets/frontend/images/clients/1.png') }}" alt=""></a>
+                            <a href="{{ $item->link }}" target="_blank" class="client-item"><img src="{{ asset('uploads/images/link-terkait/'.$item->path) }}" alt=""></a>
                         </div>
+                        @endforeach
+                        
                         <!--client-item end-->
                                                                                                                                                                                                                             
                     </div>

@@ -23,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('frontend.main',function($view)
+        {
+            $view->with('setting_website',\App\Models\Setting::first());
+            $view->with('footer_post',\App\Models\Post::limit(5)->get());
+        });
     }
 }

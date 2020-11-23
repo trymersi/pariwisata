@@ -128,6 +128,92 @@
                             @enderror
                         </div>
                     </div>
+                    <h3>Gambar Slider</h3>
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Gambar Slider Utama</label>
+                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                            <input type="file" class="form-control-file" name="slider_gambar_utama" value="{{ old('slider_gambar_utama') }}"  accept="image/jpg,image/jpeg,image/png">
+                            @error('slider_gambar_utama')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
+                            <p> Upload gambar baru untuk mengubah</p>
+                            <img width="150px" src="{{ url('uploads/images/setting/') }}/{{ $edit->slider_gambar_utama }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Gambar Slider Objek Wisata</label>
+                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                            <input type="file" class="form-control-file" name="slider_gambar_objek_wisata" value="{{ old('slider_gambar_objek_wisata') }}"  accept="image/jpg,image/jpeg,image/png">
+                            @error('slider_gambar_objek_wisata')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
+                            <p> Upload gambar baru untuk mengubah</p>
+                            <img width="150px" src="{{ url('uploads/images/setting/') }}/{{ $edit->slider_gambar_objek_wisata }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Gambar Slider Event</label>
+                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                            <input type="file" class="form-control-file" name="slider_gambar_event" value="{{ old('slider_gambar_event') }}"  accept="image/jpg,image/jpeg,image/png">
+                            @error('slider_gambar_event')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
+                            <p> Upload gambar baru untuk mengubah</p>
+                            <img width="150px" src="{{ url('uploads/images/setting/') }}/{{ $edit->slider_gambar_event }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Gambar Slider Restoran</label>
+                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                            <input type="file" class="form-control-file" name="slider_gambar_restoran" value="{{ old('slider_gambar_restoran') }}"  accept="image/jpg,image/jpeg,image/png">
+                            @error('slider_gambar_restoran')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
+                            <p> Upload gambar baru untuk mengubah</p>
+                            <img width="150px" src="{{ url('uploads/images/setting/') }}/{{ $edit->slider_gambar_restoran }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Gambar Slider Hotel</label>
+                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                            <input type="file" class="form-control-file" name="slider_gambar_hotel" value="{{ old('slider_gambar_hotel') }}"  accept="image/jpg,image/jpeg,image/png">
+                            @error('slider_gambar_hotel')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
+                            <p> Upload gambar baru untuk mengubah</p>
+                            <img width="150px" src="{{ url('uploads/images/setting/') }}/{{ $edit->slider_gambar_hotel }}">
+                        </div>
+                    </div>
+
+                    <h3>Gambar Promosi</h3>
+
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Gambar Promosi 1</label>
+                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                            <input type="file" class="form-control-file" name="gambar_promosi_satu" value="{{ old('gambar_promosi_satu') }}"  accept="image/jpg,image/jpeg,image/png">
+                            @error('gambar_promosi_satu')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
+                            <p> Upload gambar baru untuk mengubah</p>
+                            <img width="150px" src="{{ url('uploads/images/setting/') }}/{{ $edit->gambar_promosi_satu }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Gambar Promosi 2</label>
+                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                            <input type="file" class="form-control-file" name="gambar_promosi_dua" value="{{ old('gambar_promosi_dua') }}"  accept="image/jpg,image/jpeg,image/png">
+                            @error('gambar_promosi_dua')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
+                            <p> Upload gambar baru untuk mengubah</p>
+                            <img width="150px" src="{{ url('uploads/images/setting/') }}/{{ $edit->gambar_promosi_dua }}">
+                        </div>
+                    </div>
                     
                     <div class="form-group row">
                         <div class="col-sm-10">

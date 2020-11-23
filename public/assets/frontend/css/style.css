@@ -5393,9 +5393,9 @@ section.gray-section .section-separator {
 	padding: 8px 10px;
 }
 .list-single-main-item p , .accordion-inner p  , .author-content p , .about-wrap p , .user-profile-header_content p{
-    text-align: left;
+    text-align: justify;
     color: #878C9F;
-	font-size:12px;
+	font-size:14px;
 	line-height: 24px;
     padding-bottom: 10px;
 }

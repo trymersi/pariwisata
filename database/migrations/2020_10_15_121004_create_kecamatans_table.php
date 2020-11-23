@@ -17,7 +17,7 @@ class CreateKecamatansTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('kabupaten_id')->nullable()->comment('foreign key dari tabel kabupatens');
             $table->string('nama')->nullable()->comment('nama kecamatan');
-            $table->string('keterangan')->nullable()->comment('keterangan kecamatan');
+            $table->text('keterangan')->nullable()->comment('keterangan kecamatan');
             $table->string('gambar')->nullable()->comment('gambar kecamatan');
             $table->string('alamat')->nullable()->comment('alamat kecamatan');
             $table->string('latitude')->nullable()->comment('titik latitude kecamatan');
