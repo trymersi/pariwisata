@@ -77,7 +77,7 @@ class KabupatenController extends Controller
         }
 
         $nama_kabupaten_bersih = bersih($request->nama_kabupaten,'_');
-
+        $nama_kabupaten_bersih2 = bersih($request->nama_kabupaten,'-');
         $content = $request->keterangan_lengkap;
         $dom = new \DomDocument();
         libxml_use_internal_errors(true);
@@ -118,7 +118,7 @@ class KabupatenController extends Controller
         $this->kabupatenClass->nama = $request->nama_kabupaten;
         $this->kabupatenClass->keterangan = $dom->saveHTML();
         $this->kabupatenClass->gambar = $filename_kabupaten;
-        $this->kabupatenClass->slug = $nama_kabupaten_bersih;
+        $this->kabupatenClass->slug = $nama_kabupaten_bersih2;
         $this->kabupatenClass->meta_description = meta_description($dom->saveHTML());
         $this->kabupatenClass->meta_keywords = meta_keywords($request->nama_kabupaten);
         $this->kabupatenClass->longitude = $request->longitude;
@@ -179,7 +179,7 @@ class KabupatenController extends Controller
         }
 
         $nama_kabupaten_bersih = bersih($request->nama_kabupaten,'_');
-
+        $nama_kabupaten_bersih2 = bersih($request->nama_kabupaten,'-');
         $content = $request->keterangan_lengkap;
         $dom = new \DomDocument();
         libxml_use_internal_errors(true);
@@ -224,7 +224,7 @@ class KabupatenController extends Controller
         if(isset($filename_kabupaten)):
             $edit->gambar = $filename_kabupaten;
         endif;
-        $edit->slug = $nama_kabupaten_bersih;
+        $edit->slug = $nama_kabupaten_bersih2;
         $edit->meta_description = meta_description($dom->saveHTML());
         $edit->meta_keywords = meta_keywords($request->nama_kabupaten);
         $edit->longitude = $request->longitude;

@@ -15,6 +15,7 @@
         <link type="text/css" rel="stylesheet" href="{{ asset('assets/frontend/css/color.css') }}">
         <!--=============== favicons ===============-->
         <link rel="shortcut icon" href="{{ asset('uploads/images/setting/'.$setting_website->icon) }}">
+        @stack('css')
     </head>
     <body>
         <!--loader-->
@@ -285,6 +286,7 @@
         <script src="{{ asset('assets/frontend/js/plugins.js') }}"></script>
         <script src="{{ asset('assets/frontend/js/scripts.js') }}"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key={{ apiMap() }}&libraries=places&callback=initAutocomplete"></script>
-        <script src="{{ asset('assets/frontend/js/map-single.js') }}"></script>                          
+        <script src="{{ asset('assets/frontend/js/map-single.js') }}"></script>   
+        @stack('js')                       
     </body>
 </html>

@@ -15,9 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/')->group(function(){
     Route::get('/','Frontend\HomeController@index');
-    Route::prefix('/kabupaten/{id}')->group(function(){
-        Route::get('/','Frontend\kabupatenController@index');
+    Route::prefix('/kabupaten')->group(function(){
+        Route::get('/{id}','Frontend\KabupatenController@index');
     });
+    Route::prefix('/objek-wisata')->group(function(){
+        Route::resource('/','Frontend\ObjekWisataController');
+        Route::get('/{id}','Frontend\ObjekWisataController@detail');
+        
+    });
+
 });
 
 Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()

@@ -21,7 +21,7 @@
         <!-- main-search-input-tabs-->
         <div class="main-search-input-tabs  tabs-act fl-wrap">
             <ul class="tabs-menu change_bg no-list-style">
-                <li class="current"><a href="#tab-inpt1" data-bgtab="{{ asset('uploads/images/setting/'.$setting->slider_gambar_objek_wisata) }}"> Objek Wisata</a></li>
+                <li class="current"><a href="{{ url('/objek-wisata') }}" data-bgtab="{{ asset('uploads/images/setting/'.$setting->slider_gambar_objek_wisata) }}"> Objek Wisata</a></li>
                 <li><a href="#tab-inpt2" data-bgtab="{{ asset('uploads/images/setting/'.$setting->slider_gambar_event) }}"> Event</a></li>
                 <li><a href="#tab-inpt3" data-bgtab="{{ asset('uploads/images/setting/'.$setting->slider_gambar_restoran) }}"> Restoran</a></li>
                 <li><a href="#tab-inpt4" data-bgtab="{{ asset('uploads/images/setting/'.$setting->slider_gambar_hotel) }}"> Hotel</a></li>
@@ -146,7 +146,7 @@
         <div class="hero-categories fl-wrap">
             <h4 class="hero-categories_title">Just looking around ? Use quick search by category :</h4>
             <ul class="no-list-style">
-                <li><a href="listing.html"><i class="fas fa-map-marked-alt"></i><span>Objek Wisata</span></a></li>
+                <li><a href="{{ url('/objek-wisata') }}"><i class="fas fa-map-marked-alt"></i><span>Objek Wisata</span></a></li>
                 <li><a href="listing.html"><i class="far fa-bed"></i><span>Hotel</span></a></li>
                 <li><a href="listing.html"><i class="fas fa-utensils"></i><span>Restoran</span></a></li>
                 <li><a href="listing.html"><i class="fas fa-mosque"></i><span>Tempat Ibadah</span></a></li>
@@ -633,7 +633,7 @@
                                     <ul class="no-list-style">
                                         <li><a href="#" class="show_gcc"><i class="fal fa-envelope"></i><span class="geodir-opt-tooltip">Contact Info</span></a></li>
                                         <li><a href="#1" class="single-map-item" data-newlatitude="{{ $item->latitude }}" data-newlongitude="{{ $item->longitude }}"><i class="fal fa-map-marker-alt"></i><span class="geodir-opt-tooltip">On the map <strong>1</strong></span> </a></li>
-                                        @if(isset(getGambarObjekWisata($item->id)))
+                                        @if((getGambarObjekWisata($item->id) != null))
                                         <li>
                                             <div class="dynamic-gal gdop-list-link" data-dynamicPath="[@foreach(getGambarObjekWisata($item->id) as $key) {{ $key }}@endforeach]"><i class="fal fa-search-plus"></i><span class="geodir-opt-tooltip">Gallery</span></div>
                                         </li>

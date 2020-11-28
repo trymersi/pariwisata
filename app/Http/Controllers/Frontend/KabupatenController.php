@@ -64,6 +64,7 @@ class KabupatenController extends Controller
         $this->data['hotel'] = $this->hotelClass->getByKabupaten($id);
         $this->data['tempat_ibadah'] = $this->tempatIbadahClass->getByKabupaten($id);
         $this->data['cindramata'] = $this->cindramata->getData($id);
+        $this->data['kabupaten_lain'] = $this->kabupaten->whereNotIn('id',[$id])->limit(5)->get();
         return view('frontend.pages.kabupaten',$this->data);
     }
 
