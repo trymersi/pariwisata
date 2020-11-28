@@ -164,7 +164,7 @@ class ObjekWisataController extends Controller
         $this->objekWisataClass->kabupaten_id = $kab_id;
         $this->objekWisataClass->kecamatan_id = $request->kecamatan;
         $this->objekWisataClass->nama = $request->nama;
-        $this->objekWisataClass->slug = $request->nama;
+        $this->objekWisataClass->slug = str_replace(' ','-',strtolower($request->nama));
         $this->objekWisataClass->deskripsi = $dom->saveHTML();
         $this->objekWisataClass->jenis = implode(',',$request->jenis);
         $this->objekWisataClass->video_promosi = ($request->video_promosi) ? $request->video_promosi : "#";
@@ -309,7 +309,7 @@ class ObjekWisataController extends Controller
         $edit->kabupaten_id = $kab_id;
         $edit->kecamatan_id = $request->kecamatan;
         $edit->nama = $request->nama;
-        $edit->slug = $request->nama;
+        $edit->slug = str_replace(' ','-',strtolower($request->nama));
         $edit->deskripsi = $dom->saveHTML();
         $edit->jenis = implode(',',$request->jenis);
         $edit->video_promosi = ($request->video_promosi) ? $request->video_promosi : "#";

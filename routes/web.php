@@ -20,8 +20,23 @@ Route::prefix('/')->group(function(){
     });
     Route::prefix('/objek-wisata')->group(function(){
         Route::resource('/','Frontend\ObjekWisataController');
-        Route::get('/{id}','Frontend\ObjekWisataController@detail');
-        
+        Route::get('/{id}','Frontend\ObjekWisataController@show');
+    });
+    Route::prefix('/restoran')->group(function(){
+        Route::resource('/','Frontend\RestaurantController');
+        Route::get('/{id}','Frontend\RestaurantController@show');
+    });
+    Route::prefix('/hotel')->group(function(){
+        Route::resource('/','Frontend\ObjekWisataController');
+        Route::get('/{id}','Frontend\ObjekWisataController@show');
+    });
+    Route::prefix('/event')->group(function(){
+        Route::resource('/','Frontend\ObjekWisataController');
+        Route::get('/{id}','Frontend\ObjekWisataController@show');
+    });
+    Route::prefix('/tempat-ibadah')->group(function(){
+        Route::resource('/','Frontend\ObjekWisataController');
+        Route::get('/{id}','Frontend\ObjekWisataController@show');
     });
 
 });

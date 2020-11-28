@@ -208,7 +208,7 @@
 	    //  Map Infoboxes ------------------
         var locations = [
             @foreach($objek_wisata as $item)
-            [locationData('{{ url("/objek-wisata/".$item->slug) }}', '{{ asset("uploads/images/gambar-header-objek-wisata/".$item->gambar_header) }}', '{{ $item->nama }}', " {{ $item->alamat }}", 'cafe-cat', "5", "1", "{{ $item->nama_kabupaten }}"  ), {{ $item->latitude }}, {{$item->longitude}}, 0 , '{{ asset("uploads/images/gambar-header-objek-wisata/".$item->gambar_header) }}'],
+            [locationData('{{ url("/objek-wisata/".$item->slug) }}', '{{ asset("uploads/images/gambar-header-objek-wisata/".$item->gambar_header) }}', '{{ $item->nama }}', " {{ $item->alamat }}", 'gym-cat', "5", "1", "{{ $item->nama_kabupaten }}"  ), {{ $item->latitude }}, {{$item->longitude}}, 0 , '{{ asset("uploads/images/gambar-header-objek-wisata/".$item->gambar_header) }}'],
             @endforeach
         ];
 	    //   Map Infoboxes end ------------------

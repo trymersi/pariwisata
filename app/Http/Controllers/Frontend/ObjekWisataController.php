@@ -108,7 +108,7 @@ class ObjekWisataController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('frontend.pages.objek-wisata.detail',$this->data);
     }
 
     /**
