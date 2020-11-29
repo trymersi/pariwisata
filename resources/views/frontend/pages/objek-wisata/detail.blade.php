@@ -4,15 +4,15 @@
 <div class="content">
     <section class="listing-hero-section hidden-section" data-scrollax-parent="true" id="sec1">
         <div class="bg-parallax-wrap">
-            <div class="bg par-elem "  data-bg="images/bg/1.jpg" data-scrollax="properties: { translateY: '30%' }"></div>
+            <div class="bg par-elem "  data-bg="{{ asset('uploads/images/gambar-header-objek-wisata/'.$objek_wisata->gambar_header) }}" data-scrollax="properties: { translateY: '30%' }"></div>
             <div class="overlay"></div>
         </div>
         <div class="container">
             <div class="list-single-header-item  fl-wrap">
                 <div class="row">
                     <div class="col-md-9">
-                        <h1>Iconic Cafe in Manhattan <span class="verified-badge"><i class="fal fa-check"></i></span></h1>
-                        <div class="geodir-category-location fl-wrap"><a href="#"><i class="fas fa-map-marker-alt"></i>  70 Bright St New York, USA</a> <a href="#"> <i class="fal fa-phone"></i>+38099231212</a> <a href="#"><i class="fal fa-envelope"></i> yourmail@domain.com</a></div>
+                        <h1>{{ $objek_wisata->nama }} <span class="verified-badge"><i class="fal fa-check"></i></span></h1>
+                        <div class="geodir-category-location fl-wrap"><a href="#"><i class="fas fa-map-marker-alt"></i>  {{ $objek_wisata->nama_kabupaten }}</a> <a href="#"> <i class="fal fa-phone"></i>{{ $objek_wisata->kontak_telepon }}</a></div>
                     </div>
                     <div class="col-md-3">
                         <a class="fl-wrap list-single-header-column custom-scroll-link " href="#sec5">
@@ -29,14 +29,17 @@
             <div class="list-single-header_bottom fl-wrap">
                 <a class="listing-item-category-wrap" href="#">
                     <div class="listing-item-category  red-bg"><i class="fal fa-cheeseburger"></i></div>
-                    <span>Restaurants</span>
+                    {!! $jenis !!}
                 </a>
-                <div class="list-single-author"> <a href="author-single.html"><span class="author_avatar"> <img alt='' src='images/avatar/1.jpg'>  </span>By  Alisa Noory</a></div>
-                <div class="geodir_status_date gsd_open"><i class="fal fa-lock-open"></i>Open Now</div>
+                {{-- <div class="geodir_status_date gsd_open"><i class="fal fa-lock-open"></i>{{ $objek_wisata->status }}</div> --}}
+                <div class="list-single-author"> <a href="#">Jarak dari Provinsi : {{ $objek_wisata->jarak_provinsi }} </a></div>
+                <div class="list-single-author"> <a href="#">Jarak dari Kabupaten : {{ $objek_wisata->jarak_kabuten }} </a></div>
+                <div class="list-single-author"> <a href="#">Jarak dari posisi saat ini : {{ $objek_wisata->jarak_kabuten }}  </a></div>
+
                 <div class="list-single-stats">
                     <ul class="no-list-style">
-                        <li><span class="viewed-counter"><i class="fas fa-eye"></i> Viewed -  156 </span></li>
-                        <li><span class="bookmark-counter"><i class="fas fa-heart"></i> Bookmark -  24 </span></li>
+                        <li><span class="viewed-counter"><i class="fas fa-eye"></i> Melihat ini -  156 </span></li>
+                        <li><span class="bookmark-counter"><i class="fas fa-heart"></i> Menyukai ini -  24 </span></li>
                     </ul>
                 </div>
             </div>
@@ -48,22 +51,17 @@
             <nav class="scroll-nav scroll-init">
                 <ul class="no-list-style">
                     <li><a class="act-scrlink" href="#sec1"><i class="fal fa-images"></i> Top</a></li>
-                    <li><a href="#sec2"><i class="fal fa-info"></i>Details</a></li>
-                    <li><a href="#sec3"><i class="fal fa-image"></i>Gallery</a></li>
-                    <li><a href="#sec4"><i class="fal fa-utensils"></i>Menu</a></li>
+                    <li><a href="#sec2"><i class="fal fa-info"></i>Deskripsi</a></li>
+                    <li><a href="#sec3"><i class="fal fa-image"></i>Galeri</a></li>
+                    {{-- <li><a href="#sec4"><i class="fal fa-utensils"></i>Menu</a></li> --}}
                     <li><a href="#sec5"><i class="fal fa-comments-alt"></i>Reviews</a></li>
                 </ul>
             </nav>
             <div class="scroll-nav-wrapper-opt">
-                <a href="#" class="scroll-nav-wrapper-opt-btn"> <i class="fas fa-heart"></i> Save </a>
-                <a href="#" class="scroll-nav-wrapper-opt-btn showshare"> <i class="fas fa-share"></i> Share </a>
+                <a href="#" class="scroll-nav-wrapper-opt-btn"> <i class="fas fa-heart"></i> Suka </a>
+                <a href="#" class="scroll-nav-wrapper-opt-btn showshare"> <i class="fas fa-share"></i> Bagikan </a>
                 <div class="share-holder hid-share">
                     <div class="share-container  isShare"></div>
-                </div>
-                <div class="show-more-snopt"><i class="fal fa-ellipsis-h"></i></div>
-                <div class="show-more-snopt-tooltip">
-                    <a href="#"> <i class="fas fa-comment-alt"></i> Write a review</a>
-                    <a href="#"> <i class="fas fa-flag-alt"></i> Report </a>
                 </div>
             </div>
         </div>
@@ -87,29 +85,51 @@
                         <!-- list-single-main-item --> 
                         <div class="list-single-main-item fl-wrap block_box">
                             <div class="list-single-main-item-title">
-                                <h3>Description</h3>
+                                <h3>Deskripsi</h3>
                             </div>
                             <div class="list-single-main-item_content fl-wrap">
-                                <p>Praesent eros turpis, commodo vel justo at, pulvinar mollis eros. Mauris aliquet eu quam id ornare. Morbi ac quam enim. Cras vitae nulla condimentum, semper dolor non, faucibus dolor. Vivamus adipiscing eros quis orci fringilla, sed pretium lectus viverra. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec nec velit non odio aliquam suscipit. Sed non neque faucibus, condimentum lectus at, accumsan enim.   </p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla. Nulla posuere sapien vitae lectus suscipit, et pulvinar nisi tincidunt. Aliquam erat volutpat. Curabitur convallis fringilla diam sed aliquam. Sed tempor iaculis massa faucibus feugiat. In fermentum facilisis massa, a consequat purus viverra.</p>
-                                <a href="#" class="btn color2-bg    float-btn">Visit Website<i class="fal fa-chevron-right"></i></a>
+                            
+                                {!! $objek_wisata->deskripsi !!}
+                                
                             </div>
                         </div>
                         <!-- list-single-main-item end -->                                               
                         <!-- list-single-main-item --> 
                         <div class="list-single-main-item fl-wrap block_box">
                             <div class="list-single-main-item-title">
-                                <h3>Listing Features</h3>
+                                <h3>Fasilitas</h3>
                             </div>
                             <div class="list-single-main-item_content fl-wrap">
                                 <div class="listing-features fl-wrap">
                                     <ul class="no-list-style">
-                                        <li><a href="#"><i class="fa fa-rocket"></i> Elevator in building</a></li>
-                                        <li><a href="#"><i class="fa fa-wifi"></i> Free Wi Fi</a></li>
-                                        <li><a href="#"><i class="fa fa-motorcycle"></i> Free Parking</a></li>
-                                        <li><a href="#"><i class="fa fa-cloud"></i> Air Conditioned</a></li>
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i> Online Ordering</a></li>
-                                        <li><a href="#"><i class="fa fa-paw"></i> Pet Friendly</a></li>
+                                        @foreach ($fasilitas as $fasilitas)   
+
+                                        @if ($fasilitas->tempat_parkir == 1)
+                                        <li><a href="#"><i class="fa fa-check"></i> Fasilitas Parkir</a></li>
+                                        @endif
+                                        @if ($fasilitas->fasilitas_kesehatan == 1)
+                                        <li><a href="#"><i class="fa fa-check"></i> Fasilitas Kesehatan</a></li>
+                                        @endif
+                                        @if ($fasilitas->fasilitas_kesehatan == 1)
+                                        <li><a href="#"><i class="fa fa-check"></i> Fasilitas Perbelanjaan</a></li>
+                                        @endif
+                                        @if ($fasilitas->listrik == 1)
+                                        <li><a href="#"><i class="fa fa-check"></i> Fasilitas Listrik</a></li>
+                                        @endif
+                                        @if ($fasilitas->street_furniture == 1)
+                                        <li><a href="#"><i class="fa fa-check"></i> Fasilitas Street Furniture</a></li>
+                                        @endif
+                                        @if ($fasilitas->bengkel == 1)
+                                        <li><a href="#"><i class="fa fa-check"></i> Fasilitas Bengkel</a></li>
+                                        @endif
+                                        @if ($fasilitas->money_changer == 1)
+                                        <li><a href="#"><i class="fa fa-check"></i> Fasilitas Penukaran Uang</a></li>
+                                        @endif
+                                        @if ($fasilitas->tempat_sewa_kendaraan == 1)
+                                        <li><a href="#"><i class="fa fa-check"></i> Fasilitas Sewa Kendaraan</a></li>
+                                        @endif
+                                        @endforeach
+
                                     </ul>
                                 </div>
                             </div>
@@ -118,7 +138,7 @@
                         <!-- list-single-main-item-->   
                         <div class="list-single-main-item fl-wrap block_box" id="sec3">
                             <div class="list-single-main-item-title">
-                                <h3>Gallery / Photos</h3>
+                                <h3>Galeri Objek Wisata</h3>
                             </div>
                             <div class="list-single-main-item_content fl-wrap">
                                 <div class="single-carousel-wrap fl-wrap lightgallery">
@@ -127,38 +147,17 @@
                                     <div class="single-carousel fl-wrap full-height">
                                         <div class="swiper-container">
                                             <div class="swiper-wrapper">
-                                                <!-- swiper-slide-->   
+                                                <!-- swiper-slide-->
+                                                
+                                                @foreach ($galeri as $getgaleri)   
                                                 <div class="swiper-slide">
                                                     <div class="box-item">
-                                                        <img  src="images/all/1.jpg"   alt="">
-                                                        <a href="images/all/1.jpg" class="gal-link popup-image"><i class="fa fa-search"  ></i></a>
+                                                        <img  src="{{ asset('uploads/images/gallery-objek-wisata/'.$getgaleri->gambar) }}"   alt="">
+                                                        <a href="{{ asset('uploads/images/gallery-objek-wisata/'.$getgaleri->gambar) }}" class="gal-link popup-image"><i class="fa fa-search"  ></i></a>
                                                     </div>
                                                 </div>
-                                                <!-- swiper-slide end-->   
-                                                <!-- swiper-slide-->   
-                                                <div class="swiper-slide">
-                                                    <div class="box-item">
-                                                        <img  src="images/all/1.jpg"   alt="">
-                                                        <a href="images/all/1.jpg" class="gal-link popup-image"><i class="fa fa-search"  ></i></a>
-                                                    </div>
-                                                </div>
-                                                <!-- swiper-slide end-->                                                                  
-                                                <!-- swiper-slide-->   
-                                                <div class="swiper-slide">
-                                                    <div class="box-item">
-                                                        <img  src="images/all/1.jpg"   alt="">
-                                                        <a href="images/all/1.jpg" class="gal-link popup-image"><i class="fa fa-search"  ></i></a>
-                                                    </div>
-                                                </div>
-                                                <!-- swiper-slide end-->                                                                 
-                                                <!-- swiper-slide-->   
-                                                <div class="swiper-slide">
-                                                    <div class="box-item">
-                                                        <img  src="images/all/1.jpg"   alt="">
-                                                        <a href="images/all/1.jpg" class="gal-link popup-image"><i class="fa fa-search"  ></i></a>
-                                                    </div>
-                                                </div>
-                                                <!-- swiper-slide end-->                                                                  
+                                                @endforeach
+                                                <!-- swiper-slide end-->                                                                    
                                             </div>
                                         </div>
                                     </div>
@@ -179,7 +178,7 @@
                                                     <div class="num" data-content="0" data-num="245">0</div>
                                                 </div>
                                             </div>
-                                            <h6>New Visiters Every Week</h6>
+                                            <h6>Pengunjung Baru Setiap Minggu</h6>
                                         </div>
                                         <div class="stat-wave">
                                             <svg viewbox="0 0 100 25">
@@ -199,7 +198,7 @@
                                                     <div class="num" data-content="0" data-num="2557">0</div>
                                                 </div>
                                             </div>
-                                            <h6>Happy customers every year</h6>
+                                            <h6>Pengunjung Baru Setiap Bulan</h6>
                                         </div>
                                         <div class="stat-wave">
                                             <svg viewbox="0 0 100 25">
@@ -219,7 +218,7 @@
                                                     <div class="num" data-content="0" data-num="25">0</div>
                                                 </div>
                                             </div>
-                                            <h6>Won Awards</h6>
+                                            <h6>Pengunjung Baru Setiap Tahun</h6>
                                         </div>
                                         <div class="stat-wave">
                                             <svg viewbox="0 0 100 25">
@@ -233,111 +232,11 @@
                         </div>
                         <!-- list-single-facts end -->       
                         <!-- list-single-main-item-->   
-                        <div class="list-single-main-item fl-wrap block_box" id="sec4">
-                            <div class="list-single-main-item-title">
-                                <h3>Restaurant Menu</h3>
-                            </div>
-                            <div class="list-single-main-item_content fl-wrap">
-                                <div class="menu-filters">
-                                    <a href="#" class="gallery-filter  menu-filters-active" data-filter="*">All</a>
-                                    <a href="#" class="gallery-filter" data-filter=".main">Main</a>
-                                    <a href="#" class="gallery-filter" data-filter=".dessert">Dessert</a>
-                                    <a href="#" class="gallery-filter" data-filter=".lunch">Lunch</a>
-                                </div>
-                                <div class="restor-menu-widget fl-wrap">
-                                    <!--restmenu-item-->  
-                                    <div class="restmenu-item main">
-                                        <a href="images/all/menu/1.jpg" class="restmenu-item-img image-popup"> 
-                                        <img src="images/all/menu/1.jpg" alt="">
-                                        </a>
-                                        <div class="restmenu-item-det">
-                                            <div class="restmenu-item-det-header fl-wrap">
-                                                <h4>Calabrian Black Sausage</h4>
-                                                <div class="restmenu-item-det-price">$28.00</div>
-                                            </div>
-                                            <p>Netus et malesuada fames ac turpis egestas.</p>
-                                        </div>
-                                    </div>
-                                    <!--restmenu-item end-->  
-                                    <!--restmenu-item-->  
-                                    <div class="restmenu-item dessert">
-                                        <a href="images/all/menu/1.jpg" class="restmenu-item-img image-popup"> 
-                                        <img src="images/all/menu/1.jpg" alt="">
-                                        </a>
-                                        <div class="restmenu-item-det">
-                                            <div class="restmenu-item-det-header fl-wrap">
-                                                <h4>Grilled Filet of Cod</h4>
-                                                <div class="restmenu-item-det-price">$38.10</div>
-                                            </div>
-                                            <p>Aliquam at vestibulum urna, vitae tincidunt</p>
-                                        </div>
-                                    </div>
-                                    <!--restmenu-item end-->   
-                                    <!--restmenu-item-->  
-                                    <div class="restmenu-item main">
-                                        <a href="images/all/menu/1.jpg" class="restmenu-item-img image-popup"> 
-                                        <img src="images/all/menu/1.jpg" alt="">
-                                        </a>
-                                        <div class="restmenu-item-det">
-                                            <div class="restmenu-item-det-header fl-wrap">
-                                                <h4>Saute Filet of Seabass</h4>
-                                                <div class="restmenu-item-det-price">$12.70</div>
-                                            </div>
-                                            <p>Fusce vitae dui iaculis leo porta ultrices.</p>
-                                        </div>
-                                    </div>
-                                    <!--restmenu-item end-->  
-                                    <!--restmenu-item-->  
-                                    <div class="restmenu-item main lunch">
-                                        <a href="images/all/menu/1.jpg" class="restmenu-item-img image-popup"> 
-                                        <img src="images/all/menu/1.jpg" alt="">
-                                        </a>
-                                        <div class="restmenu-item-det">
-                                            <div class="restmenu-item-det-header fl-wrap">
-                                                <h4>Saute Crispy Goats</h4>
-                                                <div class="restmenu-item-det-price">$8.00</div>
-                                            </div>
-                                            <p>Etiam fermentum justo nec auctor pretium.</p>
-                                        </div>
-                                    </div>
-                                    <!--restmenu-item end-->                                                 
-                                    <!--restmenu-item-->  
-                                    <div class="restmenu-item lunch">
-                                        <a href="images/all/menu/1.jpg" class="restmenu-item-img image-popup"> 
-                                        <img src="images/all/menu/1.jpg" alt="">
-                                        </a>
-                                        <div class="restmenu-item-det">
-                                            <div class="restmenu-item-det-header fl-wrap">
-                                                <h4>La Fromagerie</h4>
-                                                <div class="restmenu-item-det-price">$18.20</div>
-                                            </div>
-                                            <p>Pellentesque placerat turpis turpis eget.</p>
-                                        </div>
-                                    </div>
-                                    <!--restmenu-item end-->  
-                                    <!--restmenu-item-->  
-                                    <div class="restmenu-item dessert">
-                                        <a href="images/all/menu/1.jpg" class="restmenu-item-img image-popup"> 
-                                        <img src="images/all/menu/1.jpg" alt="">
-                                        </a>
-                                        <div class="restmenu-item-det">
-                                            <div class="restmenu-item-det-header fl-wrap">
-                                                <h4>Warm Chocolate Pudding</h4>
-                                                <div class="restmenu-item-det-price">$9.30</div>
-                                            </div>
-                                            <p>Pellentesque habitant morbi tristique.</p>
-                                        </div>
-                                    </div>
-                                    <!--restmenu-item end-->                                                 
-                                </div>
-                                <a href="#" class="btn color2-bg   float-btn">Download PDF<i class="fal fa-file-pdf"></i></a>
-                            </div>
-                        </div>
                         <!-- list-single-main-item end -->                                     
                         <!-- list-single-main-item -->   
                         <div class="list-single-main-item fl-wrap block_box" id="sec5">
                             <div class="list-single-main-item-title">
-                                <h3>Item Reviews -  <span> 2 </span></h3>
+                                <h3>Ulasan -  <span> 2 </span></h3>
                             </div>
                             <!--reviews-score-wrap-->   
                             <div class="reviews-score-wrap fl-wrap">
@@ -446,7 +345,7 @@
                         <!-- list-single-main-item -->   
                         <div class="list-single-main-item fl-wrap block_box" id="sec6">
                             <div class="list-single-main-item-title fl-wrap">
-                                <h3>Add Review</h3>
+                                <h3>Berikan Ulasan</h3>
                             </div>
                             <!-- Add Review Box -->
                             <div id="add-review" class="add-review-box">
@@ -497,21 +396,21 @@
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label><i class="fal fa-user"></i></label>
-                                                    <input type="text" placeholder="Your Name *" value=""/>
+                                                    <input type="text" placeholder="Nama *" value=""/>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label><i class="fal fa-envelope"></i>  </label>
-                                                    <input type="text" placeholder="Email Address*" value=""/>
+                                                    <input type="text" placeholder="Email *" value=""/>
                                                 </div>
                                             </div>
-                                            <textarea cols="40" rows="3" placeholder="Your Review:"></textarea>
+                                            <textarea cols="40" rows="3" placeholder="Ulasan:"></textarea>
                                             <div class="clearfix"></div>
                                             <div class="photoUpload">
                                                 <span><i class="fal fa-image"></i> <strong>Add Photos</strong></span>
                                                 <input type="file" class="upload" multiple>
                                             </div>
                                             <div class="clearfix"></div>
-                                            <button class="btn  color2-bg  float-btn">Submit Review <i class="fal fa-paper-plane"></i></button>
+                                            <button class="btn  color2-bg  float-btn">Berikan Ulasan <i class="fal fa-paper-plane"></i></button>
                                         </div>
                                     </fieldset>
                                 </form>
@@ -524,94 +423,39 @@
                 <!-- list-single-main-wrapper-col end -->
                 <!-- list-single-sidebar -->
                 <div class="col-md-4">
-                    <!--box-widget-item -->
-                    <div class="box-widget-item fl-wrap block_box">
-                        <div class="box-widget-item-header">
-                            <h3>Working Hours</h3>
-                        </div>
-                        <div class="box-widget opening-hours fl-wrap">
-                            <div class="box-widget-content">
-                                <ul class="no-list-style">
-                                    <li class="mon"><span class="opening-hours-day">Monday </span><span class="opening-hours-time">9 AM - 5 PM</span></li>
-                                    <li class="tue"><span class="opening-hours-day">Tuesday </span><span class="opening-hours-time">9 AM - 5 PM</span></li>
-                                    <li class="wed"><span class="opening-hours-day">Wednesday </span><span class="opening-hours-time">9 AM - 5 PM</span></li>
-                                    <li class="thu"><span class="opening-hours-day">Thursday </span><span class="opening-hours-time">9 AM - 5 PM</span></li>
-                                    <li class="fri"><span class="opening-hours-day">Friday </span><span class="opening-hours-time">9 AM - 5 PM</span></li>
-                                    <li class="sat"><span class="opening-hours-day">Saturday </span><span class="opening-hours-time">9 AM - 3 PM</span></li>
-                                    <li class="sun"><span class="opening-hours-day">Sunday </span><span class="opening-hours-time">Closed</span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!--box-widget-item end -->   
-                    <!--box-widget-item -->
-                    <div class="box-widget-item fl-wrap block_box">
-                        <div class="box-widget-item-header">
-                            <h3>Book a Table</h3>
-                        </div>
-                        <div class="box-widget">
-                            <div class="box-widget-content">
-                                <form   class="add-comment custom-form">
-                                    <fieldset>
-                                        <label><i class="fal fa-user"></i></label>
-                                        <input type="text" placeholder="Your Name *" value=""/>
-                                        <div class="clearfix"></div>
-                                        <label><i class="fal fa-envelope"></i>  </label>
-                                        <input type="text" placeholder="Email Address*" value=""/>
-                                        <div class="quantity fl-wrap">
-                                            <span><i class="fal fa-user-plus"></i>Persons : </span>
-                                            <div class="quantity-item">
-                                                <input type="button" value="-" class="minus">
-                                                <input type="text"    name="quantity"   title="Qty" class="qty color-bg" data-min="1" data-max="3" data-step="1" value="1">
-                                                <input type="button" value="+" class="plus">
-                                            </div>
-                                        </div>
-                                        <div class="listsearch-input-item clact date-container2">
-                                            <label><i class="fal fa-calendar"></i></label>
-                                            <input type="text" placeholder="Date / Time"     name="datepicker-here-time"   value=""/>
-                                            <span class="clear-singleinput"><i class="fal fa-times"></i></span>
-                                        </div>
-                                        <textarea cols="40" rows="3" placeholder="Additional Information:"></textarea>
-                                    </fieldset>
-                                    <button class="btn color2-bg url_btn float-btn" onclick="window.location.href='booking.html'">Book Table Now <i class="fal fa-bookmark"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                     <!--box-widget-item end -->                                                                   
                     <!--box-widget-item -->                                       
                     <div class="box-widget-item fl-wrap block_box">
                         <div class="box-widget-item-header">
-                            <h3>Location / Contacts  </h3>
+                            <h3>Lokasi / Kontak  </h3>
                         </div>
                         <div class="box-widget">
                             <div class="map-container">
-                                <div id="singleMap" data-latitude="40.7427837" data-longitude="-73.11445617675781" data-mapTitle="Our Location"></div>
+                                <div id="singleMap" data-latitude="{{ $objek_wisata->latitude }}" data-longitude="{{ $objek_wisata->longitude }}" data-mapTitle="Our Location"></div>
                             </div>
                             <div class="box-widget-content bwc-nopad">
                                 <div class="list-author-widget-contacts list-item-widget-contacts bwc-padside">
                                     <ul class="no-list-style">
-                                        <li><span><i class="fal fa-map-marker"></i> Adress :</span> <a href="#">USA 27TH Brooklyn NY</a></li>
-                                        <li><span><i class="fal fa-phone"></i> Phone :</span> <a href="#">+7(123)987654</a></li>
-                                        <li><span><i class="fal fa-envelope"></i> Mail :</span> <a href="#">AlisaNoory@domain.com</a></li>
-                                        <li><span><i class="fal fa-browser"></i> Website :</span> <a href="#">themeforest.net</a></li>
+                                        <li><span><i class="fal fa-map-marker"></i> Alamat : </span> <span>{{ $objek_wisata->alamat }}</span></li>
+                                        <li><span><i class="fal fa-user"></i> Kontak Nama : </span> <span>{{ $objek_wisata->kontak_nama }}</span></li>
+                                        <li><span><i class="fal fa-phone"></i> Kontak Telepon : </span> <span> {{ $objek_wisata->kontak_telepon }}</span></li>
                                     </ul>
                                 </div>
                                 <div class="list-widget-social bottom-bcw-box  fl-wrap">
                                     <ul class="no-list-style">
                                         <li><a href="#" target="_blank" ><i class="fab fa-facebook-f"></i></a></li>
                                         <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#" target="_blank" ><i class="fab fa-vk"></i></a></li>
                                         <li><a href="#" target="_blank" ><i class="fab fa-instagram"></i></a></li>
+                                        {{-- <li><a href="#" target="_blank" ><i class="fa fa-map-marker"></i></a></li> --}}
                                     </ul>
-                                    <div class="bottom-bcw-box_link"><a href="#" class="show-single-contactform tolt" data-microtip-position="top" data-tooltip="Write Message"><i class="fal fa-envelope"></i></a></div>
+                                    {{-- <div class="bottom-bcw-box_link"><a href="#" class="show-single-contactform tolt" data-microtip-position="top" data-tooltip="Write Message"><i class="fal fa-envelope"></i></a></div> --}}
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!--box-widget-item end -->                                  
                     <!--box-widget-item -->
-                    <div class="box-widget-item fl-wrap block_box">
+                    {{-- <div class="box-widget-item fl-wrap block_box">
                         <div class="box-widget-item-header">
                             <h3> Price Range </h3>
                         </div>
@@ -625,26 +469,29 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!--box-widget-item end -->                                
                     <!--box-widget-item -->
                     <div class="box-widget-item fl-wrap block_box">
                         <div class="box-widget-item-header">
-                            <h3>Hosted by : </h3>
+                            <h3>Menuju lokasi dengan Maps</h3>
                         </div>
                         <div class="box-widget">
                             <div class="box-widget-author fl-wrap">
                                 <div class="box-widget-author-title">
                                     <div class="box-widget-author-title-img">
-                                        <img src="images/avatar/1.jpg" alt=""> 
+                                        <img src="{{ asset('uploads/images/gambar-header-objek-wisata/'.$objek_wisata->gambar_header) }}" alt=""> 
                                     </div>
                                     <div class="box-widget-author-title_content">
-                                        <a href="user-single.html">Alisa Noory</a>
-                                        <span>4 Places Hosted</span>
+                                        <span>
+                                            {{ $objek_wisata->nama }}
+                                        </span>
+                                        <span>
+                                            {{ $objek_wisata->alamat }}
+                                        </span>
                                     </div>
                                     <div class="box-widget-author-title_opt">
-                                        <a href="user-single.html" class="tolt green-bg" data-microtip-position="top" data-tooltip="View Profile"><i class="fas fa-user"></i></a> 
-                                        <a href="#" class="tolt color-bg cwb" data-microtip-position="top" data-tooltip="Chat With Owner"><i class="fas fa-comments-alt"></i></a>
+                                        <a href="user-single.html" target="_blank" class="tolt green-bg" data-microtip-position="top" data-tooltip="Menuju Lokasi"><i class="fas fa-map-marker"></i></a> 
                                     </div>
                                 </div>
                             </div>
@@ -654,7 +501,7 @@
                     <!--box-widget-item -->
                     <div class="box-widget-item fl-wrap block_box">
                         <div class="box-widget-item-header">
-                            <h3>Similar listings :</h3>
+                            <h3>Objek Wisata Terdekat</h3>
                         </div>
                         <div class="box-widget  fl-wrap">
                             <div class="box-widget-content">
