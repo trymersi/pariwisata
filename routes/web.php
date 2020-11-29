@@ -27,16 +27,16 @@ Route::prefix('/')->group(function(){
         Route::get('/{id}','Frontend\RestaurantController@show');
     });
     Route::prefix('/hotel')->group(function(){
-        Route::resource('/','Frontend\ObjekWisataController');
-        Route::get('/{id}','Frontend\ObjekWisataController@show');
+        Route::resource('/','Frontend\HotelController');
+        Route::get('/{id}','Frontend\HotelController@show');
     });
     Route::prefix('/event')->group(function(){
         Route::resource('/','Frontend\ObjekWisataController');
         Route::get('/{id}','Frontend\ObjekWisataController@show');
     });
     Route::prefix('/tempat-ibadah')->group(function(){
-        Route::resource('/','Frontend\ObjekWisataController');
-        Route::get('/{id}','Frontend\ObjekWisataController@show');
+        Route::resource('/','Frontend\TempatIbadahController');
+        Route::get('/{id}','Frontend\TempatIbadahController@show');
     });
 
 });

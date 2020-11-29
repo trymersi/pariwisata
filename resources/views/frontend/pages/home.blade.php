@@ -147,10 +147,10 @@
             <h4 class="hero-categories_title">Just looking around ? Use quick search by category :</h4>
             <ul class="no-list-style">
                 <li><a href="{{ url('/objek-wisata') }}"><i class="fas fa-map-marked-alt"></i><span>Objek Wisata</span></a></li>
-                <li><a href="listing.html"><i class="far fa-bed"></i><span>Hotel</span></a></li>
-                <li><a href="listing.html"><i class="fas fa-utensils"></i><span>Restoran</span></a></li>
-                <li><a href="listing.html"><i class="fas fa-mosque"></i><span>Tempat Ibadah</span></a></li>
-                <li><a href="listing.html"><i class="far fa-cocktail"></i><span>Event</span></a></li>
+                <li><a href="{{ url('/hotel') }}"><i class="far fa-bed"></i><span>Hotel</span></a></li>
+                <li><a href="{{ url('/restoran') }}"><i class="fas fa-utensils"></i><span>Restoran</span></a></li>
+                <li><a href="{{ url('/tempat-ibadah') }}"><i class="fas fa-mosque"></i><span>Tempat Ibadah</span></a></li>
+                <li><a href="{{ url('/event') }}"><i class="far fa-cocktail"></i><span>Event</span></a></li>
             </ul>
         </div>
     </div>

@@ -3453,6 +3453,9 @@ section.gray-section .section-separator {
 .map-popup-location-category.gym-cat:after  {
 	content: "\f3c5";
 }
+.map-popup-location-category.mesjid-cat:after  {
+	content: "\f3c5";
+}
 .map-popup-location-category.event-cat:after  {
 	content: "\f561";
 }

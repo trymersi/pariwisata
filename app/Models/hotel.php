@@ -40,6 +40,7 @@ class hotel extends Model
             ->leftJoin('objek_wisatas','objek_wisatas.id','hotels.objek_wisata_id')
             ->select(
                 'kabupatens.nama as nama_kabupaten',
+                'kabupatens.gambar as gambar_kabupaten',
                 'objek_wisatas.nama as nama_objek_wisata',
                 'objek_wisatas.gambar_header',
                 'hotels.nama',
@@ -49,6 +50,8 @@ class hotel extends Model
                 'hotels.id',
                 'hotels.alamat',
                 'hotels.status',
+                'hotels.latitude',
+                'hotels.longitude',
             )
             ->where('hotels.status',3)
             ->orderBy('hotels.updated_at','desc')
@@ -80,6 +83,36 @@ class hotel extends Model
         return $get;
     }
 
+    public function SearchHotel($kab=false,$kw)
+    {
+        $data = $this->leftJoin('kabupatens','kabupatens.id','hotels.kabupaten_id')
+            ->leftJoin('objek_wisatas','objek_wisatas.id','hotels.objek_wisata_id')
+            ->select(
+                'kabupatens.nama as nama_kabupaten',
+                'kabupatens.gambar as gambar_kabupaten',
+                'objek_wisatas.nama as nama_objek_wisata',
+                'objek_wisatas.gambar_header',
+                'hotels.nama',
+                'hotels.deskripsi',
+                'hotels.gambar',
+                'hotels.jenis',
+                'hotels.id',
+                'hotels.alamat',
+                'hotels.status',
+                'hotels.latitude',
+                'hotels.longitude',
+            );
+            if($kab):
+                $data = $data->where('hotels.kabupaten_id',$kab);
+            endif;
+            if($kw != ''):
+                $data = $data->where('hotels.nama','LIKE','%'.$kw.'%');
+            endif;
+            $data = $data->where('hotels.status',3)
+            ->orderBy('hotels.updated_at','desc')
+            ->get();
+        return $data;
+    }
     
 
 

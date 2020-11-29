@@ -39,6 +39,7 @@ class tempatIbadah extends Model
             ->leftJoin('objek_wisatas','objek_wisatas.id','tempat_ibadahs.objek_wisata_id')
             ->select(
                 'kabupatens.nama as nama_kabupaten',
+                'kabupatens.gambar as gambar_kabupaten',
                 'objek_wisatas.nama as nama_objek_wisata',
                 'objek_wisatas.gambar_header',
                 'tempat_ibadahs.nama',
@@ -46,7 +47,10 @@ class tempatIbadah extends Model
                 'tempat_ibadahs.gambar',
                 'tempat_ibadahs.alamat',
                 'tempat_ibadahs.status',
-                'tempat_ibadahs.id'
+                'tempat_ibadahs.slug',
+                'tempat_ibadahs.id',
+                'tempat_ibadahs.longitude',
+                'tempat_ibadahs.latitude',
             )
             ->where('tempat_ibadahs.status',3)
             ->orderBy('tempat_ibadahs.updated_at','desc')
@@ -75,5 +79,37 @@ class tempatIbadah extends Model
             ->orderBy('tempat_ibadahs.updated_at','desc')
             ->get();
         return $get;
+    }
+
+    public function SearchTempatIbadah($kab=false,$kw)
+    {
+        $data = $this->leftJoin('kabupatens','kabupatens.id','tempat_ibadahs.kabupaten_id')
+            ->leftJoin('objek_wisatas','objek_wisatas.id','tempat_ibadahs.objek_wisata_id')
+            ->select(
+                'kabupatens.nama as nama_kabupaten',
+                'kabupatens.gambar as gambar_kabupaten',
+                'objek_wisatas.nama as nama_objek_wisata',
+                'objek_wisatas.gambar_header',
+                'tempat_ibadahs.nama',
+                'tempat_ibadahs.agama',
+                'tempat_ibadahs.gambar',
+                'tempat_ibadahs.alamat',
+                'tempat_ibadahs.status',
+                'tempat_ibadahs.slug',
+                'tempat_ibadahs.id',
+                'tempat_ibadahs.longitude',
+                'tempat_ibadahs.latitude',
+                
+            );
+            if($kab):
+                $data = $data->where('tempat_ibadahs.kabupaten_id',$kab);
+            endif;
+            if($kw != ''):
+                $data = $data->where('tempat_ibadahs.nama','LIKE','%'.$kw.'%');
+            endif;
+            $data = $data->where('tempat_ibadahs.status',3)
+            ->orderBy('tempat_ibadahs.updated_at','desc')
+            ->get();
+        return $data;
     }
 }
