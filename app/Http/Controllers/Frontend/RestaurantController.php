@@ -89,7 +89,7 @@ class RestaurantController extends Controller
             $kw = $request->keyword;
         }
         
-        $this->data['objek_wisata'] = $this->objekWisata->SearchObjekWisata($request->kabupaten,$request->keyword);
+        $this->data['restoran'] = $this->restaurantClass->SearchRestaurant($request->kabupaten,$request->keyword);
         $this->data['pencarian'] = $kw;
         if($request->kabupaten != null):
         $kabupaten = $this->kabupaten->find($request->kabupaten);
@@ -97,7 +97,7 @@ class RestaurantController extends Controller
         else:
             $this->data['pencarian_kabupaten'] = '-';
         endif;
-        return view('frontend.pages.objek-wisata.index',$this->data);
+        return view('frontend.pages.restaurant.index',$this->data);
     }
 
     /**

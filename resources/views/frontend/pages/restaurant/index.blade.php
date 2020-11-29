@@ -71,7 +71,7 @@
                             <div class="fl-wrap">
                                 <div class="row">
                                     <!-- listsearch-input-item-->
-                                    <form method="post" action="{{ action('Frontend\ObjekWisataController@store') }}">
+                                    <form method="post" action="{{ action('Frontend\RestaurantController@store') }}">
                                         @csrf
                                     <div class="col-md-4">
                                         <div class="listsearch-input-item">

@@ -80,10 +80,44 @@ class restaurant extends Model
                 'restaurants.alamat',
                 'restaurants.id'
             )
+            
             ->where('restaurants.status',3)
             ->where('restaurants.kabupaten_id',$id)
             ->orderBy('restaurants.updated_at','desc')
             ->get();
         return $get;
+    }
+
+    public function SearchRestaurant($kab=false,$kw)
+    {
+        $data = $this->leftJoin('kabupatens','kabupatens.id','restaurants.kabupaten_id')
+            ->leftJoin('objek_wisatas','objek_wisatas.id','restaurants.objek_wisata_id')
+            ->select(
+                'kabupatens.nama as nama_kabupaten',
+                'kabupatens.gambar as gambar_kabupaten',
+                'objek_wisatas.nama as nama_objek_wisata',
+                'objek_wisatas.gambar_header',
+                'restaurants.nama',
+                'restaurants.deskripsi',
+                'restaurants.gambar',
+                'restaurants.nomor_kontak',
+                'restaurants.halal',
+                'restaurants.status',
+                'restaurants.longitude',
+                'restaurants.latitude',
+                'restaurants.alamat',
+                'restaurants.id',
+                'restaurants.slug',
+            );
+            if($kab):
+                $data = $data->where('restaurants.kabupaten_id',$kab);
+            endif;
+            if($kw != ''):
+                $data = $data->where('restaurants.nama','LIKE','%'.$kw.'%');
+            endif;
+            $data = $data->where('restaurants.status',3)
+            ->orderBy('restaurants.updated_at','desc')
+            ->get();
+        return $data;
     }
 }
