@@ -21,6 +21,7 @@ Route::prefix('/')->group(function(){
     Route::prefix('/objek-wisata')->group(function(){
         Route::resource('/','Frontend\ObjekWisataController');
         Route::get('/{id}','Frontend\ObjekWisataController@show');
+        Route::post('/rating','Frontend\ObjekWisataController@rating');
     });
     Route::prefix('/restoran')->group(function(){
         Route::resource('/','Frontend\RestaurantController');

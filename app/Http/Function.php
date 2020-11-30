@@ -553,3 +553,16 @@ function getGambarRestoran($id)
     }
     return $ar;
 }
+
+function hitungUlasan($ar)
+{
+    $i = 0;
+    $bintang = 0;
+    foreach($ar as $key)
+    {
+        $bintang = $bintang + $key->rating;
+        $i++;
+    }
+    
+    return ceil($bintang/$i);
+}

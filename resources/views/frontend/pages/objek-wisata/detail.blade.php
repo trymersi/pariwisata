@@ -236,15 +236,15 @@
                         <!-- list-single-main-item -->   
                         <div class="list-single-main-item fl-wrap block_box" id="sec5">
                             <div class="list-single-main-item-title">
-                                <h3>Ulasan -  <span> 2 </span></h3>
+                                <h3>Ulasan -  <span> {{ count($ulasan) }} </span></h3>
                             </div>
                             <!--reviews-score-wrap-->   
                             <div class="reviews-score-wrap fl-wrap">
                                 <div class="review-score-total">
                                     <span class="review-score-total-item">
-                                    4.1
+                                    {{ hitungUlasan($ulasan) }}
                                     </span>
-                                    <div class="listing-rating card-popup-rainingvis" data-starrating2="5"></div>
+                                    <div class="listing-rating card-popup-rainingvis" data-starrating2="{{ hitungUlasan($ulasan) }}"></div>
                                 </div>
                                 <div class="review-score-detail">
                                     <!-- review-score-detail-list-->
@@ -260,29 +260,17 @@
                                         <!-- rate item end-->
                                         <!-- rate item-->
                                         <div class="rate-item">
-                                            <div class="rate-item-title"><span>Location</span></div>
-                                            <div class="rate-item-bg" data-percent="90%">
-                                                <div class="rate-item-line gradient-bg"></div>
-                                            </div>
-                                            <div class="rate-item-percent">4.0</div>
+                                            
                                         </div>
                                         <!-- rate item end-->                                                        
                                         <!-- rate item-->
                                         <div class="rate-item">
-                                            <div class="rate-item-title"><span>Price</span></div>
-                                            <div class="rate-item-bg" data-percent="60%">
-                                                <div class="rate-item-line gradient-bg"></div>
-                                            </div>
-                                            <div class="rate-item-percent">3.0</div>
+                                           
                                         </div>
                                         <!-- rate item end-->  
                                         <!-- rate item-->
                                         <div class="rate-item">
-                                            <div class="rate-item-title"><span>Service</span></div>
-                                            <div class="rate-item-bg" data-percent="80%">
-                                                <div class="rate-item-line gradient-bg"></div>
-                                            </div>
-                                            <div class="rate-item-percent">4.0</div>
+                                            <br>
                                         </div>
                                         <!-- rate item end--> 
                                     </div>
@@ -293,51 +281,28 @@
                             <div class="list-single-main-item_content fl-wrap">
                                 <div class="reviews-comments-wrap">
                                     <!-- reviews-comments-item -->  
+                                    @foreach($ulasan as $item)
                                     <div class="reviews-comments-item">
                                         <div class="review-comments-avatar">
-                                            <img src="images/avatar/1.jpg" alt=""> 
+                                            <img src="{{ asset('assets/frontend/images/avatar/1.jpg') }}" alt=""> 
                                         </div>
                                         <div class="reviews-comments-item-text fl-wrap">
                                             <div class="reviews-comments-header fl-wrap">
-                                                <h4><a href="#">Liza Rose</a></h4>
+                                                <h4><a href="#">{{ $item->nama }}</a></h4>
                                                 <div class="review-score-user">
                                                     <span class="review-score-user_item">4.2</span>
                                                     <div class="listing-rating card-popup-rainingvis" data-starrating2="4"></div>
                                                 </div>
                                             </div>
-                                            <p>" Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. "</p>
+                                            <p>{{ $item->ulasan }}</p>
                                             <div class="reviews-comments-item-footer fl-wrap">
-                                                <div class="reviews-comments-item-date"><span><i class="far fa-calendar-check"></i>12 April 2018</span></div>
-                                                <a href="#" class="rate-review"><i class="fal fa-thumbs-up"></i>  Helpful Review  <span>2</span> </a>
+                                                <div class="reviews-comments-item-date"><span><i class="far fa-calendar-check"></i>{{ tgl_indo($item->created_at) }}</span></div>
+                                                
                                             </div>
                                         </div>
                                     </div>
                                     <!--reviews-comments-item end--> 
-                                    <!-- reviews-comments-item -->  
-                                    <div class="reviews-comments-item">
-                                        <div class="review-comments-avatar">
-                                            <img src="images/avatar/1.jpg" alt=""> 
-                                        </div>
-                                        <div class="reviews-comments-item-text fl-wrap">
-                                            <div class="reviews-comments-header fl-wrap">
-                                                <h4><a href="#">Adam Koncy</a></h4>
-                                                <div class="review-score-user">
-                                                    <span class="review-score-user_item">5.0</span>
-                                                    <div class="listing-rating card-popup-rainingvis" data-starrating2="5"></div>
-                                                </div>
-                                            </div>
-                                            <p>" Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc posuere convallis purus non cursus. Cras metus neque, gravida sodales massa ut. "</p>
-                                            <div class="review-images ">
-                                                <a href="images/all/1.jpg" class="image-popup"><img src="images/all/1.jpg" alt=""></a>
-                                                <a href="images/all/1.jpg" class="image-popup"><img src="images/all/1.jpg" alt=""></a>
-                                            </div>
-                                            <div class="reviews-comments-item-footer fl-wrap">
-                                                <div class="reviews-comments-item-date"><span><i class="far fa-calendar-check"></i>03 December 2017</span></div>
-                                                <a href="#" class="rate-review"><i class="fal fa-thumbs-up"></i>  Helpful Review  <span>4</span> </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--reviews-comments-item end-->                                                                  
+                                    @endforeach                                           
                                 </div>
                             </div>
                         </div>
@@ -350,65 +315,42 @@
                             <!-- Add Review Box -->
                             <div id="add-review" class="add-review-box">
                                 <!-- Review Comment -->
-                                <form id="add-comment" class="add-comment  custom-form" name="rangeCalc" >
+                                <form method="post" action="{{ action('Frontend\ObjekWisataController@rating') }}" class="add-comment  custom-form" name="rangeCalc" >
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $objek_wisata->id }}">
+                                    <input type="hidden" name="slug" value="{{ $objek_wisata->slug }}">
                                     <fieldset>
                                         <div class="review-score-form fl-wrap">
                                             <div class="review-range-container">
                                                 <!-- review-range-item-->
                                                 <div class="review-range-item">
-                                                    <div class="range-slider-title">Cleanliness</div>
+                                                    <div class="range-slider-title">Rating Kamu</div>
                                                     <div class="range-slider-wrap ">
                                                         <input type="text" class="rate-range" data-min="0" data-max="5"  name="rgcl"  data-step="1" value="4">
                                                     </div>
                                                 </div>
                                                 <!-- review-range-item end --> 
-                                                <!-- review-range-item-->
-                                                <div class="review-range-item">
-                                                    <div class="range-slider-title">Comfort</div>
-                                                    <div class="range-slider-wrap ">
-                                                        <input type="text" class="rate-range" data-min="0" data-max="5"  name="rgcl"  data-step="1"  value="1">
-                                                    </div>
-                                                </div>
-                                                <!-- review-range-item end --> 
-                                                <!-- review-range-item-->
-                                                <div class="review-range-item">
-                                                    <div class="range-slider-title">Staf</div>
-                                                    <div class="range-slider-wrap ">
-                                                        <input type="text" class="rate-range" data-min="0" data-max="5"  name="rgcl"  data-step="1" value="5" >
-                                                    </div>
-                                                </div>
-                                                <!-- review-range-item end --> 
-                                                <!-- review-range-item-->
-                                                <div class="review-range-item">
-                                                    <div class="range-slider-title">Facilities</div>
-                                                    <div class="range-slider-wrap">
-                                                        <input type="text" class="rate-range" data-min="0" data-max="5"  name="rgcl"  data-step="1" value="3">
-                                                    </div>
-                                                </div>
-                                                <!-- review-range-item end -->                                     
+                                                                                  
                                             </div>
                                             <div class="review-total">
                                                 <span><input type="text" name="rg_total"   data-form="AVG({rgcl})" value="0"></span>    
-                                                <strong>Your Score</strong>
+                                                <strong>Rating Kamu</strong>
                                             </div>
                                         </div>
                                         <div class="list-single-main-item_content fl-wrap">
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <label><i class="fal fa-user"></i></label>
-                                                    <input type="text" placeholder="Nama *" value=""/>
+                                                    <input type="text" name="nama" placeholder="Nama *" value="{{ old('nama') }}"/>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label><i class="fal fa-envelope"></i>  </label>
-                                                    <input type="text" placeholder="Email *" value=""/>
+                                                    <input type="text" name="email" placeholder="Email *" value="{{ old('email') }}"/>
                                                 </div>
                                             </div>
-                                            <textarea cols="40" rows="3" placeholder="Ulasan:"></textarea>
+                                            <textarea cols="40" rows="3" name="ulasan" placeholder="Ulasan:">{{ old('ulasan') }}</textarea>
                                             <div class="clearfix"></div>
-                                            <div class="photoUpload">
-                                                <span><i class="fal fa-image"></i> <strong>Add Photos</strong></span>
-                                                <input type="file" class="upload" multiple>
-                                            </div>
+                                            
                                             <div class="clearfix"></div>
                                             <button class="btn  color2-bg  float-btn">Berikan Ulasan <i class="fal fa-paper-plane"></i></button>
                                         </div>

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect; 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\TempatIbadah;
@@ -13,6 +15,7 @@ use App\Models\Cindramata;
 use App\Models\Setting;
 use App\Models\Hotel;
 use App\Models\Event;
+use App\Models\ObjekWisataReview;
 class ObjekWisataController extends Controller
 {
     private $data;
@@ -25,6 +28,7 @@ class ObjekWisataController extends Controller
     private $tempatIbadahClass;
     private $linkTerkait;
     private $cindramata;
+    private $review;
     
     /**
      * Display a listing of the resource.
@@ -44,6 +48,7 @@ class ObjekWisataController extends Controller
         $this->tempatIbadahClass = new TempatIbadah;
         $this->linkTerkait = new LinkTerkait;
         $this->cindramata = new Cindramata;
+        $this->review = new ObjekWisataReview;
         
         $this->data = [
             'page_name' => 'Destinasi Riau',
@@ -114,6 +119,7 @@ class ObjekWisataController extends Controller
         $this->data['galeri'] = $this->objekWisata->getGaleri($objekWisata->id);
         $this->data['jenis'] = jenisWisata($objekWisata->jenis);
         $this->data['fasilitas'] = $this->objekWisata->getFasilitas($objekWisata->id);
+        $this->data['ulasan'] = $this->review->orderBy('id','desc')->get();
         // dd($this->data);
         return view('frontend.pages.objek-wisata.detail',$this->data);
     }
@@ -150,5 +156,26 @@ class ObjekWisataController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function rating(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required',
+            'email' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Toastr::error('Terjadi Kesalahan Saat Menyimpan Data', 'Gagal', ["positionClass" => "toast-bottom-right"]);
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
+        $this->review->objek_wisata_id = $request->id;
+        $this->review->rating = $request->rg_total;
+        $this->review->nama = $request->nama;
+        $this->review->email = $request->email;
+        $this->review->ulasan = $request->ulasan;
+        $this->review->save();
+        return redirect::to('/objek-wisata/'.$request->slug);
     }
 }
