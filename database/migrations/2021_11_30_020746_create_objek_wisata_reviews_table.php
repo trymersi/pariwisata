@@ -20,6 +20,7 @@ class CreateObjekWisataReviewsTable extends Migration
             $table->string('email')->nullable()->comment('email pemberi review');
             $table->string('rating')->nullable()->comment('rating dalam format angka 1-5');
             $table->string('ulasan')->nullable()->comment('ulasan dari pengguna');
+            $table->string('status')->default(0)->comment('0 belum di setujui 1 sudah');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('objek_wisata_id')->references('id')->on('objek_wisatas')->onDelete('set null');

@@ -309,6 +309,7 @@ class SettingController extends Controller
         $edit->meta_keywords =  meta_keywords($request->nama_website);
         $edit->latitude = $request->latitude;
         $edit->longitude = $request->longitude;
+        $edit->video_promosi = $request->video_promo;
         $edit->save();
 
         if($edit)

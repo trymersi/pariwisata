@@ -566,3 +566,17 @@ function hitungUlasan($ar)
     
     return ceil($bintang/$i);
 }
+
+function statusUlasan($kode)
+{
+    switch ($kode) 
+    {
+        case '0':
+            $status = '<span class="badge badge-info">Diusulkan</span>';
+            break;
+        case '1':
+            $status = '<span class="badge badge-warning">Publish</span>';
+            break;
+    }
+    return $status;
+}

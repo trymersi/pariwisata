@@ -13,6 +13,7 @@
         <link type="text/css" rel="stylesheet" href="{{ asset('assets/frontend/css/plugins.css') }}">
         <link type="text/css" rel="stylesheet" href="{{ asset('assets/frontend/css/style.css') }}">
         <link type="text/css" rel="stylesheet" href="{{ asset('assets/frontend/css/color.css') }}">
+        <link href="{{ asset('assets/frontend/css/instagram.css') }}" rel="stylesheet" />
         <!--=============== favicons ===============-->
         <link rel="shortcut icon" href="{{ asset('uploads/images/setting/'.$setting_website->icon) }}">
         @stack('css')
@@ -288,5 +289,27 @@
         <script src="https://maps.googleapis.com/maps/api/js?key={{ apiMap() }}&libraries=places&callback=initAutocomplete"></script>
         <script src="{{ asset('assets/frontend/js/map-single.js') }}"></script>   
         @stack('js')                       
+        <script>
+            $("#subscribe").ajaxChimp({
+        language: "id",
+        url: "http://kwst.us18.list-manage.com/subscribe/post?u=42df802713d4826a4b137cd9e&id=815d11e811"
+    });
+        </script>
+
+        <!-- BEGIN - FC Instagram - Script -->
+    <script src="{{ asset('assets/frontend/js/FCInstagram.js')}}"></script>
+    <script>
+    jQuery.fn.FCInstagram.accessData = {
+        accessToken: "IGQVJYX1FGSEJ1QVFnTU0yWEV4SlRONV9jcG9Jdkg2Mk1MUjFsdUlJcFpWZAFNmSmNXdjdNclZADeldlVXJpY2d4SnhSNXBBTTdXYk5GOUpBNW1vbTBTajFBVjdOdzlmYjRaMDg2QzFXUXJwdmZA0d0pjX21ySWF0b3Rzbm5N", // Token
+    };
+    $('#instafeed').FCInstagram({
+        max: 12,
+        autoplay: true,
+        complete: function () {
+            console.log('completed');
+        }
+    });
+    </script>
+<!-- END - FC Instagram - Script -->
     </body>
 </html>

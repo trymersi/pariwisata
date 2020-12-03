@@ -131,4 +131,9 @@ class HomeController extends Controller
     {
         //
     }
+
+    public function subscription(Request $request)
+    {
+        
+    }
 }

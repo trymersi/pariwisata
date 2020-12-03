@@ -34,6 +34,7 @@ class CreateSettingsTable extends Migration
             $table->string('slider_gambar_objek_hotel');
             $table->string('gambar_promosi_satu');
             $table->string('gambar_promosi_dua');
+            $table->string('video_promosi');
             $table->timestamps();
         });
     }

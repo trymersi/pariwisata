@@ -277,5 +277,17 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
         Route::delete('/delete/{id}','Backend\LinkTerkaitController@destroy');
     });
 
+    Route::prefix('/review')->group(function(){
+        Route::prefix('/objek-wisata')->group(function(){
+            Route::get('/','Backend\ReviewController@objekWisata');
+            Route::get('/table','Backend\ReviewController@tableObjekWisata');
+            Route::post('/simpan','Backend\ReviewController@statusObjekWisata');
+            Route::post('/setaktiv','Backend\ReviewController@setAktivObjekWisata');
+            Route::post('/setnonaktiv','Backend\ReviewController@setNonAktivObjekWisata');
+            Route::delete('/delete/{id}','Backend\ReviewController@hapusObjekWisata');
+            
+        });
+    });
+
 });
 

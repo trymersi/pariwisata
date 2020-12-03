@@ -104,6 +104,17 @@
                     </div>
 
                     <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Video Promosi</label>
+                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                            <input type="text" class="form-control" name="video_promo" value="{{ old('video_promo',$edit->video_promosi) }}" placeholder="Masukan Link promosi destinasi riau">
+                            @error('video_promo')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
+                            <p> Url / Link dari situs youtube</p>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
                         <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">
                             Lokasi <br>
                             <a id="button-cari" class="btn btn-success mt-3">

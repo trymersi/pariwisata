@@ -104,7 +104,7 @@
                         </ul>
                     </li>
                     
-                
+                    @if(Auth::user()->level == 1)
                     <li class="menu {{ ($category_name === 'Berita') ? 'active' : '' }}">
                         <a href="#Berita" data-active="{{ ($category_name === 'Berita') ? 'true' : 'false' }}" data-toggle="collapse" aria-expanded="{{ ($category_name === 'Berita') ? 'true' : 'false' }}" class="dropdown-toggle">
                             <div class="">
@@ -131,15 +131,47 @@
                            
                         </ul>
                     </li>
+                    @endif
 
+                    @if(Auth::user()->level == 1)
+                    <li class="menu {{ ($category_name === 'Review') ? 'active' : '' }}">
+                        <a href="#Review" data-active="{{ ($category_name === 'Review') ? 'true' : 'false' }}" data-toggle="collapse" aria-expanded="{{ ($category_name === 'Review') ? 'true' : 'false' }}" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                <span>Review</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                        <ul class="collapse submenu list-unstyled {{ ($category_name === 'Review') ? 'show' : '' }}" id="Review" data-parent="#accordionExample">
+                           
+                            <li class="{{ ($page_name === 'Objek Wisata') ? 'active' : '' }}">
+                                <a href="{{ url('dashboard/review/objek-wisata') }}"> Objek Wisata </a>
+                            </li>
+
+                            <li class="{{ ($page_name === 'Label') ? 'active' : '' }}">
+                                <a href="{{ url('dashboard/label') }}"> Label Berita </a>
+                            </li>
+
+                            <li class="{{ ($page_name === 'Berita') ? 'active' : '' }}">
+                                <a href="{{ url('dashboard/berita') }}"> Berita </a>
+                            </li>
+                           
+                        </ul>
+                    </li>
+                    @endif
+                    
+                    @if(Auth::user()->level == 1)
                     <li class="menu {{ ($category_name === 'Pengaturan') ? 'active' : '' }}">
                         <a href="{{ url('/dashboard/pengaturan') }}" data-active="{{ ($category_name === 'Pengaturan') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Pengaturan') ? 'true' : 'false' }}" class="dropdown-toggle">
                             <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
                                 <span>Pengaturan</span>
                             </div>
                         </a>
                     </li>
+                    @endif
 
                     <li class="menu {{ ($category_name === 'dashboard') ? 'active' : '' }}">
                         <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-toggle">

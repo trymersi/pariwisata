@@ -523,19 +523,7 @@ function initTowhub() {
         $("#message").slideUp(1500);
     });
     //   mailchimp------------------
-    $("#subscribe").ajaxChimp({
-        language: "eng",
-        url: "http://kwst.us18.list-manage.com/subscribe/post?u=42df802713d4826a4b137cd9e&id=815d11e811"
-    });
-    $.ajaxChimp.translations.eng = {
-        submit: "Submitting...",
-        0: '<i class="fa fa-check"></i> We will be in touch soon!',
-        1: '<i class="fa fa-warning"></i> You must enter a valid e-mail address.',
-        2: '<i class="fa fa-warning"></i> E-mail address is not valid.',
-        3: '<i class="fa fa-warning"></i> E-mail address is not valid.',
-        4: '<i class="fa fa-warning"></i> E-mail address is not valid.',
-        5: '<i class="fa fa-warning"></i> E-mail address is not valid.'
-    };
+    
     //   Video------------------
     var v = $(".background-youtube-wrapper").data("vid");
     var f = $(".background-youtube-wrapper").data("mv");
