@@ -37,14 +37,10 @@
                                     <label><i class="fal fa-keyboard"></i></label>
                                     <input type="text" placeholder="What are you looking for?" value=""/>
                                 </div>
-                                <div class="main-search-input-item location autocomplete-container">
-                                    <label><i class="fal fa-map-marker-check"></i></label>
-                                    <input type="text" placeholder="Location" class="autocomplete-input" id="autocompleteid" value=""/>
-                                    <a href="#"><i class="fa fa-dot-circle-o"></i></a>
-                                </div>
+                            
                                 <div class="main-search-input-item">
                                     <select data-placeholder="All Categories"  class="chosen-select" >
-                                        <option>All Categories</option>
+                                        <option>Pilih Kabupaten</option>
                                         <option>Shops</option>
                                         <option>Hotels</option>
                                         <option>Restaurants</option>
@@ -65,11 +61,11 @@
                             <div class="main-search-input fl-wrap">
                                 <div class="main-search-input-item">
                                     <label><i class="fal fa-handshake-alt"></i></label>
-                                    <input type="text" placeholder="Event Name or Place" value=""/>
+                                    <input type="text" placeholder="Nama Event" value=""/>
                                 </div>
                                 <div class="main-search-input-item">
                                     <select data-placeholder="Loaction" class="chosen-select on-radius" >
-                                        <option>All Cities</option>
+                                        <option>Semua Kabupaten</option>
                                         <option>New York</option>
                                         <option>London</option>
                                         <option>Paris</option>
@@ -100,14 +96,16 @@
                                     <label><i class="fal fa-cheeseburger"></i></label>
                                     <input type="text" placeholder="Restaurant Name" value=""/>
                                 </div>
-                                <div class="main-search-input-item clact date-container">
-                                    <span class="iconn-dec"><i class="fal fa-calendar"></i></span>
-                                    <input type="text" placeholder="Date and Time"     name="datepicker-here-time"   value=""/>
-                                    <span class="clear-singleinput"><i class="fal fa-times"></i></span>
-                                </div>
+
                                 <div class="main-search-input-item">
-                                    <label><i class="fal fa-user-friends"></i></label>
-                                    <input type="number" placeholder="Persons" value=""/>
+                                    <select data-placeholder="All Categories"  class="chosen-select" >
+                                        <option>Pilih Kabupaten</option>
+                                        <option>Shops</option>
+                                        <option>Hotels</option>
+                                        <option>Restaurants</option>
+                                        <option>Fitness</option>
+                                        <option>Events</option>
+                                    </select>
                                 </div>
                                 <button class="main-search-button color2-bg" onclick="window.location.href='listing.html'">Search <i class="far fa-search"></i></button>
                             </div>
@@ -124,14 +122,16 @@
                                     <label><i class="fal fa-cheeseburger"></i></label>
                                     <input type="text" placeholder="Hotel Name" value=""/>
                                 </div>
+
                                 <div class="main-search-input-item">
-                                    <label><i class="fal fa-user-friends"></i></label>
-                                    <input type="number" placeholder="Persons" value=""/>
-                                </div>
-                                <div class="main-search-input-item clact date-container3 daterangepicker_big">
-                                    <span class="iconn-dec"><i class="fal fa-calendar"></i></span>
-                                    <input type="text" placeholder="Date In Out"     name="dates"   value=""/>
-                                    <span class="clear-singleinput"><i class="fal fa-times"></i></span>
+                                    <select data-placeholder="All Categories"  class="chosen-select" >
+                                        <option>Pilih Kabupaten</option>
+                                        <option>Shops</option>
+                                        <option>Hotels</option>
+                                        <option>Restaurants</option>
+                                        <option>Fitness</option>
+                                        <option>Events</option>
+                                    </select>
                                 </div>
                                 <button class="main-search-button color2-bg" onclick="window.location.href='listing.html'">Search <i class="far fa-search"></i></button>
                             </div>
@@ -172,11 +172,12 @@
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                     <!--  swiper-slide  -->
+                    @foreach($objek_wisata as $wisata)
                     <div class="swiper-slide">
                         <div class="listing-slider-item fl-wrap">
                             <!-- listing-item  -->
                             <div class="listing-item listing_carditem">
-                                @foreach($objek_wisata as $wisata)
+                                
                                     <article class="geodir-category-listing fl-wrap">
                                         <div class="geodir-category-img">
                                             
@@ -186,8 +187,8 @@
                                             <div class="geodir_status_date gsd_open"><i class="fal fa-lock-open"></i>Buka</div>
                                             <div class="geodir-category-opt">
                                                 <div class="geodir-category-opt_title">
-                                                    <h4><a href="listing-single.html">The Goggi Restaurant</a></h4>
-                                                    <div class="geodir-category-location"><a href="#"><i class="fas fa-map-marker-alt"></i>  34-42 Montgomery St , NY, USA</a></div>
+                                                    <h4><a href="listing-single.html">{{ $wisata->nama }}</a></h4>
+                                                    <div class="geodir-category-location"><a href="#"><i class="fas fa-map-marker-alt"></i>  {{ $wisata->alamat }}</a></div>
                                                 </div>
                                                 <div class="listing-rating-count-wrap">
                                                     <div class="review-score">4.1</div>
@@ -206,12 +207,13 @@
                                             </div>
                                         </div>
                                     </article> 
-                                @endforeach
+                               
                                 
                             </div>
                             <!-- listing-item end -->                                                   
                         </div>
                     </div>
+                    @endforeach
                     <!--  swiper-slide end  -->  
                     
                     <!--  swiper-slide end  -->                                        
@@ -316,7 +318,7 @@
                 <!--  listing-item-grid end  -->                                                                                               
             </div>
         </div>
-        <a href="listing.html" class="btn dec_btn   color2-bg">View All Cities<i class="fal fa-arrow-alt-right"></i></a>
+        <a href="listing.html" class="btn dec_btn   color2-bg">Lihat Semua Kabupaten<i class="fal fa-arrow-alt-right"></i></a>
     </div>
 </section>
 <!--  section  -->
