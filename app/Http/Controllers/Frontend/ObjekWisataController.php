@@ -116,10 +116,13 @@ class ObjekWisataController extends Controller
         $objekWisata = $this->objekWisata->where("slug",$id)->first();
 
         $this->data['objek_wisata'] = $this->objekWisata->getDetail($objekWisata->id);
+        $this->data['terdekat'] = $this->objekWisata->getTerdekat($objekWisata->kabupaten_id, $objekWisata->id );
         $this->data['galeri'] = $this->objekWisata->getGaleri($objekWisata->id);
         $this->data['jenis'] = jenisWisata($objekWisata->jenis);
         $this->data['fasilitas'] = $this->objekWisata->getFasilitas($objekWisata->id);
+        $this->data['fasilitas'] = $this->objekWisata->getFasilitas($objekWisata->id);
         $this->data['ulasan'] = $this->review->orderBy('id','desc')->get();
+        $this->data['pengunjung'] = $this->objekWisata->getPengunjung($objekWisata->id);
         // dd($this->data);
         return view('frontend.pages.objek-wisata.detail',$this->data);
     }
