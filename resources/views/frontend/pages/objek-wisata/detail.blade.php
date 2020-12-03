@@ -38,7 +38,7 @@
 
                 <div class="list-single-stats">
                     <ul class="no-list-style">
-                        <li><span class="viewed-counter"><i class="fas fa-eye"></i> Melihat ini -  156 </span></li>
+                        <li><span class="viewed-counter"><i class="fas fa-eye"></i> {{ number_format($pengunjung->total) }} Pengunjung </span></li>
                         <li><span class="bookmark-counter"><i class="fas fa-heart"></i> Menyukai ini -  24 </span></li>
                     </ul>
                 </div>
@@ -450,46 +450,17 @@
                                 <!--widget-posts-->
                                 <div class="widget-posts  fl-wrap">
                                     <ul class="no-list-style">
+                                        @foreach ($terdekat as $terdekat)
                                         <li>
-                                            <div class="widget-posts-img"><a href="listing-single.html"><img src="images/gallery/thumbnail/1.png" alt=""></a>  
+                                            <div class="widget-posts-img"><a href="{{ url("/objek-wisata/".$terdekat->slug) }}"><img src="{{ asset('uploads/images/gambar-header-objek-wisata/'.$terdekat->gambar_header) }}" alt=""></a>  
                                             </div>
                                             <div class="widget-posts-descr">
-                                                <h4><a href="listing-single.html">Iconic Cafe</a></h4>
-                                                <div class="geodir-category-location fl-wrap"><a href="#"><i class="fas fa-map-marker-alt"></i> 40 Journal Square Plaza, NJ, USA</a></div>
-                                                <div class="widget-posts-descr-link"><a href="listing.html" >Restaurants </a>   <a href="listing.html">Cafe</a></div>
+                                                <h4><a href="listing-single.html">{{ $terdekat->nama }}</a></h4>
+                                                <div class="geodir-category-location fl-wrap"><a href="#"><i class="fas fa-map-marker-alt"></i> {{ $terdekat->nama_kabupaten }} {{ $terdekat->alamat }} {{ $terdekat->nama_kecamatan }} </a></div>
                                                 <div class="widget-posts-descr-score">4.1</div>
                                             </div>
                                         </li>
-                                        <li>
-                                            <div class="widget-posts-img"><a href="listing-single.html"><img src="images/gallery/thumbnail/1.png" alt=""></a>
-                                            </div>
-                                            <div class="widget-posts-descr">
-                                                <h4><a href="listing-single.html">MontePlaza Hotel</a></h4>
-                                                <div class="geodir-category-location fl-wrap"><a href="#"><i class="fas fa-map-marker-alt"></i> 70 Bright St New York, USA </a></div>
-                                                <div class="widget-posts-descr-link"><a href="listing.html" >Hotels </a>  </div>
-                                                <div class="widget-posts-descr-score">5.0</div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="widget-posts-img"><a href="listing-single.html"><img src="images/gallery/thumbnail/1.png" alt=""></a>
-                                            </div>
-                                            <div class="widget-posts-descr">
-                                                <h4><a href="listing-single.html">Rocko Band in Marquee Club</a></h4>
-                                                <div class="geodir-category-location fl-wrap"><a href="#"><i class="fas fa-map-marker-alt"></i>75 Prince St, NY, USA</a></div>
-                                                <div class="widget-posts-descr-link"><a href="listing.html" >Events</a> </div>
-                                                <div class="widget-posts-descr-score">4.2</div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="widget-posts-img"><a href="listing-single.html"><img src="images/gallery/thumbnail/1.png" alt=""></a>
-                                            </div>
-                                            <div class="widget-posts-descr">
-                                                <h4><a href="listing-single.html">Premium Fitness Gym</a></h4>
-                                                <div class="geodir-category-location fl-wrap"><a href="#"><i class="fas fa-map-marker-alt"></i> W 85th St, New York, USA</a></div>
-                                                <div class="widget-posts-descr-link"><a href="listing.html" >Fitness</a> <a href="listing.html" >Gym</a> </div>
-                                                <div class="widget-posts-descr-score">5.0</div>
-                                            </div>
-                                        </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                                 <!-- widget-posts end-->
@@ -498,7 +469,7 @@
                     </div>
                     <!--box-widget-item end -->      
                     <!--box-widget-item -->
-                    <div class="box-widget-item fl-wrap block_box">
+                    {{-- <div class="box-widget-item fl-wrap block_box">
                         <div class="box-widget-item-header">
                             <h3>Tags</h3>
                         </div>
@@ -514,7 +485,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <!--box-widget-item end -->       
                 </div>
                 <!-- list-single-sidebar end -->                                
