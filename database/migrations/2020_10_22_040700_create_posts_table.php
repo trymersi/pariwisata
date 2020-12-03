@@ -25,6 +25,7 @@ class CreatePostsTable extends Migration
             $table->string('meta_description');
             $table->string('meta_keyword');
             $table->integer('status')->default(0)->nullable()->comment('status pengajuan berita; 0 untuk diajukan');
+            $table->integer('dilihat')->default(0)->nullable()->comment('jumlah berapa kali artikel dilihat');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('kabupaten_id')->references('id')->on('kabupatens')->onDelete('set null');

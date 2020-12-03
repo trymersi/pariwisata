@@ -21,8 +21,8 @@
         <!-- main-search-input-tabs-->
         <div class="main-search-input-tabs  tabs-act fl-wrap">
             <ul class="tabs-menu change_bg no-list-style">
-                <li class="current"><a href="{{ url('/objek-wisata') }}" data-bgtab="{{ asset('uploads/images/setting/'.$setting->slider_gambar_objek_wisata) }}"> Objek Wisata</a></li>
-                <li><a href="#tab-inpt2" data-bgtab="{{ asset('uploads/images/setting/'.$setting->slider_gambar_event) }}"> Event</a></li>
+                <li class="current"><a href="#tab-inpt1" data-bgtab="{{ asset('uploads/images/setting/'.$setting->slider_gambar_objek_wisata) }}"> Objek Wisata</a></li>
+                <li onclick="location.href = '{{ url('/event') }}';" ><a href="#tab-inpt1" data-bgtab="{{ asset('uploads/images/setting/'.$setting->slider_gambar_event) }}"> Event</a></li>
                 <li><a href="#tab-inpt3" data-bgtab="{{ asset('uploads/images/setting/'.$setting->slider_gambar_restoran) }}"> Restoran</a></li>
                 <li><a href="#tab-inpt4" data-bgtab="{{ asset('uploads/images/setting/'.$setting->slider_gambar_hotel) }}"> Hotel</a></li>
             </ul>
@@ -31,84 +31,56 @@
                 <!--tab -->
                 <div class="tab">
                     <div id="tab-inpt1" class="tab-content first-tab">
-                        <div class="main-search-input-wrap fl-wrap">
-                            <div class="main-search-input fl-wrap">
-                                <div class="main-search-input-item">
-                                    <label><i class="fal fa-keyboard"></i></label>
-                                    <input type="text" placeholder="What are you looking for?" value=""/>
+                        <form  method="post" action="{{ action('Frontend\ObjekWisataController@store') }}">
+                            @csrf
+                            <div class="main-search-input-wrap fl-wrap">
+                                <div class="main-search-input fl-wrap">
+                                    <div class="main-search-input-item">
+                                        <label><i class="fal fa-keyboard"></i></label>
+                                        <input type="text" name="keyword" placeholder="Apa yang kamu cari ?" value=""/>
+                                    </div>
+                                
+                                    <div class="main-search-input-item">
+                                        <select data-placeholder="All Categories"  class="chosen-select" >
+                                            <option value="">Seluruh Kabupaten</option>
+                                            @foreach($list_kabupaten as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <button class="main-search-button color2-bg">Cari <i class="far fa-search"></i></button>
                                 </div>
-                            
-                                <div class="main-search-input-item">
-                                    <select data-placeholder="All Categories"  class="chosen-select" >
-                                        <option>Pilih Kabupaten</option>
-                                        <option>Shops</option>
-                                        <option>Hotels</option>
-                                        <option>Restaurants</option>
-                                        <option>Fitness</option>
-                                        <option>Events</option>
-                                    </select>
-                                </div>
-                                <button class="main-search-button color2-bg" onclick="window.location.href='listing.html'">Search <i class="far fa-search"></i></button>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <!--tab end-->
                 <!--tab -->
-                <div class="tab">
-                    <div id="tab-inpt2" class="tab-content">
-                        <div class="main-search-input-wrap fl-wrap">
-                            <div class="main-search-input fl-wrap">
-                                <div class="main-search-input-item">
-                                    <label><i class="fal fa-handshake-alt"></i></label>
-                                    <input type="text" placeholder="Nama Event" value=""/>
-                                </div>
-                                <div class="main-search-input-item">
-                                    <select data-placeholder="Loaction" class="chosen-select on-radius" >
-                                        <option>Semua Kabupaten</option>
-                                        <option>New York</option>
-                                        <option>London</option>
-                                        <option>Paris</option>
-                                        <option>Kiev</option>
-                                        <option>Moscow</option>
-                                        <option>Dubai</option>
-                                        <option>Rome</option>
-                                        <option>Beijing</option>
-                                    </select>
-                                </div>
-                                <div class="main-search-input-item clact date-container">
-                                    <span class="iconn-dec"><i class="fal fa-calendar"></i></span>
-                                    <input type="text" placeholder="Event Date"     name="datepicker-here"   value=""/>
-                                    <span class="clear-singleinput"><i class="fal fa-times"></i></span>
-                                </div>
-                                <button class="main-search-button color2-bg" onclick="window.location.href='listing.html'">Search <i class="far fa-search"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
                 <!--tab end-->                                
                 <!--tab -->
                 <div class="tab">
                     <div id="tab-inpt3" class="tab-content">
                         <div class="main-search-input-wrap fl-wrap">
-                            <div class="main-search-input fl-wrap">
-                                <div class="main-search-input-item">
-                                    <label><i class="fal fa-cheeseburger"></i></label>
-                                    <input type="text" placeholder="Restaurant Name" value=""/>
-                                </div>
+                            <form method="post" action="{{ action('Frontend\RestaurantController@store') }}">
+                            @csrf
+                                <div class="main-search-input fl-wrap">
+                                    <div class="main-search-input-item">
+                                        <label><i class="fal fa-cheeseburger"></i></label>
+                                        <input type="text" name="keyword" placeholder="Nama Restoran / Tempat Makan" value=""/>
+                                    </div>
 
-                                <div class="main-search-input-item">
-                                    <select data-placeholder="All Categories"  class="chosen-select" >
-                                        <option>Pilih Kabupaten</option>
-                                        <option>Shops</option>
-                                        <option>Hotels</option>
-                                        <option>Restaurants</option>
-                                        <option>Fitness</option>
-                                        <option>Events</option>
-                                    </select>
+                                    <div class="main-search-input-item">
+                                        <select data-placeholder="All Categories"  class="chosen-select" >
+                                            <option value="">Seluruh Kabupaten</option>
+                                                @foreach($list_kabupaten as $item)
+                                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                                @endforeach
+                                        </select>
+                                    </div>
+                                    <button class="main-search-button color2-bg" onclick="window.location.href='listing.html'">Search <i class="far fa-search"></i></button>
                                 </div>
-                                <button class="main-search-button color2-bg" onclick="window.location.href='listing.html'">Search <i class="far fa-search"></i></button>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

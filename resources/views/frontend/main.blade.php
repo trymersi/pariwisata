@@ -31,7 +31,7 @@
             <!-- header -->
             <header class="main-header">
                 <!-- logo-->
-                <a href="index.html" class="logo-holder"><img src="{{ asset('uploads/images/setting/'.$setting_website->logo_website) }}" alt=""></a>
+                <a href="{{ url('/') }}" class="logo-holder"><img src="{{ asset('uploads/images/setting/'.$setting_website->logo_website) }}" alt=""></a>
                 <!-- logo end-->
                 <!-- header-search_btn-->         
                 <div class="header-search_btn show-search-button"><i class="fal fa-search"></i><span>Search</span></div>
@@ -57,7 +57,7 @@
                                 <a href="#" class="act-link">Home <i class="fa fa-caret-down"></i></a>
                                 <!--second level -->   
                                 <ul>
-                                    <li><a href="index.html">Parallax Image</a></li>
+                                    <li><a href="{{ url('/') }}">Parallax Image</a></li>
                                   
                                 </ul>
                                 <!--second level end-->
@@ -187,7 +187,7 @@
                             <!-- footer-widget-->
                             <div class="col-md-4">
                                 <div class="footer-widget fl-wrap">
-                                    <div class="footer-logo"><a href="index.html"><img src="{{ asset('uploads/images/setting/'.$setting_website->logo_website) }}" alt=""></a></div>
+                                    <div class="footer-logo"><a href="{{ url('/') }}"><img src="{{ asset('uploads/images/setting/'.$setting_website->logo_website) }}" alt=""></a></div>
                                     <div class="footer-contacts-widget fl-wrap">
                                         <p>{{ $setting_website->keterangan_website }}</p>
                                         <ul  class="footer-contacts fl-wrap no-list-style">

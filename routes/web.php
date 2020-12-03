@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/')->group(function(){
     Route::get('/','Frontend\HomeController@index');
+
+    Route::prefix('/hubungi-kami')->group(function(){
+        Route::get('/','Frontend\HomeController@contact');
+        Route::post('/','Frontend\HomeController@contactSave');
+    });
     Route::prefix('/kabupaten')->group(function(){
         Route::get('/{id}','Frontend\KabupatenController@index');
     });
@@ -39,6 +44,15 @@ Route::prefix('/')->group(function(){
         Route::resource('/','Frontend\TempatIbadahController');
         Route::get('/{id}','Frontend\TempatIbadahController@show');
     });
+    Route::prefix('/berita')->group(function(){
+        Route::resource('/','Frontend\BeritaController');
+        Route::get('/{id}','Frontend\BeritaController@show');
+        
+    });
+    Route::prefix('/kategori')->group(function(){
+        Route::get('/{id}','Frontend\BeritaController@kategoriBerita');
+    });
+    Route::get('/pencarian-berita', ['as' => 'pencarian', 'uses' => 'Frontend\BeritaController@pencarian']);
 
 });
 
@@ -287,6 +301,11 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
             Route::delete('/delete/{id}','Backend\ReviewController@hapusObjekWisata');
             
         });
+    });
+
+    Route::prefix('/pertanyaan')->group(function(){
+        Route::get('/','Backend\ContactController@index');
+        Route::get('/table','Backend\ContactController@table');
     });
 
 });

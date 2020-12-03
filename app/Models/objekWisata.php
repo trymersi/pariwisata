@@ -49,6 +49,7 @@ class objekWisata extends Model
                 'kabupatens.nama as nama_kabupaten',
                 'kecamatans.nama as nama_kecamatan',
                 'kabupatens.gambar as gambar_kabupaten',
+                'kabupatens.slug as slug_kabupaten',
                 'objek_wisatas.id',
                 'objek_wisatas.gambar_header',
                 'objek_wisatas.nama',
@@ -76,6 +77,7 @@ class objekWisata extends Model
                 'kabupatens.nama as nama_kabupaten',
                 'kecamatans.nama as nama_kecamatan',
                 'kabupatens.gambar as gambar_kabupaten',
+                'kabupatens.slug as slug_kabupaten',
                 'objek_wisatas.id',
                 'objek_wisatas.gambar_header',
                 'objek_wisatas.nama',
@@ -163,5 +165,6 @@ class objekWisata extends Model
             ->get();
         return $get;
     }
+    
     
 }

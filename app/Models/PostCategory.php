@@ -24,4 +24,18 @@ class PostCategory extends Model
             ->get();
         return $data;
     }
+
+    public function getDataHome()
+    {
+        $data = $this->leftJoin('posts','posts.post_category_id','post_categories.id')
+            ->select(
+                DB::RAW('count(posts.id) as total_berita'),
+                'post_categories.slug',
+                'post_categories.nama',
+            )
+            ->groupBy('post_categories.id')
+            ->orderBy('post_categories.nama','asc')
+            ->get();
+        return $data;
+    }
 }

@@ -195,6 +195,15 @@ class SettingController extends Controller
             $gambar->move($destination, $filename_icon);
         }
 
+        if($request->file('logo_website'))
+        {
+            $gambar = $request->file('logo_website');
+            $ext = $gambar->getClientOriginalExtension();
+            $destination = public_path('uploads/images/setting');
+            $filename_logo_website = "logo_website.".$ext;
+            $gambar->move($destination, $filename_logo_website);
+        }
+
         if($request->file('slider_gambar_utama'))
         {
             $gambar = $request->file('slider_gambar_utama');

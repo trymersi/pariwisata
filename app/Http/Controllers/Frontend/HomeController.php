@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Frontend;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect; 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\TempatIbadah;
@@ -12,6 +13,7 @@ use App\Models\Kabupaten;
 use App\Models\Setting;
 use App\Models\Hotel;
 use App\Models\Event;
+use App\Models\Contact;
 class HomeController extends Controller
 {
     private $data;
@@ -23,6 +25,7 @@ class HomeController extends Controller
     private $eventClass;
     private $tempatIbadahClass;
     private $linkTerkait;
+    private $contact;
     
     /**
      * Display a listing of the resource.
@@ -41,6 +44,7 @@ class HomeController extends Controller
         $this->eventClass = new Event;
         $this->tempatIbadahClass = new TempatIbadah;
         $this->linkTerkait = new LinkTerkait;
+        $this->contact = new Contact;
         
         $this->data = [
             'page_name' => 'Destinasi Riau',
@@ -63,6 +67,7 @@ class HomeController extends Controller
         $this->data['total']['hotel'] = $this->hotelClass->count();
         $this->data['total']['tempat_ibadah'] = $this->tempatIbadahClass->count();
         $this->data['link_terkait'] = $this->linkTerkait->orderBy('id','desc')->get();
+        $this->data['list_kabupaten'] = $this->kabupaten->select("id",'nama')->orderBy('nama','asc')->get();
         return view('frontend.pages.home',$this->data);
     }
 
@@ -135,5 +140,31 @@ class HomeController extends Controller
     public function subscription(Request $request)
     {
         
+    }
+
+    public function contact()
+    {
+        return view('frontend.pages.contact',$this->data);
+    }
+
+    public function contactSave(Request $request)
+    {
+       
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+            'email' => 'required',
+            'comments'=> 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return Redirect::back()->with('message', 'Terjadi Kesalahan Harap Coba Kembali')->withInput();
+        }
+
+        $this->contact->nama = $request->name;
+        $this->contact->email = $request->email;
+        $this->contact->pertanyaan = $request->comments;
+        $this->contact->save();
+
+        return redirect()->back()->with('message', 'Pesan kamu telah dikirim!');
     }
 }
