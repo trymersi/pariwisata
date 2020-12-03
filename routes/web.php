@@ -308,5 +308,13 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
         Route::get('/table','Backend\ContactController@table');
     });
 
+    Route::prefix('/sadar-wisata')->group(function(){
+        Route::resource('/','Backend\SadarWisataController');
+        Route::get('/table','Backend\SadarWisataController@table');
+        Route::get('/edit/{id}','Backend\SadarWisataController@edit');
+        Route::patch('/update/{id}','Backend\SadarWisataController@update');
+        Route::delete('/delete/{id}','Backend\SadarWisataController@destroy');
+    });
+
 });
 
