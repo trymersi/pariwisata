@@ -43,18 +43,15 @@
               
                 <!-- lang-wrap end-->                                 
                 <!-- nav-button-wrap--> 
-                <div class="nav-button-wrap color-bg">
-                    <div class="nav-button">
-                        <span></span><span></span><span></span>
-                    </div>
-                </div>
+                <a href="dashboard-add-listing.html" class="add-list color-bg"><span><i class="fal fa-plus"></i></span> Mau Berkontribusi ? </a>
+                
                 <!-- nav-button-wrap end-->
                 <!--  navigation --> 
                 <div class="nav-holder main-menu">
                     <nav>
                         <ul class="no-list-style">
                             <li>
-                                <a href="#" class="act-link">Home <i class="fa fa-caret-down"></i></a>
+                                <a href="{{ url('/') }}" class="act-link">Home <i class="fa fa-caret-down"></i></a>
                                 <!--second level -->   
                                 <ul>
                                     <li><a href="{{ url('/') }}">Parallax Image</a></li>
@@ -63,43 +60,58 @@
                                 <!--second level end-->
                             </li>
                             <li>
-                                <a href="#">Listings <i class="fa fa-caret-down"></i></a>
+                                <a href="{{ url('/objek-wisata') }}">Objek Wisata</a>
+                            </li>
+                            <li>
+                                <a href="#">Amenitas <i class="fa fa-caret-down"></i></a>
                                 <!--second level -->
                                 <ul>
-                                    <li><a href="listing.html">Column map</a></li>
-
-                                    <li>
-                                        <a href="#">Single <i class="fa fa-caret-down"></i></a>
-                                        <!--third  level  -->
-                                        <ul>
-                                            <li><a href="listing-single.html">Style 1</a></li>
-
-                                        </ul>
-                                        <!--third  level end-->
-                                    </li>
+                                    <li><a href="{{ url('/hotel') }}">Hotel</a></li>
+                                    <li><a href="{{ url('/restoran') }}">Tempat Makan</a></li>
+                                    <li><a href="{{ url('/tempat-ibadah') }}">Tempat Ibadah</a></li>
+                                    <li><a href="{{ url('/sovenir') }}">Sovenir</a></li>
+                                    <li><a href="listing.html">Data Pemandu</a></li>
+                                    <li><a href="listing.html">Agen Travel</a></li>
                                 </ul>
                                 <!--second level end-->
                             </li>
                             <li>
-                                <a href="blog.html">News</a>
+                                <a href="#">Berita <i class="fa fa-caret-down"></i></a>
+                                <!--second level -->
+                                <ul>
+                                    <li><a href="{{ url('/berita') }}">Seluruh Berita</a></li>
+                                    @foreach($kategori_berita_menu as $item)
+                                    <li><a href="{{ url('/kategori/'.$item->slug) }}">{{ $item->nama }}</a></li>
+                                    @endforeach
+                                </ul>
+                                <!--second level end-->
                             </li>
                             <li>
-                                <a href="#">Pages <i class="fa fa-caret-down"></i></a>
-                                <!--second level -->   
+                                <a href="#">Kabupaten <i class="fa fa-caret-down"></i></a>
+                                <!--second level -->
                                 <ul>
-                                    <li>
-                                        <a href="#">Shop<i class="fa fa-caret-down"></i></a>
-                                        <!--third  level  -->
-                                        <ul>
-                                            <li><a href="shop.html">Products</a></li>
-
-                                        </ul>
-                                        <!--third  level end-->
-                                    </li>
-                                    <li><a href="about.html">About</a></li>
-
+                                    @foreach($kabupaten_menu as $item)
+                                    <li><a href="{{ url('/kabupaten/'.$item->slug) }}">{{ $item->nama }}</a></li>
+                                    @endforeach
                                 </ul>
-                                <!--second level end-->                                
+                                <!--second level end-->
+                            </li>
+                            <li>
+                                <a href="{{ url('/event') }}">Kalender Event</a>
+                            </li>
+                            <li>
+                                <a href="#">Informasi <i class="fa fa-caret-down"></i></a>
+                                <!--second level -->
+                                <ul>
+                                    <li><a href="{{ url('/berita') }}">Ekonomi Kreatif</a></li>
+                                    <li><a href="{{ url('/berita') }}">Desa Wisata</a></li>
+                                    <li><a href="{{ url('/berita') }}">Sadar Wisata</a></li>
+                                </ul>
+                                <!--second level end-->
+                            </li>
+
+                            <li>
+                                <a href="{{ url('/hubungi-kami') }}">Hubungi Kami <i class="fa fa-phone" aria-hidden="true"></i></a>
                             </li>
                         </ul>
                     </nav>

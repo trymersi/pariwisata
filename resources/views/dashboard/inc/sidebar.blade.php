@@ -150,12 +150,11 @@
                                 <a href="{{ url('dashboard/review/objek-wisata') }}"> Objek Wisata </a>
                             </li>
 
-                            <li class="{{ ($page_name === 'Label') ? 'active' : '' }}">
-                                <a href="{{ url('dashboard/label') }}"> Label Berita </a>
+                            <li class="{{ ($page_name === 'Objek Wisata') ? 'active' : '' }}">
+                                <a href="{{ url('dashboard/review/objek-wisata') }}"> Hotel </a>
                             </li>
-
-                            <li class="{{ ($page_name === 'Berita') ? 'active' : '' }}">
-                                <a href="{{ url('dashboard/berita') }}"> Berita </a>
+                            <li class="{{ ($page_name === 'Objek Wisata') ? 'active' : '' }}">
+                                <a href="{{ url('dashboard/review/objek-wisata') }}"> Restaurant </a>
                             </li>
                            
                         </ul>
