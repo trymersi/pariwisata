@@ -13,6 +13,8 @@ use App\Models\Cindramata;
 use App\Models\Setting;
 use App\Models\Hotel;
 use App\Models\Event;
+use App\Models\tempatibadahReview;
+
 class TempatIbadahController extends Controller
 {
     private $data;
@@ -44,6 +46,8 @@ class TempatIbadahController extends Controller
         $this->tempatIbadahClass = new TempatIbadah;
         $this->linkTerkait = new LinkTerkait;
         $this->cindramata = new Cindramata;
+        $this->review = new tempatibadahReview;
+
         
         $this->data = [
             'page_name' => 'Destinasi Riau',
@@ -108,7 +112,25 @@ class TempatIbadahController extends Controller
      */
     public function show($id)
     {
-        //
+        $tempat_ibadah = $this->tempatIbadahClass->where("slug",$id)->first();
+        // $api = apiMap();
+        // $url = "https://maps.googleapis.com/maps/api/geocode/json?key=".$api;
+        // $data = file_get_contents($url);
+        $lat = 0.5070677;
+        $long = 101.4477793;
+        $latLong = $lat.",".$long;
+        $tempat_ibadahLatLong = $tempat_ibadah->latitude.",".$tempat_ibadah->longitude;
+
+        $this->data['tempat_ibadah'] = $this->tempatIbadahClass->getDetail($tempat_ibadah->id);
+        $this->data['terdekat'] = $this->tempatIbadahClass->getTerdekat($tempat_ibadah->kabupaten_id, $tempat_ibadah->id );
+        $this->data['galeri'] = $this->tempatIbadahClass->getGaleri($tempat_ibadah->id);
+        $this->data['jenis'] = jenisWisata($tempat_ibadah->jenis);
+        $this->data['menu'] = $this->tempatIbadahClass->getMenu($tempat_ibadah->id);
+        $this->data['ulasan'] = $this->review->where('tempat_ibadah_id',$tempat_ibadah->id)->orderBy('id','desc')->get();
+        // $this->data['pengunjung'] = $this->tempatIbadahClass->getPengunjung($tempat_ibadah->id);
+        // $this->data['jarak'] = getDistance($latLong,$tempat_ibadahLatLong);
+        // dd($this->data);
+        return view('frontend.pages.tempat-ibadah.detail',$this->data);
     }
 
     /**
