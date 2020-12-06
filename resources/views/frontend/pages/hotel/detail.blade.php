@@ -101,6 +101,7 @@
                             </div>
                             <div class="list-single-main-item_content fl-wrap">
                                 <div class="listing-features fl-wrap">
+                                    <li><a href="#"></i> {!! $layanan !!}</a></li>
                                     {{-- <ul class="no-list-style">
                                         @foreach ($fasilitas as $fasilitas)   
 
@@ -379,8 +380,8 @@
                                 <div class="list-author-widget-contacts list-item-widget-contacts bwc-padside">
                                     <ul class="no-list-style">
                                         <li><span><i class="fal fa-map-marker"></i> Alamat : </span> <span>{{ $hotel->alamat }}</span></li>
-                                        <li><span><i class="fal fa-user"></i> Kontak Nama : </span> <span>{{ $hotel->kontak_nama }}</span></li>
-                                        <li><span><i class="fal fa-phone"></i> Kontak Telepon : </span> <span> {{ $hotel->kontak_telepon }}</span></li>
+                                        {{-- <li><span><i class="fal fa-user"></i> Kontak Nama : </span> <span>{{ $hotel->kontak_nama }}</span></li> --}}
+                                        {{-- <li><span><i class="fal fa-phone"></i> Kontak Telepon : </span> <span> {{ $hotel->kontak_telepon }}</span></li> --}}
                                     </ul>
                                 </div>
                                 <div class="list-widget-social bottom-bcw-box  fl-wrap">

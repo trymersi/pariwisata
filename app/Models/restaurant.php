@@ -120,4 +120,84 @@ class restaurant extends Model
             ->get();
         return $data;
     }
+
+    public function getDetail($id)
+    {
+        $get = $this->leftJoin('kabupatens','kabupatens.id','restaurants.kabupaten_id')
+            ->leftJoin('restaurant_gambars','restaurant_gambars.restaurant_id','restaurants.id')
+            ->select(
+                'kabupatens.nama as nama_kabupaten',
+                'kabupatens.gambar as gambar_kabupaten',
+                'restaurants.id',
+                'restaurants.gambar',
+                'restaurants.nama',
+                'restaurants.halal',
+                'restaurants.status',
+                'restaurants.alamat',
+                'restaurants.deskripsi',
+                'restaurants.slug',
+                'restaurants.longitude',
+                'restaurants.latitude',
+                'restaurants.nomor_kontak',
+
+            )
+            ->orderBy('restaurants.updated_at','desc')
+            ->where('restaurants.status',3)
+            ->where('restaurants.id',$id)
+            ->first();
+        return $get;
+    }
+
+    public function getTerdekat($id,$id_hotel)
+    {
+        $get = $this->leftJoin('kabupatens','kabupatens.id','restaurants.kabupaten_id')
+        ->leftJoin('restaurant_gambars','restaurant_gambars.restaurant_id','restaurants.id')
+        ->select(
+            'kabupatens.nama as nama_kabupaten',
+            'kabupatens.gambar as gambar_kabupaten',
+            'restaurants.id',
+            'restaurants.gambar',
+            'restaurants.nama',
+            'restaurants.halal',
+            'restaurants.status',
+            'restaurants.alamat',
+            'restaurants.deskripsi',
+            'restaurants.slug',
+            'restaurants.longitude',
+            'restaurants.latitude',
+        )
+        ->orderBy('restaurants.updated_at','desc')
+        ->where('restaurants.status',3)
+        ->where('restaurants.kabupaten_id',$id)
+        ->where('restaurants.id','!=',$id_hotel)
+        ->groupBy('restaurants.nama')
+        ->get();
+    return $get;
+    }
+
+    public function getGaleri($id)
+    {
+        $get = $this->leftJoin('restaurant_gambars','restaurant_gambars.restaurant_id','restaurants.id')
+            ->select(
+                'restaurant_gambars.gambar',
+            )
+            ->orderBy('restaurants.updated_at','desc')
+            ->where('restaurants.status',3)
+            ->where('restaurants.id',$id)
+            ->get();
+        return $get;
+    }
+    public function getMenu($id)
+    {
+        $get = $this->leftJoin('restaurant_menus','restaurant_menus.restaurant_id','restaurants.id')
+            ->select(
+                'restaurant_menus.nama',
+                'restaurant_menus.deskripsi',
+                'restaurant_menus.gambar',
+            )
+            ->orderBy('restaurant_menus.updated_at','desc')
+            ->where('restaurant_menus.restaurant_id',$id)
+            ->get();
+        return $get;
+    }
 }

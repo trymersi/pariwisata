@@ -31,11 +31,14 @@ Route::prefix('/')->group(function(){
     Route::prefix('/restoran')->group(function(){
         Route::resource('/','Frontend\RestaurantController');
         Route::get('/{id}','Frontend\RestaurantController@show');
+        Route::post('/rating','Frontend\RestaurantController@rating');
+
     });
     Route::prefix('/hotel')->group(function(){
         Route::resource('/','Frontend\HotelController');
         Route::get('/{id}','Frontend\HotelController@show');
         Route::post('/rating','Frontend\HotelController@rating');
+        
 
     });
     Route::prefix('/event')->group(function(){
@@ -45,6 +48,8 @@ Route::prefix('/')->group(function(){
     Route::prefix('/tempat-ibadah')->group(function(){
         Route::resource('/','Frontend\TempatIbadahController');
         Route::get('/{id}','Frontend\TempatIbadahController@show');
+        Route::post('/rating','Frontend\TempatIbadahController@rating');
+
     });
     Route::prefix('/berita')->group(function(){
         Route::resource('/','Frontend\BeritaController');
