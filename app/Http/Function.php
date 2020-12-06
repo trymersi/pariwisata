@@ -688,7 +688,8 @@ function hitungUlasan($ar)
         $i++;
     }
     
-    return ceil($bintang/$i);
+    
+    return ($i != 0) ? ceil($bintang/$i) : 0;
 }
 
 function statusUlasan($kode)

@@ -90,7 +90,7 @@ class ObjekWisataController extends Controller
             $validator = Validator::make($request->all(), [
                 'kabupaten' => 'required',
                 'kecamatan' => 'required',
-                'desa' => 'required',
+                // 'desa' => 'required',
                 'nama'=> 'required',
                 'jenis'=> 'required',
                 'gambar_header'=> 'required',
@@ -101,7 +101,7 @@ class ObjekWisataController extends Controller
         else:
             $validator = Validator::make($request->all(), [
                 'kecamatan' => 'required',
-                'desa' => 'required',
+                // 'desa' => 'required',
                 'nama'=> 'required',
                 'jenis'=> 'required',
                 'gambar_header'=> 'required',
@@ -234,7 +234,7 @@ class ObjekWisataController extends Controller
             $validator = Validator::make($request->all(), [
                 'kabupaten' => 'required',
                 'kecamatan' => 'required',
-                'desa' => 'required',
+                // 'desa' => 'required',
                 'nama'=> 'required',
                 'jenis'=> 'required',
                 'deskripsi'=> 'required',
@@ -245,7 +245,7 @@ class ObjekWisataController extends Controller
         else:
             $validator = Validator::make($request->all(), [
                 'kecamatan' => 'required',
-                'desa' => 'required',
+                // 'desa' => 'required',
                 'nama'=> 'required',
                 'jenis'=> 'required',
                 'deskripsi'=> 'required',

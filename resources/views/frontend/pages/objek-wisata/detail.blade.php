@@ -433,7 +433,7 @@
                                         </span>
                                     </div>
                                     <div class="box-widget-author-title_opt">
-                                        <a href="user-single.html" target="_blank" class="tolt green-bg" data-microtip-position="top" data-tooltip="Menuju Lokasi"><i class="fas fa-map-marker"></i></a> 
+                                        <a style="cursor: pointer;" onclick="direction()" target="_blank" class="tolt green-bg" data-microtip-position="top" data-tooltip="Menuju Lokasi"><i class="fas fa-map-marker"></i></a> 
                                     </div>
                                 </div>
                             </div>
@@ -495,3 +495,29 @@
     <div class="limit-box fl-wrap"></div>
 </div>
 @endsection
+
+@push('js')
+
+    <script>
+    function direction()
+        {
+           
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }
+
+            function showPosition(position) 
+            {
+                var latitude = position.coords.latitude;
+                    var longitude = position.coords.longitude;
+                    var url = "https://www.google.com/maps/dir/?api=1&origin="+latitude+","+longitude+"&destination={{ $objek_wisata->latitude }},{{$objek_wisata->longitude}}";
+                    window.open(url, '_blank');
+                
+            }
+        }
+    $(document).ready(function() {
+        
+        
+    });
+    </script>
+@endpush
