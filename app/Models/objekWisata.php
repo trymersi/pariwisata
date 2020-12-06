@@ -128,7 +128,6 @@ class objekWisata extends Model
                 'objek_wisata_details.kontak_nama',
                 'objek_wisatas.jarak_provinsi',
                 'objek_wisatas.jarak_kabuten',
-                'objek_wisatas.jarak_kabuten',
             )
             ->orderBy('objek_wisatas.updated_at','desc')
             ->where('objek_wisatas.status',3)

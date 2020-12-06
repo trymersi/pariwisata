@@ -326,6 +326,70 @@ function jenisWisata($ar)
     return $data;
 }
 
+function jenisHotel($ar)
+{
+    $ar = explode(',',$ar);
+    $data = '';
+    foreach($ar as $key)
+    {
+        switch ($key) 
+        {
+            case '1':
+                $status = '<span class="badge badge-success">Bintang 1</span>';
+                break;
+            case '2':
+                $status = '<span class="badge badge-success">Bintang 2</span>';
+                break;
+            case '3':
+                $status = '<span class="badge badge-success">Bintang 3</span>';
+                break;
+            case '4':
+                $status = '<span class="badge badge-success">Bintang 4</span>';
+                break;
+            case '5':
+            $status = '<span class="badge badge-success">Bintang 4</span>';
+                break;
+            default:
+                $status ="-";
+                break;
+        }
+        $data .=$status;
+    }
+    return $data;
+}
+
+function jenisLayanan($ar)
+{
+    $ar = explode(',',$ar);
+    $data = '';
+    foreach($ar as $key)
+    {
+        switch ($key) 
+        {
+            case '1':
+                $status = '<span class="badge badge-success">Elevator in Building</span>';
+                break;
+            case '2':
+                $status = '<span class="badge badge-success">Free Wi fi</span>';
+                break;
+            case '3':
+                $status = '<span class="badge badge-success">Free Parking</span>';
+                break;
+            case '4':
+                $status = '<span class="badge badge-success">Air Conditioned</span>';
+                break;
+            case '5':
+            $status = '<span class="badge badge-success">Online Ordering</span>';
+                break;
+            default:
+                $status ="-";
+                break;
+        }
+        $data .=$status;
+    }
+    return $data;
+}
+
 function listAgama()
 {
     $data =[

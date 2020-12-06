@@ -114,15 +114,22 @@ class ObjekWisataController extends Controller
     public function show($id)
     {
         $objekWisata = $this->objekWisata->where("slug",$id)->first();
+        // $api = apiMap();
+        // $url = "https://maps.googleapis.com/maps/api/geocode/json?key=".$api;
+        // $data = file_get_contents($url);
+        $lat = 0.5070677;
+        $long = 101.4477793;
+        $latLong = $lat.",".$long;
+        $WisataLatLong = $objekWisata->latitude.",".$objekWisata->longitude;
 
         $this->data['objek_wisata'] = $this->objekWisata->getDetail($objekWisata->id);
         $this->data['terdekat'] = $this->objekWisata->getTerdekat($objekWisata->kabupaten_id, $objekWisata->id );
         $this->data['galeri'] = $this->objekWisata->getGaleri($objekWisata->id);
         $this->data['jenis'] = jenisWisata($objekWisata->jenis);
         $this->data['fasilitas'] = $this->objekWisata->getFasilitas($objekWisata->id);
-        $this->data['fasilitas'] = $this->objekWisata->getFasilitas($objekWisata->id);
-        $this->data['ulasan'] = $this->review->orderBy('id','desc')->get();
+        $this->data['ulasan'] = $this->review->where('objek_wisata_id',$objekWisata->id)->orderBy('id','desc')->get();
         $this->data['pengunjung'] = $this->objekWisata->getPengunjung($objekWisata->id);
+        $this->data['jarak'] = getDistance($latLong,$WisataLatLong);
         // dd($this->data);
         return view('frontend.pages.objek-wisata.detail',$this->data);
     }
