@@ -35,6 +35,8 @@ Route::prefix('/')->group(function(){
     Route::prefix('/hotel')->group(function(){
         Route::resource('/','Frontend\HotelController');
         Route::get('/{id}','Frontend\HotelController@show');
+        Route::post('/rating','Frontend\HotelController@rating');
+
     });
     Route::prefix('/event')->group(function(){
         Route::resource('/','Frontend\EventController');

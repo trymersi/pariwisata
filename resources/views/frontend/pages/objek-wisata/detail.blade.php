@@ -34,7 +34,7 @@
                 {{-- <div class="geodir_status_date gsd_open"><i class="fal fa-lock-open"></i>{{ $objek_wisata->status }}</div> --}}
                 <div class="list-single-author"> <a href="#">Jarak dari Provinsi : {{ $objek_wisata->jarak_provinsi }} </a></div>
                 <div class="list-single-author"> <a href="#">Jarak dari Kabupaten : {{ $objek_wisata->jarak_kabuten }} </a></div>
-                <div class="list-single-author"> <a href="#">Jarak dari posisi saat ini : {{ $objek_wisata->jarak_kabuten }}  </a></div>
+                <div class="list-single-author"> <a href="#">Jarak dari posisi saat ini : {{ $jarak }}  </a></div>
 
                 <div class="list-single-stats">
                     <ul class="no-list-style">
@@ -166,7 +166,7 @@
                         </div>
                         <!-- list-single-main-item end -->          
                         <!-- list-single-facts -->                               
-                        <div class="list-single-facts fl-wrap">
+                        {{-- <div class="list-single-facts fl-wrap">
                             <div class="row">
                                 <div class="col-md-4">
                                     <!-- inline-facts -->
@@ -229,7 +229,7 @@
                                     <!-- inline-facts end -->  
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- list-single-facts end -->       
                         <!-- list-single-main-item-->   
                         <!-- list-single-main-item end -->                                     
@@ -284,7 +284,7 @@
                                     @foreach($ulasan as $item)
                                     <div class="reviews-comments-item">
                                         <div class="review-comments-avatar">
-                                            <img src="{{ asset('assets/frontend/images/avatar/1.jpg') }}" alt=""> 
+                                            <img src="{{ asset('assets/frontend/images/avatar/1.png') }}" alt=""> 
                                         </div>
                                         <div class="reviews-comments-item-text fl-wrap">
                                             <div class="reviews-comments-header fl-wrap">

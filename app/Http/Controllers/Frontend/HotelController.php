@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Frontend;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect; 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\TempatIbadah;
@@ -13,6 +14,7 @@ use App\Models\Cindramata;
 use App\Models\Setting;
 use App\Models\Hotel;
 use App\Models\Event;
+use App\Models\hotelReview;
 class HotelController extends Controller
 {
     private $data;
@@ -25,6 +27,8 @@ class HotelController extends Controller
     private $tempatIbadahClass;
     private $linkTerkait;
     private $cindramata;
+    private $review;
+
     
     /**
      * Display a listing of the resource.
@@ -44,11 +48,13 @@ class HotelController extends Controller
         $this->tempatIbadahClass = new TempatIbadah;
         $this->linkTerkait = new LinkTerkait;
         $this->cindramata = new Cindramata;
+        $this->review = new hotelReview;
+
         
         $this->data = [
             'page_name' => 'Destinasi Riau',
-            'meta_description' => 'Data objek wisata yang berada di provinsi riau',
-            'meta_keywords' => 'Objek Wisata',
+            'meta_description' => 'Data hotel yang berada di provinsi riau',
+            'meta_keywords' => 'Hotel',
             'setting' => $this->setting,
         ];
     }
@@ -108,7 +114,24 @@ class HotelController extends Controller
      */
     public function show($id)
     {
-        //
+        $hotel = $this->hotelClass->where("slug",$id)->first();
+        // $api = apiMap();
+        // $url = "https://maps.googleapis.com/maps/api/geocode/json?key=".$api;
+        // $data = file_get_contents($url);
+        $lat = 0.5070677;
+        $long = 101.4477793;
+        $latLong = $lat.",".$long;
+        $hotelLatLong = $hotel->latitude.",".$hotel->longitude;
+
+        $this->data['hotel'] = $this->hotelClass->getDetail($hotel->id);
+        $this->data['terdekat'] = $this->hotelClass->getTerdekat($hotel->kabupaten_id, $hotel->id );
+        $this->data['galeri'] = $this->hotelClass->getGaleri($hotel->id);
+        $this->data['jenis'] = jenisHotel($hotel->jenis);
+        $this->data['layanan'] = jenisLayanan($hotel->layanan);
+        $this->data['ulasan'] = $this->review->where('hotel_id',$hotel->id)->orderBy('id','desc')->get();
+        // $this->data['jarak'] = getDistance($latLong,$hotelLatLong);
+        // dd($this->data);
+        return view('frontend.pages.hotel.detail',$this->data);
     }
 
     /**
@@ -120,6 +143,26 @@ class HotelController extends Controller
     public function edit($id)
     {
         //
+    }
+    public function rating(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required',
+            'email' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Toastr::error('Terjadi Kesalahan Saat Menyimpan Data', 'Gagal', ["positionClass" => "toast-bottom-right"]);
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
+        $this->review->hotel_id = $request->id;
+        $this->review->rating = $request->rg_total;
+        $this->review->nama = $request->nama;
+        $this->review->email = $request->email;
+        $this->review->ulasan = $request->ulasan;
+        $this->review->save();
+        return redirect::to('/hotel/'.$request->slug);
     }
 
     /**

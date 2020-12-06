@@ -52,6 +52,7 @@ class hotel extends Model
                 'hotels.status',
                 'hotels.latitude',
                 'hotels.longitude',
+                'hotels.slug',
             )
             ->where('hotels.status',3)
             ->orderBy('hotels.updated_at','desc')
@@ -113,6 +114,73 @@ class hotel extends Model
             ->get();
         return $data;
     }
+
+    public function getDetail($id)
+    {
+        $get = $this->leftJoin('kabupatens','kabupatens.id','hotels.kabupaten_id')
+            ->leftJoin('hotel_gambars','hotel_gambars.hotel_id','hotels.id')
+            ->select(
+                'kabupatens.nama as nama_kabupaten',
+                'kabupatens.gambar as gambar_kabupaten',
+                'hotels.id',
+                'hotels.gambar',
+                'hotels.nama',
+                'hotels.jenis',
+                'hotels.status',
+                'hotels.alamat',
+                'hotels.deskripsi',
+                'hotels.slug',
+                'hotels.longitude',
+                'hotels.latitude',
+            )
+            ->orderBy('hotels.updated_at','desc')
+            ->where('hotels.status',3)
+            ->where('hotels.id',$id)
+            ->first();
+        return $get;
+    }
+
+    public function getTerdekat($id,$id_hotel)
+    {
+        $get = $this->leftJoin('kabupatens','kabupatens.id','hotels.kabupaten_id')
+        ->leftJoin('hotel_gambars','hotel_gambars.hotel_id','hotels.id')
+        ->select(
+            'kabupatens.nama as nama_kabupaten',
+            'kabupatens.gambar as gambar_kabupaten',
+            'hotels.id',
+            'hotels.gambar',
+            'hotels.nama',
+            'hotels.jenis',
+            'hotels.status',
+            'hotels.alamat',
+            'hotels.deskripsi',
+            'hotels.slug',
+            'hotels.longitude',
+            'hotels.latitude',
+        )
+        ->orderBy('hotels.updated_at','desc')
+        ->where('hotels.status',3)
+        ->where('hotels.kabupaten_id',$id)
+        ->where('hotels.id','!=',$id_hotel)
+        ->groupBy('hotels.nama')
+        ->get();
+    return $get;
+    }
+
+    public function getGaleri($id)
+    {
+        $get = $this->leftJoin('hotel_gambars','hotel_gambars.hotel_id','hotels.id')
+            ->select(
+                'hotel_gambars.gambar',
+            )
+            ->orderBy('hotels.updated_at','desc')
+            ->where('hotels.status',3)
+            ->where('hotels.id',$id)
+            ->get();
+        return $get;
+    }
+
+ 
     
 
 

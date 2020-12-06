@@ -155,7 +155,7 @@ class HotelController extends Controller
         $this->hotelClass->kabupaten_id = $kab_id;
         $this->hotelClass->objek_wisata_id = $request->objek_wisata;
         $this->hotelClass->nama = $request->nama;
-        $this->hotelClass->slug = $request->nama;
+        $this->hotelClass->slug = str_replace(' ','-',strtolower($request->nama));
         $this->hotelClass->deskripsi = $dom->saveHTML();
         $this->hotelClass->jenis = implode(',',$request->jenis);
         $this->hotelClass->layanan = implode(',',$request->layanan);
