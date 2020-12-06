@@ -343,5 +343,21 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
         Route::delete('/delete/{id}','Backend\TravelController@destroy');
     });
 
+    Route::prefix('/iklan')->group(function(){
+        Route::resource('/','Backend\IklanController');
+        Route::get('/table','Backend\IklanController@table');
+        Route::get('/edit/{id}','Backend\IklanController@edit');
+        Route::patch('/update/{id}','Backend\IklanController@update');
+        Route::delete('/delete/{id}','Backend\IklanController@destroy');
+    });
+
+    Route::prefix('/kunjungan')->group(function(){
+        Route::resource('/','Backend\KunjunganController');
+        Route::get('/table','Backend\KunjunganController@table');
+        Route::get('/edit/{id}','Backend\KunjunganController@edit');
+        Route::patch('/update/{id}','Backend\KunjunganController@update');
+        Route::delete('/delete/{id}','Backend\KunjunganController@destroy');
+    });
+
 });
 

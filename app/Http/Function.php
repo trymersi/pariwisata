@@ -481,6 +481,66 @@ function tgl_indo($tanggal){
 	return $pecahkan[2] . ' ' . $bulan[ (int)$pecahkan[1] ] . ' ' . $pecahkan[0];
 }
 
+function bulanIndo()
+{
+    $bulan[0]['nomor'] = 1;
+    $bulan[0]['nama_bulan'] = "Januari";
+
+    $bulan[1]['nomor'] = 2;
+    $bulan[1]['nama_bulan'] = "Februari";
+
+    $bulan[2]['nomor'] = 3;
+    $bulan[2]['nama_bulan'] = "Maret";
+
+    $bulan[3]['nomor'] = 4;
+    $bulan[3]['nama_bulan'] = "April";
+
+    $bulan[4]['nomor'] = 5;
+    $bulan[4]['nama_bulan'] = "Mei";
+
+    $bulan[5]['nomor'] = 6;
+    $bulan[5]['nama_bulan'] = "Juni";
+
+    $bulan[6]['nomor'] = 7;
+    $bulan[6]['nama_bulan'] = "Juli";
+
+    $bulan[7]['nomor'] = 8;
+    $bulan[7]['nama_bulan'] = "Agustus";
+
+    $bulan[8]['nomor'] = 9;
+    $bulan[8]['nama_bulan'] = "September";
+
+    $bulan[9]['nomor'] = 10;
+    $bulan[9]['nama_bulan'] = "Oktober";
+
+    $bulan[10]['nomor'] = 11;
+    $bulan[10]['nama_bulan'] = "November";
+
+    $bulan[11]['nomor'] = 12;
+    $bulan[11]['nama_bulan'] = "Desember";
+    
+    return $bulan;
+}
+
+function getBulan($id){
+
+	$bulan = array (
+		1 =>   'Januari',
+		'Februari',
+		'Maret',
+		'April',
+		'Mei',
+		'Juni',
+		'Juli',
+		'Agustus',
+		'September',
+		'Oktober',
+		'November',
+		'Desember'
+	);
+	return $bulan[$id];
+}
+
 function iconSosmedHome($kode)
 {
     switch($kode)
