@@ -16,7 +16,6 @@ class CreateKabupatensTable extends Migration
         Schema::create('kabupatens', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama')->nullable()->comment('nama kabupaten');
-            $table->string('slug');
             $table->text('keterangan')->nullable()->comment('keterangan kabupaten');
             $table->string('gambar')->nullable()->comment('gambar kabupaten');
             $table->string('alamat')->nullable()->comment('alamat kabupaten');
