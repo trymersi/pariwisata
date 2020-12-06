@@ -50,6 +50,16 @@
                                 <a href="{{ url('dashboard/ekraf') }}"> Ekraf </a>
                             </li>
                             @endif
+                            @if(Auth::user()->level == 1)
+                            <li class="{{ ($page_name === 'Link Terkait') ? 'active' : '' }}">
+                                <a href="{{ url('dashboard/link-terkait') }}"> Link Terkait </a>
+                            </li>
+                            @endif
+                            @if(Auth::user()->level == 1 || Auth::user()->level == 5)
+                            <li class="{{ ($page_name === 'Iklan') ? 'active' : '' }}">
+                                <a href="{{ url('dashboard/iklan') }}"> Iklan </a>
+                            </li>
+                            @endif
                         </ul>
                     </li>
 
@@ -190,6 +200,14 @@
                     </li>
                     @endif
                     @if(Auth::user()->level == 1 || Auth::user()->level == 5)
+                    <li class="menu {{ ($category_name === 'Kunjungan') ? 'active' : '' }}">
+                        <a href="{{ url('/dashboard/kunjungan') }}" data-active="{{ ($category_name === 'Kunjungan') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Kunjungan') ? 'true' : 'false' }}" class="dropdown-toggle">
+                            <div class="">
+                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                <span>Kunjungan</span>
+                            </div>
+                        </a>
+                    </li>
                     <li class="menu {{ ($category_name === 'Travel') ? 'active' : '' }}">
                         <a href="{{ url('/dashboard/travel') }}" data-active="{{ ($category_name === 'Travel') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Travel') ? 'true' : 'false' }}" class="dropdown-toggle">
                             <div class="">
