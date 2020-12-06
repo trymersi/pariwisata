@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Frontend;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Redirect;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\TempatIbadah;
@@ -13,6 +14,8 @@ use App\Models\Cindramata;
 use App\Models\Setting;
 use App\Models\Hotel;
 use App\Models\Event;
+use App\Models\RestaurantReview;
+
 class RestaurantController extends Controller
 {
     private $data;
@@ -25,6 +28,7 @@ class RestaurantController extends Controller
     private $tempatIbadahClass;
     private $linkTerkait;
     private $cindramata;
+    private $review;
     
     /**
      * Display a listing of the resource.
@@ -44,6 +48,7 @@ class RestaurantController extends Controller
         $this->tempatIbadahClass = new TempatIbadah;
         $this->linkTerkait = new LinkTerkait;
         $this->cindramata = new Cindramata;
+        $this->review = new RestaurantReview;
         
         $this->data = [
             'page_name' => 'Destinasi Riau',
@@ -108,7 +113,25 @@ class RestaurantController extends Controller
      */
     public function show($id)
     {
-        //
+        $restaurant = $this->restaurantClass->where("slug",$id)->first();
+        // $api = apiMap();
+        // $url = "https://maps.googleapis.com/maps/api/geocode/json?key=".$api;
+        // $data = file_get_contents($url);
+        $lat = 0.5070677;
+        $long = 101.4477793;
+        $latLong = $lat.",".$long;
+        $restaurantLatLong = $restaurant->latitude.",".$restaurant->longitude;
+
+        $this->data['restaurant'] = $this->restaurantClass->getDetail($restaurant->id);
+        $this->data['terdekat'] = $this->restaurantClass->getTerdekat($restaurant->kabupaten_id, $restaurant->id );
+        $this->data['galeri'] = $this->restaurantClass->getGaleri($restaurant->id);
+        $this->data['jenis'] = jenisWisata($restaurant->jenis);
+        $this->data['menu'] = $this->restaurantClass->getMenu($restaurant->id);
+        $this->data['ulasan'] = $this->review->where('restaurant_id',$restaurant->id)->orderBy('id','desc')->get();
+        // $this->data['pengunjung'] = $this->restaurantClass->getPengunjung($restaurant->id);
+        // $this->data['jarak'] = getDistance($latLong,$restaurantLatLong);
+        // dd($this->data);
+        return view('frontend.pages.restaurant.detail',$this->data);
     }
 
     /**
@@ -143,5 +166,26 @@ class RestaurantController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function rating(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required',
+            'email' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Toastr::error('Terjadi Kesalahan Saat Menyimpan Data', 'Gagal', ["positionClass" => "toast-bottom-right"]);
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
+        $this->review->restaurant_id  = $request->id;
+        $this->review->rating = $request->rg_total;
+        $this->review->nama = $request->nama;
+        $this->review->email = $request->email;
+        $this->review->ulasan = $request->ulasan;
+        $this->review->save();
+        return redirect::to('/restoran/'.$request->slug);
     }
 }

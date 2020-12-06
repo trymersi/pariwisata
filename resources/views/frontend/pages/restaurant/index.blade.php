@@ -125,10 +125,10 @@
                     <article class="geodir-category-listing fl-wrap">
                         <div class="geodir-category-img">
                             
-                            <a href="listing-single.html" class="geodir-category-img-wrap fl-wrap">
+                            <a href="{{ url('/restoran/'.$item->slug) }}" class="geodir-category-img-wrap fl-wrap">
                             <img src="{{ asset('uploads/images/gambar-header-restaurant/'.$item->gambar) }}" alt=""> 
                             </a>
-                            <div class="listing-avatar"><a href="author-single.html"><img src="{{ asset('uploads/images/foto-kabupaten/'.$item->gambar_kabupaten) }}" alt=""></a>
+                            <div class="listing-avatar"><a href="{{ url('/restoran/'.$item->slug) }}"><img src="{{ asset('uploads/images/foto-kabupaten/'.$item->gambar_kabupaten) }}" alt=""></a>
                                 <span class="avatar-tooltip"><strong>{{ $item->nama_kabupaten }}</strong></span>
                             </div>
                             <div class="geodir_status_date gsd_open"><i class="fal fa-lock-open"></i>{{ $item->nama_kabupaten }}</div>
@@ -144,7 +144,7 @@
                         <div class="geodir-category-content fl-wrap">
                             <div class="geodir-category-content-title fl-wrap">
                                 <div class="geodir-category-content-title-item">
-                                    <h3 class="title-sin_map"><a href="listing-single.html">{{ $item->nama }}</a><span class="verified-badge"><i class="fal fa-check"></i></span></h3>
+                                    <h3 class="title-sin_map"><a href="{{ url('/restoran/'.$item->slug) }}">{{ $item->nama }}</a><span class="verified-badge"><i class="fal fa-check"></i></span></h3>
                                     <div class="geodir-category-location fl-wrap"><a href="#5" class="map-item"><i class="fas fa-map-marker-alt"></i> {{ $item->alamat }}</a></div>
                                 </div>
                             </div>
