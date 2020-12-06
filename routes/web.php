@@ -364,5 +364,13 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
         Route::delete('/delete/{id}','Backend\KunjunganController@destroy');
     });
 
+    Route::prefix('/kuliner')->group(function(){
+        Route::resource('/','Backend\KulinerController');
+        Route::get('/table','Backend\KulinerController@table');
+        Route::get('/edit/{id}','Backend\KulinerController@edit');
+        Route::patch('/update/{id}','Backend\KulinerController@update');
+        Route::delete('/delete/{id}','Backend\KulinerController@destroy');
+    });
+
 });
 

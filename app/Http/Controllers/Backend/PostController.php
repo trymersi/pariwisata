@@ -91,7 +91,6 @@ class PostController extends Controller
             ]);
         else:
             $validator = Validator::make($request->all(), [
-                'kabupaten' => 'required',
                 'kategori' => 'required',
                 'label'=> 'required',
                 'judul_berita'=> 'required',
@@ -235,7 +234,6 @@ class PostController extends Controller
             ]);
         else:
             $validator = Validator::make($request->all(), [
-                'kabupaten' => 'required',
                 'kategori' => 'required',
                 'label'=> 'required',
                 'judul_berita'=> 'required',
@@ -252,7 +250,7 @@ class PostController extends Controller
         $kab_id = (Auth::user()->level != 7) ? $request->kabupaten : Auth::user()->kabupaten_id;
 
         $nama_bersih = bersih($request->judul_berita,'-');
-
+        $edit = Post::find($id);
         $content = $request->isi_berita;
         $dom = new \DomDocument();
         libxml_use_internal_errors(true);
@@ -266,7 +264,7 @@ class PostController extends Controller
             {
                 preg_match('/data:image\/(?<mime>.*?)\;/', $src, $groups);
                 $mimetype = $groups['mime'];
-                $filename = $nama_bersih.'_'.$hitungGambar;
+                $filename = $nama_bersih.'_'.$hitungGambar.'-'.rand(1,9999);
                 $filepath = public_path('uploads/images/gambar-berita').'/'.$filename.'.'.$mimetype;
                 $nama = $filename.'.'.$mimetype;
                 $image = Image::make($src)
@@ -276,24 +274,33 @@ class PostController extends Controller
                 $new_src =$truepath;
                 $img->removeAttribute('src');
                 $img->setAttribute('src', $new_src);
+                $hitungGambar++;
+                
             }
-            if($hitungGambar == 1)
-            {
-                $thumbnail = $nama;
+            if($hitungGambar == 2)
+            {   
+                if($edit->thumbnail == 'default.jpg' || $edit->thumbnail == '')
+                {
+                    $thumbnail = $nama;
+                    $thumb = isset($thumbnail) ? $thumbnail : 'default.jpg';
+                }
+                
             }
-            $hitungGambar++;
+            
         }
 
-        $thumb = isset($thumbnail) ? $thumbnail : 'default.jpg';
+        
 
-        $edit = Post::find($id);
+       
          $edit->kabupaten_id = $kab_id;
          $edit->objek_wisata_id = $request->objek_wisata;
          $edit->post_category_id = $request->kategori;
          $edit->slug = $nama_bersih;
          $edit->title = $request->judul_berita;
          $edit->isi = $dom->saveHTML();
+         if(isset($thumb)):
          $edit->thumbnail = $thumb;
+         endif;
          $edit->meta_description = meta_description($dom->saveHTML());
          $edit->meta_keyword = meta_keywords($request->judul_berita);
          $edit->status = (Auth::user()->level == 7 ) ? 1 : $request->status;        
