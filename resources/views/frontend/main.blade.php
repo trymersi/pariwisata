@@ -312,7 +312,7 @@
     <script src="{{ asset('assets/frontend/js/FCInstagram.js')}}"></script>
     <script>
     jQuery.fn.FCInstagram.accessData = {
-        accessToken: "IGQVJYX1FGSEJ1QVFnTU0yWEV4SlRONV9jcG9Jdkg2Mk1MUjFsdUlJcFpWZAFNmSmNXdjdNclZADeldlVXJpY2d4SnhSNXBBTTdXYk5GOUpBNW1vbTBTajFBVjdOdzlmYjRaMDg2QzFXUXJwdmZA0d0pjX21ySWF0b3Rzbm5N", // Token
+        accessToken: "AQDySjTmhvwWd3hJsygNQ5AVBSIQlpQAKe2fdIcj-OJ5-d-mgXuHNoA1CsnVHRJejEdgFku7ix5_1aP4BzFPEV11XeHbA1Ee7qgZojhLuBE25DXXYP5psGSgqitRG1i0G-WWchsM-zwnytONYT0nX0eaJCvJcKCcCsYrT0WMn4zc_CdTlEc522fy6Nz4yYNqxC0_kCs0tPCFs5UB3QYcGtIXHTTkImssEPqbC4QpFn8Y1g", // Token
     };
     $('#instafeed').FCInstagram({
         max: 12,

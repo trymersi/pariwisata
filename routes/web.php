@@ -318,5 +318,22 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
         Route::delete('/delete/{id}','Backend\SadarWisataController@destroy');
     });
 
+    Route::prefix('/pemandu-wisata')->group(function(){
+        Route::resource('/','Backend\PemanduController');
+        Route::get('/table','Backend\PemanduController@table');
+        Route::get('/edit/{id}','Backend\PemanduController@edit');
+        Route::patch('/update/{id}','Backend\PemanduController@update');
+        Route::delete('/delete/{id}','Backend\PemanduController@destroy');
+        Route::get('/objek-wisata/{id}','Backend\PemanduController@objekWisataByKab');
+    });
+
+    Route::prefix('/desa-wisata')->group(function(){
+        Route::resource('/','Backend\DesaWisataController');
+        Route::get('/table','Backend\DesaWisataController@table');
+        Route::get('/edit/{id}','Backend\DesaWisataController@edit');
+        Route::patch('/update/{id}','Backend\DesaWisataController@update');
+        Route::delete('/delete/{id}','Backend\DesaWisataController@destroy');
+    });
+
 });
 
