@@ -333,5 +333,13 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
         Route::delete('/delete/{id}','Backend\DesaWisataController@destroy');
     });
 
+    Route::prefix('/travel')->group(function(){
+        Route::resource('/','Backend\TravelController');
+        Route::get('/table','Backend\TravelController@table');
+        Route::get('/edit/{id}','Backend\TravelController@edit');
+        Route::patch('/update/{id}','Backend\TravelController@update');
+        Route::delete('/delete/{id}','Backend\TravelController@destroy');
+    });
+
 });
 
