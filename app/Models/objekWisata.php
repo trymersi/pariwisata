@@ -182,7 +182,6 @@ class objekWisata extends Model
                 'objek_wisata_details.kontak_nama',
                 'objek_wisatas.jarak_provinsi',
                 'objek_wisatas.jarak_kabuten',
-                'objek_wisatas.jarak_kabuten',
             )
             ->orderBy('objek_wisatas.updated_at','desc')
             ->where('objek_wisatas.status',3)
@@ -192,6 +191,78 @@ class objekWisata extends Model
             ->get();
         return $get;
     }
+
+    public function getRestoTerdekat($id,$id_wisata)
+    {
+        $get = $this->leftJoin('restaurants','restaurants.objek_wisata_id','objek_wisatas.id')
+            ->select(
+                'restaurants.nama as nama_resto',
+                'restaurants.slug as slug_resto',
+                'restaurants.alamat as alamat_resto',
+                'restaurants.gambar as gambar_resto',
+            )
+            ->orderBy('objek_wisatas.updated_at','desc')
+            ->where('objek_wisatas.status',3)
+            ->where('objek_wisatas.id',$id_wisata)
+            ->groupBy('objek_wisatas.nama')
+            ->get();
+            return $get;
+
+    }
+    public function getIbadahTerdekat($id,$id_wisata)
+    {
+        $get = $this->leftJoin('tempat_ibadahs','tempat_ibadahs.objek_wisata_id','objek_wisatas.id')
+            ->select(
+                'tempat_ibadahs.nama as nama_ibadah',
+                'tempat_ibadahs.slug as slug_ibadah',
+                'tempat_ibadahs.alamat as alamat_ibadah',
+                'tempat_ibadahs.gambar as gambar_ibadah',
+            )
+            ->orderBy('objek_wisatas.updated_at','desc')
+            ->where('objek_wisatas.status',3)
+            ->where('objek_wisatas.id',$id_wisata)
+            ->groupBy('objek_wisatas.nama')
+            ->get();
+            return $get;
+
+    }
+
+    public function getHotelTerdekat($id,$id_wisata)
+    {
+        $get = $this->leftJoin('hotels','hotels.objek_wisata_id','objek_wisatas.id')
+            ->select(
+                'hotels.nama as nama_hotel',
+                'hotels.slug as slug_hotel',
+                'hotels.alamat as alamat_hotel',
+                'hotels.gambar as gambar_hotel',
+            )
+            ->orderBy('objek_wisatas.updated_at','desc')
+            ->where('objek_wisatas.status',3)
+            ->where('objek_wisatas.id',$id_wisata)
+            ->groupBy('objek_wisatas.nama')
+            ->get();
+            return $get;
+
+    }
+
+    public function getCindraTerdekat($id,$id_wisata)
+    {
+        $get = $this->leftJoin('cindramatas','cindramatas.objek_wisata_id','objek_wisatas.id')
+            ->select(
+                'cindramatas.nama as nama_cindra',
+                'cindramatas.slug as slug_cindra',
+                'cindramatas.alamat as alamat_cindra',
+                'cindramatas.gambar as gambar_cindra',
+            )
+            ->orderBy('objek_wisatas.updated_at','desc')
+            ->where('objek_wisatas.status',3)
+            ->where('objek_wisatas.id',$id_wisata)
+            ->groupBy('objek_wisatas.nama')
+            ->get();
+            return $get;
+
+    }
+    
     public function getFasilitas($id)
     {
         $get = $this->leftJoin('objek_wisata_amenitas','objek_wisata_amenitas.objek_wisata_id','objek_wisatas.id')
@@ -202,7 +273,42 @@ class objekWisata extends Model
                 'objek_wisata_amenitas.listrik',
                 'objek_wisata_amenitas.street_furniture',
                 'objek_wisata_amenitas.money_changer',
-                'objek_wisata_amenitas.money_changer',
+                'objek_wisata_amenitas.sinyal_provider',
+            )
+            ->orderBy('objek_wisatas.updated_at','desc')
+            ->where('objek_wisatas.status',3)
+            ->where('objek_wisatas.id',$id)
+            ->get();
+        return $get;
+    }
+    public function getAksebilitas($id)
+    {
+        $get = $this->leftJoin('objek_wisata_aksebilitas','objek_wisata_aksebilitas.objek_wisata_id','objek_wisatas.id')
+            ->select(
+                'objek_wisata_aksebilitas.kondisi_jalan_menuju',
+                'objek_wisata_aksebilitas.kondisi_jalan_dalam',
+                'objek_wisata_aksebilitas.jenis_transportasi',
+                'objek_wisata_aksebilitas.biaya',
+            )
+            ->orderBy('objek_wisatas.updated_at','desc')
+            ->where('objek_wisatas.status',3)
+            ->where('objek_wisatas.id',$id)
+            ->get();
+        return $get;
+    }
+
+    public function getPlus($id)
+    {
+        $get = $this->leftJoin('objek_wisata_details','objek_wisata_details.objek_wisata_id','objek_wisatas.id')
+            ->select(
+                'objek_wisata_details.lembaga_pengelola',
+                'objek_wisata_details.jenis_pemasaran',
+                'objek_wisata_details.peraturan_uu',
+                'objek_wisata_details.stakeholders',
+                'objek_wisata_details.kontak_nama',
+                'objek_wisata_details.kontak_telepon',
+                'objek_wisata_details.harga_tiket',
+                'objek_wisata_details.halal',
             )
             ->orderBy('objek_wisatas.updated_at','desc')
             ->where('objek_wisatas.status',3)

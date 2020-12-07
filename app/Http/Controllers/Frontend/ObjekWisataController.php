@@ -123,7 +123,13 @@ class ObjekWisataController extends Controller
         $WisataLatLong = $objekWisata->latitude.",".$objekWisata->longitude;
 
         $this->data['objek_wisata'] = $this->objekWisata->getDetail($objekWisata->id);
+        $this->data['aksebilitas'] = $this->objekWisata->getAksebilitas($objekWisata->id);
+        $this->data['plus'] = $this->objekWisata->getPlus($objekWisata->id);
         $this->data['terdekat'] = $this->objekWisata->getTerdekat($objekWisata->kabupaten_id, $objekWisata->id );
+        $this->data['restoterdekat'] = $this->objekWisata->getRestoTerdekat($objekWisata->kabupaten_id, $objekWisata->id );
+        $this->data['ibadahterdekat'] = $this->objekWisata->getIbadahTerdekat($objekWisata->kabupaten_id, $objekWisata->id );
+        $this->data['hotelterdekat'] = $this->objekWisata->getHotelTerdekat($objekWisata->kabupaten_id, $objekWisata->id );
+        $this->data['cindraterdekat'] = $this->objekWisata->getCindraTerdekat($objekWisata->kabupaten_id, $objekWisata->id );
         $this->data['galeri'] = $this->objekWisata->getGaleri($objekWisata->id);
         $this->data['jenis'] = jenisWisata($objekWisata->jenis);
         $this->data['fasilitas'] = $this->objekWisata->getFasilitas($objekWisata->id);

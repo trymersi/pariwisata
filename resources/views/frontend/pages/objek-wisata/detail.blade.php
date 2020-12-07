@@ -70,7 +70,8 @@
     <section class="gray-bg no-top-padding">
         <div class="container">
             <div class="breadcrumbs inline-breadcrumbs fl-wrap">
-                <a href="#">Home</a><a href="#">Listings</a><a href="#">New York</a><span>Listing Single</span> 
+                {{-- <a href="#">Home</a><a href="#">Listings</a><a href="#">New York</a><span>Listing Single</span>  --}}
+                <a href="#">Beranda</a><a href="#">Objek Wisata</a><span>{{ $objek_wisata->nama }}</span> 
             </div>
             <div class="clearfix"></div>
             <div class="row">
@@ -95,45 +96,125 @@
                         </div>
                         <!-- list-single-main-item end -->                                               
                         <!-- list-single-main-item --> 
-                        <div class="list-single-main-item fl-wrap block_box">
+                        <div class="list-single-main-item fl-wrap block_box" id="sec4">
                             <div class="list-single-main-item-title">
-                                <h3>Fasilitas</h3>
+                                <h3>Detail Informasi Objek Wisata</h3>
                             </div>
                             <div class="list-single-main-item_content fl-wrap">
-                                <div class="listing-features fl-wrap">
-                                    <ul class="no-list-style">
-                                        @foreach ($fasilitas as $fasilitas)   
-
-                                        @if ($fasilitas->tempat_parkir == 1)
-                                        <li><a href="#"><i class="fa fa-check"></i> Fasilitas Parkir</a></li>
-                                        @endif
-                                        @if ($fasilitas->fasilitas_kesehatan == 1)
-                                        <li><a href="#"><i class="fa fa-check"></i> Fasilitas Kesehatan</a></li>
-                                        @endif
-                                        @if ($fasilitas->fasilitas_kesehatan == 1)
-                                        <li><a href="#"><i class="fa fa-check"></i> Fasilitas Perbelanjaan</a></li>
-                                        @endif
-                                        @if ($fasilitas->listrik == 1)
-                                        <li><a href="#"><i class="fa fa-check"></i> Fasilitas Listrik</a></li>
-                                        @endif
-                                        @if ($fasilitas->street_furniture == 1)
-                                        <li><a href="#"><i class="fa fa-check"></i> Fasilitas Street Furniture</a></li>
-                                        @endif
-                                        @if ($fasilitas->bengkel == 1)
-                                        <li><a href="#"><i class="fa fa-check"></i> Fasilitas Bengkel</a></li>
-                                        @endif
-                                        @if ($fasilitas->money_changer == 1)
-                                        <li><a href="#"><i class="fa fa-check"></i> Fasilitas Penukaran Uang</a></li>
-                                        @endif
-                                        @if ($fasilitas->tempat_sewa_kendaraan == 1)
-                                        <li><a href="#"><i class="fa fa-check"></i> Fasilitas Sewa Kendaraan</a></li>
-                                        @endif
-                                        @endforeach
-
-                                    </ul>
+                                <div class="menu-filters">
+                                    <a href="#" class="gallery-filter  menu-filters-active" data-filter="*">Seluruhnya</a>
+                                    <a href="#" class="gallery-filter" data-filter=".detail">Detail Informasi</a>
+                                    <a href="#" class="gallery-filter" data-filter=".amenitas">Amenitas</a>
+                                    <a href="#" class="gallery-filter" data-filter=".aksebilitas">Aksebilitas</a>
                                 </div>
+                                <div class="restor-menu-widget fl-wrap">
+                                    <!--restmenu-item-->  
+                                    @foreach ($plus as $plus)   
+
+                                    <div class="restmenu-item detail">
+                                        <a href="images/all/menu/1.jpg" class="restmenu-item-img image-popup"> 
+                                        <img src="images/all/menu/1.jpg" alt="">
+                                        </a>
+                                        <div class="restmenu-item-det">
+                                            <div class="restmenu-item-det-header fl-wrap">
+                                                <h4>Detail</h4>
+                                                {{-- <div class="restmenu-item-det-price">$28.00</div> --}}
+                                            </div>
+                                            <?php
+                                            if($plus->peraturan_uu == 1){
+                                                $status_regulasi = 'Sudah Ada';
+                                            }else {
+                                                $status_regulasi = 'Belum Ada';
+                                            }
+                                            if($plus->halal == 1){
+                                                $halal = 'Halal';
+                                            }else {
+                                                $halal = 'Tidak Halal';
+                                            }
+                                            ?>
+                                            <p>Status Regulasi : {{ $status_regulasi }}</p>
+                                            <p>Lembaga Pengelola : {{ $plus->lembaga_pengelola }}</p>
+                                            <p>Jenis Pemasaran : {{ $plus->jenis_pemasaran }}</p>
+                                            <p>Stakeholders : {{ $plus->stakeholders }}</p>
+                                            <p>Nama Kontak : {{ $plus->kontak_nama }}</p>
+                                            <p>No. Telpon : {{ $plus->kontak_telepon }}</p>
+                                            <p>Harga Tiket : {{ $plus->harga_tiket }}</p>
+                                            <p>Statu Halal : {{ $halal }}</p>
+                                        </div>
+                                    </div>
+                                    @endforeach
+
+                                    <!--restmenu-item end-->  
+                                    <!--restmenu-item-->  
+                                    @foreach ($aksebilitas as $aksebilitas)   
+                                   
+                                    <div class="restmenu-item aksebilitas">
+                                        <a href="images/all/menu/1.jpg" class="restmenu-item-img image-popup"> 
+                                        <img src="images/all/menu/1.jpg" alt="">
+                                        </a>
+                                        <div class="restmenu-item-det">
+                                            <div class="restmenu-item-det-header fl-wrap">
+                                                <h4>Aksebilitas</h4>
+                                                {{-- <div class="restmenu-item-det-price">$38.10</div> --}}
+                                            </div>
+                                            <p>Kondisi Jalan Menuju Objek Wisata : {{ $aksebilitas->kondisi_jalan_menuju }}</p>
+                                            <p>Kondisi Jalan Dalam Objek Wisata : {{ $aksebilitas->kondisi_jalan_dalam }}</p>
+                                            <p>Jenis Transportasi Menuju Objek Wisata : {{ $aksebilitas->jenis_transportasi }}</p>
+                                            <p>Biaya Masuk Objek Wisata : {{ $aksebilitas->biaya }}</p>
+                                        </div>
+                                    </div>
+                                    
+                                    @endforeach
+
+                                    @foreach ($fasilitas as $fasilitas)   
+                                    <div class="restmenu-item main amenitas">
+                                        <a href="images/all/menu/1.jpg" class="restmenu-item-img image-popup"> 
+                                        <img src="images/all/menu/1.jpg" alt="">
+                                        </a>
+                                        <div class="restmenu-item-det">
+                                            <div class="restmenu-item-det-header fl-wrap">
+                                                <h4>Amenitas</h4>
+                                                {{-- <div class="restmenu-item-det-price">$8.00</div> --}}
+                                            </div>
+                                            {{-- <p>Etiam fermentum justo nec auctor pretium.</p> --}}
+                                            @if ($fasilitas->tempat_parkir == 1)
+                                            <p><i class="fa fa-check"></i> Fasilitas Parkir</p>
+                                            @endif
+                                            @if ($fasilitas->fasilitas_kesehatan == 1)
+                                            <p><i class="fa fa-check"></i> Fasilitas Kesehatan</p>
+                                            @endif
+                                            @if ($fasilitas->fasilitas_kesehatan == 1)
+                                            <p><i class="fa fa-check"></i> Fasilitas Perbelanjaan</p>
+                                            @endif
+                                            @if ($fasilitas->listrik == 1)
+                                            <p><i class="fa fa-check"></i> Fasilitas Listrik</p>
+                                            @endif
+                                            @if ($fasilitas->street_furniture == 1)
+                                            <p><i class="fa fa-check"></i> Fasilitas Street Furniture</p>
+                                            @endif
+                                            @if ($fasilitas->bengkel == 1)
+                                            <p><i class="fa fa-check"></i> Fasilitas Bengkel</p>
+                                            @endif
+                                            @if ($fasilitas->money_changer == 1)
+                                            <p><i class="fa fa-check"></i> Fasilitas Penukaran Uang</p>
+                                            @endif
+                                            @if ($fasilitas->tempat_sewa_kendaraan == 1)
+                                            <p><i class="fa fa-check"></i> Fasilitas Sewa Kendaraan</p>
+                                            @endif
+                                            @if ($fasilitas->sinyal_provider != null)
+                                            
+                                            <p><i class="fa fa-check"></i> Sinyal Provider : {{ str_replace(",",", ",$fasilitas->sinyal_provider) }}</p>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    
+                                    @endforeach                                                
+                                </div>
+                                {{-- <a href="#" class="btn color2-bg   float-btn">Download PDF<i class="fal fa-file-pdf"></i></a> --}}
                             </div>
                         </div>
+
+
                         <!-- list-single-main-item end -->                                    
                         <!-- list-single-main-item-->   
                         <div class="list-single-main-item fl-wrap block_box" id="sec3">
@@ -455,8 +536,89 @@
                                             <div class="widget-posts-img"><a href="{{ url("/objek-wisata/".$terdekat->slug) }}"><img src="{{ asset('uploads/images/gambar-header-objek-wisata/'.$terdekat->gambar_header) }}" alt=""></a>  
                                             </div>
                                             <div class="widget-posts-descr">
-                                                <h4><a href="listing-single.html">{{ $terdekat->nama }}</a></h4>
+                                                <h4><a href="{{ url('/objek-wisata/'.$terdekat->slug) }}">{{ $terdekat->nama }}</a></h4>
                                                 <div class="geodir-category-location fl-wrap"><a href="#"><i class="fas fa-map-marker-alt"></i> {{ $terdekat->nama_kabupaten }} {{ $terdekat->alamat }} {{ $terdekat->nama_kecamatan }} </a></div>
+                                                <div class="widget-posts-descr-score">4.1</div>
+                                            </div>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <!-- widget-posts end-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box-widget-item fl-wrap block_box">
+                        <div class="box-widget-item-header">
+                            <h3>Tempat Ibadah Terdekat</h3>
+                        </div>
+                        <div class="box-widget  fl-wrap">
+                            <div class="box-widget-content">
+                                <!--widget-posts-->
+                                <div class="widget-posts  fl-wrap">
+                                    <ul class="no-list-style">
+                                        @foreach ($ibadahterdekat as $ibadahterdekat)
+                                        <li>
+                                            <div class="widget-posts-img"><a href="{{ url("/tempat-ibadah/".$ibadahterdekat->slug_ibadah) }}"><img src="{{ asset('uploads/images/gambar-header-tempat-ibadah/'.$ibadahterdekat->gambar_ibadah) }}" alt=""></a>  
+                                            </div>
+                                            <div class="widget-posts-descr">
+                                                <h4><a href="{{ url("/restoran/".$ibadahterdekat->slug_ibadah) }}">{{ $ibadahterdekat->nama_ibadah }}</a></h4>
+                                                <div class="geodir-category-location fl-wrap"><a href="#"><i class="fas fa-map-marker-alt"></i>{{ $ibadahterdekat->alamat_ibadah }}</a></div>
+                                                <div class="widget-posts-descr-score">4.1</div>
+                                            </div>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <!-- widget-posts end-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box-widget-item fl-wrap block_box">
+                        <div class="box-widget-item-header">
+                            <h3>Hotel Terdekat</h3>
+                        </div>
+                        <div class="box-widget  fl-wrap">
+                            <div class="box-widget-content">
+                                <!--widget-posts-->
+                                <div class="widget-posts  fl-wrap">
+                                    <ul class="no-list-style">
+                                        @foreach ($hotelterdekat as $hotelterdekat)
+                                        <li>
+                                            <div class="widget-posts-img"><a href="{{ url("/hotel/".$hotelterdekat->slug_hotel) }}"><img src="{{ asset('uploads/images/gambar-header-hotel/'.$hotelterdekat->gambar_hotel) }}" alt=""></a>  
+                                            </div>
+                                            <div class="widget-posts-descr">
+                                                <h4><a href="{{ url("/hotel/".$hotelterdekat->slug_hotel) }}">{{ $hotelterdekat->nama_hotel }}</a></h4>
+                                                <div class="geodir-category-location fl-wrap"><a href="#"><i class="fas fa-map-marker-alt"></i>{{ $hotelterdekat->alamat_hotel }}</a></div>
+                                                <div class="widget-posts-descr-score">4.1</div>
+                                            </div>
+                                        </li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <!-- widget-posts end-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="box-widget-item fl-wrap block_box">
+                        <div class="box-widget-item-header">
+                            <h3>Cindramata Terdekat</h3>
+                        </div>
+                        <div class="box-widget  fl-wrap">
+                            <div class="box-widget-content">
+                                <!--widget-posts-->
+                                <div class="widget-posts  fl-wrap">
+                                    <ul class="no-list-style">
+                                        @foreach ($cindraterdekat as $cindraterdekat)
+                                        <li>
+                                            <div class="widget-posts-img"><a href="{{ url("/sovenir/".$cindraterdekat->slug_cindra) }}"><img src="{{ asset('uploads/images/gambar-header-cindramata/'.$cindraterdekat->gambar_cindra) }}" alt=""></a>  
+                                            </div>
+                                            <div class="widget-posts-descr">
+                                                <h4><a href="{{ url("/sovenir/".$cindraterdekat->slug_cindra) }}">{{ $cindraterdekat->nama_cindra }}</a></h4>
+                                                <div class="geodir-category-location fl-wrap"><a href="#"><i class="fas fa-map-marker-alt"></i>{{ $cindraterdekat->alamat_cindra }}</a></div>
                                                 <div class="widget-posts-descr-score">4.1</div>
                                             </div>
                                         </li>

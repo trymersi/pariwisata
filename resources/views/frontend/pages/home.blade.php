@@ -16,7 +16,7 @@
             <div class="bubbles">
                 <h1>Temukan Tempat Terbaik Di Provinsi Riau</h1>
             </div>
-            <h3>Find some of the best tips from around the city from our partners and friends.</h3>
+            <h3>Temukan beberapa tempat terbaik dari sekitar kota anda.</h3>
         </div>
         <!-- main-search-input-tabs-->
         <div class="main-search-input-tabs  tabs-act fl-wrap">
@@ -116,7 +116,7 @@
         </div>
         <!-- main-search-input-tabs end-->
         <div class="hero-categories fl-wrap">
-            <h4 class="hero-categories_title">Just looking around ? Use quick search by category :</h4>
+            <h4 class="hero-categories_title">Hanya melihat-lihat? Gunakan pencarian cepat berdasarkan kategori:</h4>
             <ul class="no-list-style">
                 <li><a href="{{ url('/objek-wisata') }}"><i class="fas fa-map-marked-alt"></i><span>Objek Wisata</span></a></li>
                 <li><a href="{{ url('/hotel') }}"><i class="far fa-bed"></i><span>Hotel</span></a></li>
@@ -205,10 +205,10 @@
 <section   class="gray-bg hidden-section particles-wrapper">
     <div class="container">
         <div class="section-title">
-            <h2>Explore Best Cities</h2>
-            <div class="section-subtitle">Catalog of Categories</div>
+            <h2>Jelajahi Kota Terbaik</h2>
+            <div class="section-subtitle">Jelajahi Kota Terbaik</div>
             <span class="section-separator"></span>
-            <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus.</p>
+            <p>Temukan Kabupaten / Kota pilihan Anda</p>
         </div>
         
         <div class="listing-item-grid_container fl-wrap">
@@ -290,7 +290,7 @@
                 <!--  listing-item-grid end  -->                                                                                               
             </div>
         </div>
-        <a href="listing.html" class="btn dec_btn   color2-bg">Lihat Semua Kabupaten<i class="fal fa-arrow-alt-right"></i></a>
+        <a href="listing.html" class="btn dec_btn   color2-bg">Lihat selengkapnya<i class="fal fa-arrow-alt-right"></i></a>
     </div>
 </section>
 <!--  section  -->
@@ -356,10 +356,10 @@
 <section>
     <div class="container big-container">
         <div class="section-title">
-            <h2><span>Most Popular Palces</span></h2>
-            <div class="section-subtitle">Best Listings</div>
+            <h2><span>Tempat Paling Populer</span></h2>
+            <div class="section-subtitle">Daftar Terbaik</div>
             <span class="section-separator"></span>
-            <p>Proin dapibus nisl ornare diam varius tempus. Aenean a quam luctus, finibus tellus ut, convallis eros sollicitudin turpis.</p>
+            <p>Daftar tempat terbaik dan terpopuler pada Provinsi Riau</p>
         </div>
         <div class="listing-filters gallery-filters fl-wrap">
             <a href="#" class="gallery-filter  gallery-filter-active" data-filter="*">Semua Kategori</a>
@@ -629,7 +629,7 @@
             @endforeach
                                         
         </div>
-        <a href="listing.html" class="btn  dec_btn  color2-bg">Check Out All Listings<i class="fal fa-arrow-alt-right"></i></a>
+        <a href="listing.html" class="btn  dec_btn  color2-bg">Lihat selengkapnya<i class="fal fa-arrow-alt-right"></i></a>
     </div>
 </section>
 <!--section end-->
@@ -640,8 +640,8 @@
     <!--container-->
     <div class="container">
         <div class="video_section-title fl-wrap">
-            <h4>Aliquam erat volutpat interdum</h4>
-            <h2>Get ready to start your exciting journey. <br> Our agency will lead you through the amazing digital world</h2>
+            <h4>Video Promosi Destinasi Wisata Pemerintah Provinsi Riau</h4>
+            <h2>Bersiaplah untuk memulai perjalanan mengasyikkan Anda.<br>Website kami akan memandu Anda melewati dunia digital yang menakjubkan</h2>
         </div>
         <a href="{{ $setting->video_promosi }}" class="promo-link big_prom   image-popup"><i class="fal fa-play"></i><span>Promo Video</span></a>
     </div>
@@ -673,7 +673,7 @@
                 <div class="colomn-text  pad-top-column-text fl-wrap">
                     <div class="colomn-text-title">
                         <h3>Our App  Available Now</h3>
-                        <p>In ut odio libero, at vulputate urna. Nulla tristique mi a massa convallis cursus. Nulla eu mi magna. Etiam suscipit commodo gravida. Lorem ipsum dolor sit amet, conse ctetuer adipiscing elit.</p>
+                        <p>Website ini didukung juga dengan dua Platform Android dan IOs</p>
                         <a href="#" class=" down-btn color3-bg"><i class="fab fa-apple"></i>  Apple Store </a>
                         <a href="#" class=" down-btn color3-bg"><i class="fab fa-android"></i>  Google Play </a>
                     </div>
@@ -716,10 +716,10 @@
 <section>
     <div class="container">
         <div class="section-title">
-            <h2> Testimonilas</h2>
-            <div class="section-subtitle">Clients Reviews</div>
+            <h2> Ulasan</h2>
+            <div class="section-subtitle">Pengunjung Memberi Ulasa</div>
             <span class="section-separator"></span>
-            <p>Maecenas in pulvinar neque. Nulla finibus lobortis pulvinar. Donec a consectetur nulla.</p>
+            <p>Ulasan ini diberikan secara nyata</p>
         </div>
     </div>
     <div class="clearfix"></div>
