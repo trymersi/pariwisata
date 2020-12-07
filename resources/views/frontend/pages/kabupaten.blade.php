@@ -82,13 +82,13 @@
                                 <div class="listing-item-grid_container fl-wrap">
                                     
                                     <div class="listing-item-container init-grid-items fl-wrap nocolumn-lic">
-                                        @foreach($restoran as $item)
+                                        @foreach($objek_wisata as $item)
                                         <!-- listing-item  -->
                                         <div class="listing-item" style="height: 484.516px;">
                                             <article class="geodir-category-listing fl-wrap">
                                                 <div class="geodir-category-img">
                                                     
-                                                    <a href="listing-single.html" class="geodir-category-img-wrap fl-wrap">
+                                                    <a href="{{ url('/objek-wisata/'.$item->slug) }}" class="geodir-category-img-wrap fl-wrap">
                                                     <img src="{{ asset('uploads/images/gambar-header-objek-wisata/'.$item->gambar_header) }}" alt=""> 
                                                     </a>
                                                 
@@ -157,7 +157,7 @@
                                             <article class="geodir-category-listing fl-wrap">
                                                 <div class="geodir-category-img">
                                                     
-                                                    <a href="listing-single.html" class="geodir-category-img-wrap fl-wrap">
+                                                    <a href="{{ url('/hotel/'.$item->slug) }}" class="geodir-category-img-wrap fl-wrap">
                                                     <img src="{{ asset('uploads/images/gambar-header-hotel/'.$item->gambar) }}" alt=""> 
                                                     </a>
                                                 
@@ -225,7 +225,7 @@
                                             <article class="geodir-category-listing fl-wrap">
                                                 <div class="geodir-category-img">
                                                     
-                                                    <a href="listing-single.html" class="geodir-category-img-wrap fl-wrap">
+                                                    <a href="{{ url('/restoran/'.$item->slug) }}" class="geodir-category-img-wrap fl-wrap">
                                                     <img src="{{ asset('uploads/images/gambar-header-restaurant/'.$item->gambar) }}" alt=""> 
                                                     </a>
                                                 

@@ -74,6 +74,7 @@ class restaurant extends Model
                 'restaurants.gambar',
                 'restaurants.nomor_kontak',
                 'restaurants.halal',
+                'restaurants.slug',
                 'restaurants.status',
                 'restaurants.longitude',
                 'restaurants.latitude',

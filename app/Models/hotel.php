@@ -74,6 +74,7 @@ class hotel extends Model
                 'hotels.jenis',
                 'hotels.id',
                 'hotels.alamat',
+                'hotels.slug',
                 'hotels.status',
             )
             ->where('hotels.status',3)
