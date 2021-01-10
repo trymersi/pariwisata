@@ -30,6 +30,7 @@ class CreateObjekWisatasTable extends Migration
             $table->string('status')->default(0)->nullable()->comment('status verifikasi objek wisata; 0 untuk diajukan');
             $table->string('jarak_provinsi')->nullable()->comment('jarak provinsi ke objek wisata');
             $table->string('jarak_kabuten')->nullable()->comment('jarak kabupaten ke objek wisata');
+            $table->string('pilihan')->nullable()->comment('apakah objek wisata tersebut ditampilkan di slide');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('kabupaten_id')->references('id')->on('kabupatens')->onDelete('set null');

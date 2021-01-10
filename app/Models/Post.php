@@ -55,7 +55,7 @@ class Post extends Model
             ->groupBy('posts.id')
             ->where('posts.status',3)
             ->orderBy('posts.updated_at','desc')
-            ->paginate(10);;
+            ->paginate(10);
         return $data;
     }
 
@@ -152,6 +152,28 @@ class Post extends Model
         $data = $this->where('id','<',$id)->select('id','title','thumbnail','slug')->where('status',3)->first();
     }
 
+    public function getRelated($id_kabupaten,$id_berita)
+    {
+        $data = $this->leftJoin('kabupatens','kabupatens.id','posts.kabupaten_id')
+            ->leftJoin('objek_wisatas','objek_wisatas.id','posts.objek_wisata_id')
+            ->leftJoin('post_categories','post_categories.id','posts.post_category_id')
+            ->select(
+                'kabupatens.nama as nama_kabupaten',
+                'objek_wisatas.nama as nama_objek_wisata',
+                'post_categories.nama as nama_kategori',
+                'posts.title',
+                'posts.thumbnail',
+                'posts.updated_at',
+                'posts.id'
+            )
+            ->where('posts.kabupaten_id',$id_kabupaten)
+            ->where('posts.id','!=',$id_berita)
+            ->groupBy('posts.id')
+            ->orderBy('posts.updated_at','desc')
+            ->limit(5)
+            ->get();
+        return $data;
+    }
    
 
 

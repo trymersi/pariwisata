@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 Use DB;
 
-class objekWisata extends Model
+class ObjekWisata extends Model
 {
     use SoftDeletes;
     use HasFactory;
@@ -41,7 +41,7 @@ class objekWisata extends Model
             ->get();
     }
 
-    public function getAll()
+    public function getAll($kab=false)
     {
         $get = $this->leftJoin('kabupatens','kabupatens.id','objek_wisatas.kabupaten_id')
             ->leftJoin('kecamatans','kecamatans.id','objek_wisatas.kecamatan_id')
@@ -64,8 +64,11 @@ class objekWisata extends Model
                 'objek_wisata_details.kontak_telepon',
             )
             ->orderBy('objek_wisatas.updated_at','desc')
-            ->where('objek_wisatas.status',3)
-            ->paginate(10);
+            ->where('objek_wisatas.status',3);
+            if($kab):
+            $get = $get->where('objek_wisatas.kabupaten_id',$kab);
+            endif;
+            $get = $get->paginate(10);
         return $get;
     }
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
-class objekWisataDetail extends Model
+class ObjekWisataDetail extends Model
 {
     use HasFactory;
     use SoftDeletes;

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
-class restaurantGambar extends Model
+class RestaurantGambar extends Model
 {
     use SoftDeletes;
     use HasFactory;

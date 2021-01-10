@@ -11,8 +11,8 @@ use Illuminate\Http\Request;
 use App\Models\Hotel;
 use App\Models\Kabupaten;
 use App\Models\Kecamatan;
-use App\Models\objekWisata;
-use App\Models\hotelGambar;
+use App\Models\ObjekWisata;
+use App\Models\HotelGambar;
 use Carbon\Carbon;
 use DataTables;
 use Toastr;
@@ -40,8 +40,8 @@ class HotelController extends Controller
         $this->kabupatenClass = new Kabupaten;
         $this->kecamatanClass = new Kecamatan;
         $this->hotelClass = new Hotel;
-        $this->objekWisataClass = new objekWisata;
-        $this->hotelGambarClass = new hotelGambar;
+        $this->objekWisataClass = new ObjekWisata;
+        $this->hotelGambarClass = new HotelGambar;
         $this->sosialMediaClass = new SosialMedia;
 
         $this->data = [

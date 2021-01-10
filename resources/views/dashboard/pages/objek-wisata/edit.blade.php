@@ -154,6 +154,18 @@
                         </div>
                     </div>
 
+                    <div class="form-group row">
+                        <div class="col-sm-2">Objek Wisata Pilihan</div>
+                        <div class="col-sm-10">
+                            <div class="form-check pl-0">
+                                <div class="custom-control custom-checkbox checkbox-info">
+                                    <input type="checkbox" name="pilihan" @if($edit->pilihan == 1) checked="checked" @endif class="custom-control-input" id="pilihan">
+                                    <label class="custom-control-label" for="pilihan">Apakah Objek Wisata ini ditampilkan pada slide aplikasi ?</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     @if(Auth::user()->level == 1 || Auth::user()->level == 2)
                         <div class="form-group row mb-4">
                             <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Status</label>

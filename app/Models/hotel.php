@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use DB;
-class hotel extends Model
+class Hotel extends Model
 {
     use SoftDeletes;
     use HasFactory;
@@ -27,9 +27,9 @@ class hotel extends Model
                 'hotels.status as status_hotel',
             );
             if($kab):
-                $get->where('hotels.kabupaten_id',$kab);
+                $get = $get->where('hotels.kabupaten_id',$kab);
             endif;
-            $get->orderBy('hotels.updated_at','desc')
+            $get = $get->orderBy('hotels.updated_at','desc')
             ->get();
         return $get;
     }
@@ -57,6 +57,36 @@ class hotel extends Model
             ->where('hotels.status',3)
             ->orderBy('hotels.updated_at','desc')
             ->get();
+        return $get;
+    }
+
+    public function getAll($kab=false)
+    {
+        $get = $this->leftJoin('kabupatens','kabupatens.id','hotels.kabupaten_id')
+            ->leftJoin('objek_wisatas','objek_wisatas.id','hotels.objek_wisata_id')
+            ->select(
+                'kabupatens.nama as nama_kabupaten',
+                'kabupatens.gambar as gambar_kabupaten',
+                'objek_wisatas.nama as nama_objek_wisata',
+                'objek_wisatas.gambar_header',
+                'hotels.nama',
+                'hotels.deskripsi',
+                'hotels.gambar',
+                'hotels.jenis',
+                'hotels.id',
+                'hotels.alamat',
+                'hotels.status',
+                'hotels.latitude',
+                'hotels.longitude',
+                'hotels.slug',
+            )
+            ->where('hotels.status',3)
+            ->orderBy('hotels.updated_at','desc');
+            if($kab):
+                $get = $get->where('hotels.kabupaten_id',$kab);
+            endif;
+            $get = $get->orderBy('hotels.updated_at','desc')
+            ->paginate(10);
         return $get;
     }
 

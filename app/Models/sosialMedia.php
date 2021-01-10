@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 use DB;
-class sosialMedia extends Model
+class SosialMedia extends Model
 {
     use HasFactory;
     use SoftDeletes;

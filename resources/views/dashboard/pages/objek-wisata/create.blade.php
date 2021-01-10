@@ -150,6 +150,18 @@
                     </div>
 
                     <div class="form-group row">
+                        <div class="col-sm-2">Objek Wisata Pilihan</div>
+                        <div class="col-sm-10">
+                            <div class="form-check pl-0">
+                                <div class="custom-control custom-checkbox checkbox-info">
+                                    <input type="checkbox" name="pilihan" class="custom-control-input" id="pilihan">
+                                    <label class="custom-control-label" for="pilihan">Apakah Objek Wisata ini ditampilkan pada slide aplikasi ?</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
                         <div class="col-sm-2">Setuju</div>
                         <div class="col-sm-10">
                             <div class="form-check pl-0">

@@ -90,8 +90,8 @@
                name: 'image'
            },
            {
-               data: 'nama_kategori',
-               name: 'nama_kategori'
+               data: 'nama',
+               name: 'nama'
            },
            {
                data: 'deskripsi',

@@ -193,7 +193,7 @@ class EkrafController extends Controller
     public function table(Request $request)
     {   
         
-        $data = $this->ekrafClass->getData();
+        $data = (Auth::user()->level == 1 || Auth::user()->level == 3) ? $this->ekrafClass->getData() :  $this->ekrafClass->getData(Auth::user()->kabupaten_id);
             return DataTables::of($data)
             ->addColumn('status', function($data)
             {

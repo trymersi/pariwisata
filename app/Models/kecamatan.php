@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
-class kecamatan extends Model
+class Kecamatan extends Model
 {
     use SoftDeletes;
     use HasFactory;
