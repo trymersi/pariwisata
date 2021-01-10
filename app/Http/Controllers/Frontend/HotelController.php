@@ -14,7 +14,7 @@ use App\Models\Cindramata;
 use App\Models\Setting;
 use App\Models\Hotel;
 use App\Models\Event;
-use App\Models\hotelReview;
+use App\Models\HotelReview;
 class HotelController extends Controller
 {
     private $data;
@@ -48,7 +48,7 @@ class HotelController extends Controller
         $this->tempatIbadahClass = new TempatIbadah;
         $this->linkTerkait = new LinkTerkait;
         $this->cindramata = new Cindramata;
-        $this->review = new hotelReview;
+        $this->review = new HotelReview;
 
         
         $this->data = [
