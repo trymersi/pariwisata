@@ -101,7 +101,7 @@ class ServiceController extends Controller
 
     private function cekToken($token)
     {
-        return ($token == "iiganteng") ? true : false;
+        return ($token == "pariwisata_riau") ? true : false;
     }
 
     private function kabupaten()
