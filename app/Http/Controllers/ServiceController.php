@@ -117,6 +117,7 @@ class ServiceController extends Controller
             $this->data['response']['objek_wisata_pilihan'] = $this->objekWisata->orderBy('id','desc')->limit(5)->where('pilihan',1)->get();
             $this->data['response']['list_objek_wisata'] = $this->objekWisata->orderBy('id','desc')->limit(10)->where('pilihan','!=',1)->get();
             $this->data['response']['berita'] = $this->postClass->getAll();
+            $this->data['response']['event'] = $this->eventClass->getAll();
             $this->data['response']['iklan'] = $this->iklan->orderBy('id','desc')->limit(10)->get();
             return response()->json($this->data);
         }
