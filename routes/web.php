@@ -157,6 +157,30 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
             Route::patch('/update/{id}','Backend\ObjekWisataController@sosmedUpdate');
             Route::delete('/delete/{id}','Backend\ObjekWisataController@sosmedDestroy');
         });
+
+        Route::prefix('/hotel')->group(function(){
+            Route::get('/{id}','Backend\ObjekWisataController@hotelIndex');
+            Route::get('/create/{id_objek_wisata}','Backend\ObjekWisataController@hotelCreate');
+            Route::post('/store','Backend\ObjekWisataController@hotelStore');
+            Route::get('/table/{id_objek_wisata}','Backend\ObjekWisataController@hotelTable');
+            Route::delete('/delete/{id}','Backend\ObjekWisataController@hotelDestroy');
+        });
+
+        Route::prefix('/restaurant')->group(function(){
+            Route::get('/{id}','Backend\ObjekWisataController@restaurantIndex');
+            Route::get('/create/{id_objek_wisata}','Backend\ObjekWisataController@restaurantCreate');
+            Route::post('/store','Backend\ObjekWisataController@restaurantStore');
+            Route::get('/table/{id_objek_wisata}','Backend\ObjekWisataController@restaurantTable');
+            Route::delete('/delete/{id}','Backend\ObjekWisataController@restaurantDestroy');
+        });
+
+        Route::prefix('/tempat-ibadah')->group(function(){
+            Route::get('/{id}','Backend\ObjekWisataController@tempatIbadahIndex');
+            Route::get('/create/{id_objek_wisata}','Backend\ObjekWisataController@tempatIbadahCreate');
+            Route::post('/store','Backend\ObjekWisataController@tempatIbadahStore');
+            Route::get('/table/{id_objek_wisata}','Backend\ObjekWisataController@tempatIbadahTable');
+            Route::delete('/delete/{id}','Backend\ObjekWisataController@tempatIbadahDestroy');
+        });
     });
 
     Route::prefix('/restaurant')->group(function(){
