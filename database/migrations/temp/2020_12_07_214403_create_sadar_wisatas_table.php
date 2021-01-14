@@ -19,7 +19,6 @@ class CreateSadarWisatasTable extends Migration
             $table->unsignedBigInteger('kecamatan_id')->nullable()->comment('foreign key dari tabel kecamatans');
             $table->string('nama')->nullable()->comment('nama dari sadar wisata');
             $table->string('alamat')->nullable()->comment('alamat dari sadar wisata');
-            $table->string('potensi_wisata')->nullable()->comment('alamat dari sadar wisata');
             $table->string('kontak')->nullable()->comment('alamat dari sadar wisata');
             $table->string('status')->nullable()->comment('statusnya');
             $table->timestamps();

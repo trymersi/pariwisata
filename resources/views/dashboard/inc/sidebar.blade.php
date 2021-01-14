@@ -60,6 +60,8 @@
                                 <a href="{{ url('dashboard/iklan') }}"> Iklan </a>
                             </li>
                             @endif
+
+
                         </ul>
                     </li>
 
@@ -110,10 +112,56 @@
                                 <a href="{{ url('dashboard/hotel') }}"> Hotel</a>
                             </li>
                             @endif
+
+                            @if(Auth::user()->level == 1 || Auth::user()->level == 4 || Auth::user()->level == 7)
+                            <li class=" {{ ($page_name === 'Sadar Wisata') ? 'active' : '' }}">
+                                <a href="{{ url('/dashboard/sadar-wisata') }}" data-active="{{ ($category_name === 'Sadar Wisata') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Sadar Wisata') ? 'true' : 'false' }}" class="dropdown-toggle">
+                                    <div class="">
+                                        <span>Sadar Wisata</span>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li class=" {{ ($page_name === 'Desa Wisata') ? 'active' : '' }}">
+                                <a href="{{ url('/dashboard/desa-wisata') }}" data-active="{{ ($category_name === 'Desa Wisata') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Desa Wisata') ? 'true' : 'false' }}" class="dropdown-toggle">
+                                    <div class="">
+                                        <span>Desa Wisata</span>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li class=" {{ ($page_name === 'Pemandu') ? 'active' : '' }}">
+                                <a href="{{ url('/dashboard/pemandu-wisata') }}" data-active="{{ ($category_name === 'Pemandu') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Pemandu') ? 'true' : 'false' }}" class="dropdown-toggle">
+                                    <div class="">
+                                        <span>Pemandu Wisata</span>
+                                    </div>
+                                </a>
+                            </li>
+                            @endif
+                            @if(Auth::user()->level == 1 || Auth::user()->level == 5)
+                            
+                            <li class=" {{ ($page_name === 'Travel') ? 'active' : '' }}">
+                                <a href="{{ url('/dashboard/travel') }}" data-active="{{ ($category_name === 'Travel') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Travel') ? 'true' : 'false' }}" class="dropdown-toggle">
+                                    <div class="">
+                                        <span>Travel</span>
+                                    </div>
+                                </a>
+                            </li>
+                            @endif
+
+                            @if(Auth::user()->level == 1 || Auth::user()->level == 3 || Auth::user()->level == 7)
+                            <li class=" {{ ($page_name === 'Kuliner') ? 'active' : '' }}">
+                                <a href="{{ url('/dashboard/kuliner') }}" data-active="{{ ($category_name === 'Kuliner') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Kuliner') ? 'true' : 'false' }}" class="dropdown-toggle">
+                                    <div class="">
+                                        <span>Kuliner</span>
+                                    </div>
+                                </a>
+                            </li>
+                            @endif
                            
                         </ul>
                     </li>
-                    
+                   
                     @if(Auth::user()->level == 1)
                     <li class="menu {{ ($category_name === 'Berita') ? 'active' : '' }}">
                         <a href="#Berita" data-active="{{ ($category_name === 'Berita') ? 'true' : 'false' }}" data-toggle="collapse" aria-expanded="{{ ($category_name === 'Berita') ? 'true' : 'false' }}" class="dropdown-toggle">
@@ -171,36 +219,8 @@
                     </li>
                     @endif
                     
-                    @if(Auth::user()->level == 1 || Auth::user()->level == 4 || Auth::user()->level == 7)
-                    <li class="menu {{ ($category_name === 'Sadar Wisata') ? 'active' : '' }}">
-                        <a href="{{ url('/dashboard/sadar-wisata') }}" data-active="{{ ($category_name === 'Sadar Wisata') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Sadar Wisata') ? 'true' : 'false' }}" class="dropdown-toggle">
-                            <div class="">
-                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                                <span>Sadar Wisata</span>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li class="menu {{ ($category_name === 'Desa Wisata') ? 'active' : '' }}">
-                        <a href="{{ url('/dashboard/desa-wisata') }}" data-active="{{ ($category_name === 'Desa Wisata') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Desa Wisata') ? 'true' : 'false' }}" class="dropdown-toggle">
-                            <div class="">
-                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                                <span>Desa Wisata</span>
-                            </div>
-                        </a>
-                    </li>
-
-                    <li class="menu {{ ($category_name === 'Pemandu') ? 'active' : '' }}">
-                        <a href="{{ url('/dashboard/pemandu-wisata') }}" data-active="{{ ($category_name === 'Pemandu') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Pemandu') ? 'true' : 'false' }}" class="dropdown-toggle">
-                            <div class="">
-                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                                <span>Pemandu Wisata</span>
-                            </div>
-                        </a>
-                    </li>
-                    @endif
                     @if(Auth::user()->level == 1 || Auth::user()->level == 5)
-                    <li class="menu {{ ($category_name === 'Kunjungan') ? 'active' : '' }}">
+                    <li class="menu {{ ($page_name === 'Kunjungan') ? 'active' : '' }}">
                         <a href="{{ url('/dashboard/kunjungan') }}" data-active="{{ ($category_name === 'Kunjungan') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Kunjungan') ? 'true' : 'false' }}" class="dropdown-toggle">
                             <div class="">
                                 <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
@@ -208,26 +228,8 @@
                             </div>
                         </a>
                     </li>
-                    <li class="menu {{ ($category_name === 'Travel') ? 'active' : '' }}">
-                        <a href="{{ url('/dashboard/travel') }}" data-active="{{ ($category_name === 'Travel') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Travel') ? 'true' : 'false' }}" class="dropdown-toggle">
-                            <div class="">
-                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                                <span>Travel</span>
-                            </div>
-                        </a>
-                    </li>
                     @endif
-
-                    @if(Auth::user()->level == 1 || Auth::user()->level == 3 || Auth::user()->level == 7)
-                    <li class="menu {{ ($category_name === 'Kuliner') ? 'active' : '' }}">
-                        <a href="{{ url('/dashboard/kuliner') }}" data-active="{{ ($category_name === 'Kuliner') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Kuliner') ? 'true' : 'false' }}" class="dropdown-toggle">
-                            <div class="">
-                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                                <span>Kuliner</span>
-                            </div>
-                        </a>
-                    </li>
-                    @endif
+                    
                     @if(Auth::user()->level == 1)
                     <li class="menu {{ ($category_name === 'Pertanyaan') ? 'active' : '' }}">
                         <a href="{{ url('/dashboard/pertanyaan') }}" data-active="{{ ($category_name === 'Pertanyaan') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Pertanyaan') ? 'true' : 'false' }}" class="dropdown-toggle">

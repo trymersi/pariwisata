@@ -153,7 +153,7 @@ class HotelController extends Controller
         }
 
         $this->hotelClass->kabupaten_id = $kab_id;
-        $this->hotelClass->objek_wisata_id = $request->objek_wisata;
+        // $this->hotelClass->objek_wisata_id = $request->objek_wisata;
         $this->hotelClass->nama = $request->nama;
         $this->hotelClass->slug = str_replace(' ','-',strtolower($request->nama));
         $this->hotelClass->deskripsi = $dom->saveHTML();
@@ -303,7 +303,7 @@ class HotelController extends Controller
 
         $edit = $this->hotelClass->find($id);
         $edit->kabupaten_id = $kab_id;
-        $edit->objek_wisata_id = $request->objek_wisata;
+        // $edit->objek_wisata_id = $request->objek_wisata;
         $edit->nama = $request->nama;
         $edit->slug = $request->nama;
         $edit->latitude = $request->latitude;

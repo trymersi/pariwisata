@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
-
+use DB;
 class SadarWisata extends Model
 {
     use HasFactory;
@@ -14,7 +14,10 @@ class SadarWisata extends Model
     {
         $data = $this->leftJoin('kabupatens','kabupatens.id','sadar_wisatas.kabupaten_id')
             ->leftJoin('kecamatans','kecamatans.id','sadar_wisatas.kecamatan_id')
+            ->leftJoin('sadar_wisata_details','sadar_wisata_details.sadar_wisata_id','sadar_wisatas.id')
+            ->leftJoin('desa_wisatas','desa_wisatas.id','sadar_wisata_details.desa_wisata_id')
             ->select(
+                DB::RAW('GROUP_CONCAT(desa_wisatas.nama) as nama_desa_wisata'),
                 'kabupatens.nama as nama_kabupaten',
                 'kecamatans.nama as nama_kecamatan',
                 'sadar_wisatas.nama',
@@ -28,6 +31,7 @@ class SadarWisata extends Model
                 $data = $data->where('sadar_wisatas.kabupaten_id',$kab);
             endif;
             $data = $data->orderBy('sadar_wisatas.updated_at','desc')
+            ->groupBy('sadar_wisatas.id')
             ->get();
             return $data;
     }
@@ -77,7 +81,9 @@ class SadarWisata extends Model
     {
         $data = $this->leftJoin('kabupatens','kabupatens.id','sadar_wisatas.kabupaten_id')
             ->leftJoin('kecamatans','kecamatans.id','sadar_wisatas.kecamatan_id')
+            
             ->select(
+                
                 'kabupatens.nama as nama_kabupaten',
                 'kecamatans.nama as nama_kecamatan',
                 'sadar_wisatas.nama',
@@ -90,6 +96,7 @@ class SadarWisata extends Model
             ->where('sadar_wisatas.kabupaten_id',$id_kabupaten)
             ->where('sadar_wisatas.id','!=',$id_sadar_wisata)
             ->orderBy('sadar_wisatas.updated_at','desc')
+            
             ->limit(10)
             ->get();
             return $data;

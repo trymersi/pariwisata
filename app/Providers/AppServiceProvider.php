@@ -30,5 +30,10 @@ class AppServiceProvider extends ServiceProvider
             $view->with('kategori_berita_menu',\App\Models\PostCategory::select('nama','slug')->get());
             $view->with('kabupaten_menu',\App\Models\Kabupaten::select('nama','slug')->get());
         });
+
+        view()->composer('dashboard.layouts.app',function($view)
+        {
+            $view->with('setting_website',\App\Models\Setting::first());
+        });
     }
 }
