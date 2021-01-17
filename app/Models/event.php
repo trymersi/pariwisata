@@ -51,6 +51,7 @@ class Event extends Model
             )
             ->where('events.status',3)
             ->orderBy('events.updated_at','desc')
+            ->limit(10)
             ->get();
         return $get;
     }

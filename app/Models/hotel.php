@@ -56,6 +56,7 @@ class Hotel extends Model
             )
             ->where('hotels.status',3)
             ->orderBy('hotels.updated_at','desc')
+            ->limit(10)
             ->get();
         return $get;
     }
