@@ -57,6 +57,7 @@ class Restaurant extends Model
             )
             ->where('restaurants.status',3)
             ->orderBy('restaurants.updated_at','desc')
+            ->limit(10)
             ->get();
         return $get;
     }

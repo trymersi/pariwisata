@@ -158,7 +158,7 @@ class ObjekWisata extends Model
             ->where('objek_wisatas.status',3)
             ->where('objek_wisatas.id',$id)
             ->first();
-        return $get;
+        return $get->total ? $get->total :0;
     }
 
     public function getTerdekat($id,$id_wisata)

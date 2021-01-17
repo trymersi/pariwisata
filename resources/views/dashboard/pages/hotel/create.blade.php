@@ -35,7 +35,7 @@
                         </div>
                     @endif
 
-                    <div class="form-group row mb-4">
+                    {{-- <div class="form-group row mb-4">
                         <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Objek Wisata Terdekat</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
                             <select name="objek_wisata"  id="objek_wisata" class="form-control select">
@@ -48,7 +48,7 @@
                                 <span><code>{{$message}}</code></span>
                             @enderror
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group row mb-4">
                         <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nama Hotel</label>

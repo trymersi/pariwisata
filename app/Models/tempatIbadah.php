@@ -54,6 +54,7 @@ class TempatIbadah extends Model
             )
             ->where('tempat_ibadahs.status',3)
             ->orderBy('tempat_ibadahs.updated_at','desc')
+            ->limit(10)
             ->get();
         return $get;
     }

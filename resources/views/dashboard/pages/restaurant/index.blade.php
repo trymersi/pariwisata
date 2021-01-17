@@ -24,7 +24,7 @@
                                 @if(Auth::user()->level == 1 || Auth::user()->level == 4)
                                 <th>Kabupaten</th>
                                 @endif
-                                <th>Nama Objek Wisata</th>
+                                {{-- <th>Nama Objek Wisata</th> --}}
                                 <th>Nama Restaurant</th>
                                 <th>Deskripsi</th>
                                 <th>Gambar</th>
@@ -97,10 +97,10 @@
                name: 'nama_kabupaten'
            },
            @endif
-           {
-               data: 'nama_objek_wisata',
-               name: 'nama_objek_wisata'
-           },
+        //    {
+        //        data: 'nama_objek_wisata',
+        //        name: 'nama_objek_wisata'
+        //    },
            {
                data: 'nama',
                name: 'nama'

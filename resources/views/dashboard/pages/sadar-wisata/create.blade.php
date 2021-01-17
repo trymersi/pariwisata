@@ -70,10 +70,12 @@
                     </div>
 
                     <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Potensi Wisata</label>
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Desa Wisata</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
                             <select name="potensi[]" class="form-control select-potensi" multiple>
-    
+                                @foreach($desa_wisata as $item)
+                                <option @if(old('potensi') == $item->id) selected="" @endif value="{{ $item->id }}">{{ $item->nama }}</option>
+                                @endforeach
                             </select>
                             <p> (ketik Potensi lalu tekan tombol enter untuk menambahkan)</p>
                             @error('potensi')

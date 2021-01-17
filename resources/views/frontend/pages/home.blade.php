@@ -513,10 +513,10 @@
                                     <div class="reviews-count">9 reviews</div>
                                 </div>
                             </div>
-                            <img src="{{ asset('uploads/images/gambar-header-event/'.$item->gambar) }}" alt="{{ ucwords($item->nama) }}"> 
+                            <img src="{{ asset('uploads/images/gambar-header-event/'.$item->gambar_header) }}" alt="{{ ucwords($item->nama) }}"> 
                             </a>
                             @if(isset($item->gambar_header))
-                            <div class="listing-avatar"><a href="author-single.html"><img src="{{ asset('uploads/images/gambar-header-objek-wisata/'.$item->gambar_header) }}" alt=""></a>
+                            <div class="listing-avatar"><a href="author-single.html"><img src="{{ asset('uploads/images/gambar-header-event/'.$item->gambar_header) }}" alt=""></a>
                                 <span class="avatar-tooltip"><strong>{{ $item->nama_objek_wisata }}</strong></span>
                             </div>
                             @endif

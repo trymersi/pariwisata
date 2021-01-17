@@ -13,10 +13,10 @@
 
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
 @switch($page_name)
-    @case('analytics')
+    @case('dashboard')
       {{-- Dashboard --}}
 <link href="{{asset('plugins/apex/apexcharts.css')}}" rel="stylesheet" type="text/css">
-<link href="{{asset('assets/css/dashboard/dash_2.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('assets/css/dashboard/dash.css')}}" rel="stylesheet" type="text/css" />
       @break
 
     @case('sales')

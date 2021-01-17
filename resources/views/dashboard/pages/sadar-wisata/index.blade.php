@@ -24,7 +24,7 @@
                                 
                                 <th>Sadar Wisata</th>
                                 <th>Alamat</th>
-                                <th>Potensi Wisata</th>
+                                <th>Desa Wisata</th>
                                 <th>Nomor Kontak</th>
                                 <th>Kabupaten</th>
                                 <th>Kecamatan</th>
@@ -97,8 +97,8 @@
                 name: 'alamat'
             },
             {
-                data: 'potensi_wisata',
-                name: 'potensi_wisata'
+                data: 'nama_desa_wisata',
+                name: 'nama_desa_wisata'
             },
             {
                 data: 'kontak',

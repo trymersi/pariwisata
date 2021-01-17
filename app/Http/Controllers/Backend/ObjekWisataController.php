@@ -10,11 +10,17 @@ use App\Models\ObjekWisataAksebilitas;
 use App\Models\ObjekWisataAmenitas;
 use App\Models\ObjekWisataDetail;
 use App\Models\ObjekWisataGambar;
+use App\Models\ObjekWisataHotel;
+use App\Models\ObjekWisataRestaurant;
+use App\Models\ObjekWisataTempatIbadah;
 use Illuminate\Http\Request;
 use App\Models\SosialMedia;
 use App\Models\ObjekWisata;
 use App\Models\Kabupaten;
 use App\Models\Kecamatan;
+use App\Models\Hotel;
+use App\Models\Restaurant;
+use App\Models\TempatIbadah;
 use Carbon\Carbon;
 use DataTables;
 use Toastr;
@@ -33,6 +39,12 @@ class ObjekWisataController extends Controller
     private $objekDetailClass;
     private $objekGambarClass;
     private $sosialMediaClass;
+    private $objekWisataHotel;
+    private $ObjekWisataRestaurant;
+    private $ObjekWisataTempatIbadah;
+    private $hotel;
+    private $restaurant;
+    private $tempatIbadah;
     
 
     public function __construct()
@@ -47,6 +59,12 @@ class ObjekWisataController extends Controller
         $this->objekDetailClass = new ObjekWisataDetail;
         $this->objekGambarClass = new ObjekWisataGambar;
         $this->sosialMediaClass = new SosialMedia;
+        $this->objekWisataHotel = new ObjekWisataHotel;
+        $this->objekWisataRestaurant = new ObjekWisataRestaurant;
+        $this->objekWisataTempatIbadah = new ObjekWisataTempatIbadah;
+        $this->hotel = new Hotel;
+        $this->restaurant = new Restaurant;
+        $this->tempatIbadah = new TempatIbadah;
 
         $this->data = [
             'category_name' => 'Objek',
@@ -427,6 +445,10 @@ class ObjekWisataController extends Controller
                         <a class="dropdown-item" href="'.url("/dashboard/objek-wisata/detail").'/'.$data->id.'">Detail Objek Wisata</a>
                         <a class="dropdown-item" href="'.url("/dashboard/objek-wisata/gambar").'/'.$data->id.'">Gambar Gallery</a>
                         <a class="dropdown-item" href="'.url("/dashboard/objek-wisata/sosial-media").'/'.$data->id.'">Sosial Media</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="'.url("/dashboard/objek-wisata/hotel").'/'.$data->id.'">Hotel Terdekat</a>
+                        <a class="dropdown-item" href="'.url("/dashboard/objek-wisata/restaurant").'/'.$data->id.'">Restaurant Terdekat</a>
+                        <a class="dropdown-item" href="'.url("/dashboard/objek-wisata/tempat-ibadah").'/'.$data->id.'">Tempat Ibadah Terdekat</a>
                     </div>
                 </div>';
 
@@ -963,6 +985,264 @@ class ObjekWisataController extends Controller
     public function sosmedDestroy($id)
     {
         $delete = $this->sosialMediaClass->find($id);
+        $delete->delete();
+        return ['status'=>'1'];
+    }
+
+    public function hotelIndex($id)
+    {
+        $data = $this->objekWisataClass->find($id);
+        $this->data['sub_page'] = $data->nama;
+        $this->data['id'] = $id;
+        return view('dashboard.pages.objek-wisata.hotel.index',$this->data); 
+    }
+
+    public function hotelCreate($id)
+    {
+        $data = $this->objekWisataClass->find($id);
+        $this->data['sub_page'] = $data->nama;
+        $this->data['hotel'] = $this->hotel->orderBy('nama','asc')->get();
+        $this->data['id'] = $id;
+        return view('dashboard.pages.objek-wisata.hotel.create',$this->data); 
+    }
+
+    public function hotelStore(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'hotel' => 'required',
+            'tos' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Toastr::error('Terjadi Kesalahan Saat Menyimpan Data', 'Gagal', ["positionClass" => "toast-bottom-right"]);
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
+        $objekWisata = $this->objekWisataClass->find($request->id);
+        $latLong = $objekWisata->latitude.",".$objekWisata->longitude;
+        foreach($request->hotel as $item)
+        {
+            $hotel = $this->hotel->find($item);
+            if($hotel->latitude != '' && $hotel->longitude != '')
+            {
+                $jarak = getDistance($latLong,$hotel->latitude.",".$hotel->longitude);
+            }
+            else
+            {
+                $jarak = '-';
+            }
+            $save = new ObjekWisataHotel;
+            $save->objek_wisata_id = $request->id;
+            $save->hotel_id = $item;
+            $save->jarak = $jarak;
+            $save->save();
+        }
+ 
+        Toastr::success('Data Berhasil Diubah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
+        return redirect::to('dashboard/objek-wisata/hotel/'.$request->id);
+    }
+
+    public function hotelTable($id)
+    {
+        $data = $this->objekWisataHotel->getData($id);
+        
+        return DataTables::of($data)
+        ->addColumn('option', function($data)
+        {
+
+            $button = '<button data-id="'.$data->id.'" data-nama="'.$data->nama.'" class="btn btn-danger mb-2 mr-2 btn-sm" data-toggle="modal" data-target="#ModalHapus" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>';
+            return  $button;
+        })
+        
+        ->addColumn('tanggal', function($data)
+        {
+           return  Carbon::parse($data->updated_at)->diffForHumans();
+        })
+
+        ->addColumn('gambar', function($data)
+        {
+           return  "<img width='250px' src='".asset('uploads/images/gambar-header-hotel/'.$data->gambar)."'>";
+        })
+        ->addIndexColumn()
+        ->rawColumns(['status','option','gambar','jenis','detail'])
+        ->make(true);
+    }
+
+    public function hotelDestroy($id)
+    {
+        $delete =   $this->objekWisataHotel->find($id);
+        $delete->delete();
+        return ['status'=>'1'];
+    }
+    
+
+    public function restaurantIndex($id)
+    {
+        $data = $this->objekWisataClass->find($id);
+        $this->data['sub_page'] = $data->nama;
+        $this->data['id'] = $id;
+        return view('dashboard.pages.objek-wisata.restaurant.index',$this->data); 
+    }
+
+    public function restaurantCreate($id)
+    {
+        $data = $this->objekWisataClass->find($id);
+        $this->data['sub_page'] = $data->nama;
+        $this->data['restoran'] = $this->restaurant->orderBy('nama','asc')->get();
+        $this->data['id'] = $id;
+        return view('dashboard.pages.objek-wisata.restaurant.create',$this->data); 
+    }
+
+    public function restaurantStore(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'restoran' => 'required',
+            'tos' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Toastr::error('Terjadi Kesalahan Saat Menyimpan Data', 'Gagal', ["positionClass" => "toast-bottom-right"]);
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
+        $objekWisata = $this->objekWisataClass->find($request->id);
+        $latLong = $objekWisata->latitude.",".$objekWisata->longitude;
+        foreach($request->restoran as $item)
+        {
+            $place = $this->restaurant->find($item);
+            if($place->latitude != '' && $place->longitude != '')
+            {
+                $jarak = getDistance($latLong,$place->latitude.",".$place->longitude);
+            }
+            else
+            {
+                $jarak = '-';
+            }
+            $save = new ObjekWisataRestaurant;
+            $save->objek_wisata_id = $request->id;
+            $save->restaurant_id = $item;
+            $save->jarak = $jarak;
+            $save->save();
+        }
+ 
+        Toastr::success('Data Berhasil Diubah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
+        return redirect::to('dashboard/objek-wisata/restaurant/'.$request->id);
+    }
+
+    public function restaurantTable($id)
+    {
+        $data = $this->objekWisataRestaurant->getData($id);
+        
+        return DataTables::of($data)
+        ->addColumn('option', function($data)
+        {
+
+            $button = '<button data-id="'.$data->id.'" data-nama="'.$data->nama.'" class="btn btn-danger mb-2 mr-2 btn-sm" data-toggle="modal" data-target="#ModalHapus" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>';
+            return  $button;
+        })
+        
+        ->addColumn('tanggal', function($data)
+        {
+           return  Carbon::parse($data->updated_at)->diffForHumans();
+        })
+
+        ->addColumn('gambar', function($data)
+        {
+           return  "<img width='250px' src='".asset('uploads/images/gambar-header-restaurant/'.$data->gambar)."'>";
+        })
+        ->addIndexColumn()
+        ->rawColumns(['status','option','gambar','jenis','detail'])
+        ->make(true);
+    }
+
+    public function restaurantDestroy($id)
+    {
+        $delete =   $this->objekWisataRestaurant->find($id);
+        $delete->delete();
+        return ['status'=>'1'];
+    }
+
+    public function tempatIbadahIndex($id)
+    {
+        $data = $this->objekWisataClass->find($id);
+        $this->data['sub_page'] = $data->nama;
+        $this->data['id'] = $id;
+        return view('dashboard.pages.objek-wisata.tempat-ibadah.index',$this->data); 
+    }
+
+    public function tempatIbadahCreate($id)
+    {
+        $data = $this->objekWisataClass->find($id);
+        $this->data['sub_page'] = $data->nama;
+        $this->data['tempat_ibadah'] = $this->tempatIbadah->orderBy('nama','asc')->get();
+        $this->data['id'] = $id;
+        return view('dashboard.pages.objek-wisata.tempat-ibadah.create',$this->data); 
+    }
+
+    public function tempatIbadahStore(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'tempat_ibadah' => 'required',
+            'tos' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            Toastr::error('Terjadi Kesalahan Saat Menyimpan Data', 'Gagal', ["positionClass" => "toast-bottom-right"]);
+            return Redirect::back()->withErrors($validator)->withInput();
+        }
+
+        $objekWisata = $this->objekWisataClass->find($request->id);
+        $latLong = $objekWisata->latitude.",".$objekWisata->longitude;
+        foreach($request->tempat_ibadah as $item)
+        {
+            $place = $this->tempatIbadah->find($item);
+            if($place->latitude != '' && $place->longitude != '')
+            {
+                $jarak = getDistance($latLong,$place->latitude.",".$place->longitude);
+            }
+            else
+            {
+                $jarak = '-';
+            }
+            $save = new ObjekWisataTempatIbadah;
+            $save->objek_wisata_id = $request->id;
+            $save->tempat_ibadah_id = $item;
+            $save->jarak = $jarak;
+            $save->save();
+        }
+ 
+        Toastr::success('Data Berhasil Diubah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
+        return redirect::to('dashboard/objek-wisata/tempat-ibadah/'.$request->id);
+    }
+
+    public function tempatIbadahTable($id)
+    {
+        $data = $this->objekWisataTempatIbadah->getData($id);
+        return DataTables::of($data)
+        ->addColumn('option', function($data)
+        {
+
+            $button = '<button data-id="'.$data->id.'" data-nama="'.$data->nama.'" class="btn btn-danger mb-2 mr-2 btn-sm" data-toggle="modal" data-target="#ModalHapus" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>';
+            return  $button;
+        })
+        
+        ->addColumn('tanggal', function($data)
+        {
+           return  Carbon::parse($data->updated_at)->diffForHumans();
+        })
+
+        ->addColumn('gambar', function($data)
+        {
+           return  "<img width='250px' src='".asset('uploads/images/gambar-header-tempat-ibadah/'.$data->gambar)."'>";
+        })
+        ->addIndexColumn()
+        ->rawColumns(['status','option','gambar','jenis','detail'])
+        ->make(true);
+    }
+
+    public function tempatIbadahDestroy($id)
+    {
+        $delete =   $this->objekWisataTempatIbadah->find($id);
         $delete->delete();
         return ['status'=>'1'];
     }
