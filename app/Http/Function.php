@@ -374,7 +374,7 @@ function jenisHotel($ar)
                 $status = '<span class="badge badge-success">Bintang 4</span>';
                 break;
             case '5':
-            $status = '<span class="badge badge-success">Bintang 4</span>';
+            $status = '<span class="badge badge-success">Bintang 5</span>';
                 break;
             default:
                 $status ="-";
@@ -406,7 +406,7 @@ function jenisHotelIon($ar)
                 $status = '>Bintang 4';
                 break;
             case '5':
-            $status = 'Bintang 4';
+            $status = 'Bintang 5';
                 break;
             default:
                 $status ="-";

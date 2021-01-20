@@ -107,8 +107,22 @@ class ObjekWisata extends Model
             endif;
             $get = $get->paginate(10);
 
+        $data = array();
+        $data['current_page'] = $get->toArray()['current_page'];
+        $data['first_page_url'] = $get->toArray()['first_page_url'];
+        $data['first_page_url'] = $get->toArray()['first_page_url'];
+        $data['last_pagefrom'] =$get->toArray()['last_page'];
+        $data['last_page_url'] =$get->toArray()['last_page_url'];
+        $data['links'] =$get->toArray()['links'];
+        $data['next_page_url'] =$get->toArray()['next_page_url'];
+        $data['path'] =$get->toArray()['path'];
+        $data['per_page'] =$get->toArray()['per_page'];
+        $data['prev_page_url'] =$get->toArray()['prev_page_url'];
+        $data['to'] =$get->toArray()['to'];
+        $data['total'] =$get->toArray()['total'];
+
             
-        return collect($get)->sortBy('kunjungan_lokal')->reverse()->toArray();
+        return collect($get)->sortBy('kunjungan_lokal')->reverse()->toArray();;
     }
 
     public function getByUlasan($kab=false,$kw=false)
@@ -199,7 +213,22 @@ class ObjekWisata extends Model
                 $data[$i]['jarak'] = $jarak;
                 $i++;
             }
-        return collect($data)->sortBy('jarak')->reverse()->toArray();
+            $resp = array();
+            $resp['current_page'] = $get->toArray()['current_page'];
+            $resp['first_page_url'] = $get->toArray()['first_page_url'];
+            $resp['first_page_url'] = $get->toArray()['first_page_url'];
+            $resp['last_pagefrom'] =$get->toArray()['last_page'];
+            $resp['last_page_url'] =$get->toArray()['last_page_url'];
+            $resp['links'] =$get->toArray()['links'];
+            $resp['next_page_url'] =$get->toArray()['next_page_url'];
+            $resp['path'] =$get->toArray()['path'];
+            $resp['per_page'] =$get->toArray()['per_page'];
+            $resp['prev_page_url'] =$get->toArray()['prev_page_url'];
+            $resp['to'] =$get->toArray()['to'];
+            $resp['total'] =$get->toArray()['total'];
+            $resp['total'] =$get->toArray()['total'];
+            $resp['data'] = collect($data)->sortBy('jarak')->reverse()->toArray();
+        return $resp;
     }
 
     public function SearchObjekWisata($kab=false,$kw)
