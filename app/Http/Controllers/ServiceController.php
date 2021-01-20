@@ -214,8 +214,8 @@ class ServiceController extends Controller
                 $this->data['response']['detail'] = $this->hotelClass->getDetail($hotel->id);
                 $this->data['response']['terdekat'] = $this->hotelClass->getTerdekat($hotel->kabupaten_id, $hotel->id);
                 $this->data['response']['galeri'] = $this->hotelClass->getGaleri($hotel->id);
-                $this->data['response']['jenis'] = jenisHotel($hotel->jenis);
-                $this->data['response']['layanan'] = jenisLayanan($hotel->layanan);
+                $this->data['response']['jenis'] = jenisHotelIon($hotel->jenis);
+                $this->data['response']['layanan'] = jenisLayananIon($hotel->layanan);
                 $this->data['response']['ulasan'] = $this->hotelReview->where('hotel_id',$hotel->id)->orderBy('id','desc')->get();
                 if(isset($request->user_latitude) && $request->user_latitude != '' && isset($request->user_longitude) && $request->user_longitude != '')
                 {
