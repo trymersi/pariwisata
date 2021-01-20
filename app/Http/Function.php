@@ -257,31 +257,6 @@ function getDistance($from,$to)
     return False;
 }
 
-function getJarak($from,$to)
-{
-    $api = apiMap();
-    $url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=".$from."&destinations=".$to."&key=".$api;
-    $data = json_decode(file_get_contents($url),true);
-    if(isset($data['status']) && $data['status'] == "OK")
-    {   $data = array();
-        if(isset($data['rows'][0]['elements'][0]['distance']))
-        {
-            $jarak = $data['rows'][0]['elements'][0]['distance']['text'];
-            $jarak = str_replace(' mi', '', $jarak)*1.609344;
-            $jarak = formatAngkat($jarak).' Km';
-            $durasi = $data['rows'][0]['elements'][0]['duration']['value'];
-            $durasi = waktu($durasi);
-            
-            $data['jarak'] = $jarak;
-            $data['durasi'] = $durasi;
-            return $data;
-        }
-        $data['jarak'] = 0;
-        $data['durasi'] = 0;
-        return $data;
-    }
-    return False;
-}
 
 function getLocationLatLong($lat,$long)
 {
@@ -342,6 +317,32 @@ function jenisWisata($ar)
                 break;
             case '3':
                 $status = '<span class="badge badge-success">Budaya</span>';
+                break;
+            default:
+                $status ="-";
+                break;
+        }
+        $data .=$status;
+    }
+    return $data;
+}
+
+function jenisWisataIon($ar)
+{
+    $ar = explode(',',$ar);
+    $data = '';
+    foreach($ar as $key)
+    {
+        switch ($key) 
+        {
+            case '1':
+                $status = 'Alam';
+                break;
+            case '2':
+                $status = 'Buatan';
+                break;
+            case '3':
+                $status = 'Budaya';
                 break;
             default:
                 $status ="-";

@@ -173,7 +173,7 @@ class ServiceController extends Controller
                 $this->data['response']['hotelterdekat'] = $this->objekWisata->getHotelTerdekat($objekWisata->kabupaten_id, $objekWisata->id );
                 $this->data['response']['cindraterdekat'] = $this->objekWisata->getCindraTerdekat($objekWisata->kabupaten_id, $objekWisata->id );
                 $this->data['response']['galeri'] = $this->objekWisata->getGaleri($objekWisata->id);
-                $this->data['response']['jenis'] = jenisWisata($objekWisata->jenis);
+                $this->data['response']['jenis'] = jenisWisataIon($objekWisata->jenis);
                 $this->data['response']['fasilitas'] = $this->objekWisata->getFasilitas($objekWisata->id);
                 $this->data['response']['ulasan'] = $this->objekWisataReview->where('objek_wisata_id',$objekWisata->id)->orderBy('id','desc')->get();
                 $this->data['response']['pengunjung'] = $this->objekWisata->getPengunjung($objekWisata->id);
