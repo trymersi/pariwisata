@@ -130,7 +130,27 @@ class ServiceController extends Controller
         {
             $this->data['response']['status'] = "success";
             $this->kabupaten();
-            $this->data['response']['items'] = (isset($request->kabupaten_id)  && $request->kabupaten_id != '') ? $this->objekWisata->getAll($request->kabupaten_id) : $this->objekWisata->getAll();
+            $sort = $request->sort;
+            switch($sort)
+            {
+                case '1':
+                    $this->data['response']['items'] = (isset($request->kabupaten_id)  && $request->kabupaten_id != '') ? $this->objekWisata->getAll($request->kabupaten_id,$request->keyword) : $this->objekWisata->getAll();
+                    break;
+                case '2':
+                    $this->data['response']['items'] = $this->objekWisata->getByKunjungan($request->kabupaten_id,$request->keyword);
+                    break;
+                case '3':
+                    $this->data['response']['items'] = $this->objekWisata->getByUlasan($request->kabupaten_id,$request->keyword);
+                    break;
+                case '4':
+                    $this->data['response']['items'] = $this->objekWisata->getByJarak($request->kabupaten_id,$request->keyword,$request->latitude,$request->longitude);
+                    break;
+                default:
+                    $this->data['response']['items'] = $this->objekWisata->getAll($request->kabupaten_id,$request->keyword);
+                break;
+            }
+
+            
             return response()->json($this->data);
         }
         return response()->json($this->errMessage);

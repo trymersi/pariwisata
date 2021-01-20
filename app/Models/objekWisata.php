@@ -41,7 +41,7 @@ class ObjekWisata extends Model
             ->get();
     }
 
-    public function getAll($kab=false)
+    public function getAll($kab=false,$kw=false)
     {
         $get = $this->leftJoin('kabupatens','kabupatens.id','objek_wisatas.kabupaten_id')
             ->leftJoin('kecamatans','kecamatans.id','objek_wisatas.kecamatan_id')
@@ -68,8 +68,138 @@ class ObjekWisata extends Model
             if($kab):
             $get = $get->where('objek_wisatas.kabupaten_id',$kab);
             endif;
+            if($kw && $kw != ''):
+                $get = $get->where('objek_wisatas.nama','LIKE','%'.$kw.'%');
+                endif;
             $get = $get->paginate(10);
         return $get;
+    }
+
+    public function getByKunjungan($kab=false,$kw=false)
+    {
+        $get = $this->leftJoin('kabupatens','kabupatens.id','objek_wisatas.kabupaten_id')
+            ->leftJoin('kecamatans','kecamatans.id','objek_wisatas.kecamatan_id')
+            ->leftJoin('kunjungans','kunjungans.objek_wisata_id','objek_wisatas.id')
+            ->select(
+                DB::RAW('sum(kunjungans.lokal + kunjungans.internasional) as kunjungan'),
+                'kabupatens.nama as nama_kabupaten',
+                'kecamatans.nama as nama_kecamatan',
+                'kabupatens.gambar as gambar_kabupaten',
+                'kabupatens.slug as slug_kabupaten',
+                'objek_wisatas.id',
+                'objek_wisatas.gambar_header',
+                'objek_wisatas.nama',
+                'objek_wisatas.jenis',
+                'objek_wisatas.status',
+                'objek_wisatas.alamat',
+                'objek_wisatas.deskripsi',
+                'objek_wisatas.slug',
+                'objek_wisatas.longitude',
+                'objek_wisatas.latitude',
+            )
+            ->groupBy('objek_wisatas.id')
+            ->where('objek_wisatas.status',3);
+            if($kab):
+                $get = $get->where('objek_wisatas.kabupaten_id',$kab);
+            endif;
+            if($kw && $kw != ''):
+                $get = $get->where('objek_wisatas.nama','LIKE','%'.$kw.'%');
+            endif;
+            $get = $get->paginate(10);
+
+            
+        return collect($get)->sortBy('kunjungan_lokal')->reverse()->toArray();
+    }
+
+    public function getByUlasan($kab=false,$kw=false)
+    {
+        $get = $this->leftJoin('kabupatens','kabupatens.id','objek_wisatas.kabupaten_id')
+            ->leftJoin('kecamatans','kecamatans.id','objek_wisatas.kecamatan_id')
+            ->leftJoin('objek_wisata_reviews','objek_wisata_reviews.objek_wisata_id','objek_wisatas.id')
+            ->select(
+                DB::RAW('count(objek_wisata_reviews.id) as ulasan'),
+                'kabupatens.nama as nama_kabupaten',
+                'kecamatans.nama as nama_kecamatan',
+                'kabupatens.gambar as gambar_kabupaten',
+                'kabupatens.slug as slug_kabupaten',
+                'objek_wisatas.id',
+                'objek_wisatas.gambar_header',
+                'objek_wisatas.nama',
+                'objek_wisatas.jenis',
+                'objek_wisatas.status',
+                'objek_wisatas.alamat',
+                'objek_wisatas.deskripsi',
+                'objek_wisatas.slug',
+                'objek_wisatas.longitude',
+                'objek_wisatas.latitude',
+            )
+            ->groupBy('objek_wisatas.id')
+            ->where('objek_wisatas.status',3);
+            if($kab):
+                $get = $get->where('objek_wisatas.kabupaten_id',$kab);
+            endif;
+            if($kw && $kw != ''):
+                $get = $get->where('objek_wisatas.nama','LIKE','%'.$kw.'%');
+            endif;
+            $get = $get->paginate(10);
+
+            
+        return collect($get)->sortBy('ulasan')->reverse()->toArray();
+    }
+
+    public function getByJarak($kab=false,$kw=false,$latitude,$longitude)
+    {
+        $get = $this->leftJoin('kabupatens','kabupatens.id','objek_wisatas.kabupaten_id')
+            ->leftJoin('kecamatans','kecamatans.id','objek_wisatas.kecamatan_id')
+            ->select(
+                'kabupatens.nama as nama_kabupaten',
+                'kecamatans.nama as nama_kecamatan',
+                'kabupatens.gambar as gambar_kabupaten',
+                'kabupatens.slug as slug_kabupaten',
+                'objek_wisatas.id',
+                'objek_wisatas.gambar_header',
+                'objek_wisatas.nama',
+                'objek_wisatas.jenis',
+                'objek_wisatas.status',
+                'objek_wisatas.alamat',
+                'objek_wisatas.deskripsi',
+                'objek_wisatas.slug',
+                'objek_wisatas.longitude',
+                'objek_wisatas.latitude',
+            )
+            ->groupBy('objek_wisatas.id')
+            ->where('objek_wisatas.status',3);
+            if($kab):
+                $get = $get->where('objek_wisatas.kabupaten_id',$kab);
+            endif;
+            if($kw && $kw != ''):
+                $get = $get->where('objek_wisatas.nama','LIKE','%'.$kw.'%');
+            endif;
+            $get = $get->paginate(10);
+
+            $data = array();
+            $i = 0;
+            foreach($get as $item)
+            {
+                $data[$i]['id'] = $item->id;
+                $data[$i]['nama_kabupaten'] = $item->nama_kabupaten;
+                $data[$i]['nama_kecamatan'] = $item->nama_kecamatan;
+                $data[$i]['gambar_kabupaten'] = $item->gambar_kabupaten;
+                $data[$i]['slug_kabupaten'] = $item->slug_kabupaten;
+                $data[$i]['gambar_header'] = $item->gambar_header;
+                $data[$i]['nama'] = $item->nama;
+                $data[$i]['jenis'] = $item->jenis;
+                $data[$i]['status'] = $item->status;
+                $data[$i]['alamat'] = $item->alamat;
+                $data[$i]['deskripsi'] = $item->deskripsi;
+                $data[$i]['slug'] = $item->slug;
+                $data[$i]['longitude'] = $item->longitude;
+                $data[$i]['latitude'] = $item->latitude;
+                $jarak = getDistance($item->latitude.",".$item->longitude,$latitude.",".$longitude);
+                $data[$i]['jarak'] = $jarak;
+                $i++;
+            }
+        return collect($data)->sortBy('jarak')->reverse()->toArray();
     }
 
     public function SearchObjekWisata($kab=false,$kw)
