@@ -91,6 +91,42 @@ class Hotel extends Model
         return $get;
     }
 
+    public function getApi($kab=false,$kw=false,$lokasi=false)
+    {
+        $get = $this->leftJoin('kabupatens','kabupatens.id','hotels.kabupaten_id')
+            ->leftJoin('objek_wisatas','objek_wisatas.id','hotels.objek_wisata_id')
+            ->select(
+                'kabupatens.nama as nama_kabupaten',
+                'kabupatens.gambar as gambar_kabupaten',
+                'objek_wisatas.nama as nama_objek_wisata',
+                'objek_wisatas.gambar_header',
+                'hotels.nama',
+                'hotels.deskripsi',
+                'hotels.gambar',
+                'hotels.jenis',
+                'hotels.id',
+                'hotels.alamat',
+                'hotels.status',
+                'hotels.latitude',
+                'hotels.longitude',
+                'hotels.slug',
+            )
+            ->where('hotels.status',3)
+            ->orderBy('hotels.updated_at','desc');
+            if($kab && $kab != ''):
+                $get = $get->where('hotels.kabupaten_id',$kab);
+            endif;
+            if($kw && $kw != ''):
+                $get = $get->where('hotels.nama','LIKE','%'.$kw.'%');
+            endif;
+            if($lokasi && $lokasi != ''):
+                $get = $get->where('hotels.jenis',$lokasi);
+            endif;
+            $get = $get->orderBy('hotels.updated_at','desc')
+            ->paginate(10);
+        return $get;
+    }
+
     public function getByKabupaten($id)
     {
         $get = $this->leftJoin('kabupatens','kabupatens.id','hotels.kabupaten_id')

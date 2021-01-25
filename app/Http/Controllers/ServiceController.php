@@ -197,7 +197,8 @@ class ServiceController extends Controller
         {
             $this->data['response']['status'] = "success";
             $this->kabupaten();
-            $this->data['response']['items'] = (isset($request->kabupaten_id)  && $request->kabupaten_id != '') ? $this->hotelClass->getAll($request->kabupaten_id) : $this->hotelClass->getAll();
+            $sort = $request->sort;
+            $this->data['response']['items'] = $this->hotelClass->getApi($request->kabupaten_id,$request->keyword,$request->sort);
             return response()->json($this->data);
         }
         return response()->json($this->errMessage);
