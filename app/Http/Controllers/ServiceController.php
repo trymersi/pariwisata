@@ -236,7 +236,7 @@ class ServiceController extends Controller
         {
             $this->data['response']['status'] = "success";
             $this->kabupaten();
-            $this->data['response']['items'] = (isset($request->kabupaten_id)  && $request->kabupaten_id != '') ? $this->tempatIbadahClass->getAll($request->kabupaten_id) : $this->tempatIbadahClass->getAll();
+            $this->data['response']['items'] = $this->tempatIbadahClass->getApi($request->kabupaten_id,$request->keyword);
             return response()->json($this->data);
         }
         return response()->json($this->errMessage);
@@ -274,7 +274,7 @@ class ServiceController extends Controller
         {
             $this->data['response']['status'] = "success";
             $this->kabupaten();
-            $this->data['response']['items'] = (isset($request->kabupaten_id)  && $request->kabupaten_id != '') ? $this->restaurantClass->getAll($request->kabupaten_id) : $this->restaurantClass->getAll();
+            $this->data['response']['items'] = $this->restaurantClass->getApi($request->kabupaten_id,$request->keyword);
             return response()->json($this->data);
         }
         return response()->json($this->errMessage);
@@ -312,7 +312,7 @@ class ServiceController extends Controller
         {
             $this->data['response']['status'] = "success";
             $this->kabupaten();
-            $this->data['response']['items'] = (isset($request->kabupaten_id)  && $request->kabupaten_id != '') ? $this->ekrafClass->getAll($request->kabupaten_id) : $this->ekrafClass->getAll();
+            $this->data['response']['items'] = $this->kategoriEkraf->getApi($request->kabupaten_id,$request->keyword);
             return response()->json($this->data);
         }
     }
@@ -323,7 +323,7 @@ class ServiceController extends Controller
         {
             $this->data['response']['status'] = "success";
             $this->kabupaten();
-            $this->data['response']['items'] = (isset($request->kabupaten_id)  && $request->kabupaten_id != '') ? $this->eventClass->getAll($request->kabupaten_id) : $this->eventClass->getAll();
+            $this->data['response']['items'] = $this->eventClass->getApi($request->kabupaten_id,$request->keyword);
             return response()->json($this->data);
         }
         return response()->json($this->errMessage);
@@ -351,7 +351,7 @@ class ServiceController extends Controller
         {
             $this->data['response']['status'] = "success";
             $this->kabupaten();
-            $this->data['response']['items'] = (isset($request->kabupaten_id)  && $request->kabupaten_id != '') ? $this->cendramata->getAll($request->kabupaten_id) : $this->cendramata->getAll();
+            $this->data['response']['items'] = $this->cendramata->getApi($request->kabupaten_id,$request->keyword);
             return response()->json($this->data);
         }
         return response()->json($this->errMessage);
@@ -386,7 +386,7 @@ class ServiceController extends Controller
         {
             $this->data['response']['status'] = "success";
             $this->kabupaten();
-            $this->data['response']['items'] = (isset($request->kabupaten_id)  && $request->kabupaten_id != '') ? $this->desaWisata->getAll($request->kabupaten_id) : $this->desaWisata->getAll();
+            $this->data['response']['items'] = $this->desaWisata->getApi($request->kabupaten_id,$request->keyword);
             return response()->json($this->data);
         }
         return response()->json($this->errMessage);
@@ -414,7 +414,7 @@ class ServiceController extends Controller
         {
             $this->data['response']['status'] = "success";
             $this->kabupaten();
-            $this->data['response']['items'] = (isset($request->kabupaten_id)  && $request->kabupaten_id != '') ? $this->kulinerClass->getAll($request->kabupaten_id) : $this->kulinerClass->getAll();
+            $this->data['response']['items'] = $this->kulinerClass->getApi($request->kabupaten_id,$request->keyword);
             return response()->json($this->data);
         }
         return response()->json($this->errMessage);
@@ -526,7 +526,7 @@ class ServiceController extends Controller
         {
             $this->data['response']['status'] = "success";
             $this->kabupaten();
-            $this->data['response']['items'] = (isset($request->kabupaten_id)  && $request->kabupaten_id != '') ? $this->travelClass->getAll($request->kabupaten_id) : $this->travelClass->getAll();
+            $this->data['response']['items'] = $this->travelClass->getApi($request->kabupaten_id,$request->keyword);
             return response()->json($this->data);
         }
         return response()->json($this->errMessage);

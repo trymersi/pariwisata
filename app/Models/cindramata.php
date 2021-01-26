@@ -55,6 +55,31 @@ class Cindramata extends Model
         return $get;
     }
 
+    public function getApi($kab=false,$kw=false)
+    {
+        $get = $this->leftJoin('kabupatens','kabupatens.id','cindramatas.kabupaten_id')
+            ->leftJoin('objek_wisatas','objek_wisatas.id','cindramatas.objek_wisata_id')
+            ->select(
+                'kabupatens.nama as nama_kabupaten',
+                'objek_wisatas.nama as nama_objek_wisata',
+                'cindramatas.nama',
+                'cindramatas.alamat',
+                'cindramatas.gambar',
+                'cindramatas.nomor_kontak',
+                'cindramatas.status',
+                'cindramatas.id'
+            );
+            if($kab && $kab != ''):
+                $get = $get->where('cindramatas.kabupaten_id',$kab);
+            endif;
+            if($kw && $kw != ''):
+                $get = $get->where('cindramatas.nama','LIKE','%'.$kw.'%');
+            endif;
+            $get = $get->orderBy('cindramatas.updated_at','desc')
+            ->pagination(10);
+        return $get;
+    }
+
     public function getDetail($id)
     {
         $get = $this->leftJoin('kabupatens','kabupatens.id','cindramatas.kabupaten_id')

@@ -54,6 +54,33 @@ class Kuliner extends Model
         return $data;
     }
 
+    public function getApi($kab=false,$kw=false)
+    {
+        $data = $this->leftJoin('kabupatens','kabupatens.id','kuliners.kabupaten_id')
+            ->select(
+                'kabupatens.nama as nama_kabupaten',
+                'kuliners.title',
+                'kuliners.meta_description',
+                'kuliners.alamat',
+                'kuliners.thumbnail',
+                'kuliners.updated_at',
+                'kuliners.status',
+                'kuliners.id'
+            );
+            if($kab && $kab != ''):
+                $data = $data->where('kuliners.kabupaten_id',$kab);
+            endif;
+
+            if($kw && $kw != ''):
+                $data = $data->where('kuliners.title','LIKE','%'.$kw.'%');
+            endif;
+            
+            $data = $data->groupBy('kuliners.id')
+            ->orderBy('kuliners.updated_at','desc')
+            ->paginate(10);
+        return $data;
+    }
+
     public function getDetail($id)
     {
         $data = $this->leftJoin('kabupatens','kabupatens.id','kuliners.kabupaten_id')
