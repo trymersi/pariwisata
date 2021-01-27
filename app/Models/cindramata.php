@@ -76,7 +76,7 @@ class Cindramata extends Model
                 $get = $get->where('cindramatas.nama','LIKE','%'.$kw.'%');
             endif;
             $get = $get->orderBy('cindramatas.updated_at','desc')
-            ->pagination(10);
+            ->paginate(10);
         return $get;
     }
 

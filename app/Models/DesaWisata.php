@@ -93,7 +93,8 @@ class DesaWisata extends Model
                 'desa_wisatas.potensi_wisata',
                 'desa_wisatas.kontak',
                 'desa_wisatas.status',
-                'desa_wisatas.id'
+                'desa_wisatas.id',
+                'desa_wisatas.gambar_header'
             )
             ->where('desa_wisatas.id',$id)
             ->first();
@@ -120,6 +121,25 @@ class DesaWisata extends Model
             ->limit(10)
             ->get();
             return $data;
+    }
+
+    public function getSadarWisata($id_desa_wisata)
+    {
+        $get = $this->leftJoin('sadar_wisata_details','sadar_wisata_details.desa_wisata_id','desa_wisatas.id')
+            ->leftJoin('sadar_wisatas','sadar_wisatas.id','sadar_wisata_details.sadar_wisata_id')
+            ->leftJoin('kabupatens','kabupatens.id','sadar_wisatas.kabupaten_id')
+            ->leftJoin('kecamatans','kecamatans.id','sadar_wisatas.kecamatan_id')
+            ->select(
+                'kabupatens.nama as nama_kabupaten',
+                'kecamatans.nama as nama_kecamatan',
+                'sadar_wisatas.nama as nama_sadar_wisata',
+                'sadar_wisatas.alamat',
+                'sadar_wisatas.id',
+                'sadar_wisatas.kontak',
+            )
+            ->where('desa_wisatas.id',$id_desa_wisata)
+            ->get();
+            return $get;
     }
 
 }

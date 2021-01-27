@@ -317,6 +317,18 @@ class ServiceController extends Controller
         }
     }
 
+    public function getEkrafDetail(Request $request)
+    {
+        if($this->cekToken($request->key) && $request->kategori_ekraf_id && $request->kategori_ekraf_id != '')
+        {
+            $this->data['response']['status'] = "success";
+            $this->data['response']['detail'] = $this->ekrafClass->getByKat($request->kabupaten_id,$request->keyword,$request->kategori_ekraf_id);
+            $this->data['response']['kategori'] = $this->kategoriEkraf->find($request->kategori_ekraf_id);
+            return response()->json($this->data);
+        }
+        return response()->json($this->errMessage);
+    }
+
     public function getEvent(Request $request)
     {
         if($this->cekToken($request->key))
@@ -338,6 +350,8 @@ class ServiceController extends Controller
             {
                 $this->data['response']['status'] = "success";
                 $this->data['response']['detail'] = $this->eventClass->getDetail($event->id);
+                $this->data['response']['detail']['tanggal_mulai'] = tgl_indo($this->data['response']['detail']->tanggal_mulai);
+                $this->data['response']['detail']['tanggal_selesai'] = tgl_indo($this->data['response']['detail']->tanggal_selesai);
                 $this->data['response']['terdekat'] = $this->eventClass->getTerdekat($event->kabupaten_id, $event->id );
                 return response()->json($this->data);
             }
@@ -401,7 +415,9 @@ class ServiceController extends Controller
             {
                 $this->data['response']['status'] = "success";
                 $this->data['response']['detail'] = $this->desaWisata->getDetail($desa->id);
-                $this->data['response']['terdekat'] = $this->desaWisata->getTerdekat($desa->kabupaten_id, $desa->id );
+                $this->data['response']['potensi'] = explode(',',$this->data['response']['detail']->potensi_wisata);
+                $this->data['response']['sadar_wisata'] = $this->desaWisata->getSadarWisata($desa->id);
+                $this->data['response']['terdekat'] = $this->desaWisata->getTerdekat($desa->kabupaten_id, $desa->id);
                 return response()->json($this->data);
             }
         }
@@ -470,7 +486,7 @@ class ServiceController extends Controller
         {
             $this->data['response']['status'] = "success";
             $this->kabupaten();
-            $this->data['response']['items'] = $this->postClass->getAll();
+            $this->data['response']['items'] = $this->postClass->getApi($request->kabupaten_id,$request->keyword);
             return response()->json($this->data);
         }
         return response()->json($this->errMessage);

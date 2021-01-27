@@ -42,6 +42,7 @@ Route::prefix('/get-restoran')->group(function(){
 
 Route::prefix('/get-ekraf')->group(function(){
     Route::post('/','ServiceController@getEkraf');
+    Route::post('/detail','ServiceController@getEkrafDetail');
 });
 
 Route::prefix('/get-event')->group(function(){
