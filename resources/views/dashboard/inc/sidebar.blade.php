@@ -45,11 +45,6 @@
                                 <a href="{{ url('dashboard/kategori-ekraf') }}"> Kategori Ekraf </a>
                             </li>
                             @endif
-                            @if(Auth::user()->level == 1 || Auth::user()->level == 3 || Auth::user()->level == 7)
-                            <li class="{{ ($page_name === 'Ekraf') ? 'active' : '' }}">
-                                <a href="{{ url('dashboard/ekraf') }}"> Ekraf </a>
-                            </li>
-                            @endif
                             @if(Auth::user()->level == 1)
                             <li class="{{ ($page_name === 'Link Terkait') ? 'active' : '' }}">
                                 <a href="{{ url('dashboard/link-terkait') }}"> Link Terkait </a>
@@ -65,21 +60,33 @@
                         </ul>
                     </li>
 
-                    <li class="menu {{ ($category_name === 'Objek') ? 'active' : '' }}">
-                        <a href="#Objek" data-active="{{ ($category_name === 'Objek') ? 'true' : 'false' }}" data-toggle="collapse" aria-expanded="{{ ($category_name === 'Objek') ? 'true' : 'false' }}" class="dropdown-toggle">
+                    <li class="menu {{ ($category_name === 'Destinasi') ? 'active' : '' }}">
+                        <a href="#Destinasi" data-active="{{ ($category_name === 'Destinasi') ? 'true' : 'false' }}" data-toggle="collapse" aria-expanded="{{ ($category_name === 'Destinasi') ? 'true' : 'false' }}" class="dropdown-toggle">
                             <div class="">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                <span>Objek</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-server"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                                <span>Destinasi</span>
                             </div>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
                             </div>
                         </a>
-                        <ul class="collapse submenu list-unstyled {{ ($category_name === 'Objek') ? 'show' : '' }}" id="Objek" data-parent="#accordionExample">
+                        <ul class="collapse submenu list-unstyled {{ ($category_name === 'Destinasi') ? 'show' : '' }}" id="Destinasi" data-parent="#accordionExample">
                            
                             @if(Auth::user()->level == 1 || Auth::user()->level == 2 || Auth::user()->level == 7)
                             <li class="{{ ($page_name === 'Objek Wisata') ? 'active' : '' }}">
                                 <a href="{{ url('dashboard/objek-wisata') }}"> Objek Wisata </a>
+                            </li>
+                            @endif
+                            
+                            @if(Auth::user()->level == 1 || Auth::user()->level == 5)
+                            <li class="{{ ($page_name === 'Kunjungan') ? 'active' : '' }}">
+                                <a href="{{ url('dashboard/kunjungan') }}"> Data Kunjungan </a>
+                            </li>
+                            @endif
+                            
+                            @if(Auth::user()->level == 1 || Auth::user()->level == 3 || Auth::user()->level == 7)
+                            <li class="{{ ($page_name === 'Ekraf') ? 'active' : '' }}">
+                                <a href="{{ url('dashboard/ekraf') }}"> Ekraf </a>
                             </li>
                             @endif
 
@@ -161,6 +168,178 @@
                            
                         </ul>
                     </li>
+                    
+                    <li class="menu {{ ($category_name === 'Objek') ? 'active' : '' }}">
+                        <a href="#Objek" data-active="{{ ($category_name === 'Objek') ? 'true' : 'false' }}" data-toggle="collapse" aria-expanded="{{ ($category_name === 'Objek') ? 'true' : 'false' }}" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-server"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                                <span>Sumber Daya Pariwisata</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                        <ul class="collapse submenu list-unstyled {{ ($category_name === 'Objek') ? 'show' : '' }}" id="Objek" data-parent="#accordionExample">
+                            
+                            @if(Auth::user()->level == 1 || Auth::user()->level == 2 || Auth::user()->level == 7)
+                            <li class="{{ ($page_name === 'Hotel') ? 'active' : '' }}">
+                                <a href="{{ url('dashboard/hotel') }}"> Hotel</a>
+                            </li>
+                            @endif
+                            
+                            @if(Auth::user()->level == 1 || Auth::user()->level == 4 || Auth::user()->level == 7)
+                            <li class="{{ ($page_name === 'Restaurant') ? 'active' : '' }}">
+                                <a href="{{ url('dashboard/restaurant') }}"> Restaurant </a>
+                            </li>
+                            @endif
+                            
+                            @if(Auth::user()->level == 1 || Auth::user()->level == 4 || Auth::user()->level == 7)
+                            <li class="{{ ($page_name === 'Tempat Ibadah') ? 'active' : '' }}">
+                                <a href="{{ url('dashboard/tempat-ibadah') }}"> Tempat Ibadah </a>
+                            </li>
+                            @endif
+                            
+                            @if(Auth::user()->level == 1 || Auth::user()->level == 4 || Auth::user()->level == 7)
+                            
+                            <li class=" {{ ($page_name === 'Desa Wisata') ? 'active' : '' }}">
+                                <a href="{{ url('/dashboard/desa-wisata') }}" data-active="{{ ($category_name === 'Desa Wisata') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Desa Wisata') ? 'true' : 'false' }}" class="dropdown-toggle">
+                                    <div class="">
+                                        <span>Desa Wisata</span>
+                                    </div>
+                                </a>
+                            </li>
+                            
+                            <li class=" {{ ($page_name === 'Sadar Wisata') ? 'active' : '' }}">
+                                <a href="{{ url('/dashboard/sadar-wisata') }}" data-active="{{ ($category_name === 'Sadar Wisata') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Sadar Wisata') ? 'true' : 'false' }}" class="dropdown-toggle">
+                                    <div class="">
+                                        <span>Sadar Wisata</span>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li class=" {{ ($page_name === 'Pemandu') ? 'active' : '' }}">
+                                <a href="{{ url('/dashboard/pemandu-wisata') }}" data-active="{{ ($category_name === 'Pemandu') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Pemandu') ? 'true' : 'false' }}" class="dropdown-toggle">
+                                    <div class="">
+                                        <span>Pemandu Wisata</span>
+                                    </div>
+                                </a>
+                            </li>
+                            @endif
+                            @if(Auth::user()->level == 1 || Auth::user()->level == 5)
+                            
+                            <li class=" {{ ($page_name === 'Travel') ? 'active' : '' }}">
+                                <a href="{{ url('/dashboard/travel') }}" data-active="{{ ($category_name === 'Travel') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Travel') ? 'true' : 'false' }}" class="dropdown-toggle">
+                                    <div class="">
+                                        <span>Travel</span>
+                                    </div>
+                                </a>
+                            </li>
+                            @endif
+                            
+                            <!--@if(Auth::user()->level == 1 || Auth::user()->level == 3 || Auth::user()->level == 7)-->
+                            <!--<li class="{{ ($page_name === 'Ekraf') ? 'active' : '' }}">-->
+                            <!--    <a href="{{ url('dashboard/ekraf') }}"> Ekraf </a>-->
+                            <!--</li>-->
+                            <!--@endif-->
+                            
+                            <!--@if(Auth::user()->level == 1 || Auth::user()->level == 4 || Auth::user()->level == 7)-->
+                            <!--<li class="{{ ($page_name === 'Cindramata') ? 'active' : '' }}">-->
+                            <!--    <a href="{{ url('dashboard/cindramata') }}"> Cindramata </a>-->
+                            <!--</li>-->
+                            <!--@endif-->
+
+                            <!--@if(Auth::user()->level == 1 || Auth::user()->level == 4 || Auth::user()->level == 7)-->
+                            <!--<li class="{{ ($page_name === 'Event') ? 'active' : '' }}">-->
+                            <!--    <a href="{{ url('dashboard/event') }}"> Event </a>-->
+                            <!--</li>-->
+                            <!--@endif-->
+                            
+                            <!--@if(Auth::user()->level == 1 || Auth::user()->level == 3 || Auth::user()->level == 7)-->
+                            <!--<li class=" {{ ($page_name === 'Kuliner') ? 'active' : '' }}">-->
+                            <!--    <a href="{{ url('/dashboard/kuliner') }}" data-active="{{ ($category_name === 'Kuliner') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Kuliner') ? 'true' : 'false' }}" class="dropdown-toggle">-->
+                            <!--        <div class="">-->
+                            <!--            <span>Kuliner</span>-->
+                            <!--        </div>-->
+                            <!--    </a>-->
+                            <!--</li>-->
+                            <!--@endif-->
+                           
+                        </ul>
+                    </li>
+                    
+                    <li class="menu {{ ($category_name === 'Ekraf') ? 'active' : '' }}">
+                        <a href="#Ekraf" data-active="{{ ($category_name === 'Ekraf') ? 'true' : 'false' }}" data-toggle="collapse" aria-expanded="{{ ($category_name === 'Ekraf') ? 'true' : 'false' }}" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-server"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                                <span>Ekraf</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                        <ul class="collapse submenu list-unstyled {{ ($category_name === 'Ekraf') ? 'show' : '' }}" id="Ekraf" data-parent="#accordionExample">
+                            
+                            @if(Auth::user()->level == 1 || Auth::user()->level == 3 || Auth::user()->level == 7)
+                            <li class="{{ ($page_name === 'Ekraf') ? 'active' : '' }}">
+                                <a href="{{ url('dashboard/ekraf') }}"> Pelaku Ekraf </a>
+                            </li>
+                            @endif
+                            
+                            @if(Auth::user()->level == 1 || Auth::user()->level == 4 || Auth::user()->level == 7)
+                            <li class="{{ ($page_name === 'Cindramata') ? 'active' : '' }}">
+                                <a href="{{ url('dashboard/cindramata') }}"> Cindramata </a>
+                            </li>
+                            @endif
+
+                            <!--@if(Auth::user()->level == 1 || Auth::user()->level == 4 || Auth::user()->level == 7)-->
+                            <!--<li class="{{ ($page_name === 'Event') ? 'active' : '' }}">-->
+                            <!--    <a href="{{ url('dashboard/event') }}"> Event </a>-->
+                            <!--</li>-->
+                            <!--@endif-->
+                            
+                            @if(Auth::user()->level == 1 || Auth::user()->level == 3 || Auth::user()->level == 7)
+                            <li class=" {{ ($page_name === 'Kuliner') ? 'active' : '' }}">
+                                <a href="{{ url('/dashboard/kuliner') }}" data-active="{{ ($category_name === 'Kuliner') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Kuliner') ? 'true' : 'false' }}" class="dropdown-toggle">
+                                    <div class="">
+                                        <span>Kuliner</span>
+                                    </div>
+                                </a>
+                            </li>
+                            @endif
+                           
+                        </ul>
+                    </li>
+                    
+                    <li class="menu {{ ($category_name === 'Pemasaran') ? 'active' : '' }}">
+                        <a href="#Pemasaran" data-active="{{ ($category_name === 'Pemasaran') ? 'true' : 'false' }}" data-toggle="collapse" aria-expanded="{{ ($category_name === 'Pemasaran') ? 'true' : 'false' }}" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-server"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect><rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect><line x1="6" y1="6" x2="6.01" y2="6"></line><line x1="6" y1="18" x2="6.01" y2="18"></line></svg>
+                                <span>Pemasaran</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                        <ul class="collapse submenu list-unstyled {{ ($category_name === 'Pemasaran') ? 'show' : '' }}" id="Pemasaran" data-parent="#accordionExample">
+
+                            @if(Auth::user()->level == 1 || Auth::user()->level == 4 || Auth::user()->level == 7)
+                            <li class="{{ ($page_name === 'Event') ? 'active' : '' }}">
+                                <a href="{{ url('dashboard/event') }}"> Event </a>
+                            </li>
+                            @endif
+                            
+                            <!--@if(Auth::user()->level == 1 || Auth::user()->level == 3 || Auth::user()->level == 7)-->
+                            <!--<li class=" {{ ($page_name === 'Kuliner') ? 'active' : '' }}">-->
+                            <!--    <a href="{{ url('/dashboard/kuliner') }}" data-active="{{ ($category_name === 'Kuliner') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Kuliner') ? 'true' : 'false' }}" class="dropdown-toggle">-->
+                            <!--        <div class="">-->
+                            <!--            <span>Kuliner</span>-->
+                            <!--        </div>-->
+                            <!--    </a>-->
+                            <!--</li>-->
+                            <!--@endif-->
+                           
+                        </ul>
+                    </li>
                    
                     @if(Auth::user()->level == 1)
                     <li class="menu {{ ($category_name === 'Berita') ? 'active' : '' }}">
@@ -219,16 +398,16 @@
                     </li>
                     @endif
                     
-                    @if(Auth::user()->level == 1 || Auth::user()->level == 5)
-                    <li class="menu {{ ($page_name === 'Kunjungan') ? 'active' : '' }}">
-                        <a href="{{ url('/dashboard/kunjungan') }}" data-active="{{ ($category_name === 'Kunjungan') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Kunjungan') ? 'true' : 'false' }}" class="dropdown-toggle">
-                            <div class="">
-                                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-                                <span>Kunjungan</span>
-                            </div>
-                        </a>
-                    </li>
-                    @endif
+                    <!--@if(Auth::user()->level == 1 || Auth::user()->level == 5)-->
+                    <!--<li class="menu {{ ($page_name === 'Kunjungan') ? 'active' : '' }}">-->
+                    <!--    <a href="{{ url('/dashboard/kunjungan') }}" data-active="{{ ($category_name === 'Kunjungan') ? 'true' : 'false' }}" aria-expanded="{{ ($category_name === 'Kunjungan') ? 'true' : 'false' }}" class="dropdown-toggle">-->
+                    <!--        <div class="">-->
+                    <!--            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>-->
+                    <!--            <span>Kunjungan</span>-->
+                    <!--        </div>-->
+                    <!--    </a>-->
+                    <!--</li>-->
+                    <!--@endif-->
                     
                     @if(Auth::user()->level == 1)
                     <li class="menu {{ ($category_name === 'Pertanyaan') ? 'active' : '' }}">

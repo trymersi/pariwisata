@@ -67,7 +67,7 @@ class ObjekWisataController extends Controller
         $this->tempatIbadah = new TempatIbadah;
 
         $this->data = [
-            'category_name' => 'Objek',
+            'category_name' => 'Destinasi',
             'page_name' => 'Objek Wisata',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
@@ -137,8 +137,17 @@ class ObjekWisataController extends Controller
         $latLong = $request->latitude.",".$request->longitude;
         $kab_id = (Auth::user()->level == 1 || Auth::user()->level == 2 ) ? $request->kabupaten : Auth::user()->kabupaten_id;
         $kabLatLong = $this->kabupatenClass->find($kab_id);
-        $kabLatLong = $kabLatLong->latitude.",".$kabLatLong->longitude;
-        $jarak_kabupaten = getDistance($latLong,$kabLatLong);
+        if($kabLatLong->latitude == 0 || $kabLatLong->longitude == 0)
+        {
+            $kabLatLong = $kabLatLong->latitude.",".$kabLatLong->longitude;
+            $jarak_kabupaten = 0;
+        }
+        else
+        {
+            $kabLatLong = $kabLatLong->latitude.",".$kabLatLong->longitude;
+            $jarak_kabupaten = getDistance($latLong,$kabLatLong);
+        }
+        
         $jarak_provinsi = getDistance($latLong,latLongProv());
 
         $nama_bersih = bersih($request->nama,'-');
@@ -1001,7 +1010,10 @@ class ObjekWisataController extends Controller
     {
         $data = $this->objekWisataClass->find($id);
         $this->data['sub_page'] = $data->nama;
-        $this->data['hotel'] = $this->hotel->orderBy('nama','asc')->get();
+        $this->data['hotel'] = $this->hotel
+                               ->join('kabupatens', 'hotels.kabupaten_id', '=', 'kabupatens.id')
+                               ->select('hotels.id as id_hotel','hotels.nama as nama_hotel', 'kabupatens.nama as nama_kabupaten')
+                               ->orderBy('hotels.nama','asc')->get();
         $this->data['id'] = $id;
         return view('dashboard.pages.objek-wisata.hotel.create',$this->data); 
     }
@@ -1088,7 +1100,11 @@ class ObjekWisataController extends Controller
     {
         $data = $this->objekWisataClass->find($id);
         $this->data['sub_page'] = $data->nama;
-        $this->data['restoran'] = $this->restaurant->orderBy('nama','asc')->get();
+        // $this->data['restoran'] = $this->restaurant->orderBy('nama','asc')->get();
+        $this->data['restoran'] = $this->restaurant
+                               ->join('kabupatens', 'restaurants.kabupaten_id', '=', 'kabupatens.id')
+                               ->select('restaurants.id as id_restaurant','restaurants.nama as nama_restaurant', 'kabupatens.nama as nama_kabupaten')
+                               ->orderBy('restaurants.nama','asc')->get();
         $this->data['id'] = $id;
         return view('dashboard.pages.objek-wisata.restaurant.create',$this->data); 
     }
@@ -1165,6 +1181,7 @@ class ObjekWisataController extends Controller
     public function tempatIbadahIndex($id)
     {
         $data = $this->objekWisataClass->find($id);
+        // dd($data);
         $this->data['sub_page'] = $data->nama;
         $this->data['id'] = $id;
         return view('dashboard.pages.objek-wisata.tempat-ibadah.index',$this->data); 
@@ -1174,7 +1191,11 @@ class ObjekWisataController extends Controller
     {
         $data = $this->objekWisataClass->find($id);
         $this->data['sub_page'] = $data->nama;
-        $this->data['tempat_ibadah'] = $this->tempatIbadah->orderBy('nama','asc')->get();
+        // $this->data['tempat_ibadah'] = $this->tempatIbadah->orderBy('nama','asc')->get();
+        $this->data['tempat_ibadah'] = $this->tempatIbadah
+                               ->join('kabupatens', 'tempat_ibadahs.kabupaten_id', '=', 'kabupatens.id')
+                               ->select('tempat_ibadahs.id as id_tempat_ibadah','tempat_ibadahs.nama as nama_tempat_ibadah', 'kabupatens.nama as nama_kabupaten')
+                               ->orderBy('tempat_ibadahs.nama','asc')->get();
         $this->data['id'] = $id;
         return view('dashboard.pages.objek-wisata.tempat-ibadah.create',$this->data); 
     }

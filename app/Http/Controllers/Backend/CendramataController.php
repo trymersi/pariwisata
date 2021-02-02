@@ -38,7 +38,7 @@ class CendramataController extends Controller
         $this->sosialMediaClass = new SosialMedia;
 
         $this->data = [
-            'category_name' => 'Objek',
+            'category_name' => 'Ekraf',
             'page_name' => 'Cindramata',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
@@ -176,6 +176,7 @@ class CendramataController extends Controller
                 'kabupaten' => 'required',
                 'nama' => 'required',
                 'alamat'=> 'required',
+                'gambar'=> 'required',
                 'nomor_kontak'=> 'required',
                 'latitude'=> 'required',
                 'longitude'=> 'required',
@@ -186,6 +187,7 @@ class CendramataController extends Controller
             $validator = Validator::make($request->all(), [
                 'nama' => 'required',
                 'alamat'=> 'required',
+                'gambar'=> 'required',
                 'nomor_kontak'=> 'required',
                 'latitude'=> 'required',
                 'longitude'=> 'required',
@@ -220,9 +222,7 @@ class CendramataController extends Controller
         $edit->nama = $request->nama;
         $edit->slug = $nama_bersih;
         $edit->alamat = $request->alamat;
-        if(isset($filename_header)):
         $edit->gambar = $filename_header;
-        endif;
         $edit->latitude = $request->latitude;
         $edit->longitude = $request->longitude;
         $edit->nomor_kontak = $request->nomor_kontak;

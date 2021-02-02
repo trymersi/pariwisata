@@ -26,7 +26,7 @@
                             <select name="hotel[]"  id="hotel" multiple="multiple" class="form-control select">
                                 
                                 @foreach($hotel as $item)
-                                    <option @if(old('hotel') == $item->id) selected="" @endif value="{{ $item->id }}">{{ $item->nama }}</option>
+                                    <option @if(old('hotel') == $item->id_hotel) selected="" @endif value="{{ $item->id_hotel }}">{{ $item->nama_kabupaten }} - {{ $item->nama_hotel }}</option>
                                 @endforeach
                             </select>
                             @error('hotel')
