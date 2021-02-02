@@ -31,7 +31,7 @@ class EkrafController extends Controller
         $this->kategoriEkrafClass = new KategoriEkraf;
         
         $this->data = [
-            'category_name' => 'Master',
+            'category_name' => 'Ekraf',
             'page_name' => 'Ekraf',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
@@ -127,6 +127,7 @@ class EkrafController extends Controller
         $this->data['kabupaten'] = $this->kabupatenClass->orderBy("nama",'desc')->get();
         $this->data['kategori'] = $this->kategoriEkrafClass->orderBy("nama",'desc')->get();
         $this->data['edit'] = $this->ekrafClass->find($id);
+        // dd($this->data);
         return view('dashboard.pages.ekraf.edit',$this->data);
     }
 

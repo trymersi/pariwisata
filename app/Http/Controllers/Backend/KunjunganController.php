@@ -30,7 +30,7 @@ class KunjunganController extends Controller
         $this->objekWista = new ObjekWisata;
 
         $this->data = [
-            'category_name' => 'Kunjungan',
+            'category_name' => 'Destinasi',
             'page_name' => 'Kunjungan',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',

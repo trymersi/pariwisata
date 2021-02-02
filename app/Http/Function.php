@@ -257,6 +257,7 @@ function getDistance($from,$to)
     return False;
 }
 
+
 function getLocationLatLong($lat,$long)
 {
     $api = apiMap();
@@ -326,6 +327,32 @@ function jenisWisata($ar)
     return $data;
 }
 
+function jenisWisataIon($ar)
+{
+    $ar = explode(',',$ar);
+    $data = '';
+    foreach($ar as $key)
+    {
+        switch ($key) 
+        {
+            case '1':
+                $status = 'Alam';
+                break;
+            case '2':
+                $status = 'Buatan';
+                break;
+            case '3':
+                $status = 'Budaya';
+                break;
+            default:
+                $status ="-";
+                break;
+        }
+        $data .=$status;
+    }
+    return $data;
+}
+
 function jenisHotel($ar)
 {
     $ar = explode(',',$ar);
@@ -347,7 +374,39 @@ function jenisHotel($ar)
                 $status = '<span class="badge badge-success">Bintang 4</span>';
                 break;
             case '5':
-            $status = '<span class="badge badge-success">Bintang 4</span>';
+            $status = '<span class="badge badge-success">Bintang 5</span>';
+                break;
+            default:
+                $status ="-";
+                break;
+        }
+        $data .=$status;
+    }
+    return $data;
+}
+
+function jenisHotelIon($ar)
+{
+    $ar = explode(',',$ar);
+    $data = '';
+    foreach($ar as $key)
+    {
+        switch ($key) 
+        {
+            case '1':
+                $status = 'Bintang 1';
+                break;
+            case '2':
+                $status = 'Bintang 2';
+                break;
+            case '3':
+                $status = 'Bintang 3';
+                break;
+            case '4':
+                $status = '>Bintang 4';
+                break;
+            case '5':
+            $status = 'Bintang 5';
                 break;
             default:
                 $status ="-";
@@ -380,6 +439,38 @@ function jenisLayanan($ar)
                 break;
             case '5':
             $status = '<span class="badge badge-success">Online Ordering</span>';
+                break;
+            default:
+                $status ="-";
+                break;
+        }
+        $data .=$status;
+    }
+    return $data;
+}
+
+function jenisLayananIon($ar)
+{
+    $ar = explode(',',$ar);
+    $data = '';
+    foreach($ar as $key)
+    {
+        switch ($key) 
+        {
+            case '1':
+                $status = 'Elevator in Building';
+                break;
+            case '2':
+                $status = 'Free Wi fi';
+                break;
+            case '3':
+                $status = 'Free Parking';
+                break;
+            case '4':
+                $status = 'Air Conditioned';
+                break;
+            case '5':
+            $status = 'Online Ordering';
                 break;
             default:
                 $status ="-";

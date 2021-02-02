@@ -115,7 +115,7 @@ class TempatIbadahController extends Controller
         }
 
         $this->tempatIbadahClass->kabupaten_id = $kab_id;
-        $this->tempatIbadahClass->objek_wisata_id = $request->objek_wisata;
+        // $this->tempatIbadahClass->objek_wisata_id = $request->objek_wisata;
         $this->tempatIbadahClass->nama = $request->nama_tempat_ibadah;
         $this->tempatIbadahClass->slug = $nama_bersih;
         $this->tempatIbadahClass->alamat = $request->alamat;
@@ -212,7 +212,7 @@ class TempatIbadahController extends Controller
 
         $edit = TempatIbadah::find($id);
         $edit->kabupaten_id = $kab_id;
-        $edit->objek_wisata_id = $request->objek_wisata;
+        // $edit->objek_wisata_id = $request->objek_wisata;
         $edit->nama = $request->nama_tempat_ibadah;
         $edit->slug = $nama_bersih;
         $edit->alamat = $request->alamat;

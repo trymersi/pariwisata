@@ -34,7 +34,7 @@ class KulinerController extends Controller
       
 
         $this->data = [
-            'category_name' => 'Kuliner',
+            'category_name' => 'Ekraf',
             'page_name' => 'Kuliner',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',

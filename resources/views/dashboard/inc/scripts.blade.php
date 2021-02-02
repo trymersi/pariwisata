@@ -27,10 +27,10 @@ $("#button-simpan").on('click',function()
 
 <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
 @switch($page_name)
-    @case('analytics')
+    @case('dashboard')
       {{-- Dashboard --}}
       <script src="{{asset('plugins/apex/apexcharts.min.js')}}"></script>
-      <script src="{{asset('assets/js/dashboard/dash_2.js')}}"></script>
+      <script src="{{asset('assets/js/dashboard/dash.js')}}"></script>
       @break
 
     @case('sales')

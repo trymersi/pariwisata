@@ -34,7 +34,7 @@ class PemanduController extends Controller
         $this->objekWisata = new ObjekWisata;
 
         $this->data = [
-            'category_name' => 'Pemandu',
+            'category_name' => 'Objek',
             'page_name' => 'Pemandu',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',

@@ -152,7 +152,7 @@ class RestaurantController extends Controller
         }
 
         $this->restaurantClass->kabupaten_id = $kab_id;
-        $this->restaurantClass->objek_wisata_id = $request->objek_wisata;
+        // $this->restaurantClass->objek_wisata_id = $request->objek_wisata;
         $this->restaurantClass->nama = $request->nama_restaurant;
         $this->restaurantClass->slug = $nama_bersih;
         $this->restaurantClass->alamat = $request->alamat;
@@ -211,7 +211,6 @@ class RestaurantController extends Controller
                 'kabupaten' => 'required',
                 'nama_restaurant' => 'required',
                 'alamat'=> 'required',
-                'gambar'=> 'required',
                 'nomor_kontak'=> 'required',
                 'latitude'=> 'required',
                 'longitude'=> 'required',
@@ -223,7 +222,6 @@ class RestaurantController extends Controller
             $validator = Validator::make($request->all(), [
                 'nama_restaurant' => 'required',
                 'alamat'=> 'required',
-                'gambar'=> 'required',
                 'nomor_kontak'=> 'required',
                 'latitude'=> 'required',
                 'longitude'=> 'required',
@@ -283,7 +281,7 @@ class RestaurantController extends Controller
 
         $edit = Restaurant::find($id);
         $edit->kabupaten_id = $kab_id;
-        $edit->objek_wisata_id = $request->objek_wisata;
+        // $edit->objek_wisata_id = $request->objek_wisata;
         $edit->nama = $request->nama_restaurant;
         $edit->slug = $nama_bersih;
         $edit->alamat = $request->alamat;

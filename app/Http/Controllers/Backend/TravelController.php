@@ -31,7 +31,7 @@ class TravelController extends Controller
         $this->kecamatanClass = new Kecamatan;
 
         $this->data = [
-            'category_name' => 'Travel',
+            'category_name' => 'Objek',
             'page_name' => 'Travel',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',

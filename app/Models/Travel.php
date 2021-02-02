@@ -48,6 +48,29 @@ class Travel extends Model
             return $data;
     }
 
+    public function getApi($kab=false,$kw=false)
+    {
+        $data = $this->leftJoin('kabupatens','kabupatens.id','travel.kabupaten_id')
+            ->select(
+                'kabupatens.nama as nama_kabupaten',
+                'travel.nama',
+                'travel.alamat',
+                'travel.kontak',
+                'travel.status',
+                'travel.id',
+                'travel.gambar'
+            );
+            if($kab && $kab != ''):
+                $data = $data->where('travel.kabupaten_id',$kab);
+            endif;
+            if($kw && $kw != ''):
+                $data = $data->where('travel.nama','LIKE','%'.$kw.'%');
+            endif;
+            $data = $data->orderBy('travel.updated_at','desc')
+            ->paginate(10);
+            return $data;
+    }
+
     public function getDetail($id)
     {
         $data = $this->leftJoin('kabupatens','kabupatens.id','travel.kabupaten_id')

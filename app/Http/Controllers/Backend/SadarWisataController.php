@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Models\Kabupaten;
 use App\Models\Kecamatan;
 use App\Models\SadarWisata;
+use App\Models\DesaWisata;
+use App\Models\SadarWisataDetail;
 use DataTables;
 use Toastr;
 use File;
@@ -21,6 +23,8 @@ class SadarWisataController extends Controller
     private $sadarWisata;
     private $kabupatenClass;
     private $kecamatanClass;
+    private $desaWisata;
+    private $sadarWisataDetail;
 
     public function __construct()
     {
@@ -29,9 +33,12 @@ class SadarWisataController extends Controller
         $this->kabupatenClass = new Kabupaten;
         $this->sadarWisata = new SadarWisata;
         $this->kecamatanClass = new Kecamatan;
+        $this->desaWisata = new DesaWisata;
+        $this->sadarWisataDetail = new SadarWisataDetail;
+
 
         $this->data = [
-            'category_name' => 'Sadar Wisata',
+            'category_name' => 'Objek',
             'page_name' => 'Sadar Wisata',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
@@ -57,6 +64,7 @@ class SadarWisataController extends Controller
     public function create()
     {
         $this->data['kabupaten'] = $this->kabupatenClass->orderBy("nama",'desc')->get();
+        $this->data['desa_wisata'] = $this->desaWisata->orderBy("nama",'desc')->get();
         return view('dashboard.pages.sadar-wisata.create',$this->data);
     }
 
@@ -100,10 +108,20 @@ class SadarWisataController extends Controller
         $this->sadarWisata->kecamatan_id = $request->kecamatan;
         $this->sadarWisata->nama = $request->nama;
         $this->sadarWisata->alamat = $request->alamat;
-        $this->sadarWisata->potensi_wisata = implode(',',$request->potensi);
+        // $this->sadarWisata->potensi_wisata = implode(',',$request->potensi);
         $this->sadarWisata->kontak = $request->kontak;
         $this->sadarWisata->status = (Auth::user()->level == 1 || Auth::user()->level == 4 ) ? 3 : 1;
         $this->sadarWisata->save();
+
+        $idSadarWisata = $this->sadarWisata->id;
+
+        foreach($request->potensi as $item)
+        {
+            $save = new SadarWisataDetail;
+            $save->sadar_wisata_id = $idSadarWisata;
+            $save->desa_wisata_id = $item;
+            $save->save();
+        }
 
         if($this->sadarWisata)
         {
@@ -131,7 +149,15 @@ class SadarWisataController extends Controller
      */
     public function edit($id)
     {
-        
+        $detail = $this->sadarWisataDetail->select("desa_wisata_id")->where('sadar_wisata_id',$id)->get();
+        $detailAr = array();
+        foreach($detail as $item)
+        {
+            $detailAr[] = $item->desa_wisata_id;
+        }
+        $this->data['desa_wisata'] = $this->desaWisata->orderBy("nama",'desc')->get();
+        $this->data['desa_wisata_detail'] = $detailAr;
+
         $this->data['edit'] = $this->sadarWisata->find($id);
         $this->data['kabupaten'] = $this->kabupatenClass->orderBy("nama",'desc')->get();
         $this->data['kecamatan'] = $this->kecamatanClass->getListByKab($this->data['edit']->kabupaten_id);
@@ -191,10 +217,21 @@ class SadarWisataController extends Controller
         $edit->kecamatan_id = $request->kecamatan;
         $edit->nama = $request->nama;
         $edit->alamat = $request->alamat;
-        $edit->potensi_wisata = implode(',',$request->potensi);
+        // $edit->potensi_wisata = implode(',',$request->potensi);
         $edit->kontak = $request->kontak;
         $edit->status = (Auth::user()->level == 1 || Auth::user()->level == 4 ) ? $request->status : 1;
         $edit->save();
+
+        $this->sadarWisataDetail->where('sadar_wisata_id',$id)->delete();
+
+        foreach($request->potensi as $item)
+        {
+            $save = new SadarWisataDetail;
+            $save->sadar_wisata_id = $id;
+            $save->desa_wisata_id = $item;
+            $save->save();
+        }
+
 
         if($this->sadarWisata)
         {

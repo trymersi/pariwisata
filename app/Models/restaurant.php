@@ -57,6 +57,7 @@ class Restaurant extends Model
             )
             ->where('restaurants.status',3)
             ->orderBy('restaurants.updated_at','desc')
+            ->limit(10)
             ->get();
         return $get;
     }
@@ -84,6 +85,39 @@ class Restaurant extends Model
             );
             if($kab):
                 $get = $get->where('restaurants.kabupaten_id',$kab);
+            endif;
+            $get = $get->orderBy('restaurants.nama','asc')
+            ->where('restaurants.status',3)
+            ->paginate(10);
+        return $get;
+    }
+
+    public function getApi($kab=false,$kw=false)
+    {
+        $get = $this->leftJoin('kabupatens','kabupatens.id','restaurants.kabupaten_id')
+            ->leftJoin('objek_wisatas','objek_wisatas.id','restaurants.objek_wisata_id')
+            ->select(
+                'kabupatens.nama as nama_kabupaten',
+                'kabupatens.gambar as gambar_kabupaten',
+                'objek_wisatas.nama as nama_objek_wisata',
+                'objek_wisatas.gambar_header',
+                'restaurants.nama',
+                'restaurants.deskripsi',
+                'restaurants.gambar',
+                'restaurants.nomor_kontak',
+                'restaurants.halal',
+                'restaurants.status',
+                'restaurants.longitude',
+                'restaurants.latitude',
+                'restaurants.alamat',
+                'restaurants.id',
+                'restaurants.slug',
+            );
+            if($kab && $kab != ''):
+                $get = $get->where('restaurants.kabupaten_id',$kab);
+            endif;
+            if($kw && $kw != ''):
+                $get = $get->where('restaurants.nama','LIKE','%'.$kw.'%');
             endif;
             $get = $get->orderBy('restaurants.nama','asc')
             ->where('restaurants.status',3)

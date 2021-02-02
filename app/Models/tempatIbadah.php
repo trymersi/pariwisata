@@ -54,6 +54,7 @@ class TempatIbadah extends Model
             )
             ->where('tempat_ibadahs.status',3)
             ->orderBy('tempat_ibadahs.updated_at','desc')
+            ->limit(10)
             ->get();
         return $get;
     }
@@ -79,6 +80,37 @@ class TempatIbadah extends Model
             );
             if($kab):
                 $get = $get->where('tempat_ibadahs.kabupaten_id',$kab);
+            endif;
+            $get = $get->orderBy('tempat_ibadahs.nama','asc')
+            ->where('tempat_ibadahs.status',3)
+            ->paginate(10);
+        return $get;
+    }
+
+    public function getApi($kab=false,$kw=false)
+    {
+        $get = $this->leftJoin('kabupatens','kabupatens.id','tempat_ibadahs.kabupaten_id')
+            ->leftJoin('objek_wisatas','objek_wisatas.id','tempat_ibadahs.objek_wisata_id')
+            ->select(
+                'kabupatens.nama as nama_kabupaten',
+                'kabupatens.gambar as gambar_kabupaten',
+                'objek_wisatas.nama as nama_objek_wisata',
+                'objek_wisatas.gambar_header',
+                'tempat_ibadahs.nama',
+                'tempat_ibadahs.agama',
+                'tempat_ibadahs.gambar',
+                'tempat_ibadahs.alamat',
+                'tempat_ibadahs.status',
+                'tempat_ibadahs.slug',
+                'tempat_ibadahs.id',
+                'tempat_ibadahs.longitude',
+                'tempat_ibadahs.latitude',
+            );
+            if($kab && $kab != ''):
+                $get = $get->where('tempat_ibadahs.kabupaten_id',$kab);
+            endif;
+            if($kw && $kw != ''):
+                $get = $get->where('tempat_ibadahs.nama','LIKE','%'.$kw.'%');
             endif;
             $get = $get->orderBy('tempat_ibadahs.nama','asc')
             ->where('tempat_ibadahs.status',3)

@@ -31,7 +31,7 @@ class DesaWisataController extends Controller
         $this->kecamatanClass = new Kecamatan;
 
         $this->data = [
-            'category_name' => 'Desa Wisata',
+            'category_name' => 'Objek',
             'page_name' => 'Desa Wisata',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',

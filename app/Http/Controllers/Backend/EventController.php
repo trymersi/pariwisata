@@ -34,7 +34,7 @@ class EventController extends Controller
         $this->eventClass = new Event;
 
         $this->data = [
-            'category_name' => 'Objek',
+            'category_name' => 'Pemasaran',
             'page_name' => 'Event',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',

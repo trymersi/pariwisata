@@ -38,7 +38,7 @@ class CendramataController extends Controller
         $this->sosialMediaClass = new SosialMedia;
 
         $this->data = [
-            'category_name' => 'Objek',
+            'category_name' => 'Ekraf',
             'page_name' => 'Cindramata',
             'has_scrollspy' => 0,
             'scrollspy_offset' => '',
