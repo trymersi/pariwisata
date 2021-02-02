@@ -356,34 +356,38 @@ class ObjekWisata extends Model
 
     public function getRestoTerdekat($id,$id_wisata)
     {
-        $get = $this->leftJoin('restaurants','restaurants.objek_wisata_id','objek_wisatas.id')
+        $get = $this->leftJoin('objek_wisata_restaurants','objek_wisata_restaurants.objek_wisata_id','objek_wisatas.id')
+            ->leftJoin('restaurants','restaurants.id','objek_wisata_restaurants.restaurant_id')
             ->select(
+                'restaurants.id',
                 'restaurants.nama as nama_resto',
                 'restaurants.slug as slug_resto',
                 'restaurants.alamat as alamat_resto',
                 'restaurants.gambar as gambar_resto',
+                'objek_wisata_restaurants.jarak'
             )
             ->orderBy('objek_wisatas.updated_at','desc')
             ->where('objek_wisatas.status',3)
             ->where('objek_wisatas.id',$id_wisata)
-            ->groupBy('objek_wisatas.nama')
             ->get();
             return $get;
 
     }
     public function getIbadahTerdekat($id,$id_wisata)
     {
-        $get = $this->leftJoin('tempat_ibadahs','tempat_ibadahs.objek_wisata_id','objek_wisatas.id')
+        $get = $this->leftJoin('objek_wisata_tempat_ibadahs','objek_wisata_tempat_ibadahs.objek_wisata_id','objek_wisatas.id')
+            ->leftJoin('tempat_ibadahs','tempat_ibadahs.id','objek_wisata_tempat_ibadahs.tempat_ibadah_id')
             ->select(
+                'tempat_ibadahs.id',
                 'tempat_ibadahs.nama as nama_ibadah',
                 'tempat_ibadahs.slug as slug_ibadah',
                 'tempat_ibadahs.alamat as alamat_ibadah',
                 'tempat_ibadahs.gambar as gambar_ibadah',
+                'objek_wisata_tempat_ibadahs.jarak'
             )
             ->orderBy('objek_wisatas.updated_at','desc')
             ->where('objek_wisatas.status',3)
             ->where('objek_wisatas.id',$id_wisata)
-            ->groupBy('objek_wisatas.nama')
             ->get();
             return $get;
 
@@ -391,17 +395,19 @@ class ObjekWisata extends Model
 
     public function getHotelTerdekat($id,$id_wisata)
     {
-        $get = $this->leftJoin('hotels','hotels.objek_wisata_id','objek_wisatas.id')
+        $get = $this->leftJoin('objek_wisata_hotels','objek_wisata_hotels.objek_wisata_id','objek_wisatas.id')
+            ->leftJoin('hotels','hotels.id','objek_wisata_hotels.hotel_id')
             ->select(
+                'hotels.id',
                 'hotels.nama as nama_hotel',
                 'hotels.slug as slug_hotel',
                 'hotels.alamat as alamat_hotel',
                 'hotels.gambar as gambar_hotel',
+                'objek_wisata_hotels.jarak'
             )
             ->orderBy('objek_wisatas.updated_at','desc')
             ->where('objek_wisatas.status',3)
             ->where('objek_wisatas.id',$id_wisata)
-            ->groupBy('objek_wisatas.nama')
             ->get();
             return $get;
 

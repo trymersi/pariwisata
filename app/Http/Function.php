@@ -246,8 +246,21 @@ function getDistance($from,$to)
         if(isset($data['rows'][0]['elements'][0]['distance']))
         {
             $jarak = $data['rows'][0]['elements'][0]['distance']['text'];
-            $jarak = str_replace(' mi', '', $jarak)*1.609344;
-            $jarak = formatAngkat($jarak).' Km';
+            
+            $cek = strpos($jarak,'ft');
+            if($cek !== FALSE)
+            {
+                $jarak = str_replace(' ft', '', $jarak)/3.281;
+                $jarak = formatAngkat($jarak).' M';
+            }
+            else
+            {
+                $jarak = str_replace(' mi', '', $jarak)*1.609344;
+                $jarak = formatAngkat($jarak).' Km';
+            }
+            
+            
+            
             $durasi = $data['rows'][0]['elements'][0]['duration']['value'];
             $durasi = waktu($durasi);
             return $jarak." (".$durasi.")";
@@ -672,7 +685,7 @@ function getSosmedHotel($id)
 
 function getSosmedObjekWisata($id)
 {
-    $get = App\Models\sosialMedia::getObjekWisataSosmed($id);
+    $get = App\Models\SosialMedia::getObjekWisataSosmed($id);
     $url = array();
     foreach($get as $item)
     {
@@ -708,7 +721,7 @@ function getSosmedObjekCindramata($id)
 
 function getGambarObjekWisata($id)
 {
-    $data =  App\Models\objekWisataGambar::getGallery($id);
+    $data =  App\Models\ObjekWisataGambar::getGallery($id);
     $hitung = count($data);
     $i = 1;
     $ar = array();
@@ -729,7 +742,7 @@ function getGambarObjekWisata($id)
 
 function getGambarHotel($id)
 {
-    $data =  App\Models\hotelGambar::getGallery($id);
+    $data =  App\Models\HotelGambar::getGallery($id);
     $hitung = count($data);
     $i = 1;
     $ar = array();
@@ -750,7 +763,7 @@ function getGambarHotel($id)
 
 function getGambarRestoran($id)
 {
-    $data =  App\Models\restaurantGambar::getGallery($id);
+    $data =  App\Models\RestaurantGambar::getGallery($id);
     $hitung = count($data);
     $i = 1;
     $ar = array();

@@ -179,9 +179,9 @@ class ServiceController extends Controller
                 $this->data['response']['pengunjung'] = $this->objekWisata->getPengunjung($objekWisata->id);
                 $this->data['response']['pemandu'] = $this->pemanduWisata->getByObjek($objekWisata->id);
 
-                if(isset($request->user_latitude) && $request->user_latitude != '' && isset($request->user_longitude) && $request->user_longitude != '')
+                if(isset($request->latitude) && $request->latitude != '' && isset($request->longitude) && $request->longitude != '')
                 {
-                    $latLong = $request->user_latitude.",".$request->user_longitude;
+                    $latLong = $request->latitude.",".$request->longitude;
                     $WisataLatLong = $objekWisata->latitude.",".$objekWisata->longitude;
                     $this->data['response']['jarak'] = getDistance($latLong,$WisataLatLong);
                 }
@@ -218,9 +218,9 @@ class ServiceController extends Controller
                 $this->data['response']['jenis'] = jenisHotelIon($hotel->jenis);
                 $this->data['response']['layanan'] = jenisLayananIon($hotel->layanan);
                 $this->data['response']['ulasan'] = $this->hotelReview->where('hotel_id',$hotel->id)->orderBy('id','desc')->get();
-                if(isset($request->user_latitude) && $request->user_latitude != '' && isset($request->user_longitude) && $request->user_longitude != '')
+                if(isset($request->latitude) && $request->latitude != '' && isset($request->longitude) && $request->longitude != '')
                 {
-                    $latLong = $request->user_latitude.",".$request->user_longitude;
+                    $latLong = $request->latitude.",".$request->longitude;
                     $hotelLatLong = $hotel->latitude.",".$hotel->longitude;
                     $this->data['response']['jarak'] = getDistance($latLong,$hotelLatLong);
                 }
@@ -256,9 +256,9 @@ class ServiceController extends Controller
                 $this->data['response']['jenis'] = jenisWisata($tempat_ibadah->jenis);
                 $this->data['response']['menu'] = $this->tempatIbadahClass->getMenu($tempat_ibadah->id);
                 $this->data['response']['ulasan'] = $this->tempatibadahReview->where('tempat_ibadah_id',$tempat_ibadah->id)->orderBy('id','desc')->get();
-                if(isset($request->user_latitude) && $request->user_latitude != '' && isset($request->user_longitude) && $request->user_longitude != '')
+                if(isset($request->latitude) && $request->latitude != '' && isset($request->longitude) && $request->longitude != '')
                 {
-                    $latLong = $request->user_latitude.",".$request->user_longitude;
+                    $latLong = $request->latitude.",".$request->longitude;
                     $placeLatLong = $tempat_ibadah->latitude.",".$tempat_ibadah->longitude;
                     $this->data['response']['jarak'] = getDistance($latLong,$placeLatLong);
                 }
@@ -294,9 +294,9 @@ class ServiceController extends Controller
                 $this->data['response']['jenis'] = jenisWisata($restaurant->jenis);
                 $this->data['response']['menu'] = $this->restaurantClass->getMenu($restaurant->id);
                 $this->data['response']['ulasan'] = $this->restaurantReview->where('restaurant_id',$restaurant->id)->orderBy('id','desc')->get();
-                if(isset($request->user_latitude) && $request->user_latitude != '' && isset($request->user_longitude) && $request->user_longitude != '')
+                if(isset($request->latitude) && $request->latitude != '' && isset($request->longitude) && $request->longitude != '')
                 {
-                    $latLong = $request->user_latitude.",".$request->user_longitude;
+                    $latLong = $request->latitude.",".$request->longitude;
                     $placeLatLong = $restaurant->latitude.",".$restaurant->longitude;
                     $this->data['response']['jarak'] = getDistance($latLong,$placeLatLong);
                 }
@@ -382,9 +382,9 @@ class ServiceController extends Controller
                 $this->data['response']['detail'] = $this->cendramata->getDetail($cendramata->id);
                 $this->data['response']['produk'] = $this->cindramataDetail->getProduk($cendramata->id);
                 $this->data['response']['terdekat'] = $this->cendramata->getTerdekat($cendramata->kabupaten_id, $cendramata->id );
-                if(isset($request->user_latitude) && $request->user_latitude != '' && isset($request->user_longitude) && $request->user_longitude != '')
+                if(isset($request->latitude) && $request->latitude != '' && isset($request->longitude) && $request->longitude != '')
                 {
-                    $latLong = $request->user_latitude.",".$request->user_longitude;
+                    $latLong = $request->latitude.",".$request->longitude;
                     $placeLatLong = $cendramata->latitude.",".$cendramata->longitude;
                     $this->data['response']['jarak'] = getDistance($latLong,$placeLatLong);
                 }
