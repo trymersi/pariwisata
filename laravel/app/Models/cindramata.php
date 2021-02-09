@@ -14,14 +14,12 @@ class Cindramata extends Model
     public function getData($kab=false)
     {
         $get = $this->leftJoin('kabupatens','kabupatens.id','cindramatas.kabupaten_id')
-            ->leftJoin('objek_wisatas','objek_wisatas.id','cindramatas.objek_wisata_id')
             ->select(
                 'kabupatens.nama as nama_kabupaten',
-                'objek_wisatas.nama as nama_objek_wisata',
                 'cindramatas.nama',
-                'cindramatas.alamat',
+                'cindramatas.jenis',
                 'cindramatas.gambar',
-                'cindramatas.nomor_kontak',
+                'cindramatas.deskripsi',
                 'cindramatas.status',
                 'cindramatas.id'
             );
@@ -36,14 +34,12 @@ class Cindramata extends Model
     public function getAll($kab=false)
     {
         $get = $this->leftJoin('kabupatens','kabupatens.id','cindramatas.kabupaten_id')
-            ->leftJoin('objek_wisatas','objek_wisatas.id','cindramatas.objek_wisata_id')
             ->select(
                 'kabupatens.nama as nama_kabupaten',
-                'objek_wisatas.nama as nama_objek_wisata',
                 'cindramatas.nama',
-                'cindramatas.alamat',
+                'cindramatas.jenis',
                 'cindramatas.gambar',
-                'cindramatas.nomor_kontak',
+                'cindramatas.deskripsi',
                 'cindramatas.status',
                 'cindramatas.id'
             );
@@ -58,14 +54,12 @@ class Cindramata extends Model
     public function getApi($kab=false,$kw=false)
     {
         $get = $this->leftJoin('kabupatens','kabupatens.id','cindramatas.kabupaten_id')
-            ->leftJoin('objek_wisatas','objek_wisatas.id','cindramatas.objek_wisata_id')
             ->select(
                 'kabupatens.nama as nama_kabupaten',
-                'objek_wisatas.nama as nama_objek_wisata',
                 'cindramatas.nama',
-                'cindramatas.alamat',
+                'cindramatas.jenis',
                 'cindramatas.gambar',
-                'cindramatas.nomor_kontak',
+                'cindramatas.deskripsi',
                 'cindramatas.status',
                 'cindramatas.id'
             );
@@ -83,14 +77,12 @@ class Cindramata extends Model
     public function getDetail($id)
     {
         $get = $this->leftJoin('kabupatens','kabupatens.id','cindramatas.kabupaten_id')
-            ->leftJoin('objek_wisatas','objek_wisatas.id','cindramatas.objek_wisata_id')
             ->select(
                 'kabupatens.nama as nama_kabupaten',
-                'objek_wisatas.nama as nama_objek_wisata',
                 'cindramatas.nama',
-                'cindramatas.alamat',
+                'cindramatas.jenis',
                 'cindramatas.gambar',
-                'cindramatas.nomor_kontak',
+                'cindramatas.deskripsi',
                 'cindramatas.status',
                 'cindramatas.id'
             )
@@ -103,14 +95,12 @@ class Cindramata extends Model
     public function getTerdekat($id,$id_cendramata)
     {
         $get = $this->leftJoin('kabupatens','kabupatens.id','cindramatas.kabupaten_id')
-            ->leftJoin('objek_wisatas','objek_wisatas.id','cindramatas.objek_wisata_id')
             ->select(
                 'kabupatens.nama as nama_kabupaten',
-                'objek_wisatas.nama as nama_objek_wisata',
                 'cindramatas.nama',
-                'cindramatas.alamat',
+                'cindramatas.jenis',
                 'cindramatas.gambar',
-                'cindramatas.nomor_kontak',
+                'cindramatas.deskripsi',
                 'cindramatas.status',
                 'cindramatas.id'
             )

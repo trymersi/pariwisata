@@ -169,7 +169,7 @@ class ObjekWisataController extends Controller
                 $filepath = public_path('uploads/images/deskripsi-objek-wisata').'/'.$filename.'.'.$mimetype;
                 $nama = $filename.'.'.$mimetype;
                 $image = Image::make($src)
-                        ->encode($mimetype, 75)
+                        ->encode($mimetype, 60)
                         ->save($filepath);
                 $truepath = asset('uploads/images/deskripsi-objek-wisata').'/'.$filename.'.'.$mimetype;
                 $new_src =$truepath;
@@ -181,11 +181,19 @@ class ObjekWisataController extends Controller
 
         if($request->file('gambar_header'))
         {
-            $gambar = $request->file('gambar_header');
-            $ext = $gambar->getClientOriginalExtension();
             $destination = public_path('uploads/images/gambar-header-objek-wisata');
-            $filename_header = $nama_bersih.".".$ext;
-            $gambar->move($destination, $filename_header);
+            $filename_header = rand().'-'.$nama_bersih.".jpg";
+            $gambar = Image::make($request->file('gambar_header'));
+            $gambar->encode('jpg', 60);
+            $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+            if($request->sumber_gambar_header != '')
+            {
+                $gambar->text("SUMBER : ".$request->sumber_gambar_header, 3, $gambar->height() - 3, function($font) {
+                    $font->color('#fdf6e3');
+                    $font->size(24);
+                });
+            }
+            $gambar->save($destination.'/'.$filename_header);
         }
 
         $this->objekWisataClass->kabupaten_id = $kab_id;
@@ -196,6 +204,7 @@ class ObjekWisataController extends Controller
         $this->objekWisataClass->jenis = implode(',',$request->jenis);
         $this->objekWisataClass->video_promosi = ($request->video_promosi) ? $request->video_promosi : "#";
         $this->objekWisataClass->gambar_header = $filename_header;
+        $this->objekWisataClass->sumber_gambar_header = $request->sumber_gambar_header;
         $this->objekWisataClass->desa = $request->desa;
         $this->objekWisataClass->latitude = $request->latitude;
         $this->objekWisataClass->longitude = $request->longitude;
@@ -313,7 +322,7 @@ class ObjekWisataController extends Controller
                 $filepath = public_path('uploads/images/deskripsi-objek-wisata').'/'.$filename.'.'.$mimetype;
                 $nama = $filename.'.'.$mimetype;
                 $image = Image::make($src)
-                        ->encode($mimetype, 75)
+                        ->encode($mimetype, 60)
                         ->save($filepath);
                 $truepath = asset('uploads/images/deskripsi-objek-wisata').'/'.$filename.'.'.$mimetype;
                 $new_src =$truepath;
@@ -325,11 +334,19 @@ class ObjekWisataController extends Controller
 
         if($request->file('gambar_header'))
         {
-            $gambar = $request->file('gambar_header');
-            $ext = $gambar->getClientOriginalExtension();
             $destination = public_path('uploads/images/gambar-header-objek-wisata');
-            $filename_header = $nama_bersih.".".$ext;
-            $gambar->move($destination, $filename_header);
+            $filename_header = rand().'-'.$nama_bersih.".jpg";
+            $gambar = Image::make($request->file('gambar_header'));
+            $gambar->encode('jpg', 60);
+            $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+            if($request->sumber_gambar_header != '')
+            {
+                $gambar->text("SUMBER : ".$request->sumber_gambar_header, 3, $gambar->height() - 3, function($font) {
+                    $font->color('#fdf6e3');
+                    $font->size(24);
+                });
+            }
+            $gambar->save($destination.'/'.$filename_header);
         }
         
 
@@ -344,6 +361,7 @@ class ObjekWisataController extends Controller
         if(isset($filename_header)):
             $edit->gambar_header = $filename_header;
         endif;
+        $edit->sumber_gambar_header = $request->sumber_gambar_header;
         $edit->desa = $request->desa;
         $edit->latitude = $request->latitude;
         $edit->longitude = $request->longitude;
@@ -506,7 +524,7 @@ class ObjekWisataController extends Controller
             $objekWisata = $this->objekWisataClass->find($data->objek_wisata_id);
             $nama_objek = $objekWisata->nama;
             $button = '<a href="'.url('dashboard/objek-wisata/gambar/edit/'.$data->id.'/'.$data->objek_wisata_id).'" class="btn btn-warning mb-2 mr-2 btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a>';
-            $button .= '<button data-id="'.$data->id.'" data-nama="'.$nama_objek.'" class="btn btn-danger mb-2 mr-2 btn-sm" data-toggle="modal" data-target="#ModalHapus" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>';
+            $button = '<button data-id="'.$data->id.'" data-nama="'.$nama_objek.'" class="btn btn-danger mb-2 mr-2 btn-sm" data-toggle="modal" data-target="#ModalHapus" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>';
             return  $button;
         })
         
@@ -546,28 +564,30 @@ class ObjekWisataController extends Controller
             return Redirect::back()->withErrors($validator)->withInput();
         }
 
-        if($request->file('gambar'))
+        $data = $this->objekWisataClass->find($request->objek_wisata_id);
+        $nama_objek = bersih($data->nama,'-');
+        $destination = public_path('uploads/images/gallery-objek-wisata');
+        $filename = rand().'-'.$nama_objek.".jpg";
+        $gambar = Image::make($request->file('gambar'));
+        $gambar->encode('jpg', 60);
+        $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+        if($request->sumber != '')
         {
-            $data = $this->objekWisataClass->find($request->objek_wisata_id);
-            $nama_objek = bersih($data->nama,'-');
-            $i = 1;
-            foreach($request->file('gambar') as $key)
-            {
-                $ext = $key->getClientOriginalExtension();
-                $destination = public_path('uploads/images/gallery-objek-wisata');
-                $filename = $nama_objek."-".$i.".".$ext;
-                $key->move($destination, $filename);
-
-                $save = new ObjekWisataGambar;
-                $save->objek_wisata_id = $request->objek_wisata_id;
-                $save->gambar = $filename;
-                $save->save();
-                $i++;
-            }
-
-            Toastr::success('Data Berhasil Ditambah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
-            return redirect::to('dashboard/objek-wisata/gambar/'.$request->objek_wisata_id);
+            $gambar->text("SUMBER : ".$request->sumber, 3, $gambar->height() - 3, function($font) {
+                $font->color('#fdf6e3');
+                $font->size(24);
+            });
         }
+        $gambar->save($destination.'/'.$filename);
+
+        $save = new ObjekWisataGambar;
+        $save->objek_wisata_id = $request->objek_wisata_id;
+        $save->gambar = $filename;
+        $save->sumber = $request->sumber;
+        $save->save();
+
+        Toastr::success('Data Berhasil Ditambah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
+        return redirect::to('dashboard/objek-wisata/gambar/'.$request->objek_wisata_id);
     }
 
     public function gambarEdit($id,$objek_wisata_id)

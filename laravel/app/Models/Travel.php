@@ -19,7 +19,8 @@ class Travel extends Model
                 'travel.alamat',
                 'travel.kontak',
                 'travel.status',
-                'travel.id'
+                'travel.id',
+                'travel.gambar'
             );
             if($kab):
                 $data = $data->where('travel.kabupaten_id',$kab);
@@ -38,7 +39,8 @@ class Travel extends Model
                 'travel.alamat',
                 'travel.kontak',
                 'travel.status',
-                'travel.id'
+                'travel.id',
+                'travel.gambar'
             );
             if($kab):
                 $data = $data->where('travel.kabupaten_id',$kab);
@@ -80,7 +82,8 @@ class Travel extends Model
                 'travel.alamat',
                 'travel.kontak',
                 'travel.status',
-                'travel.id'
+                'travel.id',
+                'travel.gambar'
             )
             ->where('travel.id',$id)
             ->first();
@@ -96,7 +99,8 @@ class Travel extends Model
                 'travel.alamat',
                 'travel.kontak',
                 'travel.status',
-                'travel.id'
+                'travel.id',
+                'travel.gambar'
             )
             ->where('travel.kabupaten_id',$id_kabupaten)
             ->where('travel.id','!=',$id_travel)

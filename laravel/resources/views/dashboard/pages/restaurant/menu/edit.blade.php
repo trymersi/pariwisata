@@ -39,7 +39,17 @@
                                 <span><code>{{$message}}</code></span>
                             @enderror
                             <p> Upload foto baru untuk mengubah gambar</p>
-                            <img width="50%" src="{{ url('uploads/images/restaurant-menu/') }}/{{ $edit->gambar }}">
+                            <img width="50%" src="{{ asset('uploads/images/restaurant-menu/') }}/{{ $edit->gambar }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Sumber Gambar</label>
+                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                            <input type="text" class="form-control" name="sumber" value="{{ old('sumber',$edit->sumber) }}" placeholder="Masukan sumber foto">
+                            @error('sumber')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
                         </div>
                     </div>
 

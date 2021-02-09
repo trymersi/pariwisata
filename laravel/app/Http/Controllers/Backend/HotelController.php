@@ -145,11 +145,20 @@ class HotelController extends Controller
 
         if($request->file('gambar_header'))
         {
-            $gambar = $request->file('gambar_header');
-            $ext = $gambar->getClientOriginalExtension();
             $destination = public_path('uploads/images/gambar-header-hotel');
-            $filename_header = $nama_bersih.".".$ext;
-            $gambar->move($destination, $filename_header);
+            $filename_header = rand().'-'.$nama_bersih.".jpg";
+            $gambar = Image::make($request->file('gambar_header'));
+            $gambar->encode('jpg', 60);
+            $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+            if($request->sumber_gambar_header != '')
+            {
+                $gambar->text("SUMBER : ".$request->sumber_gambar_header, 3, $gambar->height() - 3, function($font) {
+                    $font->color('#fdf6e3');
+                    $font->size(24);
+                });
+            }
+            $gambar->save($destination.'/'.$filename_header);
+
         }
 
         $this->hotelClass->kabupaten_id = $kab_id;
@@ -160,6 +169,7 @@ class HotelController extends Controller
         $this->hotelClass->jenis = implode(',',$request->jenis);
         $this->hotelClass->layanan = implode(',',$request->layanan);
         $this->hotelClass->gambar = $filename_header;
+        $this->hotelClass->sumber_gambar_header = $request->sumber_gambar_header;
         $this->hotelClass->latitude = $request->latitude;
         $this->hotelClass->longitude = $request->longitude;
         $this->hotelClass->alamat = $request->alamat;
@@ -293,11 +303,19 @@ class HotelController extends Controller
 
         if($request->file('gambar_header'))
         {
-            $gambar = $request->file('gambar_header');
-            $ext = $gambar->getClientOriginalExtension();
             $destination = public_path('uploads/images/gambar-header-hotel');
-            $filename_header = $nama_bersih.".".$ext;
-            $gambar->move($destination, $filename_header);
+            $filename_header = rand().'-'.$nama_bersih.".jpg";
+            $gambar = Image::make($request->file('gambar_header'));
+            $gambar->encode('jpg', 60);
+            $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+            if($request->sumber_gambar_header != '')
+            {
+                $gambar->text("SUMBER : ".$request->sumber_gambar_header, 3, $gambar->height() - 3, function($font) {
+                    $font->color('#fdf6e3');
+                    $font->size(24);
+                });
+            }
+            $gambar->save($destination.'/'.$filename_header);
         }
         
 
@@ -308,6 +326,7 @@ class HotelController extends Controller
         $edit->slug = $request->nama;
         $edit->latitude = $request->latitude;
         $edit->longitude = $request->longitude;
+        $edit->longitude = $request->sumber_gambar_header;
         $edit->alamat = $request->alamat;
         $edit->deskripsi = $dom->saveHTML();
         $edit->jenis = implode(',',$request->jenis);
@@ -315,6 +334,7 @@ class HotelController extends Controller
         if(isset($filename_header)):
             $edit->gambar = $filename_header;
         endif;
+        
         $edit->status = (Auth::user()->level == 1 || Auth::user()->level == 4 ) ? $request->status : 1;
         $edit->save();
 
@@ -429,7 +449,7 @@ class HotelController extends Controller
 
             ->addColumn('jenis', function($data)
             {
-               return  jenisWisata($data->jenis);
+               return  jenisHotel($data->jenis_hotel);
             })
             
 
@@ -456,7 +476,7 @@ class HotelController extends Controller
             $hotel = $this->hotelClass->find($data->hotel_id);
             $nama_hotel = $hotel->nama;
             $button = '<a href="'.url('dashboard/hotel/gambar/edit/'.$data->id.'/'.$data->hotel_id).'" class="btn btn-warning mb-2 mr-2 btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a>';
-            $button .= '<button data-id="'.$data->id.'" data-nama="'.$nama_hotel.'" class="btn btn-danger mb-2 mr-2 btn-sm" data-toggle="modal" data-target="#ModalHapus" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>';
+            $button = '<button data-id="'.$data->id.'" data-nama="'.$nama_hotel.'" class="btn btn-danger mb-2 mr-2 btn-sm" data-toggle="modal" data-target="#ModalHapus" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>';
             return  $button;
         })
         
@@ -496,28 +516,30 @@ class HotelController extends Controller
             return Redirect::back()->withErrors($validator)->withInput();
         }
 
-        if($request->file('gambar'))
+        $data = $this->hotelClass->find($request->hotel_id);
+        $nama_hotel = bersih($data->nama,'-');
+        $destination = public_path('uploads/images/gallery-hotel');
+        $filename = rand().'-'.$nama_hotel.".jpg";
+        $gambar = Image::make($request->file('gambar'));
+        $gambar->encode('jpg', 60);
+        $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+        if($request->sumber != '')
         {
-            $data = $this->hotelClass->find($request->hotel_id);
-            $nama_hotel = bersih($data->nama,'-');
-            $i = 1;
-            foreach($request->file('gambar') as $key)
-            {
-                $ext = $key->getClientOriginalExtension();
-                $destination = public_path('uploads/images/gallery-hotel');
-                $filename = $nama_hotel."-".$i.".".$ext;
-                $key->move($destination, $filename);
-
-                $save = new HotelGambar;
-                $save->hotel_id = $request->hotel_id;
-                $save->gambar = $filename;
-                $save->save();
-                $i++;
-            }
-
-            Toastr::success('Data Berhasil Ditambah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
-            return redirect::to('dashboard/hotel/gambar/'.$request->hotel_id);
+            $gambar->text("SUMBER : ".$request->sumber, 3, $gambar->height() - 3, function($font) {
+                $font->color('#fdf6e3');
+                $font->size(24);
+            });
         }
+        $gambar->save($destination.'/'.$filename);
+
+        $save = new HotelGambar;
+        $save->hotel_id = $request->hotel_id;
+        $save->gambar = $filename;
+        $save->sumber = $request->sumber;
+        $save->save();
+
+        Toastr::success('Data Berhasil Ditambah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
+        return redirect::to('dashboard/hotel/gambar/'.$request->hotel_id);
     }
 
     public function gambarEdit($id,$hotel_id)

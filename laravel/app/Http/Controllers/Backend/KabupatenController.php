@@ -108,11 +108,13 @@ class KabupatenController extends Controller
 
         if($request->file('foto_kabupaten'))
         {
-            $foto_kabupaten = $request->file('foto_kabupaten');
-            $ext = $foto_kabupaten->getClientOriginalExtension();
+ 
             $destination = public_path('uploads/images/foto-kabupaten');
-            $filename_kabupaten = $nama_kabupaten_bersih.".".$ext;
-            $foto_kabupaten->move($destination, $filename_kabupaten);
+            $filename_kabupaten = $nama_bersih.".jpg";
+            $gambar = Image::make($request->file('gambar_header'));
+            $gambar->encode('jpg', 60);
+            $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+            $gambar->save($destination.'/'.$filename_header);
         }
         
         $this->kabupatenClass->nama = $request->nama_kabupaten;
@@ -211,11 +213,12 @@ class KabupatenController extends Controller
 
         if($request->file('foto_kabupaten'))
         {
-            $foto_kabupaten = $request->file('foto_kabupaten');
-            $ext = $foto_kabupaten->getClientOriginalExtension();
-            $filename_kabupaten = $nama_kabupaten_bersih.".".$ext;
             $destination = public_path('uploads/images/foto-kabupaten');
-            $foto_kabupaten->move($destination, $filename_kabupaten);
+            $filename_kabupaten = $nama_bersih.".jpg";
+            $gambar = Image::make($request->file('foto_kabupaten'));
+            $gambar->encode('jpg', 60);
+            $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+            $gambar->save($destination.'/'.$filename_header);
         }
         
         $edit = $this->kabupatenClass->find($id);

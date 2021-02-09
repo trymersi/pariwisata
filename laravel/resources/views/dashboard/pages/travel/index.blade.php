@@ -23,6 +23,7 @@
                                 <th>#</th>
                                 
                                 <th>Nama Travel</th>
+                                <th>Gambar Travel</th>
                                 <th>Alamat</th>
                                 <th>Nomor Kontak</th>
                                 <th>Kabupaten</th>
@@ -88,6 +89,10 @@
             {
                 data: 'nama',
                 name: 'nama'
+            },
+            {
+                data: 'gambar',
+                name: 'gambar'
             },
             {
                 data: 'alamat',

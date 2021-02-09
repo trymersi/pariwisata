@@ -144,17 +144,26 @@ class RestaurantController extends Controller
 
         if($request->file('gambar'))
         {
-            $gambar = $request->file('gambar');
-            $ext = $gambar->getClientOriginalExtension();
             $destination = public_path('uploads/images/gambar-header-restaurant');
-            $filename_header = $nama_bersih.".".$ext;
-            $gambar->move($destination, $filename_header);
+            $filename_header = rand().'-'.$nama_bersih.".jpg";
+            $gambar = Image::make($request->file('gambar'));
+            $gambar->encode('jpg', 60);
+            $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+            if($request->sumber_gambar_header != '')
+            {
+                $gambar->text("SUMBER : ".$request->sumber_gambar_header, 3, $gambar->height() - 3, function($font) {
+                    $font->color('#fdf6e3');
+                    $font->size(24);
+                });
+            }
+            $gambar->save($destination.'/'.$filename_header);
         }
 
         $this->restaurantClass->kabupaten_id = $kab_id;
         // $this->restaurantClass->objek_wisata_id = $request->objek_wisata;
         $this->restaurantClass->nama = $request->nama_restaurant;
         $this->restaurantClass->slug = $nama_bersih;
+        $this->restaurantClass->sumber_gambar_header = $request->sumber_gambar_header;
         $this->restaurantClass->alamat = $request->alamat;
         $this->restaurantClass->gambar = $filename_header;
         $this->restaurantClass->latitude = $request->latitude;
@@ -271,12 +280,21 @@ class RestaurantController extends Controller
 
         if($request->file('gambar'))
         {
-            $gambar = $request->file('gambar');
-            $ext = $gambar->getClientOriginalExtension();
             $destination = public_path('uploads/images/gambar-header-restaurant');
-            $filename_header = $nama_bersih.".".$ext;
-            $gambar->move($destination, $filename_header);
+            $filename_header = rand().'-'.$nama_bersih.".jpg";
+            $gambar = Image::make($request->file('gambar'));
+            $gambar->encode('jpg', 60);
+            $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+            if($request->sumber_gambar_header != '')
+            {
+                $gambar->text("SUMBER : ".$request->sumber_gambar_header, 3, $gambar->height() - 3, function($font) {
+                    $font->color('#fdf6e3');
+                    $font->size(24);
+                });
+            }
+            $gambar->save($destination.'/'.$filename_header);
         }
+
         
 
         $edit = Restaurant::find($id);
@@ -284,6 +302,7 @@ class RestaurantController extends Controller
         // $edit->objek_wisata_id = $request->objek_wisata;
         $edit->nama = $request->nama_restaurant;
         $edit->slug = $nama_bersih;
+        $edit->sumber_gambar_header = $request->sumber_gambar_header;
         $edit->alamat = $request->alamat;
         if(isset($filename_header)):
             $edit->gambar = $filename_header;
@@ -405,6 +424,11 @@ class RestaurantController extends Controller
                return  isset($data->nama_objek_wisata) ? $data->nama_objek_wisata : '-';
             })
 
+            ->addColumn('halal', function($data)
+            {
+               return  $data->halal == 1 ? "Halal" : "Tidak Halal";
+            })
+
             ->addIndexColumn()
             ->rawColumns(['status','option','gambar','jenis','detail','deskripsi'])
             ->make(true);
@@ -435,7 +459,7 @@ class RestaurantController extends Controller
             $restaurant = $this->restaurantClass->find($data->restaurant_id);
             $nama_objek = $restaurant->nama;
             $button = '<a href="'.url('dashboard/restaurant/gambar/edit/'.$data->id.'/'.$data->restaurant_id).'" class="btn btn-warning mb-2 mr-2 btn-sm"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></a>';
-            $button .= '<button data-id="'.$data->id.'" data-nama="'.$nama_objek.'" class="btn btn-danger mb-2 mr-2 btn-sm" data-toggle="modal" data-target="#ModalHapus" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>';
+            $button = '<button data-id="'.$data->id.'" data-nama="'.$nama_objek.'" class="btn btn-danger mb-2 mr-2 btn-sm" data-toggle="modal" data-target="#ModalHapus" ><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg></button>';
             return  $button;
         })
         
@@ -474,28 +498,30 @@ class RestaurantController extends Controller
             return Redirect::back()->withErrors($validator)->withInput();
         }
 
-        if($request->file('gambar'))
+        $data = $this->restaurantClass->find($request->restaurant_id);
+        $nama_objek = bersih($data->nama,'-');
+        $destination = public_path('uploads/images/gallery-restaurant');
+        $filename = rand().'-'.$nama_objek.".jpg";
+        $gambar = Image::make($request->file('gambar'));
+        $gambar->encode('jpg', 60);
+        $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+        if($request->sumber != '')
         {
-            $data = $this->restaurantClass->find($request->restaurant_id);
-            $nama_objek = bersih($data->nama,'-');
-            $i = 1;
-            foreach($request->file('gambar') as $key)
-            {
-                $ext = $key->getClientOriginalExtension();
-                $destination = public_path('uploads/images/gallery-restaurant');
-                $filename = $nama_objek."-".$i.".".$ext;
-                $key->move($destination, $filename);
-
-                $save = new RestaurantGambar;
-                $save->restaurant_id = $request->restaurant_id;
-                $save->gambar = $filename;
-                $save->save();
-                $i++;
-            }
-
-            Toastr::success('Data Berhasil Ditambah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
-            return redirect::to('dashboard/restaurant/gambar/'.$request->restaurant_id);
+            $gambar->text("SUMBER : ".$request->sumber, 3, $gambar->height() - 3, function($font) {
+                $font->color('#fdf6e3');
+                $font->size(24);
+            });
         }
+        $gambar->save($destination.'/'.$filename);
+
+        $save = new RestaurantGambar;
+        $save->restaurant_id = $request->restaurant_id;
+        $save->gambar = $filename;
+        $save->sumber = $request->sumber;
+        $save->save();
+
+        Toastr::success('Data Berhasil Ditambah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
+        return redirect::to('dashboard/restaurant/gambar/'.$request->restaurant_id);
     }
 
     public function gambarEdit($id,$restaurant_id)
@@ -612,20 +638,32 @@ class RestaurantController extends Controller
         $nama_objek = bersih($data->nama,'-');
         $nama_menu = bersih($request->nama_menu,'-');
         $nama_gambar = $nama_objek.'-'.$nama_menu;
+
         if($request->file('gambar'))
         {
-            $gambar = $request->file('gambar');
-            $ext = $gambar->getClientOriginalExtension();
+            $nama_objek = bersih($data->nama,'-');
             $destination = public_path('uploads/images/restaurant-menu');
-            $filename_header = $nama_gambar.".".$ext;
-            $gambar->move($destination, $filename_header);
+            $filename_header = rand().'-'.$nama_gambar.".jpg";
+            $gambar = Image::make($request->file('gambar'));
+            $gambar->encode('jpg', 60);
+            $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+            if($request->sumber != '')
+            {
+                $gambar->text("SUMBER : ".$request->sumber, 3, $gambar->height() - 3, function($font) {
+                    $font->color('#fdf6e3');
+                    $font->size(24);
+                });
+            }
+            $gambar->save($destination.'/'.$filename_header);
         }
+
 
         $save = new RestaurantMenu;
         $save->restaurant_id = $request->restaurant_id;
         $save->nama = $request->nama_menu;
         $save->deskripsi = $request->deskripsi;
         $save->gambar = $filename_header;
+        $save->sumber = $request->sumber;
         $save->save();
 
         Toastr::success('Data Berhasil Ditambah', 'Sukses', ["positionClass" => "toast-bottom-right"]);
@@ -660,17 +698,27 @@ class RestaurantController extends Controller
 
         if($request->file('gambar'))
         {
-            $gambar = $request->file('gambar');
-            $ext = $gambar->getClientOriginalExtension();
+            $nama_objek = bersih($data->nama,'-');
             $destination = public_path('uploads/images/restaurant-menu');
-            $filename_header = $nama_gambar.".".$ext;
-            $gambar->move($destination, $filename_header);
+            $filename_header = rand().'-'.$nama_gambar.".jpg";
+            $gambar = Image::make($request->file('gambar'));
+            $gambar->encode('jpg', 60);
+            $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+            if($request->sumber != '')
+            {
+                $gambar->text("SUMBER : ".$request->sumber, 3, $gambar->height() - 3, function($font) {
+                    $font->color('#fdf6e3');
+                    $font->size(24);
+                });
+            }
+            $gambar->save($destination.'/'.$filename_header);
         }
 
         $save = RestaurantMenu::find($id);
         $save->restaurant_id = $request->restaurant_id;
         $save->nama = $request->nama_menu;
         $save->deskripsi = $request->deskripsi;
+        $save->sumber = $request->sumber;
         if(isset($filename_header)):
             $save->gambar = $filename_header;
         endif;

@@ -35,7 +35,7 @@
                         </div>
                     @endif
 
-                    <div class="form-group row mb-4">
+                    {{-- <div class="form-group row mb-4">
                         <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nama Objek Wisata</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
                             <select name="objek_wisata"  id="objek_wisata" class="form-control select">
@@ -46,12 +46,12 @@
                                 <span><code>{{$message}}</code></span>
                             @enderror
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nama Tempat</label>
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nama Cindramata</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <input type="text" class="form-control" name="nama" value="{{ old('nama') }}" placeholder="Masukan nama tempat">
+                            <input type="text" class="form-control" name="nama" value="{{ old('nama') }}" placeholder="Masukan nama Cindramata">
                             @error('nama')
                                 <span><code>{{$message}}</code></span>
                             @enderror
@@ -59,36 +59,40 @@
                     </div>
 
                     <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Alamat</label>
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Jenis</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <input type="text" class="form-control" name="alamat" value="{{ old('alamat') }}" placeholder="Masukan alamat lengkap">
-                            @error('alamat')
+                            <input type="text" class="form-control" name="jenis" value="{{ old('jenis') }}" placeholder="Masukan Jenis Cindramata">
+                            @error('jenis')
                                 <span><code>{{$message}}</code></span>
                             @enderror
                         </div>
                     </div>
 
+                
                     <div class="form-group row mb-4">
                         <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Gambar</label>
-                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                        <div class="col-xl-5 col-lg-4 col-sm-5">
                             <input type="file" class="form-control-file" name="gambar" value="{{ old('gambar') }}" placeholder="Masukan gambar" accept="image/jpg,image/jpeg,image/png">
                             @error('gambar')
                                 <span><code>{{$message}}</code></span>
                             @enderror
                         </div>
-                    </div>
-
-                    <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nomor Kontak</label>
-                        <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <input type="text" class="form-control" name="nomor_kontak" value="{{ old('nomor_kontak') }}" placeholder="Masukan nomor kontak">
-                            @error('nomor_kontak')
-                                <span><code>{{$message}}</code></span>
-                            @enderror
+                        <div class="col-xl-5 col-lg-4 col-sm-5">
+                            <input type="text" class="form-control" name="sumber_gambar_header" value="{{ old('sumber_gambar_header') }}" placeholder="Masukan Sumber Foto">
                         </div>
                     </div>
 
-                  
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Deskripsi</label>
+                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                            <textarea id="summernote" name="deskripsi">{!! old('deskripsi') !!}</textarea>
+                            @error('deskripsi')
+                                <span><code>{{$message}}</code></span>
+                            @enderror   
+                        </div>
+                    </div>
+
+{{--                   
                     <div class="form-group row mb-4">
                         <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">
                             Lokasi <br>
@@ -113,7 +117,7 @@
                                 <span><code>{{$message}}</code></span>
                             @enderror
                         </div>
-                    </div>
+                    </div> --}}
                     
 
                    
@@ -161,7 +165,7 @@
                     <div class="col-xl-12 col-md-12 col-sm-12 col-12">
                         <h4>Form Tambah Data {{ $page_name }}</h4>
                         <li>Masukan data detail tempat cendramata untuk ditambahkan</li>
-                        <div id="map"></div>
+                        
                     </div>                                                                        
                 </div>
             </div>
@@ -171,10 +175,10 @@
 </div> 
 @endsection
 @push('css')
-    <script
+    {{-- <script
     src="https://maps.googleapis.com/maps/api/js?key={{ apiMap() }}&callback=initMap"
     defer
-    ></script>
+    ></script> --}}
     <link href="{{ asset('plugins/select2/select2.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('plugins/summernote/dist/summernote.css') }}" rel="stylesheet" />
     <style>
@@ -189,13 +193,13 @@
     <script src="{{ asset('plugins/select2/select2.min.js') }}"></script>
     <script>
         
-        let map
-        function initMap() {
-            map = new google.maps.Map(document.getElementById("map"), {
-                center: { lat: 0.507068, lng: 101.447777 },
-                zoom: 8,
-            });
-        }
+        // let map
+        // function initMap() {
+        //     map = new google.maps.Map(document.getElementById("map"), {
+        //         center: { lat: 0.507068, lng: 101.447777 },
+        //         zoom: 8,
+        //     });
+        // }
 
         function changeMap(lat,long)
         {
@@ -207,7 +211,7 @@
             var marker = new google.maps.Marker({position: data, map: map});
         }
         $(document).ready(function() {
-            initMap()
+            // initMap()
             
             $("#longitude").keyup(function()
             {

@@ -81,9 +81,31 @@ class TravelController extends Controller
             return Redirect::back()->withErrors($validator)->withInput();
         }
 
+        $nama_bersih = bersih($request->nama,'-');
+
+        if($request->file('gambar'))
+        {
+            $destination = public_path('uploads/images/gambar-travel');
+            $filename_header = rand().'-'.$nama_bersih.".jpg";
+            $gambar = Image::make($request->file('gambar'));
+            $gambar->encode('jpg', 60);
+            $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+            if($request->sumber_gambar_header != '')
+            {
+                $gambar->text("SUMBER : ".$request->sumber_gambar_header, 3, $gambar->height() - 3, function($font) {
+                    $font->color('#fdf6e3');
+                    $font->size(24);
+                });
+            }
+            $gambar->save($destination.'/'.$filename_header);
+        }
 
         $this->travelClass->kabupaten_id = $request->kabupaten;
         $this->travelClass->nama = $request->nama;
+        if(isset($filename_header)):
+            $this->travelClass->gambar = $filename_header;
+        endif;
+        $this->travelClass->sumber_gambar_header = $request->sumber_gambar_header;
         $this->travelClass->alamat = $request->alamat;
         $this->travelClass->kontak = $request->kontak;
         $this->travelClass->save();
@@ -142,9 +164,31 @@ class TravelController extends Controller
             return Redirect::back()->withErrors($validator)->withInput();
         }
 
+        $nama_bersih = bersih($request->nama,'-');
+
+        if($request->file('gambar'))
+        {
+            $destination = public_path('uploads/images/gambar-travel');
+            $filename_header = rand().'-'.$nama_bersih.".jpg";
+            $gambar = Image::make($request->file('gambar'));
+            $gambar->encode('jpg', 60);
+            $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+            if($request->sumber_gambar_header != '')
+            {
+                $gambar->text("SUMBER : ".$request->sumber_gambar_header, 3, $gambar->height() - 3, function($font) {
+                    $font->color('#fdf6e3');
+                    $font->size(24);
+                });
+            }
+            $gambar->save($destination.'/'.$filename_header);
+        }
 
         $edit = Travel::find($id);
         $edit->kabupaten_id = $request->kabupaten;
+        if(isset($filename_header)):
+            $edit->gambar = $filename_header;
+        endif;
+        $edit->sumber_gambar_header = $request->sumber_gambar_header;
         $edit->nama = $request->nama;
         $edit->alamat = $request->alamat;
         $edit->kontak = $request->kontak;
@@ -186,8 +230,13 @@ class TravelController extends Controller
                 return  $button;
             })
 
+            ->addColumn('gambar', function($data)
+            {
+               return  "<img width='150px' src='".asset('uploads/images/gambar-travel/'.$data->gambar)."'>";
+            })
+
             ->addIndexColumn()
-            ->rawColumns(['status','option'])
+            ->rawColumns(['status','option','gambar'])
             ->make(true);
     }
 }

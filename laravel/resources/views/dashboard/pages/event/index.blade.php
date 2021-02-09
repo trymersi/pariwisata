@@ -115,6 +115,10 @@
                 data: 'status',
                 name: 'status'
             },
+            {
+                data: 'detail',
+                name: 'detail'
+            },
            {
                data: 'option',
                name: 'option'

@@ -28,7 +28,7 @@
                                         <select name="kabupaten" class="form-control select">
                                             <option selected="selected" value="">Pilih Kabupaten</option>
                                             @foreach($kabupaten as $kab)
-                                                <option @if(old('kabupaten',$edit->kabupaten_id) == $kab->id) selected="" @endif value="{{ $kab->id }}">{{ $kab->nama_kabupaten }}</option>
+                                                <option @if(old('kabupaten',$edit->kabupaten_id) == $kab->id) selected="" @endif value="{{ $kab->id }}">{{ $kab->nama }}</option>
                                             @endforeach
                                         </select>
                                         @error('kabupaten')
@@ -44,7 +44,7 @@
                                     <select name="kategori_ekraf" class="form-control select">
                                         <option selected="selected" value="">Pilih Kategori</option>
                                         @foreach($kategori as $kat)
-                                            <option @if(old('kategori_ekraf',$edit->kategori_ekraf_id) == $kat->id) selected="" @endif value="{{ $kat->id }}">{{ $kat->nama_kategori }}</option>
+                                            <option @if(old('kategori_ekraf',$edit->kategori_ekraf_id) == $kat->id) selected="" @endif value="{{ $kat->id }}">{{ $kat->nama }}</option>
                                         @endforeach
                                     </select>
                                     @error('kategori_ekraf')

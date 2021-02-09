@@ -23,7 +23,8 @@ class DesaWisata extends Model
                 'desa_wisatas.potensi_wisata',
                 'desa_wisatas.kontak',
                 'desa_wisatas.status',
-                'desa_wisatas.id'
+                'desa_wisatas.id',
+                'desa_wisatas.gambar_header'
             );
             if($kab):
                 $data = $data->where('desa_wisatas.kabupaten_id',$kab);
@@ -45,7 +46,8 @@ class DesaWisata extends Model
                 'desa_wisatas.potensi_wisata',
                 'desa_wisatas.kontak',
                 'desa_wisatas.status',
-                'desa_wisatas.id'
+                'desa_wisatas.id',
+                'desa_wisatas.gambar_header'
             );
             if($kab):
                 $data = $data->where('desa_wisatas.kabupaten_id',$kab);

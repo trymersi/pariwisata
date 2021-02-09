@@ -64,12 +64,16 @@
 
                                 <div class="form-group row mb-4">
                                     <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Gambar Header</label>
-                                    <div class="col-xl-10 col-lg-9 col-sm-10">
+                                    <div class="col-xl-5 col-lg-4 col-sm-5">
                                         <input type="file" class="form-control-file" name="gambar_header" value="{{ old('gambar_header') }}" placeholder="Masukan Foto" accept="image/jpg,image/jpeg,image/png">
                                         @error('gambar_header')
                                             <span><code>{{$message}}</code></span>
                                         @enderror
                                     </div>
+                                    <div class="col-xl-5 col-lg-4 col-sm-5">
+                                        <input type="text" class="form-control" name="sumber_gambar_header" value="{{ old('sumber_gambar_header') }}" placeholder="Masukan Sumber Foto">
+                                    </div>
+                                    
                                 </div>
 
                                 <div class="form-group row mb-4">
@@ -88,6 +92,28 @@
                                         @error('tanggal_selesai')
                                             <span><code>{{$message}}</code></span>
                                         @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-4">
+                                    <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Link Video (Youtube)</label>
+                                    <div class="col-xl-10 col-lg-9 col-sm-10">
+                                        <select name="video[]" class="form-control select" multiple>
+                                        </select>
+                                        <p>Masukan Url video tekan enter jika sudah, lalu masukan lagi url selanjutnya</p>
+                                        @error('video')
+                                            <span><code>{{$message}}</code></span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-4">
+                                    <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Deskripsi</label>
+                                    <div class="col-xl-10 col-lg-9 col-sm-10">
+                                        <textarea id="summernote" name="deskripsi">{!! old('deskripsi') !!}</textarea>
+                                        @error('deskripsi')
+                                            <span><code>{{$message}}</code></span>
+                                        @enderror   
                                     </div>
                                 </div>
 
@@ -138,15 +164,21 @@
 @push('css')
     <link href="{{ asset('plugins/select2/select2.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('plugins/flatpickr/flatpickr.css') }}" rel="stylesheet" />
+    <link href="{{ asset('plugins/summernote/dist/summernote.css') }}" rel="stylesheet" />
 @endpush
 @push('js')
     
     <script src="{{ asset('plugins/flatpickr/flatpickr.js') }}"></script>
     <script src="{{ asset('plugins/select2/select2.min.js') }}"></script>
+    <script src="{{ asset('plugins/summernote/dist/summernote.min.js') }}"></script>
     <script>
         
         $(document).ready(function() {
-            
+            $('#summernote').summernote({
+                placeholder: 'Masukan keterangan lengkap disini, anda juga dapat memasukan gambar pada bagian text',
+                height: 350
+            });
+
             var f2 = flatpickr(document.getElementById('dateTimeFlatpickr'), {
                 dateFormat: "d-m-Y",
             });

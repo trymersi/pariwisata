@@ -38,7 +38,7 @@
 
                 <div class="list-single-stats">
                     <ul class="no-list-style">
-                        <li><span class="viewed-counter"><i class="fas fa-eye"></i> {{ number_format($pengunjung->total) }} Pengunjung </span></li>
+                        {{-- <li><span class="viewed-counter"><i class="fas fa-eye"></i> {{ number_format($pengunjung->total) }} Pengunjung </span></li> --}}
                         <li><span class="bookmark-counter"><i class="fas fa-heart"></i> Menyukai ini -  24 </span></li>
                     </ul>
                 </div>

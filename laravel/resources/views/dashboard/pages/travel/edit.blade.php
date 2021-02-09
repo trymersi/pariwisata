@@ -73,7 +73,20 @@
                     </div>
 
                     
-                    
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Gambar</label>
+                        <div class="col-xl-5 col-lg-4 col-sm-5">
+                            <input type="file" class="form-control-file" name="gambar" value="{{ old('gambar') }}" placeholder="Masukan gambar" accept="image/jpg,image/jpeg,image/png">
+                            @error('gambar')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
+                            <p> Upload foto baru untuk mengubah gambar</p>
+                            <img width="50%" src="{{ asset('uploads/images/gambar-travel/') }}/{{ $edit->gambar }}">
+                        </div>
+                        <div class="col-xl-5 col-lg-4 col-sm-5">
+                            <input type="text" class="form-control" name="sumber_gambar_header" value="{{ old('sumber_gambar_header',$edit->sumber_gambar_header) }}" placeholder="Masukan Sumber Foto">
+                        </div>
+                    </div>
 
                     <div class="form-group row">
                         <div class="col-sm-2">Setuju</div>

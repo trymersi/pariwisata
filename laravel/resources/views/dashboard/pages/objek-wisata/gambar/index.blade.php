@@ -117,7 +117,7 @@
                         var idDelete = $(this).attr('data-id');
                         var token = $(this).attr('data-token');
                         $.ajax({
-                            url:"{{url('dashboard/objek-wisata/gambar/  delete')}}/" + idDelete,
+                            url:"{{url('dashboard/objek-wisata/gambar/delete')}}/" + idDelete,
                             type: 'POST',
                             data: {_method: 'delete', _token :token},
                             success:function(get){

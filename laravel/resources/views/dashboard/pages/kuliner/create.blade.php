@@ -48,17 +48,33 @@
                                 </div>
 
                                 <div class="form-group row mb-4">
-                                    <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Alamat</label>
+                                    <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Gambar</label>
+                                    <div class="col-xl-5 col-lg-4 col-sm-5">
+                                        <input type="file" class="form-control-file" name="gambar" value="{{ old('gambar') }}" placeholder="Masukan gambar" accept="image/jpg,image/jpeg,image/png">
+                                        @error('gambar')
+                                            <span><code>{{$message}}</code></span>
+                                        @enderror
+                                    </div>
+                                    <div class="col-xl-5 col-lg-4 col-sm-5">
+                                        <input type="text" class="form-control" name="sumber_gambar_header" value="{{ old('sumber_gambar_header') }}" placeholder="Masukan Sumber Foto">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-4">
+                                    <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Link Video (Youtube)</label>
                                     <div class="col-xl-10 col-lg-9 col-sm-10">
-                                        <input type="text" class="form-control" name="alamat" value="{{ old('alamat') }}" placeholder="Masukan alamat kuliner">
-                                        @error('alamat')
+                                        <select name="video[]" class="form-control select" multiple>
+                                        </select>
+                                        <p>Masukan Url video tekan enter jika sudah, lalu masukan lagi url selanjutnya</p>
+                                        @error('video')
                                             <span><code>{{$message}}</code></span>
                                         @enderror
                                     </div>
                                 </div>
+            
                                 
                                 <div class="form-group row mb-4">
-                                    <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Isi</label>
+                                    <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Deskripsi</label>
                                     <div class="col-xl-10 col-lg-9 col-sm-10">
                                         <span>Masukan Gambar Kuliner Pada Isian Dibawah !!
                                         <textarea id="summernote" name="isi_berita">{!! old('isi_berita') !!}</textarea>

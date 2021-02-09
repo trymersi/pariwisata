@@ -90,4 +90,8 @@ Route::prefix('/get-kabupaten')->group(function(){
     Route::post('/detail','ServiceController@getKabupatenDetail');
 });
 
+Route::prefix('/get-pengaturan')->group(function(){
+    Route::post('/','ServiceController@pengaturan');
+});
+
 

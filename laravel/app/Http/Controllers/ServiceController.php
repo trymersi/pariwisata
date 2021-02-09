@@ -27,6 +27,7 @@ use App\Models\Kuliner;
 use App\Models\PemanduWisata;
 use App\Models\Post;
 use App\Models\SadarWisata;
+use App\Models\SettingAplikasi;
 use App\Models\Travel;
 use App\Models\Iklan;
 
@@ -34,6 +35,7 @@ class ServiceController extends Controller
 {
     private $data;
     private $setting;
+    private $settingApp;
     private $objekWisata;
     private $kabupaten;
     private $restaurantClass;
@@ -92,6 +94,7 @@ class ServiceController extends Controller
         $this->sadarWisata = new SadarWisata;
         $this->travelClass = new Travel;
         $this->iklan = new iklan;
+        $this->settingApp = new SettingAplikasi;
 
         $this->data = array();
 
@@ -597,5 +600,16 @@ class ServiceController extends Controller
             }
         }
         return response()->json($this->errMessage);
+    }
+
+    public function pengaturan(Request $request)
+    {
+        if($this->cekToken($request->key))
+        {
+            $this->data['response']['status'] = "success";
+            $this->data['response']['setting_aplikasi'] = $this->settingApp->find(1);
+            $this->data['response']['hubungi_kami'] = $this->setting->where('id',1)->select('alamat_kantor','email','notel')->first();
+            return response()->json($this->data);
+        }
     }
 }

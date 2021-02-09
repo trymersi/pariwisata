@@ -75,6 +75,13 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
         Route::delete('/delete/{id}','Backend\SettingController@destroy');
     });
 
+    Route::prefix('/pengaturan-aplikasi')->group(function(){
+        Route::resource('/','Backend\AppSettingController');
+        Route::get('/edit/{id}','Backend\AppSettingController@edit');
+        Route::patch('/update/{id}','Backend\AppSettingController@update');
+        Route::delete('/delete/{id}','Backend\AppSettingController@destroy');
+    });
+
     Route::prefix('/kabupaten')->group(function(){
         Route::resource('/','Backend\KabupatenController');
         Route::get('/table','Backend\KabupatenController@table');
@@ -226,6 +233,21 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
         Route::patch('/update/{id}','Backend\CendramataController@update');
         Route::delete('/delete/{id}','Backend\CendramataController@destroy');
         Route::get('list-objek-wisata/{id_kabupaten}','Backend\CendramataController@getListObjekWisata');
+        Route::prefix('/gambar')->group(function(){
+            Route::get('/{id}','Backend\CendramataController@gambarIndex');
+            Route::get('/create/{id_event}','Backend\CendramataController@gambarCreate');
+            Route::post('/store','Backend\CendramataController@gambarStore');
+            Route::get('/table/{id_event}','Backend\CendramataController@gambarTable');
+            Route::delete('/delete/{id}','Backend\CendramataController@gambarDestroy');
+        });
+        Route::prefix('/penyedia')->group(function(){
+            Route::get('/{id}','Backend\CendramataController@penyediaIndex');
+            Route::get('/create/{id_objek_wisata}','Backend\CendramataController@penyediaCreate');
+            Route::post('/store','Backend\CendramataController@penyediaStore');
+            Route::get('/table/{id_objek_wisata}','Backend\CendramataController@penyediaTable');
+            Route::delete('/delete/{id}','Backend\CendramataController@penyediaDestroy');
+        });
+
         Route::prefix('/detail')->group(function(){
             Route::get('/{id}','Backend\CendramataController@detailIndex');
             Route::get('/create/{cindramata_id}','Backend\CendramataController@detailCreate');
@@ -312,6 +334,13 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
         Route::get('/edit/{id}','Backend\EventController@edit');
         Route::patch('/update/{id}','Backend\EventController@update');
         Route::delete('/delete/{id}','Backend\EventController@destroy');
+        Route::prefix('/gambar')->group(function(){
+            Route::get('/{id}','Backend\EventController@gambarIndex');
+            Route::get('/create/{id_event}','Backend\EventController@gambarCreate');
+            Route::post('/store','Backend\EventController@gambarStore');
+            Route::get('/table/{id_event}','Backend\EventController@gambarTable');
+            Route::delete('/delete/{id}','Backend\EventController@gambarDestroy');
+        });
     });
 
     Route::prefix('/link-terkait')->group(function(){
@@ -394,6 +423,20 @@ Route::group(['prefix' => 'dashboard',  'middleware' => 'auth'],function()
         Route::get('/edit/{id}','Backend\KulinerController@edit');
         Route::patch('/update/{id}','Backend\KulinerController@update');
         Route::delete('/delete/{id}','Backend\KulinerController@destroy');
+        Route::prefix('/gambar')->group(function(){
+            Route::get('/{id}','Backend\KulinerController@gambarIndex');
+            Route::get('/create/{id_event}','Backend\KulinerController@gambarCreate');
+            Route::post('/store','Backend\KulinerController@gambarStore');
+            Route::get('/table/{id_event}','Backend\KulinerController@gambarTable');
+            Route::delete('/delete/{id}','Backend\KulinerController@gambarDestroy');
+        });
+        Route::prefix('/penyedia')->group(function(){
+            Route::get('/{id}','Backend\KulinerController@penyediaIndex');
+            Route::get('/create/{id_objek_wisata}','Backend\KulinerController@penyediaCreate');
+            Route::post('/store','Backend\KulinerController@penyediaStore');
+            Route::get('/table/{id_objek_wisata}','Backend\KulinerController@penyediaTable');
+            Route::delete('/delete/{id}','Backend\KulinerController@penyediaDestroy');
+        });
     });
 
 });

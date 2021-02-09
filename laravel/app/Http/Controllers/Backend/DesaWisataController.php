@@ -96,10 +96,33 @@ class DesaWisataController extends Controller
 
         $kab_id = (Auth::user()->level == 1 || Auth::user()->level == 4 ) ? $request->kabupaten : Auth::user()->kabupaten_id;
 
+        $nama_bersih = bersih($request->nama,'-');
+
+        if($request->file('gambar'))
+        {
+            $destination = public_path('uploads/images/gambar-header-desa-wisata');
+            $filename_header = rand().'-'.$nama_bersih.".jpg";
+            $gambar = Image::make($request->file('gambar'));
+            $gambar->encode('jpg', 60);
+            $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+            if($request->sumber_gambar_header != '')
+            {
+                $gambar->text("SUMBER : ".$request->sumber_gambar_header, 3, $gambar->height() - 3, function($font) {
+                    $font->color('#fdf6e3');
+                    $font->size(24);
+                });
+            }
+            $gambar->save($destination.'/'.$filename_header);
+        }
+
         $this->desaWisata->kabupaten_id = $kab_id;
         $this->desaWisata->kecamatan_id = $request->kecamatan;
         $this->desaWisata->nama = $request->nama;
+        if(isset($filename_header)):
+            $this->desaWisata->gambar_header = $filename_header;
+        endif;
         $this->desaWisata->alamat = $request->alamat;
+        $this->desaWisata->sumber_gambar_header = $request->sumber_gambar_header;
         $this->desaWisata->potensi_wisata = implode(',',$request->potensi);
         $this->desaWisata->kontak = $request->kontak;
         $this->desaWisata->status = (Auth::user()->level == 1 || Auth::user()->level == 4 ) ? 3 : 1;
@@ -186,9 +209,32 @@ class DesaWisataController extends Controller
 
         $kab_id = (Auth::user()->level == 1 || Auth::user()->level == 4 ) ? $request->kabupaten : Auth::user()->kabupaten_id;
 
+        $nama_bersih = bersih($request->nama,'-');
+
+        if($request->file('gambar'))
+        {
+            $destination = public_path('uploads/images/gambar-header-desa-wisata');
+            $filename_header = rand().'-'.$nama_bersih.".jpg";
+            $gambar = Image::make($request->file('gambar'));
+            $gambar->encode('jpg', 60);
+            $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+            if($request->sumber_gambar_header != '')
+            {
+                $gambar->text("SUMBER : ".$request->sumber_gambar_header, 3, $gambar->height() - 3, function($font) {
+                    $font->color('#fdf6e3');
+                    $font->size(24);
+                });
+            }
+            $gambar->save($destination.'/'.$filename_header);
+        }
+
         $edit = desaWisata::find($id);
         $edit->kabupaten_id = $kab_id;
         $edit->kecamatan_id = $request->kecamatan;
+        if(isset($filename_header)):
+            $edit->gambar_header = $filename_header;
+        endif;
+        $edit->sumber_gambar_header = $request->sumber_gambar_header;
         $edit->nama = $request->nama;
         $edit->alamat = $request->alamat;
         $edit->potensi_wisata = implode(',',$request->potensi);
@@ -231,8 +277,13 @@ class DesaWisataController extends Controller
                 return  $button;
             })
 
+            ->addColumn('gambar', function($data)
+            {
+               return  "<img width='150px' src='".asset('uploads/images/gambar-header-desa-wisata/'.$data->gambar_header)."'>";
+            })
+
             ->addIndexColumn()
-            ->rawColumns(['status','option'])
+            ->rawColumns(['status','option','gambar'])
             ->make(true);
     }
 }

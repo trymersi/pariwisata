@@ -72,18 +72,19 @@
 
                     <div class="form-group row mb-4">
                         <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Gambar Header</label>
-                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                        <div class="col-xl-5 col-lg-4 col-sm-5">
                             <input type="file" class="form-control-file" name="gambar_header" value="{{ old('gambar_header') }}" placeholder="Masukan Foto" accept="image/jpg,image/jpeg,image/png">
                             @error('gambar_header')
                                 <span><code>{{$message}}</code></span>
                             @enderror
                             <p> Upload foto baru untuk mengubah gambar header</p>
-                                <img width="150px" src="{{ url('uploads/images/gambar-header-hotel/') }}/{{ $edit->gambar }}">
+                                <img width="150px" src="{{ asset('uploads/images/gambar-header-hotel/') }}/{{ $edit->gambar }}">
+                        </div>
+                        <div class="col-xl-5 col-lg-4 col-sm-5">
+                            <input type="text" class="form-control" name="sumber_gambar_header" value="{{ old('sumber_gambar_header',$edit->sumber_gambar_header) }}" placeholder="Masukan Sumber Foto">
                         </div>
                     </div>
 
-                    
-                    
 
                     <div class="form-group row mb-4">
                         <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Deskripsi</label>

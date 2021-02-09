@@ -24,10 +24,11 @@
                                 <th>Judul</th>
                                 <th>Thumbnail</th>
                                 <th>Isi</th>
-                                <th>Alamat</th>
+                                <th>Video</th>
                                 @if(Auth::user()->level != 7)
                                 <th>Kabupaten</th>
                                 @endif
+                                <th>Detail</th>
                                 <th>Tanggal</th>
                                 <th>Status</th>
                                 <th class="no-content"></th>
@@ -102,8 +103,8 @@
                 name: 'meta_description'
             },
             {
-                data: 'alamat',
-                name: 'alamat'
+                data: 'video',
+                name: 'video'
             },
             @if(Auth::user()->level != 7)
             {
@@ -112,9 +113,14 @@
             },
             @endif
             {
+                data: 'detail',
+                name: 'detail'
+            },
+            {
                 data: 'tanggal',
                 name: 'tanggal'
             },
+            
             {
                 data: 'status',
                 name: 'status'

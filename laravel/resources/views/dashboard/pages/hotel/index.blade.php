@@ -109,8 +109,8 @@
                name: 'gambar'
            },
            {
-               data: 'jenis_hotel',
-               name: 'jenis_hotel'
+               data: 'jenis',
+               name: 'jenis'
            },
            {
                data: 'alamat_hotel',

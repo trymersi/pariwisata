@@ -107,11 +107,19 @@ class TempatIbadahController extends Controller
 
         if($request->file('gambar'))
         {
-            $gambar = $request->file('gambar');
-            $ext = $gambar->getClientOriginalExtension();
             $destination = public_path('uploads/images/gambar-header-tempat-ibadah');
-            $filename_header = $nama_bersih.".".$ext;
-            $gambar->move($destination, $filename_header);
+            $filename_header = rand().'-'.$nama_bersih.".jpg";
+            $gambar = Image::make($request->file('gambar'));
+            $gambar->encode('jpg', 60);
+            $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+            if($request->sumber_gambar_header != '')
+            {
+                $gambar->text("SUMBER : ".$request->sumber_gambar_header, 3, $gambar->height() - 3, function($font) {
+                    $font->color('#fdf6e3');
+                    $font->size(24);
+                });
+            }
+            $gambar->save($destination.'/'.$filename_header);
         }
 
         $this->tempatIbadahClass->kabupaten_id = $kab_id;
@@ -119,6 +127,7 @@ class TempatIbadahController extends Controller
         $this->tempatIbadahClass->nama = $request->nama_tempat_ibadah;
         $this->tempatIbadahClass->slug = $nama_bersih;
         $this->tempatIbadahClass->alamat = $request->alamat;
+        $this->tempatIbadahClass->sumber_gambar_header = $request->sumber_gambar_header;
         $this->tempatIbadahClass->gambar = $filename_header;
         $this->tempatIbadahClass->latitude = $request->latitude;
         $this->tempatIbadahClass->longitude = $request->longitude;
@@ -203,11 +212,19 @@ class TempatIbadahController extends Controller
 
         if($request->file('gambar'))
         {
-            $gambar = $request->file('gambar');
-            $ext = $gambar->getClientOriginalExtension();
             $destination = public_path('uploads/images/gambar-header-tempat-ibadah');
-            $filename_header = $nama_bersih.".".$ext;
-            $gambar->move($destination, $filename_header);
+            $filename_header = rand().'-'.$nama_bersih.".jpg";
+            $gambar = Image::make($request->file('gambar'));
+            $gambar->encode('jpg', 60);
+            $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+            if($request->sumber_gambar_header != '')
+            {
+                $gambar->text("SUMBER : ".$request->sumber_gambar_header, 3, $gambar->height() - 3, function($font) {
+                    $font->color('#fdf6e3');
+                    $font->size(24);
+                });
+            }
+            $gambar->save($destination.'/'.$filename_header);
         }
 
         $edit = TempatIbadah::find($id);
@@ -215,6 +232,7 @@ class TempatIbadahController extends Controller
         // $edit->objek_wisata_id = $request->objek_wisata;
         $edit->nama = $request->nama_tempat_ibadah;
         $edit->slug = $nama_bersih;
+        $edit->sumber_gambar_header = $request->sumber_gambar_header;
         $edit->alamat = $request->alamat;
         if(isset($filename_header)):
             $edit->gambar = $filename_header;

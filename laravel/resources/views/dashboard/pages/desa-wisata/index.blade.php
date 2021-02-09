@@ -23,6 +23,7 @@
                                 <th>#</th>
                                 
                                 <th>Nama Desa Wisata</th>
+                                <th>Gambar</th>
                                 <th>Alamat</th>
                                 <th>Potensi Wisata</th>
                                 <th>Nomor Kontak</th>
@@ -91,6 +92,10 @@
             {
                 data: 'nama',
                 name: 'nama'
+            },
+            {
+                data: 'gambar',
+                name: 'gambar'
             },
             {
                 data: 'alamat',

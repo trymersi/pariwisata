@@ -105,11 +105,12 @@ class KategoriEkrafController extends Controller
 
         if($request->file('gambar_kategori'))
         {
-            $gambar_kategori = $request->file('gambar_kategori');
-            $ext = $gambar_kategori->getClientOriginalExtension();
             $destination = public_path('uploads/images/kategori-ekraf');
-            $filename_gambar= $nama_kategori_bersih.".".$ext;
-            $gambar_kategori->move($destination, $filename_gambar);
+            $filename_gambar = $nama_bersih.".jpg";
+            $gambar = Image::make($request->file('gambar_kategori'));
+            $gambar->encode('jpg', 60);
+            $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+            $gambar->save($destination.'/'.$filename_header);
         }
         
         $slug = bersih($request->nama_kategori,'-');

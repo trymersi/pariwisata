@@ -23,8 +23,18 @@
                     <div class="form-group row mb-4">
                         <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Gambar</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <input type="file" class="form-control-file" name="gambar[]" value="{{ old('gambar') }}" placeholder="Masukan Foto" accept="image/jpg,image/jpeg,image/png" multiple>
+                            <input type="file" class="form-control-file" name="gambar" value="{{ old('gambar') }}" placeholder="Masukan Foto" accept="image/jpg,image/jpeg,image/png">
                             @error('gambar')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Sumber</label>
+                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                            <input type="text" class="form-control" name="sumber" value="{{ old('sumber') }}" placeholder="Masukan sumber foto">
+                            @error('sumber')
                                 <span><code>{{$message}}</code></span>
                             @enderror
                         </div>

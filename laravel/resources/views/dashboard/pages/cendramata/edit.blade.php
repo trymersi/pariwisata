@@ -35,25 +35,12 @@
                         </div>
                     @endif
 
-                    <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nama Objek Wisata</label>
-                        <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <select name="objek_wisata"  id="objek_wisata" class="form-control select">
-                                <option selected="selected" value="">Pilih Objek Wisata</option>
-                                @foreach($objek_wisata as $objek)
-                                    <option @if(old('objek_wisata',$edit->objek_wisata_id) == $objek->id) selected="" @endif value="{{ $objek->id }}">{{ $objek->text }}</option>
-                                @endforeach
-                            </select>
-                            @error('objek_wisata')
-                                <span><code>{{$message}}</code></span>
-                            @enderror
-                        </div>
-                    </div>
+                   
 
                     <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nama Tempat</label>
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nama Cindramata</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <input type="text" class="form-control" name="nama" value="{{ old('nama',$edit->nama) }}" placeholder="Masukan nama tempat">
+                            <input type="text" class="form-control" name="nama" value="{{ old('nama',$edit->nama) }}" placeholder="Masukan nama Cindramata">
                             @error('nama')
                                 <span><code>{{$message}}</code></span>
                             @enderror
@@ -61,62 +48,42 @@
                     </div>
 
                     <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Alamat</label>
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Jenis</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <input type="text" class="form-control" name="alamat" value="{{ old('alamat',$edit->alamat) }}" placeholder="Masukan alamat lengkap">
-                            @error('alamat')
+                            <input type="text" class="form-control" name="jenis" value="{{ old('jenis',$edit->jenis) }}" placeholder="Masukan Jenis Cindramata">
+                            @error('jenis')
                                 <span><code>{{$message}}</code></span>
                             @enderror
                         </div>
                     </div>
 
+
                     <div class="form-group row mb-4">
                         <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Gambar</label>
-                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                        <div class="col-xl-5 col-lg-4 col-sm-5">
                             <input type="file" class="form-control-file" name="gambar" value="{{ old('gambar') }}" placeholder="Masukan gambar" accept="image/jpg,image/jpeg,image/png">
                             @error('gambar')
                                 <span><code>{{$message}}</code></span>
                             @enderror
                             <p> Upload foto baru untuk mengubah gambar</p>
-                            <img width="50%" src="{{ url('uploads/images/gambar-header-cindramata/') }}/{{ $edit->gambar }}">
+                            <img width="50%" src="{{ asset('uploads/images/gambar-header-cindramata/') }}/{{ $edit->gambar }}">
+                        </div>
+                        <div class="col-xl-5 col-lg-4 col-sm-5">
+                            <input type="text" class="form-control" name="sumber_gambar_header" value="{{ old('sumber_gambar_header') }}" placeholder="Masukan Sumber Foto">
                         </div>
                     </div>
 
                     <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Nomor Kontak</label>
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Deskripsi</label>
                         <div class="col-xl-10 col-lg-9 col-sm-10">
-                            <input type="text" class="form-control" name="nomor_kontak" value="{{ old('nomor_kontak',$edit->nomor_kontak) }}" placeholder="Masukan nomor kontak">
-                            @error('nomor_kontak')
+                            <textarea id="summernote" name="deskripsi">{!! old('deskripsi',$edit->deskripsi) !!}</textarea>
+                            @error('deskripsi')
                                 <span><code>{{$message}}</code></span>
-                            @enderror
+                            @enderror   
                         </div>
                     </div>
 
-                    <div class="form-group row mb-4">
-                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">
-                            Lokasi <br>
-                            <a id="button-cari" class="btn btn-success mt-3">
-                                Cari Lokasi 
-                                <svg id="loading-cari" class="spinner-border d-none"></svg>
-                                <svg id="icon-cari" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"></polygon><line x1="8" y1="2" x2="8" y2="18"></line><line x1="16" y1="6" x2="16" y2="22"></line></svg>
-                                <svg id="icon-selesai" class="d-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-check"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                            </a>
-                        </label>
-                        
-                        <div class="col-xl-5 col-lg-4 col-sm-5">
-                            <input type="text" class="form-control" id="latitude" name="latitude" value="{{ old('latitude',$edit->latitude) }}" placeholder="Masukan Latitude">
-                            <code class="map-error"></code>
-                            @error('latitude')
-                                <span><code>{{$message}}</code></span>
-                            @enderror
-                        </div>
-                        <div class="col-xl-5 col-lg-4 col-sm-5">
-                            <input type="text" class="form-control" id="longitude" name="longitude" value="{{ old('longitude',$edit->longitude) }}" placeholder="Masukan Longitude">
-                            @error('longitude')
-                                <span><code>{{$message}}</code></span>
-                            @enderror
-                        </div>
-                    </div>
+                  
                     
                     @if(Auth::user()->level == 1 || Auth::user()->level == 4)
                         <div class="form-group row mb-4">
@@ -177,9 +144,8 @@
             <div class="widget-content widget-content-area">                                
                 <div class="row">
                     <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                        <h4>Form Tambah Data {{ $page_name }}</h4>
-                        <li>Masukan data detail restaurant untuk ditambahkan</li>
-                        <div id="map"></div>
+                        <h4>Form Ubah Data {{ $page_name }}</h4>
+                        <li>Masukan data cindramata untuk Diubah</li>
                     </div>                                                                        
                 </div>
             </div>
@@ -207,27 +173,27 @@
     <script src="{{ asset('plugins/select2/select2.min.js') }}"></script>
     <script>
         
-        let map
-        function initMap() {
-            map = new google.maps.Map(document.getElementById("map"), {
-                center: { lat: {{ $edit->latitude }}, lng: {{ $edit->longitude }} },
-                zoom: 15,
-            });
-            var marker = new google.maps.Marker({position: { lat: {{ $edit->latitude }}, lng: {{ $edit->longitude }} }, map: map});
-        }
+        // let map
+        // function initMap() {
+        //     map = new google.maps.Map(document.getElementById("map"), {
+        //         center: { lat: {{ $edit->latitude }}, lng: {{ $edit->longitude }} },
+        //         zoom: 15,
+        //     });
+        //     var marker = new google.maps.Marker({position: { lat: {{ $edit->latitude }}, lng: {{ $edit->longitude }} }, map: map});
+        // }
 
-        function changeMap(lat,long)
-        {
-            var data = {lat: +lat , lng: +long};
-            console.log(data)
-            var map = new google.maps.Map(
-                document.getElementById('map'), {zoom: 15, center: data}
-            );
-            var marker = new google.maps.Marker({position: data, map: map});
-        }
+        // function changeMap(lat,long)
+        // {
+        //     var data = {lat: +lat , lng: +long};
+        //     console.log(data)
+        //     var map = new google.maps.Map(
+        //         document.getElementById('map'), {zoom: 15, center: data}
+        //     );
+        //     var marker = new google.maps.Marker({position: data, map: map});
+        // }
 
         $(document).ready(function() {
-            initMap()
+            // initMap()
             
             $("#longitude").keyup(function()
             {

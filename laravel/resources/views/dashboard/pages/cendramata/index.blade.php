@@ -24,11 +24,10 @@
                                 @if(Auth::user()->level == 1 || Auth::user()->level == 4)
                                 <th>Kabupaten</th>
                                 @endif
-                                <th>Nama Objek Wisata</th>
-                                <th>Nama Restaurant</th>
+                                <th>Nama Cindramata</th>
                                 <th>Gambar</th>
-                                <th>Nomor Kontak</th>
-                                <th>Alamat</th>
+                                <th>Jenis</th>
+                                <th>Deskripsi</th>
                                 <th>Status</th>
                                 <th>Detail</th>
                                 <th class="no-content"></th>
@@ -97,10 +96,6 @@
            },
            @endif
            {
-               data: 'nama_objek_wisata',
-               name: 'nama_objek_wisata'
-           },
-           {
                data: 'nama',
                name: 'nama'
            },
@@ -109,12 +104,12 @@
                name: 'gambar'
            },
            {
-               data: 'nomor_kontak',
-               name: 'nomor_kontak'
+               data: 'jenis',
+               name: 'jenis'
            },
            {
-               data: 'alamat',
-               name: 'alamat'
+               data: 'deskripsi',
+               name: 'deskripsi'
            },
            {
                data: 'status',

@@ -49,10 +49,34 @@
                                 </div>
 
                                 <div class="form-group row mb-4">
-                                    <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Alamat</label>
+                                    <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Gambar Header</label>
+                                    <div class="col-xl-5 col-lg-4 col-sm-5">
+                                        <input type="file" class="form-control-file" name="gambar" value="{{ old('gambar') }}" placeholder="Masukan Foto" accept="image/jpg,image/jpeg,image/png">
+                                        @error('gambar')
+                                            <span><code>{{$message}}</code></span>
+                                        @enderror
+                                        <p> Upload foto baru untuk mengubah gambar</p>
+                                        <img width="50%" src="{{ asset('uploads/images/gambar-kuliner/') }}/{{ $edit->thumbnail }}">
+                                        
+                                    </div>
+                                    <div class="col-xl-5 col-lg-4 col-sm-5">
+                                        <input type="text" class="form-control" name="sumber_gambar_header" value="{{ old('sumber_gambar_header',$edit->sumber_gambar) }}" placeholder="Masukan Sumber Foto">
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-4">
+                                    <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Link Video (Youtube)</label>
                                     <div class="col-xl-10 col-lg-9 col-sm-10">
-                                        <input type="text" class="form-control" name="alamat" value="{{ old('alamat',$edit->alamat) }}" placeholder="Masukan alamat kuliner">
-                                        @error('alamat')
+                                        <select name="video[]" class="form-control select" multiple>
+                                            @php
+                                            $video = explode(',',$edit->video);
+                                            @endphp
+                                            @foreach($video as $item)
+                                            <option value="{{ $item }}" selected>{{ $item }}</option>
+                                            @endforeach
+                                        </select>
+                                        <p>Masukan Url video tekan enter jika sudah, lalu masukan lagi url selanjutnya</p>
+                                        @error('video')
                                             <span><code>{{$message}}</code></span>
                                         @enderror
                                     </div>

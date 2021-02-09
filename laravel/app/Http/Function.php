@@ -368,11 +368,40 @@ function jenisWisataIon($ar)
 
 function jenisHotel($ar)
 {
-    $ar = explode(',',$ar);
-    $data = '';
-    foreach($ar as $key)
+    $cek = strpos($ar,',');
+    if($cek !== FALSE)
     {
-        switch ($key) 
+        $ar = explode(',',$ar);
+        $data = '';
+        foreach($ar as $key)
+        {
+            switch ($key) 
+            {
+                case '1':
+                    $status = '<span class="badge badge-success">Bintang 1</span>';
+                    break;
+                case '2':
+                    $status = '<span class="badge badge-success">Bintang 2</span>';
+                    break;
+                case '3':
+                    $status = '<span class="badge badge-success">Bintang 3</span>';
+                    break;
+                case '4':
+                    $status = '<span class="badge badge-success">Bintang 4</span>';
+                    break;
+                case '5':
+                $status = '<span class="badge badge-success">Bintang 5</span>';
+                    break;
+                default:
+                    $status ="-";
+                    break;
+            }
+            $data .=$status;
+        }
+    }
+    else
+    {
+        switch ($ar) 
         {
             case '1':
                 $status = '<span class="badge badge-success">Bintang 1</span>';
@@ -393,8 +422,9 @@ function jenisHotel($ar)
                 $status ="-";
                 break;
         }
-        $data .=$status;
+        $data = $status;
     }
+    
     return $data;
 }
 
