@@ -121,8 +121,8 @@ class DesaWisataController extends Controller
         if(isset($filename_header)):
             $this->desaWisata->gambar_header = $filename_header;
         endif;
-        $this->desaWisata->alamat = $request->alamat;
         $this->desaWisata->sumber_gambar_header = $request->sumber_gambar_header;
+        $this->desaWisata->alamat = $request->alamat;
         $this->desaWisata->potensi_wisata = implode(',',$request->potensi);
         $this->desaWisata->kontak = $request->kontak;
         $this->desaWisata->status = (Auth::user()->level == 1 || Auth::user()->level == 4 ) ? 3 : 1;

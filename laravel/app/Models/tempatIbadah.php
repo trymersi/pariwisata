@@ -87,7 +87,7 @@ class TempatIbadah extends Model
         return $get;
     }
 
-    public function getApi($kab=false,$kw=false)
+    public function getApi($kab=false,$kw=false,$agama=false)
     {
         $get = $this->leftJoin('kabupatens','kabupatens.id','tempat_ibadahs.kabupaten_id')
             ->leftJoin('objek_wisatas','objek_wisatas.id','tempat_ibadahs.objek_wisata_id')
@@ -112,8 +112,14 @@ class TempatIbadah extends Model
             if($kw && $kw != ''):
                 $get = $get->where('tempat_ibadahs.nama','LIKE','%'.$kw.'%');
             endif;
-            $get = $get->orderBy('tempat_ibadahs.nama','asc')
+            if($agama && $agama != ''):
+                $get = $get->where('tempat_ibadahs.agama',$agama);
+            else:
+                $get = $get->where('tempat_ibadahs.agama','Islam');
+            endif;
+            $get = $get->orderBy('tempat_ibadahs.id','desc')
             ->where('tempat_ibadahs.status',3)
+            
             ->paginate(10);
         return $get;
     }

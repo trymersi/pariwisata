@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\SettingAplikasi;
 use Toastr;
+use Image;
 class AppSettingController extends Controller
 {
     private $data;
@@ -53,12 +54,57 @@ class AppSettingController extends Controller
             return Redirect::back()->withErrors($validator)->withInput();
         }
 
+        if($request->file('gambar_slide1'))
+        {
+            $destination = public_path('uploads/images/setting');
+            $gambar_slide1 = rand().".jpg";
+            $gambar = Image::make($request->file('gambar_slide1'));
+            $gambar->encode('jpg', 60);
+            $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+            $gambar->save($destination.'/'.$gambar_slide1);
+        }
+
+        if($request->file('gambar_slide2'))
+        {
+            $destination = public_path('uploads/images/setting');
+            $gambar_slide2 = rand().".jpg";
+            $gambar = Image::make($request->file('gambar_slide2'));
+            $gambar->encode('jpg', 60);
+            $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+            $gambar->save($destination.'/'.$gambar_slide2);
+        }
+
+        if($request->file('gambar_slide3'))
+        {
+            $destination = public_path('uploads/images/setting');
+            $gambar_slide3 = rand().".jpg";
+            $gambar = Image::make($request->file('gambar_slide3'));
+            $gambar->encode('jpg', 60);
+            $gambar->resize(500, null, function ($constraint) {$constraint->aspectRatio();});
+            $gambar->save($destination.'/'.$gambar_slide3);
+        }
+
         $edit = SettingAplikasi::find(1);
         $edit->nama_aplikasi = $request->nama_aplikasi;
         $edit->versi_aplikasi = $request->versi_aplikasi;
         $edit->tentang_kami = $request->tentang_kami;
         $edit->ketentuan = $request->ketentuan;
         $edit->kebijakan = $request->kebijakan;
+        if(isset($gambar_slide1)):
+            $edit->gambar_slide1 = $gambar_slide1;
+        endif;
+        if(isset($gambar_slide2)):
+            $edit->gambar_slide2 = $gambar_slide2;
+        endif;
+        if(isset($gambar_slide3)):
+            $edit->gambar_slide3 = $gambar_slide3;
+        endif;
+        $edit->judul_slide1 = $request->judul_slide1;
+        $edit->judul_slide2 = $request->judul_slide2;
+        $edit->judul_slide3 = $request->judul_slide3;
+        $edit->keterangan_slide1 = $request->keterangan_slide1;
+        $edit->keterangan_slide2 = $request->keterangan_slide2;
+        $edit->keterangan_slide3 = $request->keterangan_slide3;
         $edit->save();
 
         if($edit)

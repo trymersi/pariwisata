@@ -13,6 +13,7 @@ use App\Models\Kabupaten;
 use App\Models\Setting;
 use App\Models\Hotel;
 use App\Models\Event;
+use App\Models\EventGambar;
 use App\Models\Contact;
 use App\Models\KategoriEkraf;
 use App\Models\ObjekWisataReview;
@@ -30,6 +31,10 @@ use App\Models\SadarWisata;
 use App\Models\SettingAplikasi;
 use App\Models\Travel;
 use App\Models\Iklan;
+use App\Models\CindramataGambar;
+use App\Models\CindramataPenyedia;
+use App\Models\KulinerGambar;
+use App\Models\KulinerPenyedia;
 
 class ServiceController extends Controller
 {
@@ -59,6 +64,9 @@ class ServiceController extends Controller
     private $sadarWisata;
     private $travelClass;
     private $iklan;
+    private $cindramataGambar;
+    private $cindramataPenyedia;
+    private $eventGambar;
     
     private $errMessage;
 
@@ -95,7 +103,12 @@ class ServiceController extends Controller
         $this->travelClass = new Travel;
         $this->iklan = new iklan;
         $this->settingApp = new SettingAplikasi;
-
+        $this->cindramataGambar = new CindramataGambar;
+        $this->cindramataPenyedia = new CindramataPenyedia;
+        $this->kulinerGambar = new KulinerGambar;
+        $this->kulinerPenyedia = new KulinerPenyedia;
+        $this->eventGambar = new EventGambar;
+        
         $this->data = array();
 
         $this->errMessage = ['response'=>['status'=>'error','message'=>'ooops']];
@@ -239,7 +252,7 @@ class ServiceController extends Controller
         {
             $this->data['response']['status'] = "success";
             $this->kabupaten();
-            $this->data['response']['items'] = $this->tempatIbadahClass->getApi($request->kabupaten_id,$request->keyword);
+            $this->data['response']['items'] = $this->tempatIbadahClass->getApi($request->kabupaten_id,$request->keyword,$request->agama);
             return response()->json($this->data);
         }
         return response()->json($this->errMessage);
@@ -355,6 +368,17 @@ class ServiceController extends Controller
                 $this->data['response']['detail'] = $this->eventClass->getDetail($event->id);
                 $this->data['response']['detail']['tanggal_mulai'] = tgl_indo($this->data['response']['detail']->tanggal_mulai);
                 $this->data['response']['detail']['tanggal_selesai'] = tgl_indo($this->data['response']['detail']->tanggal_selesai);
+                $cek = strpos($this->data['response']['detail']->video,',');
+                if($cek !== FALSE)
+                {
+                    $video = explode(',',$this->data['response']['detail']->video);
+                }
+                else
+                {
+                    $video[] = $this->data['response']['detail']->video;
+                }
+                $this->data['response']['video'] = $video;
+                $this->data['response']['gambar'] = $this->eventGambar->getGallery($event->id);
                 $this->data['response']['terdekat'] = $this->eventClass->getTerdekat($event->kabupaten_id, $event->id );
                 return response()->json($this->data);
             }
@@ -384,6 +408,9 @@ class ServiceController extends Controller
                 $this->data['response']['status'] = "success";
                 $this->data['response']['detail'] = $this->cendramata->getDetail($cendramata->id);
                 $this->data['response']['produk'] = $this->cindramataDetail->getProduk($cendramata->id);
+                $this->data['response']['gambar'] = $this->cindramataGambar->getGallery($cendramata->id);
+                $this->data['response']['penyedia'] = $this->cindramataPenyedia->getData($cendramata->id);
+                
                 $this->data['response']['terdekat'] = $this->cendramata->getTerdekat($cendramata->kabupaten_id, $cendramata->id );
                 if(isset($request->latitude) && $request->latitude != '' && isset($request->longitude) && $request->longitude != '')
                 {
@@ -434,6 +461,7 @@ class ServiceController extends Controller
             $this->data['response']['status'] = "success";
             $this->kabupaten();
             $this->data['response']['items'] = $this->kulinerClass->getApi($request->kabupaten_id,$request->keyword);
+            
             return response()->json($this->data);
         }
         return response()->json($this->errMessage);
@@ -448,6 +476,8 @@ class ServiceController extends Controller
             {
                 $this->data['response']['status'] = "success";
                 $this->data['response']['detail'] = $this->kulinerClass->getDetail($kuliner->id);
+                $this->data['response']['gambar'] = $this->kulinerGambar->getGallery($kuliner->id);
+                $this->data['response']['penyedia'] = $this->kulinerPenyedia->getData($kuliner->id);
                 $this->data['response']['terdekat'] = $this->kulinerClass->getTerdekat($kuliner->kabupaten_id, $kuliner->id );
                 return response()->json($this->data);
             }

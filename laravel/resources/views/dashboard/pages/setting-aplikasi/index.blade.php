@@ -68,6 +68,108 @@
                         </div>
                     </div>
 
+                    <h3>Setting Slide Aplikasi</h3>
+                    <h6>Slide 1</h6>
+
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Judul Slide</label>
+                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                            <input type="text" class="form-control" name="judul_slide1" value="{{ old('judul_slide1',$edit->judul_slide1) }}">
+                            @error('judul_slide1')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Keterangan Slide</label>
+                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                            <textarea class="form-control" name="keterangan_slide1" rows="3">{!! old('keterangan_slide1',$edit->keterangan_slide1) !!}</textarea>
+                            @error('keterangan_slide1')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Gambar Slide</label>
+                        <div class="col-xl-5 col-lg-4 col-sm-5">
+                            <input type="file" class="form-control-file" name="gambar_slide1" value="{{ old('gambar_slide1') }}" placeholder="Masukan Foto" accept="image/jpg,image/jpeg,image/png">
+                            @error('gambar_slide1')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
+                            <p> Upload foto baru untuk mengubah gambar header</p>
+                            <img width="150px" src="{{ asset('uploads/images/setting/') }}/{{ $edit->gambar_slide1 }}">
+                        </div>
+                    </div>
+                    <h6>Slide 2</h6>
+
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Judul Slide</label>
+                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                            <input type="text" class="form-control" name="judul_slide2" value="{{ old('judul_slide2',$edit->judul_slide2) }}">
+                            @error('judul_slide2')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Keterangan Slide</label>
+                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                            <textarea class="form-control" name="keterangan_slide2" rows="3">{!! old('keterangan_slide2',$edit->keterangan_slide2) !!}</textarea>
+                            @error('keterangan_slide2')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Gambar Slide</label>
+                        <div class="col-xl-5 col-lg-4 col-sm-5">
+                            <input type="file" class="form-control-file" name="gambar_slide2" value="{{ old('gambar_slide2') }}" placeholder="Masukan Foto" accept="image/jpg,image/jpeg,image/png">
+                            @error('gambar_slide2')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
+                            <p> Upload foto baru untuk mengubah gambar</p>
+                            <img width="150px" src="{{ asset('uploads/images/setting/') }}/{{ $edit->gambar_slide2 }}">
+                        </div>
+                    </div>
+                    <h6>Slide 3</h6>
+
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Judul Slide</label>
+                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                            <input type="text" class="form-control" name="judul_slide3" value="{{ old('judul_slide3',$edit->judul_slide3) }}">
+                            @error('judul_slide3')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Keterangan Slide</label>
+                        <div class="col-xl-10 col-lg-9 col-sm-10">
+                            <textarea class="form-control" name="keterangan_slide3" rows="3">{!! old('keterangan_slide3',$edit->keterangan_slide3) !!}</textarea>
+                            @error('keterangan_slide3')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-4">
+                        <label  class="col-xl-2 col-sm-3 col-sm-2 col-form-label">Gambar Slide</label>
+                        <div class="col-xl-5 col-lg-4 col-sm-5">
+                            <input type="file" class="form-control-file" name="gambar_slide3" value="{{ old('gambar_slide3') }}" placeholder="Masukan Foto" accept="image/jpg,image/jpeg,image/png">
+                            @error('gambar_slide3')
+                                <span><code>{{$message}}</code></span>
+                            @enderror
+                            <p> Upload foto baru untuk mengubah gambar</p>
+                            <img width="150px" src="{{ asset('uploads/images/setting/') }}/{{ $edit->gambar_slide3 }}">
+                        </div>
+                    </div>
+
+                    
                     
 
                     
