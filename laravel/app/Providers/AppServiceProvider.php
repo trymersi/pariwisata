@@ -14,7 +14,9 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind('path.public', function() {
-            return "D:/xampp/htdocs/project/coding/pariwisata2/public";
+            // return "D:/xampp/htdocs/project/coding/pariwisata2/public";
+            return "C:/xampp/htdocs/project/dispar/pariwisata/public";
+
         });
     }
 

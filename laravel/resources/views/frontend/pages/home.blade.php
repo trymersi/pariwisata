@@ -14,9 +14,9 @@
         <div class="intro-item fl-wrap">
             <span class="section-separator"></span>
             <div class="bubbles">
-                <h1>Temukan Tempat Terbaik Di Provinsi Riau</h1>
+                <h1>JEMARI</h1>
             </div>
-            <h3>Temukan beberapa tempat terbaik dari sekitar kota anda.</h3>
+            <h3>Jendela Informasi Pariwisata Riau</h3>
         </div>
         <!-- main-search-input-tabs-->
         <div class="main-search-input-tabs  tabs-act fl-wrap">
@@ -115,16 +115,24 @@
             <!--tabs end-->
         </div>
         <!-- main-search-input-tabs end-->
-        <div class="hero-categories fl-wrap">
-            <h4 class="hero-categories_title">Hanya melihat-lihat? Gunakan pencarian cepat berdasarkan kategori:</h4>
+        {{-- <div class="hero-categories fl-wrap">
+            <h4 class="hero-categories_title">Menu Kategori</h4>
             <ul class="no-list-style">
                 <li><a href="{{ url('/objek-wisata') }}"><i class="fas fa-map-marked-alt"></i><span>Objek Wisata</span></a></li>
                 <li><a href="{{ url('/hotel') }}"><i class="far fa-bed"></i><span>Hotel</span></a></li>
-                <li><a href="{{ url('/restoran') }}"><i class="fas fa-utensils"></i><span>Restoran</span></a></li>
                 <li><a href="{{ url('/tempat-ibadah') }}"><i class="fas fa-mosque"></i><span>Tempat Ibadah</span></a></li>
+                <li><a href="{{ url('/restoran') }}"><i class="fas fa-utensils"></i><span>Restoran</span></a></li>
                 <li><a href="{{ url('/event') }}"><i class="far fa-cocktail"></i><span>Event</span></a></li>
             </ul>
-        </div>
+            <br>
+            <ul class="no-list-style">
+                <li><a href="{{ url('/event') }}"><i class="far fa-cocktail"></i><span>Ekonomi Kreatif</span></a></li>
+                <li><a href="{{ url('/event') }}"><i class="far fa-cocktail"></i><span>Desa Wisata</span></a></li>
+                <li><a href="{{ url('/event') }}"><i class="far fa-cocktail"></i><span>Travel</span></a></li>
+                <li><a href="{{ url('/event') }}"><i class="far fa-cocktail"></i><span>CinderaMata</span></a></li>
+                <li><a href="{{ url('/event') }}"><i class="far fa-cocktail"></i><span>Kuliner</span></a></li>
+            </ul>
+        </div> --}}
     </div>
     <div class="header-sec-link">
         <a href="#sec1" class="custom-scroll-link"><i class="fal fa-angle-double-down"></i></a> 
@@ -132,6 +140,116 @@
 </section>
 <!--section end-->
 <!--section  -->
+    <section      data-scrollax-parent="true">
+    <div class="container">
+        <div class="section-title">
+            <h2>Menu Kategori</h2>
+        </div>
+        <div class="process-wrap fl-wrap">
+            <ul class="no-list-style">
+                <a href="{{ url('/event') }}">
+                <li>
+                    <div class="process-item">
+                        <span class="process-count">01 </span>
+                        <div class="time-line-icon">
+                            <img src="{{ asset('assets/frontend/images/icon/tempat wisata.png') }}" alt="" style="height: 70px"> 
+                        </div>
+                        <h4> Objek Wisata</h4>
+                    </div>
+                </li>
+                </a>
+                <a href="{{ url('/event') }}">
+                <li>
+                    <div class="process-item">
+                        <span class="process-count">01 </span>
+                        <div class="time-line-icon">
+                            <img src="{{ asset('assets/frontend/images/icon/hotel.png') }}" alt="" style="height: 70px"> 
+                        </div>
+                        <h4> Hotel</h4>
+                    </div>
+                </li>
+                </a>
+                <a href="{{ url('/event') }}">
+                <li>
+                    <div class="process-item" style="margin-bottom: 50px">
+                        <span class="process-count">01 </span>
+                        <div class="time-line-icon">
+                            <img src="{{ asset('assets/frontend/images/icon/tempat ibadah.png') }}" alt="" style="height: 70px"> 
+                        </div>
+                        <h4> Tempat Ibadah</h4>
+                    </div>
+                </li>
+                </a>
+                <a href="{{ url('/event') }}">
+                <li>
+                    <div class="process-item">
+                        <span class="process-count">01 </span>
+                        <div class="time-line-icon">
+                            <img src="{{ asset('assets/frontend/images/icon/restoran.png') }}" alt="" style="height: 70px"> 
+                        </div>
+                        <h4> Restoran</h4>
+                    </div>
+                </li>
+                </a>
+                <a href="{{ url('/event') }}">
+                <li>
+                    <div class="process-item">
+                        <span class="process-count">01 </span>
+                        <div class="time-line-icon">
+                            <img src="{{ asset('assets/frontend/images/icon/event.png') }}" alt="" style="height: 70px"> 
+                        </div>
+                        <h4> Event</h4>
+                    </div>
+                </li>
+                </a>
+                <a href="{{ url('/event') }}">
+                <li>
+                    <div class="process-item" style="margin-bottom: 50px">
+                        <span class="process-count">01 </span>
+                        <div class="time-line-icon">
+                            <img src="{{ asset('assets/frontend/images/icon/ekraf.png') }}" alt="" style="height: 70px"> 
+                        </div>
+                        <h4> Ekonomi Kreatif</h4>
+                    </div>
+                </li>
+                </a>
+                <a href="{{ url('/event') }}">
+                <li>
+                    <div class="process-item">
+                        <span class="process-count">01 </span>
+                        <div class="time-line-icon">
+                            <img src="{{ asset('assets/frontend/images/icon/desawisata.png') }}" alt="" style="height: 70px"> 
+                        </div>
+                        <h4> Desa Wisata</h4>
+                    </div>
+                </li>
+                </a>
+                <a href="{{ url('/event') }}">
+                <li>
+                    <div class="process-item">
+                        <span class="process-count">01 </span>
+                        <div class="time-line-icon">
+                            <img src="{{ asset('assets/frontend/images/icon/travel.png') }}" alt="" style="height: 70px"> 
+                        </div>
+                        <h4> Travel</h4>
+                    </div>
+                </li>
+                </a>
+                <a href="{{ url('/event') }}">
+                <li>
+                    <div class="process-item">
+                        <span class="process-count">01 </span>
+                        <div class="time-line-icon">
+                            <img src="{{ asset('assets/frontend/images/icon/cindera mata.png') }}" alt="" style="height: 70px"> 
+                        </div>
+                        <h4> Cinderamata</h4>
+                    </div>
+                </li>
+                </a>
+            </ul>
+        </div>
+    </div>
+</section>
 <section class="slw-sec" id="sec1">
     <div class="section-title">
         <h2>Objek Wisata Provinsi Riau</h2>
@@ -154,7 +272,7 @@
                                         <div class="geodir-category-img">
                                             
                                             <a href="listing-single.html" class="geodir-category-img-wrap fl-wrap">
-                                            <img src="{{ asset('uploads/images/gambar-header-objek-wisata/'.$wisata->gambar_header) }}" alt=""> 
+                                            <img src="{{ asset('uploads/images/gambar-header-objek-wisata/'.$wisata->gambar_header) }}" alt="" style="height: 300px"> 
                                             </a>
                                             <div class="geodir_status_date gsd_open"><i class="fal fa-lock-open"></i>Buka</div>
                                             <div class="geodir-category-opt">
@@ -385,7 +503,7 @@
                                     <div class="reviews-count">9 reviews</div>
                                 </div>
                             </div>
-                            <img src="{{ asset('uploads/images/gambar-header-restaurant/'.$item->gambar) }}" alt="{{ ucwords($item->nama) }}"> 
+                            <img src="{{ asset('uploads/images/gambar-header-restaurant/'.$item->gambar) }}" alt="{{ ucwords($item->nama) }}" style="height: 230px"> 
                             </a>
                             @if(isset($item->gambar_header))
                             <div class="listing-avatar"><a href="author-single.html"><img src="{{ asset('uploads/images/gambar-header-objek-wisata/'.$item->gambar_header) }}" alt=""></a>
@@ -449,7 +567,7 @@
                                     <div class="reviews-count">9 reviews</div>
                                 </div>
                             </div>
-                            <img src="{{ asset('uploads/images/gambar-header-hotel/'.$item->gambar) }}" alt="{{ ucwords($item->nama) }}"> 
+                            <img src="{{ asset('uploads/images/gambar-header-hotel/'.$item->gambar) }}" alt="{{ ucwords($item->nama) }}" style="height: 230px"> 
                             </a>
                             @if(isset($item->gambar_header))
                             <div class="listing-avatar"><a href="author-single.html"><img src="{{ asset('uploads/images/gambar-header-objek-wisata/'.$item->gambar_header) }}" alt=""></a>
@@ -513,7 +631,7 @@
                                     <div class="reviews-count">9 reviews</div>
                                 </div>
                             </div>
-                            <img src="{{ asset('uploads/images/gambar-header-event/'.$item->gambar_header) }}" alt="{{ ucwords($item->nama) }}"> 
+                            <img src="{{ asset('uploads/images/gambar-header-event/'.$item->gambar_header) }}" alt="{{ ucwords($item->nama) }}" style="height: 230px"> 
                             </a>
                             @if(isset($item->gambar_header))
                             <div class="listing-avatar"><a href="author-single.html"><img src="{{ asset('uploads/images/gambar-header-event/'.$item->gambar_header) }}" alt=""></a>
@@ -577,7 +695,7 @@
                                     <div class="reviews-count">9 reviews</div>
                                 </div>
                             </div>
-                            <img src="{{ asset('uploads/images/gambar-header-tempat-ibadah/'.$item->gambar) }}" alt="{{ ucwords($item->nama) }}"> 
+                            <img src="{{ asset('uploads/images/gambar-header-tempat-ibadah/'.$item->gambar) }}" alt="{{ ucwords($item->nama) }}" style="height: 230px"> 
                             </a>
                             @if(isset($item->gambar_header))
                             <div class="listing-avatar"><a href="author-single.html"><img src="{{ asset('uploads/images/gambar-header-objek-wisata/'.$item->gambar_header) }}" alt=""></a>
@@ -818,7 +936,7 @@
                         <!--client-item-->
                         @foreach($link_terkait as $item)
                         <div class="swiper-slide">
-                            <a href="{{ $item->link }}" target="_blank" class="client-item"><img src="{{ asset('uploads/images/link-terkait/'.$item->path) }}" alt=""></a>
+                            <a href="{{ $item->link }}" target="_blank" class="client-item"><img src="{{ asset('uploads/images/link-terkait/'.$item->path) }}" alt="" style="height: 100px"></a>
                         </div>
                         @endforeach
                         

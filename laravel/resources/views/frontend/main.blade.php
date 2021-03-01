@@ -34,7 +34,7 @@
                 <a href="{{ url('/') }}" class="logo-holder"><img src="{{ asset('uploads/images/setting/'.$setting_website->logo_website) }}" alt=""></a>
                 <!-- logo end-->
                 <!-- header-search_btn-->         
-                <div class="header-search_btn show-search-button"><i class="fal fa-search"></i><span>Search</span></div>
+                <div class="header-search_btn show-search-button"><i class="fal fa-search"></i><span>Cari disini</span></div>
                 <!-- header-search_btn end-->
                 <!-- header opt --> 
                 
@@ -168,7 +168,7 @@
             <!--footer -->
             <footer class="main-footer fl-wrap">
                 <!-- footer-header-->
-                <div class="footer-header fl-wrap grad ient-dark">
+                {{-- <div class="footer-header fl-wrap grad ient-dark">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-5">
@@ -190,7 +190,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
                 <!-- footer-header end-->
                 <!--footer-inner-->
                 <div class="footer-inner   fl-wrap">
@@ -208,7 +208,7 @@
                                             <li><span><i class="fal fa-phone"></i> Telepon :</span><a href="#">{{ $setting_website->notel }}</a></li>
                                         </ul>
                                         <div class="footer-social">
-                                            <span>Find  us on: </span>
+                                            <span>Temukan kami di: </span>
                                             <ul class="no-list-style">
                                                 <li><a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
                                                 <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
@@ -224,7 +224,7 @@
                             <!-- footer-widget-->
                             <div class="col-md-4">
                                 <div class="footer-widget fl-wrap">
-                                    <h3>Our Last News</h3>
+                                    <h3>Berita Terbaru</h3>
                                     <div class="footer-widget-posts fl-wrap">
                                         <ul class="no-list-style">
                                             @foreach($footer_post as $item)
@@ -237,7 +237,7 @@
                                             </li>
                                             @endforeach
                                         </ul>
-                                        <a href="blog.html" class="footer-link">Read all <i class="fal fa-long-arrow-right"></i></a>
+                                        <a href="blog.html" class="footer-link">Seluruh berita<i class="fal fa-long-arrow-right"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -260,7 +260,7 @@
                 <!--sub-footer-->
                 <div class="sub-footer  fl-wrap">
                     <div class="container">
-                        <div class="copyright"> &#169; Townhub 2019 .  All rights reserved.</div>
+                        <div class="copyright"> &#169; Dinas Pariwisata Provinsi Riau 2020 .  All rights reserved.</div>
 
                         <div class="subfooter-nav">
                             <ul class="no-list-style">

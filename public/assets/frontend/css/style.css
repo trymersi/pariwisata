@@ -8407,7 +8407,7 @@ section.absolute-wrap_section .section-separator {
 .process-wrap li {
 	float:left;
 	width:33.3%;
-	padding:0 30px;
+	padding:0 50px;
 	position:relative;
 }
 .process-wrap_half li{
@@ -8417,11 +8417,11 @@ section.absolute-wrap_section .section-separator {
 	float:left;
 	width:100%;
 	position:relative;
-	border:1px solid #eee;
-	padding:30px 20px 50px;
-	border-radius:6px;
+	border:1px solid #d3dd25;
+	padding:20px 10px 50px;
+	border-radius:10px;
 	z-index:20;
-	background:#f9f9f9;
+	background:#ffffff;
 }
 .process-wrap li i {
 	margin:0 auto 0;
