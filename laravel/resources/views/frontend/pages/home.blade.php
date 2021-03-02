@@ -493,7 +493,7 @@
                 <div class="listing-item">
                     <article class="geodir-category-listing fl-wrap">
                         <div class="geodir-category-img">
-                            <a href="listing-single.html" class="geodir-category-img-wrap fl-wrap">
+                            <a href="{{ url('/restoran/'.$item->slug) }}" class="geodir-category-img-wrap fl-wrap">
                             <div class="geodir_status_date gsd_open"><i class="fas fa-city"></i>{{ $item->nama_kabupaten }}</div>
                             <div class="geodir-category-opt">
                                 <div class="listing-rating-count-wrap">
@@ -514,7 +514,7 @@
                         <div class="geodir-category-content fl-wrap title-sin_item">
                             <div class="geodir-category-content-title fl-wrap">
                                 <div class="geodir-category-content-title-item">
-                                    <h3 class="title-sin_map"><a href="listing-single.html">{{ ucwords($item->nama) }}</a><span class="verified-badge"><i class="fal fa-check"></i></span></h3>
+                                    <h3 class="title-sin_map"><a href="{{ url('/restoran/'.$item->slug) }}">{{ ucwords($item->nama) }}</a><span class="verified-badge"><i class="fal fa-check"></i></span></h3>
                                     <div class="geodir-category-location fl-wrap"><a href="#" ><i class="fas fa-map-marker-alt"></i> {{ $item->alamat }}</a></div>
                                 </div>
                             </div>
@@ -557,7 +557,7 @@
                 <div class="listing-item">
                     <article class="geodir-category-listing fl-wrap">
                         <div class="geodir-category-img">
-                            <a href="listing-single.html" class="geodir-category-img-wrap fl-wrap">
+                            <a href="{{ url('/hotel/'.$item->slug) }}" class="geodir-category-img-wrap fl-wrap">
                             <div class="geodir_status_date gsd_open"><i class="fas fa-city"></i>{{ $item->nama_kabupaten }}</div>
                             <div class="geodir-category-opt">
                                 <div class="listing-rating-count-wrap">
@@ -570,7 +570,7 @@
                             <img src="{{ asset('uploads/images/gambar-header-hotel/'.$item->gambar) }}" alt="{{ ucwords($item->nama) }}" style="height: 230px"> 
                             </a>
                             @if(isset($item->gambar_header))
-                            <div class="listing-avatar"><a href="author-single.html"><img src="{{ asset('uploads/images/gambar-header-objek-wisata/'.$item->gambar_header) }}" alt=""></a>
+                            <div class="listing-avatar"><a href="{{ url('/hotel/'.$item->slug) }}"><img src="{{ asset('uploads/images/gambar-header-objek-wisata/'.$item->gambar_header) }}" alt=""></a>
                                 <span class="avatar-tooltip"><strong>{{ $item->nama_objek_wisata }}</strong></span>
                             </div>
                             @endif
@@ -578,7 +578,7 @@
                         <div class="geodir-category-content fl-wrap title-sin_item">
                             <div class="geodir-category-content-title fl-wrap">
                                 <div class="geodir-category-content-title-item">
-                                    <h3 class="title-sin_map"><a href="listing-single.html">{{ ucwords($item->nama) }}</a><span class="verified-badge"><i class="fal fa-check"></i></span></h3>
+                                    <h3 class="title-sin_map"><a href="{{ url('/hotel/'.$item->slug) }}">{{ ucwords($item->nama) }}</a><span class="verified-badge"><i class="fal fa-check"></i></span></h3>
                                     <div class="geodir-category-location fl-wrap"><a href="#" ><i class="fas fa-map-marker-alt"></i> {{ $item->alamat }}</a></div>
                                 </div>
                             </div>
@@ -634,7 +634,7 @@
                             <img src="{{ asset('uploads/images/gambar-header-event/'.$item->gambar_header) }}" alt="{{ ucwords($item->nama) }}" style="height: 230px"> 
                             </a>
                             @if(isset($item->gambar_header))
-                            <div class="listing-avatar"><a href="author-single.html"><img src="{{ asset('uploads/images/gambar-header-event/'.$item->gambar_header) }}" alt=""></a>
+                            <div class="listing-avatar"><a href="{{ url('/event/'.$item->slug) }}"><img src="{{ asset('uploads/images/gambar-header-event/'.$item->gambar_header) }}" alt=""></a>
                                 <span class="avatar-tooltip"><strong>{{ $item->nama_objek_wisata }}</strong></span>
                             </div>
                             @endif
@@ -642,7 +642,7 @@
                         <div class="geodir-category-content fl-wrap title-sin_item">
                             <div class="geodir-category-content-title fl-wrap">
                                 <div class="geodir-category-content-title-item">
-                                    <h3 class="title-sin_map"><a href="listing-single.html">{{ ucwords($item->nama) }}</a><span class="verified-badge"><i class="fal fa-check"></i></span></h3>
+                                    <h3 class="title-sin_map"><a href="{{ url('/event/'.$item->slug) }}">{{ ucwords($item->nama) }}</a><span class="verified-badge"><i class="fal fa-check"></i></span></h3>
                                     <div class="geodir-category-location fl-wrap"><a href="#" ><i class="fas fa-map-marker-alt"></i> {{ $item->alamat }}</a></div>
                                 </div>
                             </div>
@@ -685,7 +685,7 @@
                 <div class="listing-item">
                     <article class="geodir-category-listing fl-wrap">
                         <div class="geodir-category-img">
-                            <a href="listing-single.html" class="geodir-category-img-wrap fl-wrap">
+                            <a href="{{ url('/tempat-ibadah/'.$item->slug) }}" class="geodir-category-img-wrap fl-wrap">
                             <div class="geodir_status_date gsd_open"><i class="fas fa-city"></i>{{ $item->nama_kabupaten }}</div>
                             <div class="geodir-category-opt">
                                 <div class="listing-rating-count-wrap">
@@ -706,7 +706,7 @@
                         <div class="geodir-category-content fl-wrap title-sin_item">
                             <div class="geodir-category-content-title fl-wrap">
                                 <div class="geodir-category-content-title-item">
-                                    <h3 class="title-sin_map"><a href="listing-single.html">{{ ucwords($item->nama) }}</a><span class="verified-badge"><i class="fal fa-check"></i></span></h3>
+                                    <h3 class="title-sin_map"><a href="{{ url('/tempat-ibadah/'.$item->slug) }}">{{ ucwords($item->nama) }}</a><span class="verified-badge"><i class="fal fa-check"></i></span></h3>
                                     <div class="geodir-category-location fl-wrap"><a href="#" ><i class="fas fa-map-marker-alt"></i> {{ $item->alamat }}</a></div>
                                 </div>
                             </div>
